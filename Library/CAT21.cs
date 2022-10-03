@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Library
 {
     public class CAT21
     {
-
         // Data Item I021/08: Aircraft Operational Status
         public static void AircraftOperationalStatus(string[] octeto)
         {
@@ -67,7 +68,7 @@ namespace Library
 
         }
 
-   
+
 
         // Data Item I021/074: Time of Message Reception of Position–High Precision .
         public static void TimeofMessageReceptionofPositionHighPrecision(string[] octeto)
@@ -260,7 +261,6 @@ namespace Library
         {
 
         }
-
 
     }
 }

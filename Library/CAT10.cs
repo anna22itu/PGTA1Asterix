@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace PGTA1
+namespace Library
 {
     public class CAT10
     {
-
         // Data Item I010/000: MessageType
         public static void MessageType(string[] octeto)
         {
@@ -12,7 +15,7 @@ namespace PGTA1
         }
 
         // Data Item I010/010: Data Source Identifier
-        public static void DataSourceIdentifier(string[] octeto1, string[] octeto2)
+        public static void DataSourceIdentifier(string octeto1, string octeto2)
         {
             string SAC = octeto1;
             string SIC = octeto2;
@@ -22,7 +25,7 @@ namespace PGTA1
         // Data Item I010/020: Target Report Descriptor
         public static void TargetReportDescriptor(string[] octeto)
         {
-            string messageTyp = octeto[0] + octeto[1] + octeto[2]; 
+            string messageTyp = octeto[0] + octeto[1] + octeto[2];
             string messageDcr = octeto[3];
             string messageChn = octeto[4];
             string messageGbs = octeto[5];
@@ -30,7 +33,8 @@ namespace PGTA1
             string messageFx = octeto[7];
 
 
-            if (messageTyp == "000"){
+            if (messageTyp == "000")
+            {
                 messageTyp = "SSR multilateration";
             }
             else if (messageTyp == "001")
@@ -150,7 +154,7 @@ namespace PGTA1
         }
 
         // Data Item I010/131: Amplitude of Primary Plot
-        public static void AmplitudePrimaryPlot(string[] octeto)
+        public static void AmplitudePrimaryPlot(string octeto)
         {
             string PAM = octeto;
         }
@@ -158,7 +162,7 @@ namespace PGTA1
         // Data Item I010/140: Time of Day
         public static void TimeOfDay(string[] octeto1, string[] octeto2, string[] octeto3)
         {
-            int decodeTimeDay = ; // llamamos a una funcion que me decodifique el octeto
+            int decodeTimeDay = 0; // llamamos a una funcion que me decodifique el octeto
         }
 
         // Data Item I010/161: Track Number
@@ -302,7 +306,7 @@ namespace PGTA1
         // Data Item I010/300: Vehicle Fleet Identification
         public static void VehicleFleetIdentification(string[] octeto)
         {
-            int decodeVFI = null;
+            int decodeVFI = 0; //habra que ver pq con NULL daba error
             string messageVfi = "";
 
             if (decodeVFI == 0)
@@ -328,7 +332,7 @@ namespace PGTA1
             else if (decodeVFI == 5)
             {
                 messageVfi = "Snow plough";
-            } 
+            }
 
             else if (decodeVFI == 6)
             {
@@ -382,9 +386,9 @@ namespace PGTA1
         {
             string messageTrb = octeto[0];
             String messageMsg = "";
-            int decoMsg = 0 ;
+            int decoMsg = 0;
 
-            if(messageTrb == "0")
+            if (messageTrb == "0")
             {
                 messageTrb = "Default";
             }
@@ -431,21 +435,6 @@ namespace PGTA1
         {
 
         }
-
-      
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }
