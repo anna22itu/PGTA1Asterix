@@ -29,5 +29,12 @@ namespace Library
         {
             return Convert.ToInt32(bin, 2);
         }
+        //crear un subarray de un array
+        public static string[] subarray(string[] bytes, int start, int length)
+        {
+            string[] sub = new string[length];
+            Array.Copy(bytes, start, sub, 0, length);
+            return sub;
+        }
     }
 }
