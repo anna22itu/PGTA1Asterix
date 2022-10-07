@@ -9,10 +9,11 @@ namespace Library
 {
     public class CAT10
     {
-        
+        public static string[] methods = { "MessageType", "DataSourceIdentifier", "TargetReportDescriptor", "MeasuredPositionPolarCoordinates", "PositionWGS84Coordinates", "PositionCartesianCoordinates", "Mode3ACodeOctalRepresentation", "FlightLevelBinaryRepresentation", "MeasuredHeight", "AmplitudePrimaryPlot", "TimeOfDay", "TrackNumber", "TrackStatus", "CalculatedTrackVelocityPolarCoordinates", "CalculatedTrackVelocityCartesianCoordinates", "CalculatedAcceleration", "TargetAddress", "TargetIdentification", "ModeSMBData", "TargetSizeOrientation", "Presence", "VehicleFleetIdentification", "PreprogrammedMessage", "StandardDeviationPosition", "SystemStatus" }; 
         public static int Len(string octet1, string octet2) //Calcula els dos octets de la llargada de tot el data block
         {
             string length = octet1 + octet2;
+            Read.sumbyte(2);
             return Functions.bintonum(length);
         }
         public static int[] Fspec(string[] bytes)
@@ -49,6 +50,7 @@ namespace Library
                 n++;
                 
             }
+            Read.sumbyte(fxcounted); //this is the number of bytes read
             return fspec;
             
         }
