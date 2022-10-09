@@ -17,6 +17,10 @@ namespace Library
         //a la funció sumbyte, per saber que hem d'anar a pel següent byte.
         static int n = 0;
 
+        public static int getn()
+        {
+            return n;
+        }
         public static void sumbyte(int num)
         {
             n = n + num;
@@ -57,7 +61,7 @@ namespace Library
                         //      Serà algo del estil dataitems[n]:dataitems[n+2] (2 o quants bytes siguin necessaris)
                         if (found_di[i] == 1)
                         {
-                            CAT10.DICalling(CAT10.methods[i], dataitems, n);
+                            CAT10.DICalling(CAT10Dict.methods[i], dataitems, n);
                         }
 
                     }

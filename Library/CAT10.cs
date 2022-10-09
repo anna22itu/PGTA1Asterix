@@ -9,7 +9,6 @@ namespace Library
 {
     public class CAT10
     {
-        public static string[] methods = { "MessageType", "DataSourceIdentifier", "TargetReportDescriptor", "MeasuredPositionPolarCoordinates", "PositionWGS84Coordinates", "PositionCartesianCoordinates", "Mode3ACodeOctalRepresentation", "FlightLevelBinaryRepresentation", "MeasuredHeight", "AmplitudePrimaryPlot", "TimeOfDay", "TrackNumber", "TrackStatus", "CalculatedTrackVelocityPolarCoordinates", "CalculatedTrackVelocityCartesianCoordinates", "CalculatedAcceleration", "TargetAddress", "TargetIdentification", "ModeSMBData", "TargetSizeOrientation", "Presence", "VehicleFleetIdentification", "PreprogrammedMessage", "StandardDeviationPosition", "SystemStatus" }; 
         public static int Len(string octet1, string octet2) //Calcula els dos octets de la llargada de tot el data block
         {
             string length = octet1 + octet2;
@@ -63,13 +62,31 @@ namespace Library
             {
                 case "MessageType":
 
+                    MessageType(dataitems[n]);
+                    Read.sumbyte(1);
+
                     break;
 
                 case "DataSourceIdentifier":
 
+                    DataSourceIdentifier(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
+
                     break;
 
                 case "TargetReportDescriptor":
+
+                    int nextents = 1;
+                    if (dataitems[n][7] == 1)
+                    {
+                        nextents++;
+                        if(dataitems[n+1][7] == 1)
+                        {
+                            nextents++;//Cal preguntar si podem tenir més de 3 bit es a dir 2 extents
+                        }
+                    }
+                    TargetReportDescriptor(Functions.subarray(dataitems, n, nextents),nextents);
+                    Read.sumbyte(nextents);
 
                     break;
 
@@ -167,110 +184,130 @@ namespace Library
         //CAL DECIDIR SI DEIXEM CADA DATA ITEM EN UN METOD INTERN I EL CRIDEM PASSANTLI EL QUE TOCA DES DEL SWITCH O POSEM TOT EL CODI DINS EL SWITCH (OPTO PER OPCIO 1, SERA MES ORDENAT)
 
         // Data Item I010/000: MessageType
-        public static void MessageType(string[] octeto)
+        private static void MessageType(string octeto)
         {
-
+            string message = CAT10Dict.MessageType[Functions.bintonum(octeto)];
+            //Guardem el message en la classe de tots els atributs (no està creada) i aixi no cal tenir aqui totes les variables
         }
 
         // Data Item I010/010: Data Source Identifier
-        public static void DataSourceIdentifier(string octeto1, string octeto2)
+        private static void DataSourceIdentifier(string octeto1, string octeto2)
         {
-            string SAC = octeto1;
-            string SIC = octeto2;
+            int SAC = Functions.bintonum(octeto1);
+            int SIC = Functions.bintonum(octeto2);
+            //Guardem el SAC/SIC en la classe atributs etc
 
         }
 
         // Data Item I010/020: Target Report Descriptor
-        public static void TargetReportDescriptor(string[] octeto)
+        public static void TargetReportDescriptor(string[] octeto, int nextents)
         {
-            string messageTyp = octeto[0] + octeto[1] + octeto[2];
-            string messageDcr = octeto[3];
-            string messageChn = octeto[4];
-            string messageGbs = octeto[5];
-            string messageCrt = octeto[6];
-            string messageFx = octeto[7];
+            string TYP = octeto[0].Substring(0,3);
+            int DCR = octeto[0][3];
+            int CHN = octeto[0][4];
+            int GBS = octeto[0][5];
+            int CRT = octeto[0][6];
+
 
             //PODRIEM FER UN DICCIONARI AMB CADA CODI I EL SEU MISSATGE I ENS ESTALVIEM ELS 8MIL IFS
-            if (messageTyp == "000")
-            {
-                messageTyp = "SSR multilateration";
-            }
-            else if (messageTyp == "001")
-            {
-                messageTyp = "Mode S multilateration";
-            }
-            else if (messageTyp == "010")
-            {
-                messageTyp = "ADS-B";
-            }
-            else if (messageTyp == "011")
-            {
-                messageTyp = "PSR";
-            }
-            else if (messageTyp == "100")
-            {
-                messageTyp = "Magnetic Loop System";
-            }
-            else if (messageTyp == "101")
-            {
-                messageTyp = "HF multilateration";
-            }
-            else if (messageTyp == "110")
-            {
-                messageTyp = "Not defined";
-            }
-            else if (messageTyp == "111")
-            {
-                messageTyp = "Other types";
-            }
+            string messageTYP = CAT10Dict.TargetReportDescriptor_TYP[TYP];
 
-            if (messageDcr == "0")
+            if (DCR == 0)
             {
-                messageDcr = "No differential correction (ADS-B)";
+                string messageDCR = "No differential correction (ADS-B)";
             }
             else
             {
-                messageDcr = "Differential correction(ADS - B)";
+                string messageDCR = "Differential correction (ADS - B)";
             }
 
 
-            if (messageChn == "0")
+            if (CHN == 0)
             {
-                messageChn = "Chain 1";
-            }
-            else
-            {
-                messageChn = "Chain 2";
-            }
-
-
-            if (messageGbs == "0")
-            {
-                messageGbs = "Transponder Ground bit not set";
+                string messageCHN = "Chain 1";
             }
             else
             {
-                messageGbs = "Transponder Ground bit set";
+                string messageCHN = "Chain 2";
             }
 
 
-            if (messageCrt == "0")
+            if (GBS == 0)
             {
-                messageCrt = "No Corrupted reply in multilateration";
-            }
-            else
-            {
-                messageCrt = "Corrupted replies in multilateration";
-            }
-
-
-            if (messageFx == "0")
-            {
-                messageFx = "End of Data Item";
+                string messageGBS = "Transponder Ground bit not set";
             }
             else
             {
-                messageFx = "Extension into first extent ";
+                string messageGBS = "Transponder Ground bit set";
+            }
+
+
+            if (CRT == 0)
+            {
+                string messageCRT = "No Corrupted reply in multilateration";
+            }
+            else
+            {
+                string messageCRT = "Corrupted replies in multilateration";
+            }
+
+            if (nextents > 1)
+            {
+                //Decodification of 1st extent byte
+                int SIM = octeto[1][0];
+                int TST = octeto[1][1];
+                int RAB = octeto[1][2];
+                string LOP = octeto[1].Substring(3, 2);
+                string TOT = octeto[1].Substring(5, 2);
+
+                if (SIM == 0)
+                {
+                    string messageSIM = "Actual target report";
+                }
+                else
+                {
+                    string messageSIM = "Simulated target report";
+                }
+
+                if (TST == 0)
+                {
+                    string messageTST = "Default";
+                }
+                else
+                {
+                    string messageTST = "Test Target";
+                }
+
+                if (RAB == 0)
+                {
+                    string messageRAB = "Report from target transponder";
+                }
+                else
+                {
+                    string messageRAB = "Report from field monitor (fixed transponder)";
+                }
+
+                string messageLOP = CAT10Dict.TargetReportDescriptor_LOP[LOP];
+
+                string messageTOT = CAT10Dict.TargetReportDescriptor_TOT[TOT];
+
+
+
+                if (nextents > 2)
+                {
+                    //Decodification of 2nd extent byte
+                    int SPI = octeto[2][0];
+
+                    if (SPI == 0)
+                    {
+                        string messageSPI = "Absence of SPI";
+                    }
+                    else
+                    {
+                        string messageSPI = "Special Position Identification";
+                    }
+                }
+
             }
 
         }
