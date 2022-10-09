@@ -54,10 +54,118 @@ namespace Library
             return fspec;
             
         }
+
+
+        //La funció no ha de retornar res, des del metod ja anem ficant les dades on toquin (objecte avió o lo que sigui)
+        public static void DICalling(string Case, string[] dataitems, int n)
+        {
+            switch (Case)
+            {
+                case "MessageType":
+
+                    break;
+
+                case "DataSourceIdentifier":
+
+                    break;
+
+                case "TargetReportDescriptor":
+
+                    break;
+
+                case "MeasuredPositionPolarCoordinates":
+
+                    break;
+
+                case "PositionWGS84Coordinates":
+
+                    break;
+
+                case "PositionCartesianCoordinates":
+
+                    break;
+
+                case "Mode3ACodeOctalRepresentation":
+
+                    break;
+
+                case "FlightLevelBinaryRepresentation":
+
+                    break;
+
+                case "MeasuredHeight":
+
+                    break;
+
+                case "AmplitudePrimaryPlot":
+
+                    break;
+
+                case "TimeOfDay":
+
+                    break;
+
+                case "TrackNumber":
+
+                    break;
+
+                case "TrackStatus":
+
+                    break;
+
+                case "CalculatedTrackVelocityPolarCoordinates":
+
+                    break;
+
+                case "CalculatedTrackVelocityCartesianCoordinates":
+
+                    break;
+
+                case "CalculatedAcceleration":
+
+                    break;
+
+                case "TargetAddress":
+
+                    break;
+
+                case "TargetIdentification":
+
+                    break;
+
+                case "ModeSMBData":
+
+                    break;
+
+                case "TargetSizeOrientation":
+
+                    break;
+
+                case "Presence":
+
+                    break;
+
+                case "VehicleFleetIdentification":
+
+                    break;
+
+                case "PreprogrammedMessage":
+
+                    break;
+
+                case "StandardDeviationPosition":
+
+                    break;
+
+                case "SystemStatus":
+
+                    break;
+
+            }
+        }
         
-        
-        
-        
+        //CAL DECIDIR SI DEIXEM CADA DATA ITEM EN UN METOD INTERN I EL CRIDEM PASSANTLI EL QUE TOCA DES DEL SWITCH O POSEM TOT EL CODI DINS EL SWITCH (OPTO PER OPCIO 1, SERA MES ORDENAT)
+
         // Data Item I010/000: MessageType
         public static void MessageType(string[] octeto)
         {
@@ -82,7 +190,7 @@ namespace Library
             string messageCrt = octeto[6];
             string messageFx = octeto[7];
 
-
+            //PODRIEM FER UN DICCIONARI AMB CADA CODI I EL SEU MISSATGE I ENS ESTALVIEM ELS 8MIL IFS
             if (messageTyp == "000")
             {
                 messageTyp = "SSR multilateration";
