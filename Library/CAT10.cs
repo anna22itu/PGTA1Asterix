@@ -187,7 +187,7 @@ namespace Library
         private static void MessageType(string octeto)
         {
             string message = CAT10Dict.MessageType[Functions.bintonum(octeto)];
-            //Guardem el message en la classe de tots els atributs (no està creada) i aixi no cal tenir aqui totes les variables
+            CurrentData.MessageType = message;
         }
 
         // Data Item I010/010: Data Source Identifier
@@ -195,8 +195,8 @@ namespace Library
         {
             int SAC = Functions.bintonum(octeto1);
             int SIC = Functions.bintonum(octeto2);
-            //Guardem el SAC/SIC en la classe atributs etc
-
+            CurrentData.SAC = SAC;
+            CurrentData.SIC = SIC;
         }
 
         // Data Item I010/020: Target Report Descriptor
@@ -211,45 +211,12 @@ namespace Library
 
             //PODRIEM FER UN DICCIONARI AMB CADA CODI I EL SEU MISSATGE I ENS ESTALVIEM ELS 8MIL IFS
             string messageTYP = CAT10Dict.TargetReportDescriptor_TYP[TYP];
-
-            if (DCR == 0)
-            {
-                string messageDCR = "No differential correction (ADS-B)";
-            }
-            else
-            {
-                string messageDCR = "Differential correction (ADS - B)";
-            }
-
-
-            if (CHN == 0)
-            {
-                string messageCHN = "Chain 1";
-            }
-            else
-            {
-                string messageCHN = "Chain 2";
-            }
-
-
-            if (GBS == 0)
-            {
-                string messageGBS = "Transponder Ground bit not set";
-            }
-            else
-            {
-                string messageGBS = "Transponder Ground bit set";
-            }
-
-
-            if (CRT == 0)
-            {
-                string messageCRT = "No Corrupted reply in multilateration";
-            }
-            else
-            {
-                string messageCRT = "Corrupted replies in multilateration";
-            }
+            
+            CurrentData.TYP = messageTYP;
+            CurrentData.DCR = DCR;
+            CurrentData.CHN = CHN;
+            CurrentData.GBS = GBS;
+            CurrentData.CRT = CRT;
 
             if (nextents > 1)
             {
@@ -260,52 +227,23 @@ namespace Library
                 string LOP = octeto[1].Substring(3, 2);
                 string TOT = octeto[1].Substring(5, 2);
 
-                if (SIM == 0)
-                {
-                    string messageSIM = "Actual target report";
-                }
-                else
-                {
-                    string messageSIM = "Simulated target report";
-                }
-
-                if (TST == 0)
-                {
-                    string messageTST = "Default";
-                }
-                else
-                {
-                    string messageTST = "Test Target";
-                }
-
-                if (RAB == 0)
-                {
-                    string messageRAB = "Report from target transponder";
-                }
-                else
-                {
-                    string messageRAB = "Report from field monitor (fixed transponder)";
-                }
+                CurrentData.SIM = SIM;
+                CurrentData.TST = TST;
+                CurrentData.RAB = RAB;
 
                 string messageLOP = CAT10Dict.TargetReportDescriptor_LOP[LOP];
-
                 string messageTOT = CAT10Dict.TargetReportDescriptor_TOT[TOT];
 
-
+                CurrentData.LOP = messageLOP;
+                CurrentData.TOT = messageTOT;
 
                 if (nextents > 2)
                 {
                     //Decodification of 2nd extent byte
                     int SPI = octeto[2][0];
 
-                    if (SPI == 0)
-                    {
-                        string messageSPI = "Absence of SPI";
-                    }
-                    else
-                    {
-                        string messageSPI = "Special Position Identification";
-                    }
+                    CurrentData.SPI = SPI;
+
                 }
 
             }
