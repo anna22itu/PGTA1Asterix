@@ -9,52 +9,6 @@ namespace Library
 {
     public class CAT10
     {
-        public static int Len(string octet1, string octet2) //Calcula els dos octets de la llargada de tot el data block
-        {
-            string length = octet1 + octet2;
-            Read.sumbyte(2);
-            return Functions.bintonum(length);
-        }
-        public static int[] Fspec(string[] bytes)
-        {
-            int[] fspec = new int[25];
-            int fx = 1; //indica que continuem mirant fspec
-            int n = 0; //studied byte
-            int fxcounted = 0; //cal comptar quantes fx hem llegit pq no son bits valids de fspec (no estan relacionats amb data items)
-            while (fx == 1)
-            {
-                for(int i = 0; i < 8; i++)
-                {
-                    if (i == 7) //si estem mirant el fx
-                    {
-                        fxcounted++;
-                        if (bytes[n][i] == '0')
-                        {
-                            fx = 0;
-                        }
-                    }
-                    else if (bytes[n][i] == '1')
-                    {
-                        fspec[i+8*n-fxcounted] = 1;
-                    }
-                    else //cal mirar si pot ser q no fos un 0 tambe i que dones error
-                    {
-                        if(i + 8 * n <= 24)
-                        {
-                            fspec[i + 8 * n-fxcounted] = 0;
-                        }
-                        
-                    }
-                }
-                n++;
-                
-            }
-            Read.sumbyte(fxcounted); //this is the number of bytes read
-            return fspec;
-            
-        }
-
-
         //La funció no ha de retornar res, des del metod ja anem ficant les dades on toquin (objecte avió o lo que sigui)
         public static void DICalling(string Case, string[] dataitems, int n)
         {

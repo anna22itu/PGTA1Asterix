@@ -34,19 +34,19 @@ namespace Library
                 int currentCategory = Functions.bintonum(readBytes[n]);
                 sumbyte(1);
 
-                if (currentCategory == 10)
+                if (currentCategory == 10 | currentCategory == 21)
                 {
                     //passem els dos octets del len
-                    int length_dataitems = CAT10.Len(readBytes[n], readBytes[n + 1]) - 3;
+                    int length_dataitems = Functions.Len(readBytes[n], readBytes[n + 1]) - 3;
 
                     string[] fspec_dataitems = Functions.subarray(readBytes, n, length_dataitems);
 
-                    int[] found_di = CAT10.Fspec(fspec_dataitems); //retornara un vector de 25 posicions (25 di pot haver en cat10) amb 1 si hi es, 0 si no hi es
+                    int[] found_di = Functions.Fspec(fspec_dataitems, currentCategory); //retornara un vector de 25 o 42 posicions (25 di pot haver en cat10) amb 1 si hi es, 0 si no hi es
 
                     string[] dataitems =Functions.subarray(fspec_dataitems,n-3, length_dataitems+3-n); //array dels data items sense el fspec
 
-                    //Si al missatge no tenim el primer data item (message type) és un error
-                    if (found_di[0] == 0)
+                    //Si, a la cat10, al missatge no tenim el primer data item (message type) és un error
+                    if (currentCategory == 10 & found_di[0] == 0)
                     {
                         n = n + dataitems.Length;
                         readBytes = Functions.subarray(readBytes, n, readBytes.Length - n); //resetejem el readbytes per començar amb n=0 des del següent byte
@@ -61,19 +61,22 @@ namespace Library
                         //      Serà algo del estil dataitems[n]:dataitems[n+2] (2 o quants bytes siguin necessaris)
                         if (found_di[i] == 1)
                         {
-                            CAT10.DICalling(CAT10Dict.methods[i], dataitems, n);
+                            if (currentCategory == 10)
+                            {
+                                CAT10.DICalling(CAT10Dict.methods[i], dataitems, n);
+                            }
+                            else
+                            {
+                                CAT21.DICalling(CAT21Dict.methods[i], dataitems, n);
+                            }
+                            
                         }
-
+                        
                     }
 
                     //un cop acabat de llegir tot el data block
                     readBytes=Functions.subarray(readBytes,n, readBytes.Length-n); //resetejem el readbytes per començar amb n=0 des del següent byte
                     sumbyte(-n);//per resetejar a 0 la n
-                }
-
-                else if (currentCategory == 21)
-                {
-                    //fspec de la cat21 etc etc etc
                 }
 
                 else
