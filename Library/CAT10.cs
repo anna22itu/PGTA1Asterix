@@ -205,159 +205,149 @@ namespace Library
         }
 
         // Data Item I010/040: Measured Position in Polar Co-ordinates
-        public static void MeasuredPositionPolarCoordinates(string[] octeto)
+        public static void MeasuredPositionPolarCoordinates(string octeto1, string octeto2, string octeto3, string octeto4)
         {
+            float rho = Functions.bintonum(octeto1 + octeto2);
+            float delta = Functions.bintonum(octeto3 + octeto4);
 
+            CurrentData.rho = rho;
+            CurrentData.delta = delta;
         }
 
         // Data Item I010/041: Position in WGS-84 Co-ordinates
-        public static void PositionWGS84Coordinates(string[] octeto)
+        public static void PositionWGS84Coordinates(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7, string octeto8)
         {
+            float latitude = Functions.bintonum(octeto1 + octeto2 + octeto3 + octeto4);         /////////////// FALTA AÑADIR EL COMPLEMENTO A DOS YA QUE SON LONGITUDES Y LATITUDES
+            float longitude = Functions.bintonum(octeto5 + octeto5 + octeto7+ octeto8);
 
+            CurrentData.latitude = latitude;
+            CurrentData.longitude = longitude;
         }
 
         // Data Item I010/042: Position in Cartesian Co-ordinates
-        public static void PositionCartesianCoordinates(string[] octeto)
+        public static void PositionCartesianCoordinates(string octeto1, string octeto2, string octeto3, string octeto4)
         {
+            float x = Functions.bintonum(octeto1 + octeto2);
+            float y = Functions.bintonum(octeto3 + octeto4);
 
+            CurrentData.xpos = x;
+            CurrentData.ypos = y;  
         }
 
         // Data Item I010/060: Mode-3/A Code in Octal Representation
-        public static void Mode3ACodeOctalRepresentation(string[] octeto)
+        public static void Mode3ACodeOctalRepresentation(string octeto1, string octeto2)
         {
+            int V = octeto1[0];
+            int G = octeto1[1];
+            int L = octeto1[2];
 
+            string messageV = CAT10Dict.Mode3ACodeOctalRepresentation_V[V];
+            string messageG = CAT10Dict.Mode3ACodeOctalRepresentation_G[G];
+            string messageL = CAT10Dict.Mode3ACodeOctalRepresentation_L[L];
+
+            CurrentData.ModeV = messageV;
+            CurrentData.ModeG = messageG;
+            CurrentData.ModeL = messageL;
         }
 
         // Data Item I010/090: Flight Level in Binary Representation
-        public static void FlightLevelBinaryRepresentation(string[] octeto)
+        public static void FlightLevelBinaryRepresentation(string octeto1, string octeto2)
         {
+            int V = octeto1[0];
+            int G = octeto1[1];
+            int FL = Functions.bintonum(octeto1[3] + octeto1[4] + octeto1[5] + octeto1[6] + octeto1[7] + octeto2);
 
+
+            string messageV = CAT10Dict.FligthLevel_V[V];
+            string messageG = CAT10Dict.FligthLevel_G[G];
+
+            CurrentData.FLV = messageV;
+            CurrentData.FlG = messageG;
+            CurrentData.FL = FL;
         }
 
         // Data Item I010/091: Measured Height
-        public static void MeasuredHeight(string[] octeto)
+        public static void MeasuredHeight(string octeto1, string octeto2)
         {
+
+            int Height = Functions.bintonum(octeto1 + octeto2);
+
+            CurrentData.Height = Height;
 
         }
 
         // Data Item I010/131: Amplitude of Primary Plot
-        public static void AmplitudePrimaryPlot(string octeto)
+        public static void AmplitudePrimaryPlot(string octeto1)
         {
-            string PAM = octeto;
+            int PAM = Functions.bintonum(octeto1);
+
+            CurrentData.PAM = PAM;
         }
 
         // Data Item I010/140: Time of Day
-        public static void TimeOfDay(string[] octeto1, string[] octeto2, string[] octeto3)
+        public static void TimeOfDay(string octeto1, string octeto2, string octeto3)
         {
-            int decodeTimeDay = 0; // llamamos a una funcion que me decodifique el octeto
+            int TimeOfDay = Functions.bintonum(octeto1 + octeto2 + octeto3);
+
+            CurrentData.TimeDay = TimeOfDay;
         }
 
         // Data Item I010/161: Track Number
-        public static void TrackNumber(string[] octeto1, string[] octeto2)
+        public static void TrackNumber(string octeto1, string octeto2)
         {
+            int TrackNumber = Functions.bintonum(octeto1[4] + octeto1[5] + octeto1[6] + octeto1[7] + octeto2);
 
+            CurrentData.TrackNumber = TrackNumber;
         }
 
         // Data Item I010/170: Track Status
-        public static void TrackStatus(string[] octeto)
+        public static void TrackStatus(string[] octeto, int extends)
         {
-            string messageCnf = octeto[0];
-            string messageTre = octeto[1];
-            string messageCst = octeto[2] + octeto[3];
-            string messageMah = octeto[4];
-            string messageTcc = octeto[5];
-            string messageSth = octeto[6];
-            string messageFx = octeto[7];
+            int CNF = octeto[0][0];
+            int TRE = octeto[0][1];
+            string CST = octeto[0].Substring(2,4);
+            int MAH = octeto[0][4];
+            int TC = octeto[0][5];
+            int STH = octeto[0][6];
+
+            if (extends > 1)
+            {
+
+            }
 
 
-            if (messageCnf == "0")
-            {
-                messageCnf = "Confirmed track";
-            }
-            else
-            {
-                messageCnf = "Track in initialisation phase";
-            }
-
-            if (messageTre == "010")
-            {
-                messageTre = "Default";
-            }
-            else
-            {
-                messageTre = "Last report for a track";
-            }
-
-            if (messageCst == "00")
-            {
-                messageCst = "No extrapolation";
-            }
-            else if (messageCst == "01")
-            {
-                messageCst = "Predictable extrapolation due to sensor refresh period(see NOTE)";
-            }
-            else if (messageCst == "10")
-            {
-                messageCst = "Predictable extrapolation in masked area";
-            }
-            else if (messageCst == "11")
-            {
-                messageCst = "Extrapolation due to unpredictable absence of detection";
-            }
-
-            if (messageMah == "0")
-            {
-                messageMah = "Default";
-            }
-            else
-            {
-                messageMah = "Horizontal manoeuvre";
-            }
-
-            if (messageTcc == "0")
-            {
-                messageTcc = "Tracking performed in 'Sensor Plane'";
-            }
-            else
-            {
-                messageTcc = "Slant range correction and a suitable projection technique are used to track in a 2D";
-            }
-
-            if (messageSth == "0")
-            {
-                messageSth = "Measured position";
-            }
-            else
-            {
-                messageSth = "Smoothed position";
-            }
-
-            if (messageFx == "0")
-            {
-                messageFx = "End of Data Item";
-            }
-            else
-            {
-                messageFx = "Extension into first extent";
-            }
+            
         }
 
         // Data Item I010/200: Calculated Track Velocity in Polar Co-ordinates
-        public static void CalculatedTrackVelocityPolarCoordinates(string[] octeto)
+        public static void CalculatedTrackVelocityPolarCoordinates(string octeto1, string octeto2, string octeto3, string octeto4)
         {
+            float GroundSpeed = Functions.bintonum(octeto1 + octeto2);
+            float TrackAngle = Functions.bintonum(octeto3 + octeto4);
+
+            CurrentData.GroundSpeed = GroundSpeed;
+            CurrentData.TrackAngle = TrackAngle;
 
         }
 
         // Data Item I010/202: Calculated Track Velocity in Cartesian Co-ordinates
-        public static void CalculatedTrackVelocityCartesianCoordinates(string[] octeto)
+        public static void CalculatedTrackVelocityCartesianCoordinates(string octeto1, string octeto2, string octeto3, string octeto4)
         {
+            float Vx = Functions.bintonum(octeto1 + octeto2);
+            float Vy = Functions.bintonum(octeto3 + octeto4);
 
+            CurrentData.Vx = Vx;
+            CurrentData.Vy = Vy;
         }
 
         // Data Item I010/210: Calculated Acceleration
-        public static void CalculatedAcceleration(string[] octeto)
+        public static void CalculatedAcceleration(string octeto1, string octeto2)
         {
+            float Ax = Functions.bintonum(octeto1);
+            float Ay = Functions.bintonum(octeto2);
 
+            CurrentData.Ax = Ax;
+            CurrentData.Ay = Ay;
         }
 
         // Data Item I010/220: Target Address
