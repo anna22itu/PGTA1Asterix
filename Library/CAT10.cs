@@ -520,8 +520,69 @@ namespace Library
         // Data Item I010/550: System Status
         public static void SystemStatus(string[] octeto)
         {
+            string messageNogo = octeto1[0] + octeto1[1];
+            string messageOvl = octeto1[2];
+            string messageTsv = octeto1[3];
+            string messageDiv = octeto1[4];
+            string messageTtf = octeto1[5];
+            string messageZero = octeto1[6];
+            string messageZero0 = octeto1[7];
+
+            if (messageNogo == "00")
+            {
+                messageNogo = "Operational";
+            }
+            else if (messageNogo == "01")
+            {
+                messageNogo = "Degraded";
+            }
+            else if (messageNogo == "10")
+            {
+                messageNogo = "NOGO";
+            }
+
+            if (messageOvl == "0")
+            {
+                messageOvl = "NO overload";
+            }
+            else if (messageOvl == "1")
+            {
+                messageOvl = "Overload";
+            }
+
+            if (messageTsv == "0")
+            {
+                messageTsv = "valid";
+            }
+            else if (messageTsv == "1")
+            {
+                messageTsv = "invalid";
+            }
+
+            if (messageDiv == "0")
+            {
+                messageDiv = "Normal Operations";
+            }
+            else if (messageDiv == "1")
+            {
+                messageDiv = "Diversity degraded";
+            }
+
+            if (messageTtf == "0")
+            {
+                messageTtf = "Test Target Operative";
+            }
+            else if (messageTtf == "1")
+            {
+                messageTtf = "Test Target Failure";
+            }
+
+            messageZero = "0";
+            messageZero0 = "0";
 
         }
 
     }
+
+}
 }

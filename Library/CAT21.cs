@@ -186,37 +186,294 @@ namespace Library
         // Data Item I021/08: Aircraft Operational Status
         private static void AircraftOperationalStatus(string[] octeto)
         {
+            string messageRa = octeto[0];
+            string messageTc = octeto[1] + octeto[2];
+            string messageTs = octeto[3];
+            string messageArv = octeto[4];
+            string messageCdti = octeto[5];
+            string messageNotTcas = octeto[6];
+            string messageSa = octeto[7];
+
+            if (messageRa == "0")
+            {
+                messageRa = "TCAS II or ACAS RA not active";
+            }
+            else if (messageRa == "1")
+            {
+                messageRa = "TCAS RA active";
+            }
+
+            if (messageTc == "0")
+            {
+                messageTc = "no capability for Trajectory Change Reports";
+            }
+            else if (messageTc == "1")
+            {
+                messageTc = "support for TC + 0 reports only";
+            }
+            else if (messageTc == "2")
+            {
+                messageTc = "support for multiple TC reports";
+            }
+            else if (messageTc == "3")
+            {
+                messageTc = "reserved";
+            }
+
+            if (messageTs == "0")
+            {
+                messageTs = "no capability to support Target State Reports";
+            }
+            else if (messageTs == "1")
+            {
+                messageTs = "capable of supporting target State Reports";
+            }
+
+            if (messageArv == "0")
+            {
+                messageArv = "no capability to generate ARV-reports";
+            }
+            else if (messageArv == "1")
+            {
+                messageArv = "capable of generate ARV-reports";
+            }
+
+            if (messageCdti == "0")
+            {
+                messageCdti = "CDTI not operational";
+            }
+            else if (messageCdti == "1")
+            {
+                messageCdti = "CDTI operational";
+            }
+
+            if (messageNotTcas == "0")
+            {
+                messageNotTcas = "TCAS operational";
+            }
+            else if (messageNotTcas == "1")
+            {
+                messageNotTcas = "TCAS not operational";
+            }
+
+            if (messageSa == "0")
+            {
+                messageSa = "Antenna Diversity";
+            }
+            else if (messageSa == "1")
+            {
+                messageSa = "Single Antenna only";
+            }
 
         }
 
         // Data Item I021/010: Data Source Identification 
         private static void DataSourceIdentification(string[] octeto)
         {
+            string SAC = decode(octeto1);
+            string SIC = decode(octeto2);
 
         }
 
         // Data Item I021/015: Service Identification.
         private static void PositionCartesianCoordinates(string[] octeto)
         {
+            string ServiceIdentification = decode(octeto1);
 
         }
 
         // Data Item I021/016: Service Management
         private static void ServiceManagement(string[] octeto)
         {
+            int RP = deocode(octeto1[0] + octeto1[1] + octeto1[2] + octeto1[3] + octeto1[4] + octeto1[5] + octeto1[6]);
+            int LSB = Convert.ToInt32(octeto1[7]);
 
         }
 
         // Data Item I021/020: Emitter Category
         private static void EmitterCategory(string[] octeto)
         {
+            int decodeECAT = decode(octeto1);
+            string messageECAT = "";
+
+            if (decodeECAT == 0)
+            {
+                messageECAT = "No ADS-B Emitter Category Information";
+            }
+            else if (decodeECAT == 1)
+            {
+                messageECAT = " light aircraft <= 15500 lbs";
+            }
+            else if (decodeECAT == 2)
+            {
+                messageECAT = "15500 lbs < small aircraft <75000 lbs";
+            }
+            else if (decodeECAT == 3)
+            {
+                messageECAT = "75000 lbs < medium a/c < 300000 lbs";
+            }
+            else if (decodeECAT == 4)
+            {
+                messageECAT = "High Vortex Large";
+            }
+            else if (decodeECAT == 5)
+            {
+                messageECAT = "300000 lbs <= heavy aircraft";
+            }
+
+            else if (decodeECAT == 6)
+            {
+                messageECAT = "highly manoeuvrable (5g acceleration capability) and high speed(> 400 knots cruise)";
+            }
+            else if (decodeECAT == 7 || decodeECAT == 8 || decodeECAT == 9)
+            {
+                messageECAT = "reserved";
+            }
+
+            else if (decodeECAT == 10)
+            {
+                messageECAT = "rotocraft";
+            }
+
+            else if (decodeECAT == 11)
+            {
+                messageECAT = "glider / sailplane";
+            }
+            else if (decodeECAT == 12)
+            {
+                messageECAT = "lighter-than-air";
+            }
+            else if (decodeECAT == 13)
+            {
+                messageECAT = "unmanned aerial vehicle";
+            }
+            else if (decodeECAT == 14)
+            {
+                messageECAT = "space / transatmospheric vehicle";
+            }
+            else if (decodeECAT == 15)
+            {
+                messageECAT = "ultralight / handglider / paraglider";
+            }
+            else if (decodeECAT == 16)
+            {
+                messageECAT = "parachutist / skydiver";
+            }
+
+            else if (decodeECAT == 17 || decodeECAT == 18 || decodeECAT == 19)
+            {
+                messageECAT = "reserved";
+            }
+
+            else if (decodeECAT == 20)
+            {
+                messageECAT = "surface emergency vehicle";
+            }
+            else if (decodeECAT == 21)
+            {
+                messageECAT = "surface service vehicle";
+            }
+
+            else if (decodeECAT == 22)
+            {
+                messageECAT = "= fixed ground or tethered obstruction";
+            }
+            else if (decodeECAT == 23)
+            {
+                messageECAT = "cluster obstacle";
+            }
+            else if (decodeECAT == 24)
+            {
+                messageECAT = "line obstacle";
+            }
 
         }
 
         // Data Item I021/040: Target Report Descriptor
         private static void TargetReportDescriptor(string[] octeto)
         {
+            int decodeATP = decode(octeto1[0] + octeto1[1] + octeto1[2]);
+            int decodeARC = decode(octeto1[3] + octeto1[4]);
+            int decodeRC = decode(octeto1[5]);
+            int decodeRAB = decode(octeto1[6]);
+            int decodeFX = decode(octeto1[7]);
 
+            string messageATP = "";
+            string messageARC = "";
+            string messageRC = "";
+            string messageRAB = "";
+            string messageFX = "";
+
+            if (decodeATP == 0)
+            {
+                messageATP = "24-Bit ICAO address";
+            }
+            else if (decodeATP == 1)
+            {
+                messageATP = "Duplicate address";
+            }
+
+            else if (decodeATP == 2)
+            {
+                messageATP = "Surface vehicle address";
+            }
+            else if (decodeATP == 3)
+            {
+                messageATP = "Anonymous address";
+            }
+            else if (decodeATP == 4 || decodeATP == 5 || decodeATP == 6 || decodeATP == 7)
+            {
+                messageATP = "Reserved for future use";
+            }
+
+
+            if (decodeARC == 0)
+            {
+                messageARC = "25 ft";
+            }
+            else if (decodeARC == 1)
+            {
+                messageARC = "100 ft";
+            }
+            else if (decodeARC == 2)
+            {
+                messageARC = "Unknown";
+            }
+            else if (decodeARC == 3)
+            {
+                messageARC = "Invalid";
+            }
+
+
+            if (decodeRC == 0)
+            {
+                messageRC = "Default";
+            }
+            else if (decodeRC == 1)
+            {
+                messageRC = "Range Check passed, CPR Validation pending";
+            }
+
+
+            if (decodeRAB == 0)
+            {
+                messageRAB = "Report from target transponder";
+            }
+            else if (decodeRAB == 1)
+            {
+                messageRAB = "Report from field monitor (fixed transponder)";
+            }
+
+
+            if (decodeFX == 0)
+            {
+                messageFX = "End of item";
+            }
+            else if (decodeFX == 1)
+            {
+                messageFX = "Extension into first extension";
+            }
+            
         }
 
         // Data Item I021/070: Mode 3/A Code in Octal Representation
