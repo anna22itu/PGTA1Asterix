@@ -162,15 +162,17 @@ namespace Library
             int GBS = octeto[0][5];
             int CRT = octeto[0][6];
 
-
-            //PODRIEM FER UN DICCIONARI AMB CADA CODI I EL SEU MISSATGE I ENS ESTALVIEM ELS 8MIL IFS
             string messageTYP = CAT10Dict.TargetReportDescriptor_TYP[TYP];
-            
+            string messageDCR = CAT10Dict.TargetReportDescriptor_DCR[DCR];
+            string messageCHN = CAT10Dict.TargetReportDescriptor_CHN[CHN];
+            string messageGBS = CAT10Dict.TargetReportDescriptor_GBS[GBS];
+            string messageCRT = CAT10Dict.TargetReportDescriptor_CRT[CRT];
+
             CurrentData.TYP = messageTYP;
-            CurrentData.DCR = DCR;
-            CurrentData.CHN = CHN;
-            CurrentData.GBS = GBS;
-            CurrentData.CRT = CRT;
+            CurrentData.DCR = messageDCR;
+            CurrentData.CHN = messageCHN;
+            CurrentData.GBS = messageGBS;
+            CurrentData.CRT = messageCRT;
 
             if (nextents > 1)
             {
@@ -181,13 +183,15 @@ namespace Library
                 string LOP = octeto[1].Substring(3, 2);
                 string TOT = octeto[1].Substring(5, 2);
 
-                CurrentData.SIM = SIM;
-                CurrentData.TST = TST;
-                CurrentData.RAB = RAB;
-
+                string messageSIM = CAT10Dict.TargetReportDescriptor_SIM[SIM];
+                string messageTST = CAT10Dict.TargetReportDescriptor_TST[TST];
+                string messageRAB = CAT10Dict.TargetReportDescriptor_RAB[RAB];
                 string messageLOP = CAT10Dict.TargetReportDescriptor_LOP[LOP];
                 string messageTOT = CAT10Dict.TargetReportDescriptor_TOT[TOT];
 
+                CurrentData.SIM = messageSIM;
+                CurrentData.TST = messageTST;
+                CurrentData.RAB = messageRAB;
                 CurrentData.LOP = messageLOP;
                 CurrentData.TOT = messageTOT;
 
@@ -196,7 +200,9 @@ namespace Library
                     //Decodification of 2nd extent byte
                     int SPI = octeto[2][0];
 
-                    CurrentData.SPI = SPI;
+                    string messageSPI = CAT10Dict.TargetReportDescriptor_SPI[SPI];
+
+                    CurrentData.SPI = messageSPI;
 
                 }
 
@@ -301,22 +307,60 @@ namespace Library
         }
 
         // Data Item I010/170: Track Status
-        public static void TrackStatus(string[] octeto, int extends)
+        public static void TrackStatus(string[] octeto)
         {
             int CNF = octeto[0][0];
             int TRE = octeto[0][1];
-            string CST = octeto[0].Substring(2,4);
+            string CST = octeto[0].Substring(2,2);
             int MAH = octeto[0][4];
-            int TC = octeto[0][5];
+            int TCC = octeto[0][5];
             int STH = octeto[0][6];
 
-            if (extends > 1)
+            string messageCNF = CAT10Dict.TrackStatus_CNF[CNF];
+            string messageTRE = CAT10Dict.TrackStatus_TRE[TRE];
+            string messageCST = CAT10Dict.TrackStatus_CST[CST];
+            string messageMAH = CAT10Dict.TrackStatus_MAH[MAH];
+            string messageTCC = CAT10Dict.TrackStatus_TCC[TCC];
+            string messageSTH = CAT10Dict.TrackStatus_STH[STH];
+
+            CurrentData.CNF = messageCNF;
+            CurrentData.TRE = messageTRE;
+            CurrentData.CST = messageCST;
+            CurrentData.MAH = messageMAH;
+            CurrentData.TCC = messageTCC;
+            CurrentData.STH = messageSTH;
+
+
+            int FX1 = octeto[0][7];
+
+            if (FX1 == 1)
             {
+                //Decodification of 1st extent byte
+                string TOM = octeto[1].Substring(0,2);
+                string DOU = octeto[1].Substring(2,3);
+                string MRS = octeto[1].Substring(5,2);
 
+                string messageTOM = CAT10Dict.TrackStatus_TOM[TOM];
+                string messageDOU = CAT10Dict.TrackStatus_DOU[DOU];
+                string messageMRS = CAT10Dict.TrackStatus_MRS[MRS];
+
+                CurrentData.TOM = messageTOM;
+                CurrentData.DOU = messageDOU;
+                CurrentData.MRS = messageMRS;
+
+                int FX2 = octeto[1][7];
+
+                if (FX2 ==1)
+                {
+                    //Decodification of 2nd extent byte
+                    int GHO = octeto[2][0];
+
+                    string messageGHO = CAT10Dict.TrackStatus_GHO[GHO];
+
+                    CurrentData.GHO = messageGHO;
+
+                }
             }
-
-
-            
         }
 
         // Data Item I010/200: Calculated Track Velocity in Polar Co-ordinates
@@ -351,27 +395,69 @@ namespace Library
         }
 
         // Data Item I010/220: Target Address
-        public static void TargetAddress(string[] octeto)
+        public static void TargetAddress(string octeto1, string octeto2, string octeto3)
         {
+            float TA = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
+            string TargetAddress =  BitConverter; //// FALTA AÑADIR QUE LO PASE A HEXAGEMINAL
+
+            CurrentData.TargetAddress = TargetAddress;
         }
 
         // Data Item I010/245: Target Identification
-        public static void TargetIdentification(string[] octeto)
+        public static void TargetIdentification(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7)
         {
+            string STI = octeto1.Substring(0,2);
+
+            string messageSTI = CAT10Dict.TargetIdentification_STI[STI];
+
+            CurrentData.STI = messageSTI;
+
 
         }
 
         // Data Item I010/250: Mode S MB Data
-        public static void ModeSMBData(string[] octeto)
+        public static void ModeSMBData(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7, string octeto8, string octeto9)
         {
+            float REP = Functions.bintonum(octeto1);
+            float MB = Functions.bintonum(octeto2 + octeto3 + octeto4 + octeto5 + octeto6 + octeto7 + octeto8);
+            float BDS1 = Functions.bintonum(octeto9.Substring(0,4));
+            float BDS2 = Functions.bintonum(octeto9.Substring(4,4));
+
+            CurrentData.REP = REP;
+            CurrentData.MB = MB;
+            CurrentData.BDS1 = BDS1;
+            CurrentData.BDS2 = BDS2;
 
         }
 
         // Data Item I010/270: Target Size & Orientation
         public static void TargetSizeOrientation(string[] octeto)
         {
+            int LengthLSB = Functions.bintonum(octeto[0].Substring(0,7));
+            
+            CurrentData.LengthLSB = LengthLSB;
 
+            int FX1 = octeto[0][7];
+
+            if (FX1 == 1)
+            {
+                //Decodification of 1st extent byte
+                float OrientationLSB = Functions.bintonum(octeto[1].Substring(0, 7));
+
+                CurrentData.OrientationLSB = OrientationLSB;
+
+                int FX2 = octeto[1][7];
+
+                if (FX2 == 1)
+                {
+                    //Decodification of 2nd extent byte
+                    int WidthLSB = Functions.bintonum(octeto[2].Substring(0, 7));
+
+                    CurrentData.WidthLSB = WidthLSB;
+
+                }
+            }
         }
 
         // Data Item I010/280: Presence
@@ -381,198 +467,66 @@ namespace Library
         }
 
         // Data Item I010/300: Vehicle Fleet Identification
-        public static void VehicleFleetIdentification(string[] octeto)
+        public static void VehicleFleetIdentification(string octeto1)
         {
-            int decodeVFI = 0; //habra que ver pq con NULL daba error
-            string messageVfi = "";
+            int VFI = Functions.bintonum(octeto1);
 
-            if (decodeVFI == 0)
-            {
-                messageVfi = "Unknown";
-            }
-            else if (decodeVFI == 1)
-            {
-                messageVfi = "ATC equipment maintenance";
-            }
-            else if (decodeVFI == 2)
-            {
-                messageVfi = "Airport maintenance";
-            }
-            else if (decodeVFI == 3)
-            {
-                messageVfi = "Fire";
-            }
-            else if (decodeVFI == 4)
-            {
-                messageVfi = "Bird scarer";
-            }
-            else if (decodeVFI == 5)
-            {
-                messageVfi = "Snow plough";
-            }
+            string messageVFI = CAT10Dict.VehicleFleetIdentification_VFI[VFI];
 
-            else if (decodeVFI == 6)
-            {
-                messageVfi = "Runway sweeper";
-            }
-            else if (decodeVFI == 7)
-            {
-                messageVfi = "Emergency";
-            }
-            else if (decodeVFI == 8)
-            {
-                messageVfi = "Police";
-            }
-            else if (decodeVFI == 9)
-            {
-                messageVfi = "Bus";
-            }
-            else if (decodeVFI == 10)
-            {
-                messageVfi = "Tug (push/tow)";
-            }
-
-            else if (decodeVFI == 11)
-            {
-                messageVfi = "Grass cutter";
-            }
-            else if (decodeVFI == 12)
-            {
-                messageVfi = "Fuel";
-            }
-            else if (decodeVFI == 13)
-            {
-                messageVfi = "Baggage";
-            }
-            else if (decodeVFI == 14)
-            {
-                messageVfi = "Catering";
-            }
-            else if (decodeVFI == 15)
-            {
-                messageVfi = "Aircraft maintenance";
-            }
-            else if (decodeVFI == 16)
-            {
-                messageVfi = "Flyco(follow me)";
-            }
+            CurrentData.VFI = messageVFI;
         }
 
         // Data Item I010/310: Pre-programmed Message
-        public static void PreprogrammedMessage(string[] octeto)
+        public static void PreprogrammedMessage(string octeto1)
         {
-            string messageTrb = octeto[0];
-            String messageMsg = "";
-            int decoMsg = 0;
+            int TRB = octeto1[0];
+            int MSG = Functions.bintonum(octeto1.Substring(1,8));
 
-            if (messageTrb == "0")
-            {
-                messageTrb = "Default";
-            }
-            else
-            {
-                messageTrb = "In Trouble";
-            }
+            string messageTRB = CAT10Dict.PreprogrammedMessage_TRB[TRB];
+            string messageMSG = CAT10Dict.PreprogrammedMessage_MSG[MSG];
 
-
-            if (decoMsg == 1)
-            {
-                messageMsg = "Towing aircraft";
-            }
-            else if (decoMsg == 2)
-            {
-                messageMsg = "'Follow me' operation";
-            }
-            else if (decoMsg == 3)
-            {
-                messageMsg = "Runway check";
-            }
-            else if (decoMsg == 4)
-            {
-                messageMsg = "Emergency operation (fire, medical…)";
-            }
-            else if (decoMsg == 5)
-            {
-                messageMsg = "Work in progress (maintenance, birds scarer,sweepers…)";
-            }
-
+            CurrentData.TRB = messageTRB;
+            CurrentData.MSG = messageMSG;
 
         }
 
         // Data Item I010/500: Standard Deviation of Position
-        public static void StandardDeviationPosition(string[] octeto1, string[] octeto2, string[] octeto3)
+        public static void StandardDeviationPosition(string octeto1, string octeto2, string octeto3, string octeto4)
         {
-            string[] standDeviX = octeto1;
-            string[] standDeviY = octeto2;
-            string[] standDeviXY = octeto3;
+            float SDx = Functions.bintonum(octeto1);
+            float SDy = Functions.bintonum(octeto2);
+            float Covariance = Functions.bintonum(octeto3 + octeto4);   /// FALTA EL COMPLEMENTO A DOSSSSS
+
+            CurrentData.SDx = SDx;
+            CurrentData.SDy = SDy;
+            CurrentData.Covariance = Covariance;
+
         }
 
         // Data Item I010/550: System Status
-        public static void SystemStatus(string[] octeto)
+        public static void SystemStatus(string octeto1)
         {
-            string messageNogo = octeto1[0] + octeto1[1];
-            string messageOvl = octeto1[2];
-            string messageTsv = octeto1[3];
-            string messageDiv = octeto1[4];
-            string messageTtf = octeto1[5];
-            string messageZero = octeto1[6];
-            string messageZero0 = octeto1[7];
+            string NOGO = octeto1.Substring(0, 2);
+            int OVL = octeto1[2];
+            int TSV = octeto1[3];
+            int DIV = octeto1[4];
+            int TTF = octeto1[5];
 
-            if (messageNogo == "00")
-            {
-                messageNogo = "Operational";
-            }
-            else if (messageNogo == "01")
-            {
-                messageNogo = "Degraded";
-            }
-            else if (messageNogo == "10")
-            {
-                messageNogo = "NOGO";
-            }
 
-            if (messageOvl == "0")
-            {
-                messageOvl = "NO overload";
-            }
-            else if (messageOvl == "1")
-            {
-                messageOvl = "Overload";
-            }
+            string messageNOGO = CAT10Dict.SystemStatus_NOGO[NOGO];
+            string messageOVL = CAT10Dict.SystemStatus_OVL[OVL];
+            string messageTSV = CAT10Dict.SystemStatus_TSV[TSV];
+            string messageDIV = CAT10Dict.SystemStatus_DIV[DIV];
+            string messageTTF = CAT10Dict.SystemStatus_TTF[TTF];
 
-            if (messageTsv == "0")
-            {
-                messageTsv = "valid";
-            }
-            else if (messageTsv == "1")
-            {
-                messageTsv = "invalid";
-            }
-
-            if (messageDiv == "0")
-            {
-                messageDiv = "Normal Operations";
-            }
-            else if (messageDiv == "1")
-            {
-                messageDiv = "Diversity degraded";
-            }
-
-            if (messageTtf == "0")
-            {
-                messageTtf = "Test Target Operative";
-            }
-            else if (messageTtf == "1")
-            {
-                messageTtf = "Test Target Failure";
-            }
-
-            messageZero = "0";
-            messageZero0 = "0";
-
+            CurrentData.NOGO = messageNOGO;
+            CurrentData.OVL = messageOVL;
+            CurrentData.TSV = messageTSV;
+            CurrentData.DIV = messageDIV;
+            CurrentData.TTF = messageTTF;
         }
 
     }
 
 }
-}
+

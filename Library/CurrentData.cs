@@ -19,16 +19,16 @@ namespace Library
 
         //020
         public static string TYP = "";
-        public static int DCR = 0;
-        public static int CHN = 0;
-        public static int GBS = 0;
-        public static int CRT = 0;
-        public static int SIM = 0;
-        public static int TST = 0;
-        public static int RAB = 0;
+        public static string DCR = "";
+        public static string CHN = "";
+        public static string GBS = "";
+        public static string CRT = "";
+        public static string SIM = "";
+        public static string TST = "";
+        public static string RAB = "";
         public static string LOP = "";
         public static string TOT = "";
-        public static int SPI = 0;
+        public static string SPI = "";
 
         //040
         public static float rho = 0;
@@ -65,12 +65,19 @@ namespace Library
         public static int TrackNumber = 0;
 
         //170
-        public static int CNF = 0;
-        public static int TRE  = 0;
+        public static string CNF = "";
+        public static string TRE = "";
         public static string CST = "";
-        public static int MAH = 0;
-        public static int TCC = 0;
-        public static int STH = 0;
+        public static string MAH = "";
+        public static string TCC = "";
+        public static string STH = "";
+
+        public static string TOM = "";
+        public static string DOU= "";
+        public static string MRS = "";
+
+        public static string GHO = "";
+
 
         //200
         public static float GroundSpeed = 0;
@@ -84,10 +91,46 @@ namespace Library
         public static float Ax = 0;
         public static float Ay = 0;
 
+        //220
+        public static string TargetAddress = "";
+
+        //245
+        public static string STI = "";
+        public static string TargetIdentification = "";
+
+        //250
+        public static float REP = 0;
+        public static float MB = 0;
+        public static float BDS1 = 0;
+        public static float BDS2 = 0;
+
+        //270
+        public static int LengthLSB = 0;
+        public static float OrientationLSB = 0;
+        public static int WidthLSB = 0;
+
+        //300
+        public static string VFI = "";
+
+        //319
+        public static string TRB = "";
+        public static string MSG = "";
+
+        //500
+        public static float SDx = 0;
+        public static float SDy = 0;
+        public static float Covariance = 0;
+
+        //550
+        public static string NOGO = "";
+        public static string OVL = "";
+        public static string TSV = "";
+        public static string DIV = "";
+        public static string TTF = "";
 
     }
-        
-            
+
+
 }  
 
 
