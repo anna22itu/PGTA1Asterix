@@ -596,69 +596,128 @@ namespace Library
         }
 
         // Data Item I021/146: Selected Altitude
-        private static void SelectedAltitude(string[] octeto)
+        private static void SelectedAltitude(string octeto1, string octeto2)
         {
-           
+            int SAS = octeto1[0];
+            string Source = octeto1.Substring(1,2);
+            float SelectedAltitude = Functions.bintonum(octeto1.Substring(3, 5));   /// FALTA EL COMPLEMENTO A DOS
+
+            string messageSAS = CAT21Dict.SelectedAltitude_SAS[SAS];
+            string messageARC = CAT21Dict.SelectedAltitude_Source[Source];
+
+            CurrentDataCAT21.SAS = messageSAS;
+            CurrentDataCAT21.TID = messageARC;
+            CurrentDataCAT21.SelectedAltitude = SelectedAltitude;
         }
 
         // Data Item I021/148:Final State Selected Altitude
-        private static void FinalStateSelectedAltitude(string[] octeto)
+        private static void FinalStateSelectedAltitude(string octeto1, string octeto2)
         {
+            int MV = octeto1[0];
+            int AH = octeto1[1];
+            int AM = octeto1[2];
+            float AltitudeFinal = Functions.bintonum(octeto1.Substring(3, 5) + octeto2);   /// FALTA EL COMPLEMENTO A DOS
 
+            string messageMV = CAT21Dict.AltitudeFinal_MV[MV];
+            string messageAH = CAT21Dict.AltitudeFinal_AH[AH];
+            string messageAM = CAT21Dict.AltitudeFinal_AM[AM];
+
+            CurrentDataCAT21.MV = messageMV;
+            CurrentDataCAT21.AH = messageAH;
+            CurrentDataCAT21.AM = messageAM;
+            CurrentDataCAT21.AltitudeFinal = AltitudeFinal;
         }
 
         // Data Item I021/150: Air Speed
-        private static void AirSpeed(string[] octeto)
+        private static void AirSpeed(string octeto1, string octeto2)
         {
+            int IM = octeto1[0];
+            float AirSpeed = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);  
 
+            string messageIM = CAT21Dict.AirSpeed_IM[IM];
+
+            CurrentDataCAT21.IM = messageIM;
+            CurrentDataCAT21.AirSpeed = AirSpeed;
         }
 
         // Data Item I021/151: True Airspeed 
-        private static void TrueAirspeed(string[] octeto)
+        private static void TrueAirspeed(string octeto1, string octeto2)
         {
+            int RE = octeto1[0];
+            float TrueAirSpeed = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);   
 
+            string messageRE = CAT21Dict.TrueAirSpeed_RE[RE];
+
+            CurrentDataCAT21.RE = messageRE;
+            CurrentDataCAT21.TrueAirSpeed = TrueAirSpeed;
         }
 
         // Data Item I021/152:  Magnetic Heading
-        private static void MagneticHeading(string[] octeto)
+        private static void MagneticHeading(string octeto1, string octeto2)
         {
-
+            float MagneticHeading = Functions.bintonum(octeto1 + octeto2); 
+            CurrentDataCAT21.MagneticHeading = MagneticHeading;
         }
 
         // Data Item I021/155: Barometric Vertical Rate
-        private static void BarometricVerticalRate(string[] octeto)
+        private static void BarometricVerticalRate(string octeto1, string octeto2)
         {
+            int RE_VR = octeto1[0];
+            float BarometricVerticalRate = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);
 
+            string messageRE_VR = CAT21Dict.BarometricVerticalRate_RE[RE_VR];
+
+            CurrentDataCAT21.RE_VR = messageRE_VR;
+            CurrentDataCAT21.BarometricVerticalRate = BarometricVerticalRate;
         }
 
         // Data Item I021/157: Geometric Vertical Rate
-        private static void GeometricVerticalRate(string[] octeto)
+        private static void GeometricVerticalRate(string octeto1, string octeto2)
         {
+            int RE_G = octeto1[0];
+            float GeometricVerticalRate = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);
 
+            string messageRE_G = CAT21Dict.GeometricVerticalRate_RE[RE_G];
+
+            CurrentDataCAT21.RE_G = messageRE_G;
+            CurrentDataCAT21.GeometricVerticalRate = GeometricVerticalRate;
         }
 
         // Data Item I021/160: Airborne Ground Vector
-        private static void AirborneGroundVector(string[] octeto)
+        private static void AirborneGroundVector(string octeto1, string octeto2, string octeto3, string octeto4)
         {
+            int RE_A = octeto1[0];
+            float GroundSpeed = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);
+            float TrackAngle = Functions.bintonum(octeto3 + octeto4);
 
+
+            string messageRE_A = CAT21Dict.AirborneGroundVector_RE[RE_A];
+
+            CurrentDataCAT21.RE_A = messageRE_A;
+            CurrentDataCAT21.GroundSpeed = GroundSpeed;
+            CurrentDataCAT21.TrackAngle = TrackAngle;
         }
 
         // Data Item I021/161: Track Number
-        private static void TrackNumber(string[] octeto)
+        private static void TrackNumber(string octeto1, string octeto2)
         {
+            int TrackNumber = Functions.bintonum(octeto1.Substring(3, 4) + octeto2);
 
+            CurrentDataCAT21.TrackNumber = TrackNumber;
         }
 
         // Data Item I021/165: Track Angle Rate
-        private static void TrackAngleRate(string[] octeto)
+        private static void TrackAngleRate(string octeto1, string octeto2)
         {
+            float TrackAngleRate = Functions.bintonum(octeto1.Substring(5, 2) + octeto2);
 
+            CurrentDataCAT21.TrackAngleRate = TrackAngleRate;
         }
 
         // Data Item I021/170: Target Identification
-        private static void TargetIdentification(string[] octeto)
+        private static void TargetIdentification(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6)
         {
-
+            
         }
 
         // Data Item I021/200: Target Status

@@ -123,5 +123,45 @@ namespace Library
         //145
         public static float FL = 0;
 
+        //146
+        public static string SAS = "";
+        public static string Source = "";
+        public static float SelectedAltitude = 0;
+
+        //148
+        public static string MV = "";
+        public static string AH = "";
+        public static string AM = "";
+        public static float AltitudeFinal = 0;
+
+        //150
+        public static string IM = "";
+        public static float AirSpeed = 0;
+
+        //151
+        public static string RE = "";
+        public static float TrueAirSpeed = 0;
+
+        //152
+        public static float MagneticHeading = 0;
+
+        //155
+        public static string RE_VR = "";
+        public static float BarometricVerticalRate = 0;
+
+        //157
+        public static string RE_G = "";
+        public static float GeometricVerticalRate = 0;
+
+        //157
+        public static string RE_A = "";
+        public static float GroundSpeed = 0;
+        public static float TrackAngle = 0;
+
+        //161
+        public static int TrackNumber = 0;
+
+        //165
+        public static float TrackAngleRate = 0;
     }
 }

@@ -107,5 +107,39 @@ namespace Library
         
         public static IDictionary<int, string> TrajectoryIntent_TOA = new Dictionary<int, string>() { { 0, "TOV available" }, { 1, "TOV not available" } };
 
+
+        // 146
+        public static IDictionary<int, string> SelectedAltitude_SAS = new Dictionary<int, string>() { { 0, "No source information provided" }, { 1, "Source Information provided" } };
+
+        public static IDictionary<string, string> SelectedAltitude_Source = new Dictionary<string, string>() { { "00", "Unknown" }, { "01", "Aircraft Altitude (Holding Altitude)" }, { "10", "MCP/FCU Selected Altitude" }, { "11", "FMS Selected Altitude" } };
+
+
+        // 147
+        public static IDictionary<int, string> AltitudeFinal_MV = new Dictionary<int, string>() { { 0, "Not active or unknown" }, { 1, "Active" } };
+
+        public static IDictionary<int, string> AltitudeFinal_AH = new Dictionary<int, string>() { { 0, "Not active or unknown" }, { 1, "Active" } };
+
+        public static IDictionary<int, string> AltitudeFinal_AM = new Dictionary<int, string>() { { 0, "Not active or unknown" }, { 1, "Active" } };
+
+
+        // 150
+        public static IDictionary<int, string> AirSpeed_IM = new Dictionary<int, string>() { { 0, "IAS" }, { 1, "Mach" } };
+
+
+        // 151
+        public static IDictionary<int, string> TrueAirSpeed_RE = new Dictionary<int, string>() { { 0, "Value in defined range" }, { 1, "Value exceeds defined range" } };
+
+
+        // 155
+        public static IDictionary<int, string> BarometricVerticalRate_RE = new Dictionary<int, string>() { { 0, "Value in defined range" }, { 1, "Value exceeds defined range" } };
+
+
+        // 155
+        public static IDictionary<int, string> GeometricVerticalRate_RE = new Dictionary<int, string>() { { 0, "Value in defined range" }, { 1, "Value exceeds defined range" } };
+
+
+        // 157
+        public static IDictionary<int, string> AirborneGroundVector_RE = new Dictionary<int, string>() { { 0, "Value in defined range" }, { 1, "Value exceeds defined range" } };
+
     }
 }
