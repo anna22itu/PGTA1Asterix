@@ -67,7 +67,9 @@ namespace Library
         public static IDictionary<int, string> TargetReportDescriptor_RCF = new Dictionary<int, string>() { { 0, "default" }, { 1, "Range Check failed" } };
 
 
+
         public static IDictionary<int, string> TargetReportDescriptor_TBC_element = new Dictionary<int, string>() { { 0, "Element not populated" }, { 1, "Element populated" } };
+
 
 
         public static IDictionary<int, string> TargetReportDescriptor_MBC_element = new Dictionary<int, string>() { { 0, "Element not populated" }, { 1, "Element populated" } };
@@ -79,6 +81,31 @@ namespace Library
 
         // 076
         public static IDictionary<string, string> TimeMessageReceptionVelocity_HP_FSI = new Dictionary<string, string>() { { "11", "Reserved" }, { "10", "TOMRp whole seconds = (I021/073) Whole seconds – 1" }, { "01", "TOMRp whole seconds = (I021/073) Whole seconds + 1" }, { "11", "TOMRp whole seconds = (I021/073) Whole seconds" } };
+
+
+        // 110
+        public static IDictionary<int, string> TrajectoryIntent_TIS = new Dictionary<int, string>() { { 0, "Absence of Subfield #1" }, { 1, "Presence of Subfield #1" } };
+        
+        public static IDictionary<int, string> TrajectoryIntent_TID = new Dictionary<int, string>() { { 0, "Absence of Subfield #2" }, { 1, "Presence of Subfield #2" } };
+
+
+
+        public static IDictionary<int, string> TrajectoryIntent_NAV = new Dictionary<int, string>() { { 0, "Trajectory Intent Data is available for this aircraft" }, { 1, "Trajectory Intent Data is not available for this aircraft" } };
+
+        public static IDictionary<int, string> TrajectoryIntent_NVB = new Dictionary<int, string>() { { 0, "Trajectory Intent Data is valid" }, { 1, "Trajectory Intent Data is not valid" } };
+
+
+        public static IDictionary<int, string> TrajectoryIntent_TCA = new Dictionary<int, string>() { { 0, "TCP number available" }, { 1, "TCP number not available" } };
+
+        public static IDictionary<int, string> TrajectoryIntent_NC = new Dictionary<int, string>() { { 0, "TCP compliance" }, { 1, "TCP non-compliance" } };
+        
+        public static IDictionary<int, string> TrajectoryIntent_PointType = new Dictionary<int, string>() { { 0, "Unknown" }, { 1, "Fly by waypoint (LT)" }, { 2, "Fly over waypoint (LT)" }, { 3, "Hold pattern (LT)" }, { 4, "Procedure hold (LT)" }, { 5, "Procedure turn (LT)" }, { 6, "RF leg (LT)" }, { 7, "Top of climb (VT)" }, { 8, "Top of descent (VT)" }, { 9, "Start of level (VT)" }, { 10, "Cross-over altitude (VT)" }, { 11, "Transition altitude (VT)" } };
+
+        public static IDictionary<string, string> TrajectoryIntent_TD = new Dictionary<string, string>() { { "00", "N/A" }, { "01", "Turn right" }, { "10", "Turn left" }, { "11", "No turn" } };
+
+        public static IDictionary<int, string> TrajectoryIntent_TRA = new Dictionary<int, string>() { { 0, "TTR not available" }, { 1, "TTR available" } };
+        
+        public static IDictionary<int, string> TrajectoryIntent_TOA = new Dictionary<int, string>() { { 0, "TOV available" }, { 1, "TOV not available" } };
 
     }
 }

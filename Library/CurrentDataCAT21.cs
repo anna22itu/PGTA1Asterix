@@ -79,8 +79,49 @@ namespace Library
         public static float TimeMessageVelocity_HP = 0;
         public static string FSI_Vel = "";
 
+        //077
+        public static float TimeAsterixTransmission = 0;
 
+        //080
+        public static float TargerAddress = 0;
 
+        //110
+        public static string TIS = "";
+        public static string TID = "";
+
+        public static string NAV = "";
+        public static string NVB = "";
+
+        public static float REP = 0;
+        public static string TCA = "";
+        public static string NC = "";
+        public static float TCP = 0;
+        public static float Altitude = 0;
+        public static float Latitude = 0;
+        public static float Longitude = 0;
+        public static string PointType = "";
+        public static string TD = "";
+        public static string TRA = "";
+        public static string TOA = "";
+        public static float TOV = 0;
+        public static float TTR = 0;
+
+        //130
+        public static float Latitude_WGS = 0;
+        public static float Longitude_WGS = 0;
+
+        //131
+        public static float Latitude_WGS_HP = 0;
+        public static float Longitude_WGS_HP = 0;
+
+        //132
+        public static float MAM = 0;
+
+        //140
+        public static float GH = 0;
+
+        //145
+        public static float FL = 0;
 
     }
 }

@@ -420,15 +420,19 @@ namespace Library
         }
 
         // Data Item I021/077: Time of ASTERIX Report Transmission
-        private static void TimeASTERIXReportTransmission(string[] octeto)
+        private static void TimeASTERIXReportTransmission(string octeto1, string octeto2, string octeto3)
         {
+            float TimeAsterixTransmission = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
+            CurrentDataCAT21.TimeAsterixTransmission = TimeAsterixTransmission;
         }
 
         // Data Item I021/080: Target Address
-        private static void TargetAddress(string[] octeto)
+        private static void TargetAddress(string octeto1, string octeto2, string octeto3)
         {
+            float TargerAddress = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
+            CurrentDataCAT21.TargerAddress = TargerAddress;  /// FALTA CAMBIAR A HEXAGESIMAL
         }
 
         // Data Item I021/090:Quality Indicators
@@ -436,47 +440,165 @@ namespace Library
         {
 
         }
-
         // Data Item I021/110: Trajectory Intent
         private static void TrajectoryIntent(string[] octeto)
-        {
+        {            
+            int TIS = octeto[0][0];
+            int TID = octeto[0][1];
 
+            string messageTIS = CAT21Dict.TrajectoryIntent_TIS[TIS];
+            string messageARC = CAT21Dict.TrajectoryIntent_TID[TID];
+
+            CurrentDataCAT21.TIS = messageTIS;
+            CurrentDataCAT21.TID = messageARC;
+
+
+            int FX1 = octeto[0][7];
+
+            if (FX1 == 1)
+            {
+                //Decodification of 1st extent byte
+                int NAV = octeto[1][0];
+                int NVB = octeto[1][1];
+
+                string messageNAV = CAT21Dict.TrajectoryIntent_NAV[NAV];
+                string messageNVB = CAT21Dict.TrajectoryIntent_NVB[NVB];
+
+                CurrentDataCAT21.NAV = messageNAV;
+                CurrentDataCAT21.NVB = messageNVB;
+
+                int FX2 = octeto[1][7];
+
+                if (FX2 == 1)
+                {
+                    //Decodification of 2nd extent byte
+                    float REP = Functions.bintonum(octeto[2]);
+                    int TCA = octeto[3][0];
+                    int NC = octeto[3][1];
+                    float TCP = Functions.bintonum(octeto[3].Substring(2,6));
+                    float Altitude = Functions.bintonum(octeto[4] + octeto[5]);
+                    float Latitude = Functions.bintonum(octeto[6] + octeto[7] + octeto[8]);
+                    float Longitude = Functions.bintonum(octeto[9] + octeto[10] + octeto[11]);
+                    int PointType = Functions.bintonum(octeto[12].Substring(0,4));
+                    string TD = octeto[12].Substring(4, 2);
+                    int TRA = octeto[12][6];
+                    int TOA = octeto[12][7];
+                    float TOV = Functions.bintonum(octeto[13] + octeto[14] + octeto[15]);
+                    float TTR = Functions.bintonum(octeto[16] + octeto[17]);
+
+                    string messageTCA = CAT21Dict.TrajectoryIntent_TCA[TCA];
+                    string messageNC = CAT21Dict.TrajectoryIntent_NC[NC];
+                    string messagePointType = CAT21Dict.TrajectoryIntent_PointType[PointType];
+                    string messageTD = CAT21Dict.TrajectoryIntent_TD[TD];
+                    string messageTRA = CAT21Dict.TrajectoryIntent_TRA[TRA];
+                    string messageTOA = CAT21Dict.TrajectoryIntent_TOA[TOA];
+
+                    CurrentDataCAT21.REP = REP;
+                    CurrentDataCAT21.TCA = messageTCA;
+                    CurrentDataCAT21.NC = messageNC;
+                    CurrentDataCAT21.TCP = TCP;
+                    CurrentDataCAT21.Altitude = Altitude;
+                    CurrentDataCAT21.Latitude = Latitude;
+                    CurrentDataCAT21.Longitude = Longitude;
+                    CurrentDataCAT21.PointType = messagePointType;
+                    CurrentDataCAT21.TD = messageTD;
+                    CurrentDataCAT21.TRA = messageTRA;
+                    CurrentDataCAT21.TOA = messageTOA;
+                    CurrentDataCAT21.TOV = TOV;
+                    CurrentDataCAT21.TTR = TTR;
+                                       
+                }
+            }
         }
-
         // Data Item I021/130: Position in WGS-84 Co-ordinates
-        private static void PositionWGS84Coordinates(string[] octeto)
+        private static void PositionWGS84Coordinates(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6)
         {
+            float Latitude_WGS = Functions.bintonum(octeto1 + octeto2 + octeto3);   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+            float Longitude_WGS = Functions.bintonum(octeto4 + octeto5 + octeto6);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
+            CurrentDataCAT21.Latitude_WGS = Latitude_WGS;
+            CurrentDataCAT21.Longitude_WGS = Longitude_WGS;
+
+            if (Latitude_WGS > 0)
+            {
+                //NORTE
+            }
+            else
+            {
+                //SUR
+            }
+
+            if (Longitude_WGS > 0)
+            {
+                //ESTE
+            }
+            else
+            { 
+                //OESTE
+            }
         }
 
         // Data Item I021/131: High-Resolution Position in WGS-84 Co-ordinates 
-        private static void HighResolutionPositionWGS84Coordinates(string[] octeto)
+        private static void HighResolutionPositionWGS84Coordinates(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7, string octeto8)
         {
+            float Latitude_WGS_HP = Functions.bintonum(octeto1 + octeto2 + octeto3 + octeto4);   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+            float Longitude_WGS_HP = Functions.bintonum(octeto5 + octeto6 + octeto7 +  octeto8);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
+            CurrentDataCAT21.Latitude_WGS_HP = Latitude_WGS_HP;
+            CurrentDataCAT21.Longitude_WGS_HP = Longitude_WGS_HP;
+
+            if (Latitude_WGS_HP > 0)
+            {
+                //NORTE
+            }
+            else
+            {
+                //SUR
+            }
+
+            if (Longitude_WGS_HP > 0)
+            {
+                //ESTE
+            }
+            else
+            {
+                //OESTE
+            }
         }
 
         // Data Item I021/132:  Message Amplitude
-        private static void MessageAmplitude(string[] octeto)
+        private static void MessageAmplitude(string octeto1)
         {
+            float MAM = Functions.bintonum(octeto1);   
 
+            CurrentDataCAT21.MAM = MAM;
         }
 
         // Data Item I021/140: Geometric Height
-        private static void GeometricHeight(string[] octeto)
+        private static void GeometricHeight(string octeto1, string octeto2)
         {
+            float GH = Functions.bintonum(octeto1 + octeto2);
 
+            CurrentDataCAT21.GH = GH;
+
+            if(octeto1 + octeto2 == "0111111111111111")
+            {
+                GH = 0;   /// TENEMOS QUE AÑADIR QUE PASA EN ESTE CASO
+            }
         }
 
         // Data Item I021/145: Flight Level
-        private static void FlightLevel(string[] octeto)
+        private static void FlightLevel(string octeto1, string octeto2)
         {
+            float FL = Functions.bintonum(octeto1 + octeto2);
 
+            CurrentDataCAT21.FL = FL;
         }
 
         // Data Item I021/146: Selected Altitude
         private static void SelectedAltitude(string[] octeto)
         {
-
+           
         }
 
         // Data Item I021/148:Final State Selected Altitude
