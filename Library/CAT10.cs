@@ -141,7 +141,7 @@ namespace Library
         private static void MessageType(string octeto)
         {
             string message = CAT10Dict.MessageType[Functions.bintonum(octeto)];
-            CurrentData.MessageType = message;
+            CurrentDataCAT10.MessageType = message;
         }
 
         // Data Item I010/010: Data Source Identifier
@@ -149,8 +149,8 @@ namespace Library
         {
             int SAC = Functions.bintonum(octeto1);
             int SIC = Functions.bintonum(octeto2);
-            CurrentData.SAC = SAC;
-            CurrentData.SIC = SIC;
+            CurrentDataCAT10.SAC = SAC;
+            CurrentDataCAT10.SIC = SIC;
         }
 
         // Data Item I010/020: Target Report Descriptor
@@ -168,11 +168,11 @@ namespace Library
             string messageGBS = CAT10Dict.TargetReportDescriptor_GBS[GBS];
             string messageCRT = CAT10Dict.TargetReportDescriptor_CRT[CRT];
 
-            CurrentData.TYP = messageTYP;
-            CurrentData.DCR = messageDCR;
-            CurrentData.CHN = messageCHN;
-            CurrentData.GBS = messageGBS;
-            CurrentData.CRT = messageCRT;
+            CurrentDataCAT10.TYP = messageTYP;
+            CurrentDataCAT10.DCR = messageDCR;
+            CurrentDataCAT10.CHN = messageCHN;
+            CurrentDataCAT10.GBS = messageGBS;
+            CurrentDataCAT10.CRT = messageCRT;
 
             if (nextents > 1)
             {
@@ -189,11 +189,11 @@ namespace Library
                 string messageLOP = CAT10Dict.TargetReportDescriptor_LOP[LOP];
                 string messageTOT = CAT10Dict.TargetReportDescriptor_TOT[TOT];
 
-                CurrentData.SIM = messageSIM;
-                CurrentData.TST = messageTST;
-                CurrentData.RAB = messageRAB;
-                CurrentData.LOP = messageLOP;
-                CurrentData.TOT = messageTOT;
+                CurrentDataCAT10.SIM = messageSIM;
+                CurrentDataCAT10.TST = messageTST;
+                CurrentDataCAT10.RAB = messageRAB;
+                CurrentDataCAT10.LOP = messageLOP;
+                CurrentDataCAT10.TOT = messageTOT;
 
                 if (nextents > 2)
                 {
@@ -202,7 +202,7 @@ namespace Library
 
                     string messageSPI = CAT10Dict.TargetReportDescriptor_SPI[SPI];
 
-                    CurrentData.SPI = messageSPI;
+                    CurrentDataCAT10.SPI = messageSPI;
 
                 }
 
@@ -216,8 +216,8 @@ namespace Library
             float rho = Functions.bintonum(octeto1 + octeto2);
             float delta = Functions.bintonum(octeto3 + octeto4);
 
-            CurrentData.rho = rho;
-            CurrentData.delta = delta;
+            CurrentDataCAT10.rho = rho;
+            CurrentDataCAT10.delta = delta;
         }
 
         // Data Item I010/041: Position in WGS-84 Co-ordinates
@@ -226,8 +226,8 @@ namespace Library
             float latitude = Functions.bintonum(octeto1 + octeto2 + octeto3 + octeto4);         /////////////// FALTA AÑADIR EL COMPLEMENTO A DOS YA QUE SON LONGITUDES Y LATITUDES
             float longitude = Functions.bintonum(octeto5 + octeto5 + octeto7+ octeto8);
 
-            CurrentData.latitude = latitude;
-            CurrentData.longitude = longitude;
+            CurrentDataCAT10.latitude = latitude;
+            CurrentDataCAT10.longitude = longitude;
         }
 
         // Data Item I010/042: Position in Cartesian Co-ordinates
@@ -236,8 +236,8 @@ namespace Library
             float x = Functions.bintonum(octeto1 + octeto2);
             float y = Functions.bintonum(octeto3 + octeto4);
 
-            CurrentData.xpos = x;
-            CurrentData.ypos = y;  
+            CurrentDataCAT10.xpos = x;
+            CurrentDataCAT10.ypos = y;  
         }
 
         // Data Item I010/060: Mode-3/A Code in Octal Representation
@@ -251,9 +251,9 @@ namespace Library
             string messageG = CAT10Dict.Mode3ACodeOctalRepresentation_G[G];
             string messageL = CAT10Dict.Mode3ACodeOctalRepresentation_L[L];
 
-            CurrentData.ModeV = messageV;
-            CurrentData.ModeG = messageG;
-            CurrentData.ModeL = messageL;
+            CurrentDataCAT10.ModeV = messageV;
+            CurrentDataCAT10.ModeG = messageG;
+            CurrentDataCAT10.ModeL = messageL;
         }
 
         // Data Item I010/090: Flight Level in Binary Representation
@@ -267,9 +267,9 @@ namespace Library
             string messageV = CAT10Dict.FligthLevel_V[V];
             string messageG = CAT10Dict.FligthLevel_G[G];
 
-            CurrentData.FLV = messageV;
-            CurrentData.FlG = messageG;
-            CurrentData.FL = FL;
+            CurrentDataCAT10.FLV = messageV;
+            CurrentDataCAT10.FlG = messageG;
+            CurrentDataCAT10.FL = FL;
         }
 
         // Data Item I010/091: Measured Height
@@ -278,7 +278,7 @@ namespace Library
 
             int Height = Functions.bintonum(octeto1 + octeto2);
 
-            CurrentData.Height = Height;
+            CurrentDataCAT10.Height = Height;
 
         }
 
@@ -287,7 +287,7 @@ namespace Library
         {
             int PAM = Functions.bintonum(octeto1);
 
-            CurrentData.PAM = PAM;
+            CurrentDataCAT10.PAM = PAM;
         }
 
         // Data Item I010/140: Time of Day
@@ -295,7 +295,7 @@ namespace Library
         {
             int TimeOfDay = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
-            CurrentData.TimeDay = TimeOfDay;
+            CurrentDataCAT10.TimeDay = TimeOfDay;
         }
 
         // Data Item I010/161: Track Number
@@ -303,7 +303,7 @@ namespace Library
         {
             int TrackNumber = Functions.bintonum(octeto1[4] + octeto1[5] + octeto1[6] + octeto1[7] + octeto2);
 
-            CurrentData.TrackNumber = TrackNumber;
+            CurrentDataCAT10.TrackNumber = TrackNumber;
         }
 
         // Data Item I010/170: Track Status
@@ -323,12 +323,12 @@ namespace Library
             string messageTCC = CAT10Dict.TrackStatus_TCC[TCC];
             string messageSTH = CAT10Dict.TrackStatus_STH[STH];
 
-            CurrentData.CNF = messageCNF;
-            CurrentData.TRE = messageTRE;
-            CurrentData.CST = messageCST;
-            CurrentData.MAH = messageMAH;
-            CurrentData.TCC = messageTCC;
-            CurrentData.STH = messageSTH;
+            CurrentDataCAT10.CNF = messageCNF;
+            CurrentDataCAT10.TRE = messageTRE;
+            CurrentDataCAT10.CST = messageCST;
+            CurrentDataCAT10.MAH = messageMAH;
+            CurrentDataCAT10.TCC = messageTCC;
+            CurrentDataCAT10.STH = messageSTH;
 
 
             int FX1 = octeto[0][7];
@@ -344,9 +344,9 @@ namespace Library
                 string messageDOU = CAT10Dict.TrackStatus_DOU[DOU];
                 string messageMRS = CAT10Dict.TrackStatus_MRS[MRS];
 
-                CurrentData.TOM = messageTOM;
-                CurrentData.DOU = messageDOU;
-                CurrentData.MRS = messageMRS;
+                CurrentDataCAT10.TOM = messageTOM;
+                CurrentDataCAT10.DOU = messageDOU;
+                CurrentDataCAT10.MRS = messageMRS;
 
                 int FX2 = octeto[1][7];
 
@@ -357,7 +357,7 @@ namespace Library
 
                     string messageGHO = CAT10Dict.TrackStatus_GHO[GHO];
 
-                    CurrentData.GHO = messageGHO;
+                    CurrentDataCAT10.GHO = messageGHO;
 
                 }
             }
@@ -369,8 +369,8 @@ namespace Library
             float GroundSpeed = Functions.bintonum(octeto1 + octeto2);
             float TrackAngle = Functions.bintonum(octeto3 + octeto4);
 
-            CurrentData.GroundSpeed = GroundSpeed;
-            CurrentData.TrackAngle = TrackAngle;
+            CurrentDataCAT10.GroundSpeed = GroundSpeed;
+            CurrentDataCAT10.TrackAngle = TrackAngle;
 
         }
 
@@ -380,8 +380,8 @@ namespace Library
             float Vx = Functions.bintonum(octeto1 + octeto2);
             float Vy = Functions.bintonum(octeto3 + octeto4);
 
-            CurrentData.Vx = Vx;
-            CurrentData.Vy = Vy;
+            CurrentDataCAT10.Vx = Vx;
+            CurrentDataCAT10.Vy = Vy;
         }
 
         // Data Item I010/210: Calculated Acceleration
@@ -390,8 +390,8 @@ namespace Library
             float Ax = Functions.bintonum(octeto1);
             float Ay = Functions.bintonum(octeto2);
 
-            CurrentData.Ax = Ax;
-            CurrentData.Ay = Ay;
+            CurrentDataCAT10.Ax = Ax;
+            CurrentDataCAT10.Ay = Ay;
         }
 
         // Data Item I010/220: Target Address
@@ -399,9 +399,9 @@ namespace Library
         {
             float TA = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
-            string TargetAddress =  BitConverter; //// FALTA AÑADIR QUE LO PASE A HEXAGEMINAL
+            string TargetAddress =  ""; //// FALTA AÑADIR QUE LO PASE A HEXAGEMINAL
 
-            CurrentData.TargetAddress = TargetAddress;
+            CurrentDataCAT10.TargetAddress = TargetAddress;
         }
 
         // Data Item I010/245: Target Identification
@@ -411,7 +411,7 @@ namespace Library
 
             string messageSTI = CAT10Dict.TargetIdentification_STI[STI];
 
-            CurrentData.STI = messageSTI;
+            CurrentDataCAT10.STI = messageSTI;
 
 
         }
@@ -424,10 +424,10 @@ namespace Library
             float BDS1 = Functions.bintonum(octeto9.Substring(0,4));
             float BDS2 = Functions.bintonum(octeto9.Substring(4,4));
 
-            CurrentData.REP = REP;
-            CurrentData.MB = MB;
-            CurrentData.BDS1 = BDS1;
-            CurrentData.BDS2 = BDS2;
+            CurrentDataCAT10.REP = REP;
+            CurrentDataCAT10.MB = MB;
+            CurrentDataCAT10.BDS1 = BDS1;
+            CurrentDataCAT10.BDS2 = BDS2;
 
         }
 
@@ -436,7 +436,7 @@ namespace Library
         {
             int LengthLSB = Functions.bintonum(octeto[0].Substring(0,7));
             
-            CurrentData.LengthLSB = LengthLSB;
+            CurrentDataCAT10.LengthLSB = LengthLSB;
 
             int FX1 = octeto[0][7];
 
@@ -445,7 +445,7 @@ namespace Library
                 //Decodification of 1st extent byte
                 float OrientationLSB = Functions.bintonum(octeto[1].Substring(0, 7));
 
-                CurrentData.OrientationLSB = OrientationLSB;
+                CurrentDataCAT10.OrientationLSB = OrientationLSB;
 
                 int FX2 = octeto[1][7];
 
@@ -454,7 +454,7 @@ namespace Library
                     //Decodification of 2nd extent byte
                     int WidthLSB = Functions.bintonum(octeto[2].Substring(0, 7));
 
-                    CurrentData.WidthLSB = WidthLSB;
+                    CurrentDataCAT10.WidthLSB = WidthLSB;
 
                 }
             }
@@ -473,7 +473,7 @@ namespace Library
 
             string messageVFI = CAT10Dict.VehicleFleetIdentification_VFI[VFI];
 
-            CurrentData.VFI = messageVFI;
+            CurrentDataCAT10.VFI = messageVFI;
         }
 
         // Data Item I010/310: Pre-programmed Message
@@ -485,8 +485,8 @@ namespace Library
             string messageTRB = CAT10Dict.PreprogrammedMessage_TRB[TRB];
             string messageMSG = CAT10Dict.PreprogrammedMessage_MSG[MSG];
 
-            CurrentData.TRB = messageTRB;
-            CurrentData.MSG = messageMSG;
+            CurrentDataCAT10.TRB = messageTRB;
+            CurrentDataCAT10.MSG = messageMSG;
 
         }
 
@@ -497,9 +497,9 @@ namespace Library
             float SDy = Functions.bintonum(octeto2);
             float Covariance = Functions.bintonum(octeto3 + octeto4);   /// FALTA EL COMPLEMENTO A DOSSSSS
 
-            CurrentData.SDx = SDx;
-            CurrentData.SDy = SDy;
-            CurrentData.Covariance = Covariance;
+            CurrentDataCAT10.SDx = SDx;
+            CurrentDataCAT10.SDy = SDy;
+            CurrentDataCAT10.Covariance = Covariance;
 
         }
 
@@ -519,11 +519,11 @@ namespace Library
             string messageDIV = CAT10Dict.SystemStatus_DIV[DIV];
             string messageTTF = CAT10Dict.SystemStatus_TTF[TTF];
 
-            CurrentData.NOGO = messageNOGO;
-            CurrentData.OVL = messageOVL;
-            CurrentData.TSV = messageTSV;
-            CurrentData.DIV = messageDIV;
-            CurrentData.TTF = messageTTF;
+            CurrentDataCAT10.NOGO = messageNOGO;
+            CurrentDataCAT10.OVL = messageOVL;
+            CurrentDataCAT10.TSV = messageTSV;
+            CurrentDataCAT10.DIV = messageDIV;
+            CurrentDataCAT10.TTF = messageTTF;
         }
 
     }

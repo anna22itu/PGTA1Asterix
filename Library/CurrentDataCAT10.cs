@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    public class CurrentData
+    public class CurrentDataCAT10
     {
+        ///// CAT10 /////
 
         //000
         public static string MessageType = "";

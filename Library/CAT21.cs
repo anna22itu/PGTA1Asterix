@@ -184,296 +184,174 @@ namespace Library
         }
 
         // Data Item I021/08: Aircraft Operational Status
-        private static void AircraftOperationalStatus(string[] octeto)
+        private static void AircraftOperationalStatus(string octeto1)
         {
-            string messageRa = octeto[0];
-            string messageTc = octeto[1] + octeto[2];
-            string messageTs = octeto[3];
-            string messageArv = octeto[4];
-            string messageCdti = octeto[5];
-            string messageNotTcas = octeto[6];
-            string messageSa = octeto[7];
+            int RA = octeto1[0];
+            int TC = Functions.bintonum(octeto1.Substring(1, 2));
+            int TS = octeto1[3];
+            int ARV = octeto1[4];
+            int CDTIA = octeto1[5];
+            int TCAS = octeto1[6];
+            int SA = octeto1[7];
 
-            if (messageRa == "0")
-            {
-                messageRa = "TCAS II or ACAS RA not active";
-            }
-            else if (messageRa == "1")
-            {
-                messageRa = "TCAS RA active";
-            }
+            string messageRA = CAT21Dict.AircraftOperationalStatus_RA[RA];
+            string messageTC = CAT21Dict.AircraftOperationalStatus_TC[TC];
+            string messageTS = CAT21Dict.AircraftOperationalStatus_TS[TS];
+            string messageARV = CAT21Dict.AircraftOperationalStatus_ARV[ARV];
+            string messageCDTIA = CAT21Dict.AircraftOperationalStatus_CDTIA[CDTIA];
+            string messageTCAS = CAT21Dict.AircraftOperationalStatus_TCAS[TCAS];
+            string messageSA = CAT21Dict.AircraftOperationalStatus_SA[SA];
 
-            if (messageTc == "0")
-            {
-                messageTc = "no capability for Trajectory Change Reports";
-            }
-            else if (messageTc == "1")
-            {
-                messageTc = "support for TC + 0 reports only";
-            }
-            else if (messageTc == "2")
-            {
-                messageTc = "support for multiple TC reports";
-            }
-            else if (messageTc == "3")
-            {
-                messageTc = "reserved";
-            }
-
-            if (messageTs == "0")
-            {
-                messageTs = "no capability to support Target State Reports";
-            }
-            else if (messageTs == "1")
-            {
-                messageTs = "capable of supporting target State Reports";
-            }
-
-            if (messageArv == "0")
-            {
-                messageArv = "no capability to generate ARV-reports";
-            }
-            else if (messageArv == "1")
-            {
-                messageArv = "capable of generate ARV-reports";
-            }
-
-            if (messageCdti == "0")
-            {
-                messageCdti = "CDTI not operational";
-            }
-            else if (messageCdti == "1")
-            {
-                messageCdti = "CDTI operational";
-            }
-
-            if (messageNotTcas == "0")
-            {
-                messageNotTcas = "TCAS operational";
-            }
-            else if (messageNotTcas == "1")
-            {
-                messageNotTcas = "TCAS not operational";
-            }
-
-            if (messageSa == "0")
-            {
-                messageSa = "Antenna Diversity";
-            }
-            else if (messageSa == "1")
-            {
-                messageSa = "Single Antenna only";
-            }
+            CurrentDataCAT21.RA = messageRA;
+            CurrentDataCAT21.TC = messageTC;
+            CurrentDataCAT21.TS = messageTS;
+            CurrentDataCAT21.ARV = messageARV;
+            CurrentDataCAT21.CDTIA = messageCDTIA;
+            CurrentDataCAT21.TCAS = messageTCAS;
+            CurrentDataCAT21.SA = messageSA;
 
         }
 
         // Data Item I021/010: Data Source Identification 
-        private static void DataSourceIdentification(string[] octeto)
+        private static void DataSourceIdentification(string octeto1, string octeto2)
         {
-            string SAC = decode(octeto1);
-            string SIC = decode(octeto2);
+            int SAC = Functions.bintonum(octeto1);
+            int SIC = Functions.bintonum(octeto2);
 
+            CurrentDataCAT21.SAC = SAC;  ///////////////// Tenemos SAC & SIC en ambas categoriassssss
+            CurrentDataCAT21.SIC = SIC;
         }
 
         // Data Item I021/015: Service Identification.
-        private static void PositionCartesianCoordinates(string[] octeto)
+        private static void PositionCartesianCoordinates(string octeto1)
         {
-            string ServiceIdentification = decode(octeto1);
+            int ServiceIdentification = Functions.bintonum(octeto1);
+
+            CurrentDataCAT21.ServiceIdentification = ServiceIdentification;
 
         }
 
         // Data Item I021/016: Service Management
-        private static void ServiceManagement(string[] octeto)
+        private static void ServiceManagement(string octeto1)
         {
-            int RP = deocode(octeto1[0] + octeto1[1] + octeto1[2] + octeto1[3] + octeto1[4] + octeto1[5] + octeto1[6]);
-            int LSB = Convert.ToInt32(octeto1[7]);
+            float RP = Functions.bintonum(octeto1);
 
+            CurrentDataCAT21.RP = RP;
+          
         }
 
         // Data Item I021/020: Emitter Category
-        private static void EmitterCategory(string[] octeto)
+        private static void EmitterCategory(string octeto1)
         {
-            int decodeECAT = decode(octeto1);
-            string messageECAT = "";
+            int ECAT = Functions.bintonum(octeto1);
 
-            if (decodeECAT == 0)
-            {
-                messageECAT = "No ADS-B Emitter Category Information";
-            }
-            else if (decodeECAT == 1)
-            {
-                messageECAT = " light aircraft <= 15500 lbs";
-            }
-            else if (decodeECAT == 2)
-            {
-                messageECAT = "15500 lbs < small aircraft <75000 lbs";
-            }
-            else if (decodeECAT == 3)
-            {
-                messageECAT = "75000 lbs < medium a/c < 300000 lbs";
-            }
-            else if (decodeECAT == 4)
-            {
-                messageECAT = "High Vortex Large";
-            }
-            else if (decodeECAT == 5)
-            {
-                messageECAT = "300000 lbs <= heavy aircraft";
-            }
+            string messageECAT = CAT21Dict.EmitterCategory_ECAT[ECAT];
 
-            else if (decodeECAT == 6)
-            {
-                messageECAT = "highly manoeuvrable (5g acceleration capability) and high speed(> 400 knots cruise)";
-            }
-            else if (decodeECAT == 7 || decodeECAT == 8 || decodeECAT == 9)
-            {
-                messageECAT = "reserved";
-            }
-
-            else if (decodeECAT == 10)
-            {
-                messageECAT = "rotocraft";
-            }
-
-            else if (decodeECAT == 11)
-            {
-                messageECAT = "glider / sailplane";
-            }
-            else if (decodeECAT == 12)
-            {
-                messageECAT = "lighter-than-air";
-            }
-            else if (decodeECAT == 13)
-            {
-                messageECAT = "unmanned aerial vehicle";
-            }
-            else if (decodeECAT == 14)
-            {
-                messageECAT = "space / transatmospheric vehicle";
-            }
-            else if (decodeECAT == 15)
-            {
-                messageECAT = "ultralight / handglider / paraglider";
-            }
-            else if (decodeECAT == 16)
-            {
-                messageECAT = "parachutist / skydiver";
-            }
-
-            else if (decodeECAT == 17 || decodeECAT == 18 || decodeECAT == 19)
-            {
-                messageECAT = "reserved";
-            }
-
-            else if (decodeECAT == 20)
-            {
-                messageECAT = "surface emergency vehicle";
-            }
-            else if (decodeECAT == 21)
-            {
-                messageECAT = "surface service vehicle";
-            }
-
-            else if (decodeECAT == 22)
-            {
-                messageECAT = "= fixed ground or tethered obstruction";
-            }
-            else if (decodeECAT == 23)
-            {
-                messageECAT = "cluster obstacle";
-            }
-            else if (decodeECAT == 24)
-            {
-                messageECAT = "line obstacle";
-            }
+            CurrentDataCAT21.ECAT = messageECAT;
 
         }
 
         // Data Item I021/040: Target Report Descriptor
         private static void TargetReportDescriptor(string[] octeto)
         {
-            int decodeATP = decode(octeto1[0] + octeto1[1] + octeto1[2]);
-            int decodeARC = decode(octeto1[3] + octeto1[4]);
-            int decodeRC = decode(octeto1[5]);
-            int decodeRAB = decode(octeto1[6]);
-            int decodeFX = decode(octeto1[7]);
+            int ATP = Functions.bintonum(octeto[0].Substring(0,3));
+            int ARC = Functions.bintonum(octeto[0].Substring(3, 2));
+            int RC = octeto[0][5];
+            int RAB21 = octeto[0][6];
 
-            string messageATP = "";
-            string messageARC = "";
-            string messageRC = "";
-            string messageRAB = "";
-            string messageFX = "";
+            string messageATP = CAT21Dict.TargetReportDescriptor_ATP[ATP];
+            string messageARC = CAT21Dict.TargetReportDescriptor_ARC[ARC];
+            string messageRC = CAT21Dict.TargetReportDescriptor_RC[RC];
+            string messageRAB21 = CAT21Dict.TargetReportDescriptor_RAB[RAB21];
 
-            if (decodeATP == 0)
-            {
-                messageATP = "24-Bit ICAO address";
-            }
-            else if (decodeATP == 1)
-            {
-                messageATP = "Duplicate address";
-            }
-
-            else if (decodeATP == 2)
-            {
-                messageATP = "Surface vehicle address";
-            }
-            else if (decodeATP == 3)
-            {
-                messageATP = "Anonymous address";
-            }
-            else if (decodeATP == 4 || decodeATP == 5 || decodeATP == 6 || decodeATP == 7)
-            {
-                messageATP = "Reserved for future use";
-            }
+            CurrentDataCAT21.ATP = messageATP;
+            CurrentDataCAT21.ARC = messageARC;
+            CurrentDataCAT21.RC = messageRC;
+            CurrentDataCAT21.RAB = messageRAB21;
 
 
-            if (decodeARC == 0)
-            {
-                messageARC = "25 ft";
-            }
-            else if (decodeARC == 1)
-            {
-                messageARC = "100 ft";
-            }
-            else if (decodeARC == 2)
-            {
-                messageARC = "Unknown";
-            }
-            else if (decodeARC == 3)
-            {
-                messageARC = "Invalid";
-            }
+            int FX1 = octeto[0][7];
 
+            if (FX1 == 1)
+            {
+                //Decodification of 1st extent byte
+                int DCR = octeto[1][0];
+                int GBS = octeto[1][1];
+                int SIM = octeto[1][2];
+                int TST = octeto[1][3];
+                int SAA = octeto[1][4];
+                int CL = Functions.bintonum(octeto[1].Substring(5, 2));
 
-            if (decodeRC == 0)
-            {
-                messageRC = "Default";
-            }
-            else if (decodeRC == 1)
-            {
-                messageRC = "Range Check passed, CPR Validation pending";
-            }
+                string messageDCR = CAT21Dict.TargetReportDescriptor_DCR[DCR];
+                string messageGBS = CAT21Dict.TargetReportDescriptor_GBS[GBS];
+                string messageSIM = CAT21Dict.TargetReportDescriptor_SIM[SIM];
+                string messageTST = CAT21Dict.TargetReportDescriptor_TST[TST];
+                string messageSAA = CAT21Dict.TargetReportDescriptor_SAA[SAA];
+                string messageCL = CAT21Dict.TargetReportDescriptor_CL[CL];
 
+                CurrentDataCAT21.DCR = messageDCR;
+                CurrentDataCAT21.GBS = messageGBS;
+                CurrentDataCAT21.SIM = messageSIM;
+                CurrentDataCAT21.TST = messageTST;
+                CurrentDataCAT21.SAA = messageSAA;
+                CurrentDataCAT21.CL = messageCL;
 
-            if (decodeRAB == 0)
-            {
-                messageRAB = "Report from target transponder";
-            }
-            else if (decodeRAB == 1)
-            {
-                messageRAB = "Report from field monitor (fixed transponder)";
-            }
+                int FX2 = octeto[1][7];
 
+                if (FX2 == 1)
+                {
+                    //Decodification of 2nd extent byte
+                    int LLC = octeto[2][1];
+                    int IPC = octeto[2][2];
+                    int NOGO = octeto[2][3];
+                    int CPR = octeto[2][4];
+                    int LDPJ = octeto[2][5];
+                    int RCF = octeto[2][6];
 
-            if (decodeFX == 0)
-            {
-                messageFX = "End of item";
+                    string messageLLC = CAT21Dict.TargetReportDescriptor_LLC[LLC];
+                    string messageIPC = CAT21Dict.TargetReportDescriptor_IPC[IPC];
+                    string messageNOGO = CAT21Dict.TargetReportDescriptor_NOGO[NOGO];
+                    string messageCPR = CAT21Dict.TargetReportDescriptor_CPR[CPR];
+                    string messageLDPJ = CAT21Dict.TargetReportDescriptor_LDPJ[LDPJ];
+                    string messageRCF = CAT21Dict.TargetReportDescriptor_RCF[RCF];
+
+                    CurrentDataCAT21.LLC = messageLLC;
+                    CurrentDataCAT21.IPC = messageIPC;
+                    CurrentDataCAT21.NOGO = messageNOGO;
+                    CurrentDataCAT21.CPR = messageCPR;
+                    CurrentDataCAT21.LDPJ = messageLDPJ;
+                    CurrentDataCAT21.RCF = messageRCF;
+
+                    int FX3 = octeto[2][7];
+
+                    if (FX3== 1)
+                    {
+                        //Decodification of 2nd extent byte
+                        int TBC_element = octeto[3][0];
+                        int TBC_value = Functions.bintonum(octeto[3].Substring(1,6));
+
+                        string messageTBC_element = CAT21Dict.TargetReportDescriptor_TBC_element[TBC_element];
+
+                        CurrentDataCAT21.TBC_element = messageTBC_element;
+                        CurrentDataCAT21.TBC_value = TBC_value;
+
+                        int FX4 = octeto[3][7];
+
+                        if (FX4 == 1)
+                        {
+                            //Decodification of 2nd extent byte
+                            int MBC_element = octeto[3][0];
+                            int MBC_value = Functions.bintonum(octeto[3].Substring(1, 6));
+
+                            string messageMBC_element = CAT21Dict.TargetReportDescriptor_MBC_element[MBC_element];
+
+                            CurrentDataCAT21.MBC_element = messageMBC_element;
+                            CurrentDataCAT21.MBC_value = MBC_value;
+
+                        }
+                    }
+                }
             }
-            else if (decodeFX == 1)
-            {
-                messageFX = "Extension into first extension";
-            }
-            
         }
 
         // Data Item I021/070: Mode 3/A Code in Octal Representation
@@ -483,41 +361,62 @@ namespace Library
         }
 
         // Data Item I021/070: Time of Applicability for Position
-        private static void TimeofApplicabilityforPosition(string[] octeto)
+        private static void TimeofApplicabilityforPosition(string octeto1, string octeto2, string octeto3)
         {
+            float TimeApplicabilityPosition = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
+            CurrentDataCAT21.TimeApplicabilityPosition = TimeApplicabilityPosition;
         }
 
         // Data Item I021/072: Time of Applicability for Velocity
-        private static void TimeofApplicabilityforVelocity(string[] octeto)
+        private static void TimeofApplicabilityforVelocity(string octeto1, string octeto2, string octeto3)
         {
+            float TimeApplicabilityVelocity = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
+            CurrentDataCAT21.TimeApplicabilityVelocity = TimeApplicabilityVelocity;
         }
 
         // Data Item I021/073: Time of Message Reception for Position
-        private static void TimeofMessageReceptionforPosition(string[] octeto)
+        private static void TimeofMessageReceptionforPosition(string octeto1, string octeto2, string octeto3)
         {
+            float TimeMessagePosition = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
+            CurrentDataCAT21.TimeMessagePosition = TimeMessagePosition;
         }
-
 
 
         // Data Item I021/074: Time of Message Reception of Position–High Precision .
-        private static void TimeofMessageReceptionofPositionHighPrecision(string[] octeto)
+        private static void TimeofMessageReceptionofPositionHighPrecision(string octeto1, string octeto2, string octeto3, string octeto4)
         {
+            string FSI_Pos = octeto1.Substring(0, 2);
+            float TimeMessagePositionHP = Functions.bintonum(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4);
 
+            string messageFSI = CAT21Dict.TimeMessageReceptionPosition_HP_FSI[FSI_Pos];
+
+            CurrentDataCAT21.FSI_Pos = messageFSI;
+            CurrentDataCAT21.TimeMessagePosition_HP = TimeMessagePositionHP;
         }
 
-        // Data Item I021/075: Time of Message Reception for Velocity
-        private static void TimeMessageReceptionVelocity(string[] octeto)
-        {
 
+        // Data Item I021/075: Time of Message Reception for Velocity
+        private static void TimeMessageReceptionVelocity(string octeto1, string octeto2, string octeto3)
+        {
+            float TimeMessageVelocity = Functions.bintonum(octeto1 + octeto2 + octeto3);
+
+            CurrentDataCAT21.TimeMessageVelocity = TimeMessageVelocity;
         }
 
         // Data Item I021/076: Time of Message Reception of Velocity–High Precision
-        private static void TimeMessageReceptionVelocityHighPrecision(string[] octeto)
+        private static void TimeMessageReceptionVelocityHighPrecision(string octeto1, string octeto2, string octeto3, string octeto4)
         {
 
+            string FSI_Vel = octeto1.Substring(0, 2);
+            float TimeMessageVelocityHP = Functions.bintonum(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4);
+
+            string messageFSI = CAT21Dict.TimeMessageReceptionVelocity_HP_FSI[FSI_Vel];
+
+            CurrentDataCAT21.FSI_Vel = messageFSI;
+            CurrentDataCAT21.TimeMessageVelocity_HP = TimeMessageVelocityHP;
         }
 
         // Data Item I021/077: Time of ASTERIX Report Transmission
@@ -693,6 +592,6 @@ namespace Library
         {
 
         }
-
-    }
+    }   
+        
 }
