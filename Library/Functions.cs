@@ -8,6 +8,10 @@ namespace Library
 {
     internal class Functions
     {
+        public static int strtoint(char str) //Es necesita per solucionar una incompatibilitat
+        {
+            return Convert.ToInt16(str.ToString());
+        }
         public static string[] hextobin(string[] hex)
         {
             string[] bin = new string[hex.Length];

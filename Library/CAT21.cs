@@ -202,13 +202,13 @@ namespace Library
             string messageTCAS = CAT21Dict.AircraftOperationalStatus_TCAS[TCAS];
             string messageSA = CAT21Dict.AircraftOperationalStatus_SA[SA];
 
-            CurrentDataCAT21.RA = messageRA;
-            CurrentDataCAT21.TC = messageTC;
-            CurrentDataCAT21.TS = messageTS;
-            CurrentDataCAT21.ARV = messageARV;
-            CurrentDataCAT21.CDTIA = messageCDTIA;
-            CurrentDataCAT21.TCAS = messageTCAS;
-            CurrentDataCAT21.SA = messageSA;
+            CurrentData.RA = messageRA;
+            CurrentData.TC = messageTC;
+            CurrentData.TS = messageTS;
+            CurrentData.ARV = messageARV;
+            CurrentData.CDTIA = messageCDTIA;
+            CurrentData.TCAS = messageTCAS;
+            CurrentData.SA = messageSA;
 
         }
 
@@ -218,8 +218,8 @@ namespace Library
             int SAC = Functions.bintonum(octeto1);
             int SIC = Functions.bintonum(octeto2);
 
-            CurrentDataCAT21.SAC = SAC;  ///////////////// Tenemos SAC & SIC en ambas categoriassssss
-            CurrentDataCAT21.SIC = SIC;
+            CurrentData.SAC = SAC;  ///////////////// Tenemos SAC & SIC en ambas categoriassssss
+            CurrentData.SIC = SIC;
         }
 
         // Data Item I021/015: Service Identification.
@@ -227,7 +227,7 @@ namespace Library
         {
             int ServiceIdentification = Functions.bintonum(octeto1);
 
-            CurrentDataCAT21.ServiceIdentification = ServiceIdentification;
+            CurrentData.ServiceIdentification = ServiceIdentification;
 
         }
 
@@ -236,7 +236,7 @@ namespace Library
         {
             float RP = Functions.bintonum(octeto1);
 
-            CurrentDataCAT21.RP = RP;
+            CurrentData.RP = RP;
           
         }
 
@@ -247,7 +247,7 @@ namespace Library
 
             string messageECAT = CAT21Dict.EmitterCategory_ECAT[ECAT];
 
-            CurrentDataCAT21.ECAT = messageECAT;
+            CurrentData.ECAT = messageECAT;
 
         }
 
@@ -264,10 +264,10 @@ namespace Library
             string messageRC = CAT21Dict.TargetReportDescriptor_RC[RC];
             string messageRAB21 = CAT21Dict.TargetReportDescriptor_RAB[RAB21];
 
-            CurrentDataCAT21.ATP = messageATP;
-            CurrentDataCAT21.ARC = messageARC;
-            CurrentDataCAT21.RC = messageRC;
-            CurrentDataCAT21.RAB = messageRAB21;
+            CurrentData.ATP = messageATP;
+            CurrentData.ARC = messageARC;
+            CurrentData.RC = messageRC;
+            CurrentData.RAB_21 = messageRAB21;
 
 
             int FX1 = octeto[0][7];
@@ -289,13 +289,13 @@ namespace Library
                 string messageSAA = CAT21Dict.TargetReportDescriptor_SAA[SAA];
                 string messageCL = CAT21Dict.TargetReportDescriptor_CL[CL];
 
-                CurrentDataCAT21.DCR = messageDCR;
-                CurrentDataCAT21.GBS = messageGBS;
-                CurrentDataCAT21.SIM = messageSIM;
-                CurrentDataCAT21.TST = messageTST;
-                CurrentDataCAT21.SAA = messageSAA;
-                CurrentDataCAT21.CL = messageCL;
-
+                CurrentData.DCR_21 = messageDCR;
+                CurrentData.GBS_21 = messageGBS;
+                CurrentData.SIM_21 = messageSIM;
+                CurrentData.TST_21 = messageTST;
+                CurrentData.SAA = messageSAA;
+                CurrentData.CL = messageCL;
+                
                 int FX2 = octeto[1][7];
 
                 if (FX2 == 1)
@@ -315,12 +315,12 @@ namespace Library
                     string messageLDPJ = CAT21Dict.TargetReportDescriptor_LDPJ[LDPJ];
                     string messageRCF = CAT21Dict.TargetReportDescriptor_RCF[RCF];
 
-                    CurrentDataCAT21.LLC = messageLLC;
-                    CurrentDataCAT21.IPC = messageIPC;
-                    CurrentDataCAT21.NOGO = messageNOGO;
-                    CurrentDataCAT21.CPR = messageCPR;
-                    CurrentDataCAT21.LDPJ = messageLDPJ;
-                    CurrentDataCAT21.RCF = messageRCF;
+                    CurrentData.LLC = messageLLC;
+                    CurrentData.IPC = messageIPC;
+                    CurrentData.NOGO_21 = messageNOGO;
+                    CurrentData.CPR = messageCPR;
+                    CurrentData.LDPJ = messageLDPJ;
+                    CurrentData.RCF = messageRCF;
 
                     int FX3 = octeto[2][7];
 
@@ -332,8 +332,8 @@ namespace Library
 
                         string messageTBC_element = CAT21Dict.TargetReportDescriptor_TBC_element[TBC_element];
 
-                        CurrentDataCAT21.TBC_element = messageTBC_element;
-                        CurrentDataCAT21.TBC_value = TBC_value;
+                        CurrentData.TBC_element = messageTBC_element;
+                        CurrentData.TBC_value = TBC_value;
 
                         int FX4 = octeto[3][7];
 
@@ -345,8 +345,8 @@ namespace Library
 
                             string messageMBC_element = CAT21Dict.TargetReportDescriptor_MBC_element[MBC_element];
 
-                            CurrentDataCAT21.MBC_element = messageMBC_element;
-                            CurrentDataCAT21.MBC_value = MBC_value;
+                            CurrentData.MBC_element = messageMBC_element;
+                            CurrentData.MBC_value = MBC_value;
 
                         }
                     }
@@ -365,7 +365,7 @@ namespace Library
         {
             float TimeApplicabilityPosition = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
-            CurrentDataCAT21.TimeApplicabilityPosition = TimeApplicabilityPosition;
+            CurrentData.TimeApplicabilityPosition = TimeApplicabilityPosition;
         }
 
         // Data Item I021/072: Time of Applicability for Velocity
@@ -373,7 +373,7 @@ namespace Library
         {
             float TimeApplicabilityVelocity = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
-            CurrentDataCAT21.TimeApplicabilityVelocity = TimeApplicabilityVelocity;
+            CurrentData.TimeApplicabilityVelocity = TimeApplicabilityVelocity;
         }
 
         // Data Item I021/073: Time of Message Reception for Position
@@ -381,7 +381,7 @@ namespace Library
         {
             float TimeMessagePosition = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
-            CurrentDataCAT21.TimeMessagePosition = TimeMessagePosition;
+            CurrentData.TimeMessagePosition = TimeMessagePosition;
         }
 
 
@@ -393,8 +393,8 @@ namespace Library
 
             string messageFSI = CAT21Dict.TimeMessageReceptionPosition_HP_FSI[FSI_Pos];
 
-            CurrentDataCAT21.FSI_Pos = messageFSI;
-            CurrentDataCAT21.TimeMessagePosition_HP = TimeMessagePositionHP;
+            CurrentData.FSI_Pos = messageFSI;
+            CurrentData.TimeMessagePosition_HP = TimeMessagePositionHP;
         }
 
 
@@ -403,7 +403,7 @@ namespace Library
         {
             float TimeMessageVelocity = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
-            CurrentDataCAT21.TimeMessageVelocity = TimeMessageVelocity;
+            CurrentData.TimeMessageVelocity = TimeMessageVelocity;
         }
 
         // Data Item I021/076: Time of Message Reception of Velocity–High Precision
@@ -415,8 +415,8 @@ namespace Library
 
             string messageFSI = CAT21Dict.TimeMessageReceptionVelocity_HP_FSI[FSI_Vel];
 
-            CurrentDataCAT21.FSI_Vel = messageFSI;
-            CurrentDataCAT21.TimeMessageVelocity_HP = TimeMessageVelocityHP;
+            CurrentData.FSI_Vel = messageFSI;
+            CurrentData.TimeMessageVelocity_HP = TimeMessageVelocityHP;
         }
 
         // Data Item I021/077: Time of ASTERIX Report Transmission
@@ -424,7 +424,7 @@ namespace Library
         {
             float TimeAsterixTransmission = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
-            CurrentDataCAT21.TimeAsterixTransmission = TimeAsterixTransmission;
+            CurrentData.TimeAsterixTransmission = TimeAsterixTransmission;
         }
 
         // Data Item I021/080: Target Address
@@ -432,7 +432,7 @@ namespace Library
         {
             float TargerAddress = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
-            CurrentDataCAT21.TargerAddress = TargerAddress;  /// FALTA CAMBIAR A HEXAGESIMAL
+            CurrentData.TargerAddress = TargerAddress;  /// FALTA CAMBIAR A HEXAGESIMAL
         }
 
         // Data Item I021/090:Quality Indicators
@@ -449,8 +449,8 @@ namespace Library
             string messageTIS = CAT21Dict.TrajectoryIntent_TIS[TIS];
             string messageARC = CAT21Dict.TrajectoryIntent_TID[TID];
 
-            CurrentDataCAT21.TIS = messageTIS;
-            CurrentDataCAT21.TID = messageARC;
+            CurrentData.TIS = messageTIS;
+            CurrentData.TID = messageARC;
 
 
             int FX1 = octeto[0][7];
@@ -464,8 +464,8 @@ namespace Library
                 string messageNAV = CAT21Dict.TrajectoryIntent_NAV[NAV];
                 string messageNVB = CAT21Dict.TrajectoryIntent_NVB[NVB];
 
-                CurrentDataCAT21.NAV = messageNAV;
-                CurrentDataCAT21.NVB = messageNVB;
+                CurrentData.NAV = messageNAV;
+                CurrentData.NVB = messageNVB;
 
                 int FX2 = octeto[1][7];
 
@@ -493,19 +493,19 @@ namespace Library
                     string messageTRA = CAT21Dict.TrajectoryIntent_TRA[TRA];
                     string messageTOA = CAT21Dict.TrajectoryIntent_TOA[TOA];
 
-                    CurrentDataCAT21.REP = REP;
-                    CurrentDataCAT21.TCA = messageTCA;
-                    CurrentDataCAT21.NC = messageNC;
-                    CurrentDataCAT21.TCP = TCP;
-                    CurrentDataCAT21.Altitude = Altitude;
-                    CurrentDataCAT21.Latitude = Latitude;
-                    CurrentDataCAT21.Longitude = Longitude;
-                    CurrentDataCAT21.PointType = messagePointType;
-                    CurrentDataCAT21.TD = messageTD;
-                    CurrentDataCAT21.TRA = messageTRA;
-                    CurrentDataCAT21.TOA = messageTOA;
-                    CurrentDataCAT21.TOV = TOV;
-                    CurrentDataCAT21.TTR = TTR;
+                    CurrentData.REP_21 = REP;
+                    CurrentData.TCA = messageTCA;
+                    CurrentData.NC = messageNC;
+                    CurrentData.TCP = TCP;
+                    CurrentData.Altitude = Altitude;
+                    CurrentData.Latitude = Latitude;
+                    CurrentData.Longitude = Longitude;
+                    CurrentData.PointType = messagePointType;
+                    CurrentData.TD = messageTD;
+                    CurrentData.TRA = messageTRA;
+                    CurrentData.TOA = messageTOA;
+                    CurrentData.TOV = TOV;
+                    CurrentData.TTR = TTR;
                                        
                 }
             }
@@ -516,8 +516,8 @@ namespace Library
             float Latitude_WGS = Functions.bintonum(octeto1 + octeto2 + octeto3);   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
             float Longitude_WGS = Functions.bintonum(octeto4 + octeto5 + octeto6);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
-            CurrentDataCAT21.Latitude_WGS = Latitude_WGS;
-            CurrentDataCAT21.Longitude_WGS = Longitude_WGS;
+            CurrentData.Latitude_WGS = Latitude_WGS;
+            CurrentData.Longitude_WGS = Longitude_WGS;
 
             if (Latitude_WGS > 0)
             {
@@ -544,8 +544,8 @@ namespace Library
             float Latitude_WGS_HP = Functions.bintonum(octeto1 + octeto2 + octeto3 + octeto4);   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
             float Longitude_WGS_HP = Functions.bintonum(octeto5 + octeto6 + octeto7 +  octeto8);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
-            CurrentDataCAT21.Latitude_WGS_HP = Latitude_WGS_HP;
-            CurrentDataCAT21.Longitude_WGS_HP = Longitude_WGS_HP;
+            CurrentData.Latitude_WGS_HP = Latitude_WGS_HP;
+            CurrentData.Longitude_WGS_HP = Longitude_WGS_HP;
 
             if (Latitude_WGS_HP > 0)
             {
@@ -569,9 +569,9 @@ namespace Library
         // Data Item I021/132:  Message Amplitude
         private static void MessageAmplitude(string octeto1)
         {
-            float MAM = Functions.bintonum(octeto1);   
+            float MAM = Functions.bintonum(octeto1);
 
-            CurrentDataCAT21.MAM = MAM;
+            CurrentData.MAM = MAM;
         }
 
         // Data Item I021/140: Geometric Height
@@ -579,7 +579,7 @@ namespace Library
         {
             float GH = Functions.bintonum(octeto1 + octeto2);
 
-            CurrentDataCAT21.GH = GH;
+            CurrentData.GH = GH;
 
             if(octeto1 + octeto2 == "0111111111111111")
             {
@@ -592,7 +592,7 @@ namespace Library
         {
             float FL = Functions.bintonum(octeto1 + octeto2);
 
-            CurrentDataCAT21.FL = FL;
+            CurrentData.FL_21 = FL;
         }
 
         // Data Item I021/146: Selected Altitude
@@ -605,9 +605,9 @@ namespace Library
             string messageSAS = CAT21Dict.SelectedAltitude_SAS[SAS];
             string messageARC = CAT21Dict.SelectedAltitude_Source[Source];
 
-            CurrentDataCAT21.SAS = messageSAS;
-            CurrentDataCAT21.TID = messageARC;
-            CurrentDataCAT21.SelectedAltitude = SelectedAltitude;
+            CurrentData.SAS = messageSAS;
+            CurrentData.TID = messageARC;
+            CurrentData.SelectedAltitude = SelectedAltitude;
         }
 
         // Data Item I021/148:Final State Selected Altitude
@@ -622,10 +622,10 @@ namespace Library
             string messageAH = CAT21Dict.AltitudeFinal_AH[AH];
             string messageAM = CAT21Dict.AltitudeFinal_AM[AM];
 
-            CurrentDataCAT21.MV = messageMV;
-            CurrentDataCAT21.AH = messageAH;
-            CurrentDataCAT21.AM = messageAM;
-            CurrentDataCAT21.AltitudeFinal = AltitudeFinal;
+            CurrentData.MV = messageMV;
+            CurrentData.AH = messageAH;
+            CurrentData.AM = messageAM;
+            CurrentData.AltitudeFinal = AltitudeFinal;
         }
 
         // Data Item I021/150: Air Speed
@@ -636,8 +636,8 @@ namespace Library
 
             string messageIM = CAT21Dict.AirSpeed_IM[IM];
 
-            CurrentDataCAT21.IM = messageIM;
-            CurrentDataCAT21.AirSpeed = AirSpeed;
+            CurrentData.IM = messageIM;
+            CurrentData.AirSpeed = AirSpeed;
         }
 
         // Data Item I021/151: True Airspeed 
@@ -648,15 +648,15 @@ namespace Library
 
             string messageRE = CAT21Dict.TrueAirSpeed_RE[RE];
 
-            CurrentDataCAT21.RE = messageRE;
-            CurrentDataCAT21.TrueAirSpeed = TrueAirSpeed;
+            CurrentData.RE = messageRE;
+            CurrentData.TrueAirSpeed = TrueAirSpeed;
         }
 
         // Data Item I021/152:  Magnetic Heading
         private static void MagneticHeading(string octeto1, string octeto2)
         {
-            float MagneticHeading = Functions.bintonum(octeto1 + octeto2); 
-            CurrentDataCAT21.MagneticHeading = MagneticHeading;
+            float MagneticHeading = Functions.bintonum(octeto1 + octeto2);
+            CurrentData.MagneticHeading = MagneticHeading;
         }
 
         // Data Item I021/155: Barometric Vertical Rate
@@ -667,8 +667,8 @@ namespace Library
 
             string messageRE_VR = CAT21Dict.BarometricVerticalRate_RE[RE_VR];
 
-            CurrentDataCAT21.RE_VR = messageRE_VR;
-            CurrentDataCAT21.BarometricVerticalRate = BarometricVerticalRate;
+            CurrentData.RE_VR = messageRE_VR;
+            CurrentData.BarometricVerticalRate = BarometricVerticalRate;
         }
 
         // Data Item I021/157: Geometric Vertical Rate
@@ -679,8 +679,8 @@ namespace Library
 
             string messageRE_G = CAT21Dict.GeometricVerticalRate_RE[RE_G];
 
-            CurrentDataCAT21.RE_G = messageRE_G;
-            CurrentDataCAT21.GeometricVerticalRate = GeometricVerticalRate;
+            CurrentData.RE_G = messageRE_G;
+            CurrentData.GeometricVerticalRate = GeometricVerticalRate;
         }
 
         // Data Item I021/160: Airborne Ground Vector
@@ -693,9 +693,9 @@ namespace Library
 
             string messageRE_A = CAT21Dict.AirborneGroundVector_RE[RE_A];
 
-            CurrentDataCAT21.RE_A = messageRE_A;
-            CurrentDataCAT21.GroundSpeed = GroundSpeed;
-            CurrentDataCAT21.TrackAngle = TrackAngle;
+            CurrentData.RE_A = messageRE_A;
+            CurrentData.GroundSpeed_21 = GroundSpeed;
+            CurrentData.TrackAngle_21 = TrackAngle;
         }
 
         // Data Item I021/161: Track Number
@@ -703,7 +703,7 @@ namespace Library
         {
             int TrackNumber = Functions.bintonum(octeto1.Substring(3, 4) + octeto2);
 
-            CurrentDataCAT21.TrackNumber = TrackNumber;
+            CurrentData.TrackNumber_21 = TrackNumber;
         }
 
         // Data Item I021/165: Track Angle Rate
@@ -711,7 +711,7 @@ namespace Library
         {
             float TrackAngleRate = Functions.bintonum(octeto1.Substring(5, 2) + octeto2);
 
-            CurrentDataCAT21.TrackAngleRate = TrackAngleRate;
+            CurrentData.TrackAngleRate = TrackAngleRate;
         }
 
         // Data Item I021/170: Target Identification

@@ -11,7 +11,7 @@ namespace Library
 {
     public class Read
     {
-        static string[] readBytes;
+        static string[] readBytes = new string[] {};
 
         //n serà el byte que estem llegint en cada moment, és molt important que a cada funció de les classes CAT 10 i 21, quan es decodifiqui un byte es cridi
         //a la funció sumbyte, per saber que hem d'anar a pel següent byte.
@@ -44,6 +44,8 @@ namespace Library
                     int[] found_di = Functions.Fspec(fspec_dataitems, currentCategory); //retornara un vector de 25 o 42 posicions (25 di pot haver en cat10) amb 1 si hi es, 0 si no hi es
 
                     string[] dataitems =Functions.subarray(fspec_dataitems,n-3, length_dataitems+3-n); //array dels data items sense el fspec
+
+                    sumbyte(-n); //Resetejem la n a 0 per quan cridem DICalling a dataitems
 
                     //Si, a la cat10, al missatge no tenim el primer data item (message type) és un error
                     if (currentCategory == 10 & found_di[0] == 0)

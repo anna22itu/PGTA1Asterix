@@ -8,8 +8,8 @@ namespace Library
 {
     internal class CAT10Dict
     {
-        public static string[] methods = { "MessageType", "DataSourceIdentifier", "TargetReportDescriptor", "MeasuredPositionPolarCoordinates", "PositionWGS84Coordinates", "PositionCartesianCoordinates", "Mode3ACodeOctalRepresentation", "FlightLevelBinaryRepresentation", "MeasuredHeight", "AmplitudePrimaryPlot", "TimeOfDay", "TrackNumber", "TrackStatus", "CalculatedTrackVelocityPolarCoordinates", "CalculatedTrackVelocityCartesianCoordinates", "CalculatedAcceleration", "TargetAddress", "TargetIdentification", "ModeSMBData", "TargetSizeOrientation", "Presence", "VehicleFleetIdentification", "PreprogrammedMessage", "StandardDeviationPosition", "SystemStatus" };
-
+        public static string[] methods = { "DataSourceIdentifier", "MessageType", "TargetReportDescriptor", "TimeOfDay", "PositionWGS84Coordinates", "MeasuredPositionPolarCoordinates", "PositionCartesianCoordinates", "CalculatedTrackVelocityPolarCoordinates", "CalculatedTrackVelocityCartesianCoordinates", "TrackNumber", "TrackStatus", "Mode3ACodeOctalRepresentation", "TargetAddress", "TargetIdentification", "ModeSMBData", "VehicleFleetIdentification", "FlightLevelBinaryRepresentation", "MeasuredHeight", "TargetSizeOrientation", "SystemStatus", "PreprogrammedMessage", "StandardDeviationPosition", "Presence", "AmplitudePrimaryPlot", "CalculatedAcceleration" };
+        
         // 000
         public static IDictionary<int, string> MessageType = new Dictionary<int, string>() { {1, "Target Report" }, { 2, "Start of Update Cycle" }, { 3, "Periodic Status Message" }, { 4, "Event-triggered Status Message" } };
 
