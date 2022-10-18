@@ -536,8 +536,15 @@ namespace Library
         }
 
         // Data Item I010/280: Presence
-        public static void Presence(string[] octeto)
+        public static void Presence(string octeto1, string octeto2, string octeto3)
         {
+            int N = Functions.bintonum(octeto1);
+            float DRHO = Functions.bintonum(octeto2);
+            float DTHETA = Functions.bintonum(octeto2);
+
+            CurrentData.N = N;
+            CurrentData.DRHO = DRHO;
+            CurrentData.DTHETA = DTHETA;
 
         }
 

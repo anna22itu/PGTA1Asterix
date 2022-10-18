@@ -721,57 +721,336 @@ namespace Library
         }
 
         // Data Item I021/200: Target Status
-        private static void TargetStatus(string[] octeto)
+        private static void TargetStatus(string octeto1)
         {
+            int ICF = octeto1[0];
+            int LNAV = octeto1[1];
+            int ME = octeto1[2];
+            int PS = Functions.bintonum(octeto1.Substring(3, 3));
+            int SS = Functions.bintonum(octeto1.Substring(6, 2));
+
+            string messageICF = CAT21Dict.TargetStatus_ICF[ICF];
+            string messageLNAV = CAT21Dict.TargetStatus_LNAV[LNAV];
+            string messageME = CAT21Dict.TargetStatus_ME[ME];
+            string messagePS = CAT21Dict.TargetStatus_PS[PS];
+            string messageSS = CAT21Dict.TargetStatus_SS[SS];
+
+            CurrentData.ICF = messageICF;
+            CurrentData.LNAV = messageLNAV;
+            CurrentData.ME = messageME;
+            CurrentData.PS = messagePS;
+            CurrentData.SS = messageSS;
 
         }
 
         // Data Item I021/210: MOPS Version
-        private static void MOPSVersion(string[] octeto)
+        private static void MOPSVersion(string octeto1)
         {
+            int VNS = octeto1[1];
+            int LTT = Functions.bintonum(octeto1.Substring(5, 3));
 
+            string messageVNS = CAT21Dict.MOPSVersion_VNS[VNS];
+            string messageLTT = CAT21Dict.MOPSVersion_LTT[LTT];
+
+            CurrentData.VNS = messageVNS;
+            CurrentData.LTT = messageLTT;
+
+            if (LTT == 2)
+            {
+                int VN = Functions.bintonum(octeto1.Substring(2, 3));
+                string messageVN = CAT21Dict.MOPSVersion_VN[VN];
+                CurrentData.VN = messageVN;
+
+            }
+            else
+            {
+                CurrentData.VN = "null";
+            }
         }
 
         // Data Item I021/220:  Met Information
         private static void MetInformation(string[] octeto)
         {
+            int WS = octeto[0][0];
+            int WD = octeto[0][1];
+            int TMP = octeto[0][2];
+            int TRB = octeto[0][3];
 
+            string messageWS = CAT21Dict.MetInformation_WS[WS];
+            string messageWD = CAT21Dict.MetInformation_WD[WD];
+            string messageTMP = CAT21Dict.MetInformation_TMP[TMP];
+            string messageTRB = CAT21Dict.MetInformation_TRB[TRB];
+
+            CurrentData.ATP = messageWS;
+            CurrentData.WD = messageWD;
+            CurrentData.TMP = messageTMP;
+            CurrentData.TRB = messageTRB;
+
+
+            int FX1 = octeto[0][7];
+
+            if (FX1 == 1)
+            {
+                //Decodification of 1st extent byte
+                float WindSpeed = Functions.bintonum(octeto[1] + octeto[2]);          // FALTA REPASAR LA EXTENSIONNNNNNNNNNNNN
+                float WindDirection = Functions.bintonum(octeto[1] + octeto[2]);
+                float Temperature = Functions.bintonum(octeto[1] + octeto[2]);
+                float Turbulence = Functions.bintonum(octeto[1] + octeto[2]);
+
+                CurrentData.WindSpeed = WindSpeed;
+                CurrentData.WindDirection = WindDirection;
+                CurrentData.Temperature = Temperature;
+                CurrentData.Turbulence = Turbulence;
+            }
         }
 
         // Data Item I021/230: Roll Angle
-        private static void RollAngle(string[] octeto)
+        private static void RollAngle(string octeto1, string octeto2)
         {
+            float RollAngle = Functions.bintonum(octeto1 + octeto2);
 
+            CurrentData.RollAngle = RollAngle;
         }
 
         // Data Item I021/250: BDS Register Data
-        private static void BDSRegisterData(string[] octeto)
+        private static void BDSRegisterData(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7, string octeto8, string octeto9)
         {
+            float REP_BDS = Functions.bintonum(octeto1);
+            float BDSDATA = Functions.bintonum(octeto2 + octeto3 + octeto4 + octeto5 + octeto6 + octeto7 + octeto8);
+            float BDS1_BDS = Functions.bintonum(octeto9.Substring(0,4));
+            float BDS2_BDS = Functions.bintonum(octeto9.Substring(4,4));
+
+
+            CurrentData.REP_BDS = REP_BDS;
+            CurrentData.BDSDATA = BDSDATA;
+            CurrentData.BDS1_BDS = BDS1_BDS;
+            CurrentData.BDS2_BDS = BDS2_BDS;
 
         }
 
         // Data Item I021/260: ACAS Resolution Advisory Report
-        private static void ACASResolutionAdvisoryReport(string[] octeto)
+        private static void ACASResolutionAdvisoryReport(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7)
         {
+            float TYT = Functions.bintonum(octeto1.Substring(0,5));
+            float STYP = Functions.bintonum(octeto1.Substring(5,3));
+            float ARA = Functions.bintonum(octeto2 + octeto3.Substring(0, 6));
+            float RAC = Functions.bintonum(octeto3.Substring(6, 2) + octeto4.Substring(0,2));
+            float RAT = octeto4[2];
+            float MTE = octeto4[3];
+            float TTI = Functions.bintonum(octeto4.Substring(4, 2));
+            float TID_ACAS = Functions.bintonum(octeto4.Substring(6,2) + octeto5 + octeto6 + octeto7);
 
+
+            CurrentData.TYT = TYT;
+            CurrentData.STYP = STYP;
+            CurrentData.ARA = ARA;
+            CurrentData.RAC = RAC;
+            CurrentData.RAT = RAT;
+            CurrentData.MTE = MTE;
+            CurrentData.TTI = TTI;
+            CurrentData.TID_ACAS = TID_ACAS;
         }
 
         // Data Item I021/271:  Surface Capabilities and Characteristics
-        private static void SurfaceCapabilitiesCharacteristics(string[] octeto)
+        private static void SurfaceCapabilitiesCharacteristics(string octeto1)
         {
+            int POA = octeto1[2];
+            int CDTI = octeto1[3];
+            int B2 = octeto1[4];
+            int RAS = octeto1[5];
+            int IDENT = octeto1[6];
 
+
+            string messagePOA = CAT21Dict.SurfaceCapabilities_POA[POA];
+            string messageCDTI = CAT21Dict.SurfaceCapabilities_CDTI[CDTI];
+            string messageB2 = CAT21Dict.SurfaceCapabilities_B2[B2];
+            string messageRAS = CAT21Dict.SurfaceCapabilities_RAS[RAS];
+            string messageIDENT = CAT21Dict.SurfaceCapabilities_IDENT[IDENT];
+
+            CurrentData.POA = messagePOA;
+            CurrentData.CDTI = messageCDTI;
+            CurrentData.B2 = messageB2;
+            CurrentData.RAS = messageRAS;
+            CurrentData.IDENT = messageIDENT;
+
+
+            int FX1 = octeto1[7];
+
+            if (FX1 == 1)
+            {
+                
+            }
         }
 
         // Data Item I021/295:  Data Ages
         private static void DataAges(string[] octeto)
         {
+            int AOS = octeto[0][0];
+            int TRD = octeto[0][1];
+            int M3A = octeto[0][2];
+            int QI = octeto[0][3];
+            int TI = octeto[0][4];
+            int MAM = octeto[0][5];
+            int GH = octeto[0][6];
 
+            int FL = octeto[1][0];
+            int SAL = octeto[1][1];
+            int FSA = octeto[1][2];
+            int AS = octeto[1][3];
+            int TAS = octeto[1][4];
+            int MH = octeto[1][5];
+            int BVR = octeto[1][6];
+
+            int GVR = octeto[2][0];
+            int GV = octeto[2][1];
+            int TAR = octeto[2][2];
+            int TIdentification = octeto[2][3];
+            int TS = octeto[2][4];
+            int MET = octeto[2][5];
+            int ROA = octeto[2][6];
+
+            int ARA = octeto[3][4];
+            int SCC = octeto[3][5];
+
+
+            string messageAOS = CAT21Dict.DataAges_AOS[AOS];
+            string messageTRD = CAT21Dict.DataAges_TRD[TRD];
+            string messageM3A = CAT21Dict.DataAges_M3A[M3A];
+            string messageQI = CAT21Dict.DataAges_QI[QI];
+            string messageTI = CAT21Dict.DataAges_TI[TI];
+            string messageMAM = CAT21Dict.DataAges_MAM[MAM];
+            string messageGH = CAT21Dict.DataAges_GH[GH];
+
+            string messageFL = CAT21Dict.DataAges_FL[FL];
+            string messageSAL = CAT21Dict.DataAges_SAL[SAL];
+            string messageFSA = CAT21Dict.DataAges_FSA[FSA];
+            string messageAS = CAT21Dict.DataAges_AS[AS];
+            string messageTAS = CAT21Dict.DataAges_TAS[TAS];
+            string messageMH = CAT21Dict.DataAges_MH[MH];
+            string messageBVR = CAT21Dict.DataAges_BVR[BVR];
+
+            string messageGVR = CAT21Dict.DataAges_GVR[GVR];
+            string messageGV = CAT21Dict.DataAges_GV[GV]; 
+            string messageTAR = CAT21Dict.DataAges_TAR[TAR];
+            string messageTIdentification = CAT21Dict.DataAges_TIdentification[TIdentification];
+            string messageTS = CAT21Dict.DataAges_TS[TS];
+            string messageMET = CAT21Dict.DataAges_MET[MET];
+            string messageROA = CAT21Dict.DataAges_ROA[ROA];
+
+            string messageARA = CAT21Dict.DataAges_ARA[ARA];
+            string messageSCC = CAT21Dict.DataAges_SCC[SCC];
+
+
+            CurrentData.AOS = messageAOS;
+            CurrentData.TRD = messageTRD;
+            CurrentData.M3A = messageM3A;
+            CurrentData.QI = messageQI;
+            CurrentData.TI = messageTI;
+            CurrentData.MessageAmplitude = messageMAM;
+            CurrentData.GHeight = messageGH;
+
+            CurrentData.FLevelAge = messageFL;
+            CurrentData.SAL = messageSAL;
+            CurrentData.FSA = messageFSA;
+            CurrentData.AS = messageAS;
+            CurrentData.TAS = messageTAS;
+            CurrentData.MH = messageMH;
+            CurrentData.BVR = messageBVR;
+
+            CurrentData.GVR = messageGVR;
+            CurrentData.GV = messageGV;
+            CurrentData.TAR = messageTAR;
+            CurrentData.TIdentification = messageTIdentification;
+            CurrentData.TS = messageTS;
+            CurrentData.MET = messageMET;
+            CurrentData.ROA = messageROA;
+
+            CurrentData.AResolution = messageARA;
+            CurrentData.SCC = messageSCC;
+
+
+            int FX1 = octeto[0][7];
+
+            if(FX1 == 1)
+            {
+                float AOS_value = Functions.bintonum(octeto[4]);
+                float TRD_value = Functions.bintonum(octeto[5]);
+                float M3A_value = Functions.bintonum(octeto[6]);
+                float QI_value = Functions.bintonum(octeto[7]);
+                float TI_value = Functions.bintonum(octeto[8]);
+                float MAM_value = Functions.bintonum(octeto[9]);
+                float GH_value = Functions.bintonum(octeto[10]);
+
+                CurrentData.AOS_value = AOS_value;
+                CurrentData.TRD_value = TRD_value;
+                CurrentData.M3A_value = M3A_value;
+                CurrentData.QI_value = QI_value;
+                CurrentData.TI_value = TI_value;
+                CurrentData.MAM_value = MAM_value;
+                CurrentData.GH_value = GH_value;
+            }
+
+            int FX2 = octeto[1][7];
+
+            if (FX2 == 1)
+            {
+
+                float FL_value = Functions.bintonum(octeto[11]);
+                float SAL_value = Functions.bintonum(octeto[12]);
+                float FSA_value = Functions.bintonum(octeto[13]);
+                float AS_value = Functions.bintonum(octeto[14]);
+                float TAS_value = Functions.bintonum(octeto[15]);
+                float MH_value = Functions.bintonum(octeto[16]);
+                float BVR_value = Functions.bintonum(octeto[17]);
+
+                CurrentData.FL_value = FL_value;
+                CurrentData.SAL_value = SAL_value;
+                CurrentData.FSA_value = FSA_value;
+                CurrentData.AS_value = AS_value;
+                CurrentData.TAS_value = TAS_value;
+                CurrentData.MH_value = MH_value;
+                CurrentData.BVR_value = BVR_value;
+            }
+
+            int FX3 = octeto[2][7];
+
+            if (FX3 == 1)
+            {
+                float GVR_value = Functions.bintonum(octeto[18]);
+                float GV_value = Functions.bintonum(octeto[19]);
+                float TAR_value = Functions.bintonum(octeto[20]);
+                float TIdentification_value = Functions.bintonum(octeto[21]);
+                float TS_value = Functions.bintonum(octeto[22]);
+                float MET_value = Functions.bintonum(octeto[23]);
+                float ROA_value = Functions.bintonum(octeto[24]);
+
+                CurrentData.GVR_value = GVR_value;
+                CurrentData.GV_value = GV_value;
+                CurrentData.TAR_value = TAR_value;
+                CurrentData.TIdentification_value = TIdentification_value;
+                CurrentData.TS_value = TS_value;
+                CurrentData.MET_value = MET_value;
+                CurrentData.ROA_value = ROA_value;
+            }
+
+            int FX4 = octeto[3][7];
+
+            if (FX4 == 1)
+            {
+                float ARA_value = Functions.bintonum(octeto[25]);
+                float SCC_value = Functions.bintonum(octeto[26]);
+
+                CurrentData.ARA_value = ARA_value;
+                CurrentData.SCC_value = SCC_value;
+            }
         }
 
         // Data Item I021/400: Receiver ID
-        private static void ReceiverID(string[] octeto)
+        private static void ReceiverID(string octeto1)
         {
+            float ID = Functions.bintonum(octeto1);
 
+            CurrentData.ID = ID;
         }
     }   
         

@@ -110,6 +110,12 @@ namespace Library
         public static float OrientationLSB = 0;
         public static int WidthLSB = 0;
 
+        //280
+        public static int N = 0;
+        public static float DRHO = 0;
+        public static float DTHETA = 0;
+
+
         //300
         public static string VFI = "";
 
@@ -286,6 +292,116 @@ namespace Library
 
         //165
         public static float TrackAngleRate = 0;
+
+        //170
+
+        //200
+        public static string ICF = "";
+        public static string LNAV = "";
+        public static string ME = "";
+        public static string PS = "";
+        public static string SS = "";
+
+        //210
+        public static string VNS = "";
+        public static string VN = "";
+        public static string LTT = "";
+
+        //220
+        public static string WS = "";
+        public static string WD = "";
+        public static string TMP = "";
+        public static string TRB_Met = "";
+
+        public static float WindSpeed = 0;
+        public static float WindDirection = 0;
+        public static float Temperature = 0;
+        public static float Turbulence = 0;
+
+        //230
+        public static float RollAngle = 0;
+
+        //250
+        public static float REP_BDS = 0;
+        public static float BDSDATA = 0;
+        public static float BDS1_BDS = 0;
+        public static float BDS2_BDS = 0;
+
+        //260
+        public static float TYT = 0;
+        public static float STYP = 0;
+        public static float ARA = 0;
+        public static float RAC = 0;
+        public static float RAT = 0;
+        public static float MTE = 0;
+        public static float TTI = 0;
+        public static float TID_ACAS = 0;
+
+        //271
+        public static string POA = "";
+        public static string CDTI = "";
+        public static string B2 = "";
+        public static string RAS = "";
+        public static string IDENT = "";
+        public static string LengthWidth = "";
+
+        //295
+        public static string AOS = "";
+        public static string TRD = "";
+        public static string M3A = "";
+        public static string QI = "";
+        public static string TI = "";
+        public static string MessageAmplitude = "";
+        public static string GHeight = "";
+
+        public static string FLevelAge = "";
+        public static string SAL = "";
+        public static string FSA = "";
+        public static string AS = "";
+        public static string TAS = "";
+        public static string MH = "";
+        public static string BVR = "";
+
+        public static string GVR = "";
+        public static string GV = "";
+        public static string TAR = "";
+        public static string TIdentification = "";
+        public static string TStatus = "";
+        public static string MET = "";
+        public static string ROA = "";
+
+        public static string AResolution = "";
+        public static string SCC = "";
+
+        public static float AOS_value = 0;
+        public static float TRD_value = 0;
+        public static float M3A_value = 0;
+        public static float QI_value = 0;
+        public static float TI_value = 0;
+        public static float MAM_value = 0;
+        public static float GH_value = 0;
+
+        public static float FL_value = 0;
+        public static float SAL_value = 0;
+        public static float FSA_value = 0;
+        public static float AS_value = 0;
+        public static float TAS_value = 0;
+        public static float MH_value = 0;
+        public static float BVR_value = 0;
+
+        public static float GVR_value = 0;
+        public static float GV_value = 0;
+        public static float TAR_value = 0;
+        public static float TIdentification_value = 0;
+        public static float TS_value = 0;
+        public static float MET_value = 0;
+        public static float ROA_value = 0;
+
+        public static float ARA_value = 0;
+        public static float SCC_value = 0;
+
+        //400
+        public static float ID = 0;
 
     }
 

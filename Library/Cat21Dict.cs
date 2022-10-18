@@ -141,5 +141,103 @@ namespace Library
         // 157
         public static IDictionary<int, string> AirborneGroundVector_RE = new Dictionary<int, string>() { { 0, "Value in defined range" }, { 1, "Value exceeds defined range" } };
 
+
+        // 200
+        public static IDictionary<int, string> TargetStatus_ICF = new Dictionary<int, string>() { { 0, "No intent change active" }, { 1, "Intent change flag raised" } };
+
+        public static IDictionary<int, string> TargetStatus_LNAV = new Dictionary<int, string>() { { 0, "LNAV Mode engaged" }, { 1, "LNAV Mode not engaged" } };
+
+        public static IDictionary<int, string> TargetStatus_ME = new Dictionary<int, string>() { { 0, "No military emergency" }, { 1, "Military emergency" } };
+
+        public static IDictionary<int, string> TargetStatus_PS = new Dictionary<int, string>() { { 0, "No emergency / not reported" }, { 1, "General emergency" }, { 2, "Lifeguard / medical emergency" }, { 3, "Minimum fuel" }, { 4, "No communications" }, { 5, "Unlawful interference" }, { 6, "“Downed” Aircraft" } };
+
+        public static IDictionary<int, string> TargetStatus_SS= new Dictionary<int, string>() { { 0, "No condition reported" }, { 1, "Permanent Alert (Emergency condition)" }, { 2, "Temporary Alert (change in Mode 3/A Code other than emergency)" }, { 3, "SPI set" } };
+
+
+        // 210
+        public static IDictionary<int, string> MOPSVersion_VNS = new Dictionary<int, string>() { { 0, "The MOPS Version is supported by the GS" }, { 1, "The MOPS Version is not supported by the GS" } };
+
+        public static IDictionary<int, string> MOPSVersion_VN = new Dictionary<int, string>() { { 0, "ED102/DO-260 [Ref. 8]" }, { 1, "DO-260A [Ref. 9]" }, { 2, "ED102A/DO-260B [Ref. 10]" }, { 3, "ED-102B/DO-260C [Ref. 11]" } };
+
+        public static IDictionary<int, string> MOPSVersion_LTT = new Dictionary<int, string>() { { 0, "Other" }, { 1, "UAT" }, { 2, "1090 ES" }, { 3, "VDL 4" }, { 4, "Not assigned" }, { 5, "Not assigned" }, { 6, "Not assigned" }, { 7, "Not assigned" } };
+
+
+        // 220
+        public static IDictionary<int, string> MetInformation_WS = new Dictionary<int, string>() { { 0, "Absence of Subfield #1" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> MetInformation_WD = new Dictionary<int, string>() { { 0, "Absence of Subfield #2" }, { 1, "Presence of Subfield #2" } };
+
+        public static IDictionary<int, string> MetInformation_TMP = new Dictionary<int, string>() { { 0, "Absence of Subfield #3" }, { 1, "Presence of Subfield #3" } };
+
+        public static IDictionary<int, string> MetInformation_TRB = new Dictionary<int, string>() { { 0, "Absence of Subfield #4" }, { 1, "Presence of Subfield #4" } };
+
+
+        // 271
+        public static IDictionary<int, string> SurfaceCapabilities_POA = new Dictionary<int, string>() { { 0, "Position transmitted is not ADS-B position reference point" }, { 1, "Position transmitted is the ADS-B position reference point" } };
+
+        public static IDictionary<int, string> SurfaceCapabilities_CDTI = new Dictionary<int, string>() { { 0, "CDTI not operationa" }, { 1, "CDTI operational" } };
+
+        public static IDictionary<int, string> SurfaceCapabilities_B2 = new Dictionary<int, string>() { { 0, "≥ 70 Watts" }, { 1, "< 70 Watts" } };
+
+        public static IDictionary<int, string> SurfaceCapabilities_RAS = new Dictionary<int, string>() { { 0, "Aircraft not receiving ATC-services" }, { 1, "Aircraft receiving ATC services" } };
+
+        public static IDictionary<int, string> SurfaceCapabilities_IDENT = new Dictionary<int, string>() { { 0, "IDENT switch not active" }, { 1, "IDENT switch active" } };
+
+
+
+        public static IDictionary<int, string> SurfaceCapabilities_LengthWidth = new Dictionary<int, string>() { { 0, "" }, { 1, "" }, { 2, "" }, { 3, "" } , { 4, "" }, { 5, "" } , { 6, "IDENT switch not active" }, { 7, "IDENT switch active" } , { 8, "IDENT switch not active" }, { 9, "IDENT switch active" } , { 10, "IDENT switch not active" }, { 11, "IDENT switch active" } , { 12, "IDENT switch not active" }, { 13, "IDENT switch active" } , { 14, "IDENT switch not active" }, { 15, "IDENT switch active" } };
+
+
+        // 295
+        public static IDictionary<int, string> DataAges_AOS = new Dictionary<int, string>() { { 0, "Absence of Subfield #1" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_TRD = new Dictionary<int, string>() { { 0, "Absence of Subfield #2" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_M3A = new Dictionary<int, string>() { { 0, "Absence of Subfield #3" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_QI = new Dictionary<int, string>() { { 0, "Absence of Subfield #4" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_TI = new Dictionary<int, string>() { { 0, "Absence of Subfield #5" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_MAM = new Dictionary<int, string>() { { 0, "Absence of Subfield #6" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_GH = new Dictionary<int, string>() { { 0, "Absence of Subfield #7" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_FL = new Dictionary<int, string>() { { 0, "Absence of Subfield #8" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_SAL = new Dictionary<int, string>() { { 0, "Absence of Subfield #9" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_FSA = new Dictionary<int, string>() { { 0, "Absence of Subfield #10" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_AS = new Dictionary<int, string>() { { 0, "Absence of Subfield #11" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_TAS = new Dictionary<int, string>() { { 0, "Absence of Subfield #12" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_MH = new Dictionary<int, string>() { { 0, "Absence of Subfield #13" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_BVR = new Dictionary<int, string>() { { 0, "Absence of Subfield #14" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_GVR = new Dictionary<int, string>() { { 0, "Absence of Subfield #15" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_GV = new Dictionary<int, string>() { { 0, "Absence of Subfield #16" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_TAR = new Dictionary<int, string>() { { 0, "Absence of Subfield #17" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_TIdentification = new Dictionary<int, string>() { { 0, "Absence of Subfield #18" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_TS = new Dictionary<int, string>() { { 0, "Absence of Subfield #19" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_MET = new Dictionary<int, string>() { { 0, "Absence of Subfield #20" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_ROA = new Dictionary<int, string>() { { 0, "Absence of Subfield #21" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_ARA = new Dictionary<int, string>() { { 0, "Absence of Subfield #22" }, { 1, "Presence of Subfield #1" } };
+
+        public static IDictionary<int, string> DataAges_SCC = new Dictionary<int, string>() { { 0, "Absence of Subfield #23" }, { 1, "Presence of Subfield #1" } };
+
+
+
+
+
     }
 }
