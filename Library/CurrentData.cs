@@ -4,11 +4,30 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using Microsoft.Data.Sqlite;
+using System.Data.SqlTypes;
 
 namespace Library
 {
     public class CurrentData
     {
+        //SQL DATABASE
+        private SqliteConnection cnx;
+
+        public void Iniciar()
+        //Abre la base de datos.
+        {
+            string dataSource = "Data Source =  Proyectos\\PracticaDB\\S\\project.db";
+            cnx = new SQLiteConnection(dataSource);
+            cnx.Open();
+        }
+
+
+
+
+
+
         ///// CAT10 /////
 
         //000
@@ -33,7 +52,7 @@ namespace Library
 
         //040
         public static float rho = 0;
-        public static float delta = 0;
+        public static float theta = 0;
 
         //041
         public static float latitude = 0;
@@ -47,6 +66,7 @@ namespace Library
         public static string ModeV = "";
         public static string ModeG = "";
         public static string ModeL = "";
+        public static int ABCD = 0;
 
         //090
         public static string FLV = "";
@@ -97,7 +117,8 @@ namespace Library
 
         //245
         public static string STI = "";
-        public static string TargetIdentification = "";
+        public static int TargetIdentification = 0;
+
 
         //250
         public static float REP = 0;

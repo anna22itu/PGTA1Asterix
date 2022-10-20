@@ -183,7 +183,8 @@ namespace Library
 
                 case "Presence":
 
-
+                    Presence(dataitems[n], dataitems[n + 1], dataitems[n + 2]);
+                    Read.sumbyte(3);
 
                     break;
 
@@ -294,19 +295,19 @@ namespace Library
         }
 
         // Data Item I010/040: Measured Position in Polar Co-ordinates
-        public static void MeasuredPositionPolarCoordinates(string[] octetos)
+        public static void MeasuredPositionPolarCoordinates(string[] octetos) //BCD
         {
             float rho = Functions.bintonum(octetos[0] + octetos[1]);
-            float delta = Functions.bintonum(octetos[2] + octetos[3]);
+            float theta = Functions.bintonum(octetos[2] + octetos[3]);
 
             CurrentData.rho = rho;
-            CurrentData.delta = delta;
+            CurrentData.theta = theta;
         }
 
         // Data Item I010/041: Position in WGS-84 Co-ordinates
-        public static void PositionWGS84Coordinates(string[] octetos)
+        public static void PositionWGS84Coordinates(string[] octetos) //COMPLEMENTO A DOS
         {
-            float latitude = Functions.bintonum(octetos[0] + octetos[1] + octetos[2] + octetos[3]);         /////////////// FALTA AÑADIR EL COMPLEMENTO A DOS YA QUE SON LONGITUDES Y LATITUDES
+            float latitude = Functions.bintonum(octetos[0] + octetos[1] + octetos[2] + octetos[3]);
             float longitude = Functions.bintonum(octetos[4] + octetos[5] + octetos[6] + octetos[7]);
 
             CurrentData.latitude = latitude;
@@ -314,7 +315,7 @@ namespace Library
         }
 
         // Data Item I010/042: Position in Cartesian Co-ordinates
-        public static void PositionCartesianCoordinates(string[] octetos)
+        public static void PositionCartesianCoordinates(string[] octetos) //SI HAY MAS DE UNA COGEMOS ESTAS //BCD y COMPLEMENTO A DOS
         {
             float x = Functions.bintonum(octetos[0] + octetos[1]);
             float y = Functions.bintonum(octetos[2] + octetos[3]);
@@ -330,17 +331,26 @@ namespace Library
             int G = Functions.strtoint(octeto1[1]);
             int L = Functions.strtoint(octeto1[2]);
 
+            string A = Functions.bintonum(octeto1.Substring(4, 3)).ToString();
+            string B = Functions.bintonum(octeto1[7]+octeto2.Substring(0,2)).ToString();
+            string C = Functions.bintonum(octeto2.Substring(2, 3)).ToString();
+            string D = Functions.bintonum(octeto2.Substring(5, 3)).ToString();
+
+
             string messageV = CAT10Dict.Mode3ACodeOctalRepresentation_V[V];
             string messageG = CAT10Dict.Mode3ACodeOctalRepresentation_G[G];
             string messageL = CAT10Dict.Mode3ACodeOctalRepresentation_L[L];
 
+            int ABCD = Convert.ToInt32(A+B+C+D);
+
             CurrentData.ModeV = messageV;
             CurrentData.ModeG = messageG;
             CurrentData.ModeL = messageL;
+            CurrentData.ABCD = ABCD;
         }
 
         // Data Item I010/090: Flight Level in Binary Representation
-        public static void FlightLevelBinaryRepresentation(string octeto1, string octeto2)
+        public static void FlightLevelBinaryRepresentation(string octeto1, string octeto2) //TWO COMPLEMENT
         {
             int V = Functions.strtoint(octeto1[0]);
             int G = Functions.strtoint(octeto1[1]);
@@ -356,7 +366,7 @@ namespace Library
         }
 
         // Data Item I010/091: Measured Height
-        public static void MeasuredHeight(string octeto1, string octeto2)
+        public static void MeasuredHeight(string octeto1, string octeto2) //TWO COMPLEMENT //BCD
         {
 
             int Height = Functions.bintonum(octeto1 + octeto2);
@@ -374,7 +384,7 @@ namespace Library
         }
 
         // Data Item I010/140: Time of Day
-        public static void TimeOfDay(string octeto1, string octeto2, string octeto3)
+        public static void TimeOfDay(string octeto1, string octeto2, string octeto3) //BCD
         {
             int TimeOfDay = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
@@ -443,7 +453,7 @@ namespace Library
         }
 
         // Data Item I010/200: Calculated Track Velocity in Polar Co-ordinates
-        public static void CalculatedTrackVelocityPolarCoordinates(string[] octetos)
+        public static void CalculatedTrackVelocityPolarCoordinates(string[] octetos) //BCD 
         {
             float GroundSpeed = Functions.bintonum(octetos[0] + octetos[1]);
             float TrackAngle = Functions.bintonum(octetos[2] + octetos[3]);
@@ -454,7 +464,7 @@ namespace Library
         }
 
         // Data Item I010/202: Calculated Track Velocity in Cartesian Co-ordinates
-        public static void CalculatedTrackVelocityCartesianCoordinates(string[] octetos)
+        public static void CalculatedTrackVelocityCartesianCoordinates(string[] octetos) //TWO COMPLEMENT //BCD
         {
             float Vx = Functions.bintonum(octetos[0]+ octetos[1]);
             float Vy = Functions.bintonum(octetos[2]+octetos[3]);
@@ -464,7 +474,7 @@ namespace Library
         }
 
         // Data Item I010/210: Calculated Acceleration
-        public static void CalculatedAcceleration(string octeto1, string octeto2)
+        public static void CalculatedAcceleration(string octeto1, string octeto2) //TWO COMPLEMENT //BCD
         {
             float Ax = Functions.bintonum(octeto1);
             float Ay = Functions.bintonum(octeto2);
@@ -478,7 +488,7 @@ namespace Library
         {
             float TA = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
-            string TargetAddress =  ""; //// FALTA AÑADIR QUE LO PASE A HEXAGEMINAL
+            string TargetAddress =  ""; //// FALTA AÑADIR QUE LO PASE A HEXAGEMINAL HACER FUNCION DE INT A HEXA
 
             CurrentData.TargetAddress = TargetAddress;
         }
@@ -487,11 +497,22 @@ namespace Library
         public static void TargetIdentification(string[] octetos) //Falta per fer
         {
             string STI = octetos[0].Substring(0,2);
+            string C1 = octetos[1].Substring(0,6);
+            string C2 = octetos[1].Substring(6, 2) + octetos[2].Substring(0, 4);
+            string C3 = octetos[2].Substring(4, 4) + octetos[3].Substring(0, 2);
+            string C4 = octetos[3].Substring(2, 6);
+            string C5 = octetos[4].Substring(0, 6);
+            string C6 = octetos[4].Substring(6, 2) + octetos[5].Substring(0, 4);
+            string C7 = octetos[5].Substring(4, 4) + octetos[6].Substring(0, 2);
+            string C8 = octetos[6].Substring(2, 6);
+
+
 
             string messageSTI = CAT10Dict.TargetIdentification_STI[STI];
+            int C = Convert.ToInt32(C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8);
 
             CurrentData.STI = messageSTI;
-
+            CurrentData.TargetIdentification = C;
 
         }
 
@@ -519,7 +540,7 @@ namespace Library
 
             if (nextents > 1)
             {
-                //Decodification of 1st extent byte
+                //Decodification of 1st extent byte //BCD
                 float OrientationLSB = Functions.bintonum(octeto[1].Substring(0, 7));
 
                 CurrentData.OrientationLSB = OrientationLSB;
@@ -536,11 +557,11 @@ namespace Library
         }
 
         // Data Item I010/280: Presence
-        public static void Presence(string octeto1, string octeto2, string octeto3)
+        public static void Presence(string octeto1, string octeto2, string octeto3) //BCD //two-complement
         {
             int N = Functions.bintonum(octeto1);
-            float DRHO = Functions.bintonum(octeto2);
-            float DTHETA = Functions.bintonum(octeto2);
+            int DRHO = Functions.bintonum(octeto2);
+            float DTHETA = Functions.bintonum(octeto3);
 
             CurrentData.N = N;
             CurrentData.DRHO = DRHO;
@@ -562,7 +583,7 @@ namespace Library
         public static void PreprogrammedMessage(string octeto1)
         {
             int TRB = Functions.strtoint(octeto1[0]);
-            int MSG = Functions.bintonum(octeto1.Substring(1,8));
+            int MSG = Functions.bintonum(octeto1.Substring(1,7));
 
             string messageTRB = CAT10Dict.PreprogrammedMessage_TRB[TRB];
             string messageMSG = CAT10Dict.PreprogrammedMessage_MSG[MSG];
@@ -573,7 +594,7 @@ namespace Library
         }
 
         // Data Item I010/500: Standard Deviation of Position
-        public static void StandardDeviationPosition(string[] octetos)
+        public static void StandardDeviationPosition(string[] octetos) //BCD
         {
             float SDx = Functions.bintonum(octetos[0]);
             float SDy = Functions.bintonum(octetos[1]);

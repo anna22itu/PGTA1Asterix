@@ -218,12 +218,12 @@ namespace Library
             int SAC = Functions.bintonum(octeto1);
             int SIC = Functions.bintonum(octeto2);
 
-            CurrentData.SAC = SAC;  ///////////////// Tenemos SAC & SIC en ambas categoriassssss
+            CurrentData.SAC = SAC;
             CurrentData.SIC = SIC;
         }
 
         // Data Item I021/015: Service Identification.
-        private static void PositionCartesianCoordinates(string octeto1)
+        private static void ServiceIdentification(string octeto1)
         {
             int ServiceIdentification = Functions.bintonum(octeto1);
 
@@ -232,7 +232,7 @@ namespace Library
         }
 
         // Data Item I021/016: Service Management
-        private static void ServiceManagement(string octeto1)
+        private static void ServiceManagement(string octeto1) //BCD
         {
             float RP = Functions.bintonum(octeto1);
 
@@ -355,13 +355,21 @@ namespace Library
         }
 
         // Data Item I021/070: Mode 3/A Code in Octal Representation
-        private static void Mode3ACodinOctalRepresentation(string[] octeto)
+        private static void Mode3ACodinOctalRepresentation(string octeto1, string octeto2)
         {
 
+            string A = Functions.bintonum(octeto1.Substring(4, 3)).ToString();
+            string B = Functions.bintonum(octeto1[7] + octeto2.Substring(0, 2)).ToString();
+            string C = Functions.bintonum(octeto2.Substring(2, 3)).ToString();
+            string D = Functions.bintonum(octeto2.Substring(5, 3)).ToString();
+
+            int ABCD = Convert.ToInt32(A + B + C + D);
+
+            CurrentData.ABCD = ABCD;
         }
 
         // Data Item I021/070: Time of Applicability for Position
-        private static void TimeofApplicabilityforPosition(string octeto1, string octeto2, string octeto3)
+        private static void TimeofApplicabilityforPosition(string octeto1, string octeto2, string octeto3) //BCD
         {
             float TimeApplicabilityPosition = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
@@ -369,7 +377,7 @@ namespace Library
         }
 
         // Data Item I021/072: Time of Applicability for Velocity
-        private static void TimeofApplicabilityforVelocity(string octeto1, string octeto2, string octeto3)
+        private static void TimeofApplicabilityforVelocity(string octeto1, string octeto2, string octeto3) //BCD
         {
             float TimeApplicabilityVelocity = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
@@ -377,7 +385,7 @@ namespace Library
         }
 
         // Data Item I021/073: Time of Message Reception for Position
-        private static void TimeofMessageReceptionforPosition(string octeto1, string octeto2, string octeto3)
+        private static void TimeofMessageReceptionforPosition(string octeto1, string octeto2, string octeto3) //BCD
         {
             float TimeMessagePosition = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
@@ -389,7 +397,7 @@ namespace Library
         private static void TimeofMessageReceptionofPositionHighPrecision(string octeto1, string octeto2, string octeto3, string octeto4)
         {
             string FSI_Pos = octeto1.Substring(0, 2);
-            float TimeMessagePositionHP = Functions.bintonum(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4);
+            float TimeMessagePositionHP = Functions.bintonum(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4); //BCD
 
             string messageFSI = CAT21Dict.TimeMessageReceptionPosition_HP_FSI[FSI_Pos];
 
@@ -399,7 +407,7 @@ namespace Library
 
 
         // Data Item I021/075: Time of Message Reception for Velocity
-        private static void TimeMessageReceptionVelocity(string octeto1, string octeto2, string octeto3)
+        private static void TimeMessageReceptionVelocity(string octeto1, string octeto2, string octeto3) //BCD
         {
             float TimeMessageVelocity = Functions.bintonum(octeto1 + octeto2 + octeto3);
 
@@ -411,7 +419,7 @@ namespace Library
         {
 
             string FSI_Vel = octeto1.Substring(0, 2);
-            float TimeMessageVelocityHP = Functions.bintonum(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4);
+            float TimeMessageVelocityHP = Functions.bintonum(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4); //BCD
 
             string messageFSI = CAT21Dict.TimeMessageReceptionVelocity_HP_FSI[FSI_Vel];
 
@@ -422,7 +430,7 @@ namespace Library
         // Data Item I021/077: Time of ASTERIX Report Transmission
         private static void TimeASTERIXReportTransmission(string octeto1, string octeto2, string octeto3)
         {
-            float TimeAsterixTransmission = Functions.bintonum(octeto1 + octeto2 + octeto3);
+            float TimeAsterixTransmission = Functions.bintonum(octeto1 + octeto2 + octeto3); //BCD
 
             CurrentData.TimeAsterixTransmission = TimeAsterixTransmission;
         }
@@ -430,18 +438,20 @@ namespace Library
         // Data Item I021/080: Target Address
         private static void TargetAddress(string octeto1, string octeto2, string octeto3)
         {
-            float TargerAddress = Functions.bintonum(octeto1 + octeto2 + octeto3);
+            int TargetAddress = Functions.bintonum(octeto1 + octeto2 + octeto3);
+            string tahex="";
 
-            CurrentData.TargerAddress = TargerAddress;  /// FALTA CAMBIAR A HEXAGESIMAL
+            CurrentData.TargetAddress = tahex;  /// FALTA CAMBIAR A HEXAGESIMAL
         }
 
         // Data Item I021/090:Quality Indicators
-        private static void QualityIndicators(string[] octeto)
+        private static void QualityIndicators(string[] octeto) //NIIDEA NI DE COMO MIRARLO
         {
+
 
         }
         // Data Item I021/110: Trajectory Intent
-        private static void TrajectoryIntent(string[] octeto)
+        private static void TrajectoryIntent(string[] octeto) //FALTA MIRAR TODOS LOS QUE SON BCD
         {            
             int TIS = octeto[0][0];
             int TID = octeto[0][1];
@@ -569,7 +579,7 @@ namespace Library
         // Data Item I021/132:  Message Amplitude
         private static void MessageAmplitude(string octeto1)
         {
-            float MAM = Functions.bintonum(octeto1);
+            float MAM = Functions.bintonum(octeto1); //TWO COMPLEMENT BCD
 
             CurrentData.MAM = MAM;
         }
@@ -577,7 +587,7 @@ namespace Library
         // Data Item I021/140: Geometric Height
         private static void GeometricHeight(string octeto1, string octeto2)
         {
-            float GH = Functions.bintonum(octeto1 + octeto2);
+            float GH = Functions.bintonum(octeto1 + octeto2); //BCD TWO COMPLEMENT
 
             CurrentData.GH = GH;
 
@@ -588,7 +598,7 @@ namespace Library
         }
 
         // Data Item I021/145: Flight Level
-        private static void FlightLevel(string octeto1, string octeto2)
+        private static void FlightLevel(string octeto1, string octeto2) //TWO COMPLEMENT
         {
             float FL = Functions.bintonum(octeto1 + octeto2);
 
@@ -600,7 +610,7 @@ namespace Library
         {
             int SAS = octeto1[0];
             string Source = octeto1.Substring(1,2);
-            float SelectedAltitude = Functions.bintonum(octeto1.Substring(3, 5));   /// FALTA EL COMPLEMENTO A DOS
+            float SelectedAltitude = Functions.bintonum(octeto1.Substring(3, 5)+octeto2);   /// FALTA EL COMPLEMENTO A DOS
 
             string messageSAS = CAT21Dict.SelectedAltitude_SAS[SAS];
             string messageARC = CAT21Dict.SelectedAltitude_Source[Source];
@@ -632,7 +642,7 @@ namespace Library
         private static void AirSpeed(string octeto1, string octeto2)
         {
             int IM = octeto1[0];
-            float AirSpeed = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);  
+            float AirSpeed = Functions.bintonum(octeto1.Substring(2, 7) + octeto2); //BCD 
 
             string messageIM = CAT21Dict.AirSpeed_IM[IM];
 
@@ -644,7 +654,7 @@ namespace Library
         private static void TrueAirspeed(string octeto1, string octeto2)
         {
             int RE = octeto1[0];
-            float TrueAirSpeed = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);   
+            float TrueAirSpeed = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);   //BCD
 
             string messageRE = CAT21Dict.TrueAirSpeed_RE[RE];
 
@@ -655,15 +665,15 @@ namespace Library
         // Data Item I021/152:  Magnetic Heading
         private static void MagneticHeading(string octeto1, string octeto2)
         {
-            float MagneticHeading = Functions.bintonum(octeto1 + octeto2);
+            float MagneticHeading = Functions.bintonum(octeto1 + octeto2); //BCD
             CurrentData.MagneticHeading = MagneticHeading;
         }
 
         // Data Item I021/155: Barometric Vertical Rate
-        private static void BarometricVerticalRate(string octeto1, string octeto2)
+        private static void BarometricVerticalRate(string octeto1, string octeto2) 
         {
             int RE_VR = octeto1[0];
-            float BarometricVerticalRate = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);
+            float BarometricVerticalRate = Functions.bintonum(octeto1.Substring(2, 7) + octeto2); //BCD TWO COMPLEMENT 
 
             string messageRE_VR = CAT21Dict.BarometricVerticalRate_RE[RE_VR];
 
@@ -675,7 +685,7 @@ namespace Library
         private static void GeometricVerticalRate(string octeto1, string octeto2)
         {
             int RE_G = octeto1[0];
-            float GeometricVerticalRate = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);
+            float GeometricVerticalRate = Functions.bintonum(octeto1.Substring(2, 7) + octeto2); //BCD TWO COMPLEMENT
 
             string messageRE_G = CAT21Dict.GeometricVerticalRate_RE[RE_G];
 
@@ -687,8 +697,8 @@ namespace Library
         private static void AirborneGroundVector(string octeto1, string octeto2, string octeto3, string octeto4)
         {
             int RE_A = octeto1[0];
-            float GroundSpeed = Functions.bintonum(octeto1.Substring(2, 7) + octeto2);
-            float TrackAngle = Functions.bintonum(octeto3 + octeto4);
+            float GroundSpeed = Functions.bintonum(octeto1.Substring(2, 7) + octeto2); //BCD
+            float TrackAngle = Functions.bintonum(octeto3 + octeto4); //BCD
 
 
             string messageRE_A = CAT21Dict.AirborneGroundVector_RE[RE_A];
@@ -709,7 +719,7 @@ namespace Library
         // Data Item I021/165: Track Angle Rate
         private static void TrackAngleRate(string octeto1, string octeto2)
         {
-            float TrackAngleRate = Functions.bintonum(octeto1.Substring(5, 2) + octeto2);
+            float TrackAngleRate = Functions.bintonum(octeto1.Substring(5, 2) + octeto2); //BCD TWO COMPLEMENT
 
             CurrentData.TrackAngleRate = TrackAngleRate;
         }
@@ -717,7 +727,18 @@ namespace Library
         // Data Item I021/170: Target Identification
         private static void TargetIdentification(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6)
         {
-            
+            string C1 = octeto1.Substring(0, 6);
+            string C2 = octeto1.Substring(6, 2) + octeto2.Substring(0, 4);
+            string C3 = octeto2.Substring(4, 4) + octeto3.Substring(0, 2);
+            string C4 = octeto3.Substring(2, 6);
+            string C5 = octeto4.Substring(0, 6);
+            string C6 = octeto4.Substring(6, 2) + octeto5.Substring(0, 4);
+            string C7 = octeto5.Substring(4, 4) + octeto6.Substring(0, 2);
+            string C8 = octeto6.Substring(2, 6);
+
+            int C = Convert.ToInt32(C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8);
+
+            CurrentData.TargetIdentification = C;
         }
 
         // Data Item I021/200: Target Status
@@ -792,7 +813,7 @@ namespace Library
             if (FX1 == 1)
             {
                 //Decodification of 1st extent byte
-                float WindSpeed = Functions.bintonum(octeto[1] + octeto[2]);          // FALTA REPASAR LA EXTENSIONNNNNNNNNNNNN
+                float WindSpeed = Functions.bintonum(octeto[1] + octeto[2]);          //TODOS BCD
                 float WindDirection = Functions.bintonum(octeto[1] + octeto[2]);
                 float Temperature = Functions.bintonum(octeto[1] + octeto[2]);
                 float Turbulence = Functions.bintonum(octeto[1] + octeto[2]);
@@ -807,7 +828,7 @@ namespace Library
         // Data Item I021/230: Roll Angle
         private static void RollAngle(string octeto1, string octeto2)
         {
-            float RollAngle = Functions.bintonum(octeto1 + octeto2);
+            float RollAngle = Functions.bintonum(octeto1 + octeto2); //TWO COMPLEMENT BCD
 
             CurrentData.RollAngle = RollAngle;
         }
@@ -831,7 +852,7 @@ namespace Library
         // Data Item I021/260: ACAS Resolution Advisory Report
         private static void ACASResolutionAdvisoryReport(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7)
         {
-            float TYT = Functions.bintonum(octeto1.Substring(0,5));
+            float TYT = Functions.bintonum(octeto1.Substring(0,5));                             //TODO BCD
             float STYP = Functions.bintonum(octeto1.Substring(5,3));
             float ARA = Functions.bintonum(octeto2 + octeto3.Substring(0, 6));
             float RAC = Functions.bintonum(octeto3.Substring(6, 2) + octeto4.Substring(0,2));
@@ -878,7 +899,7 @@ namespace Library
 
             if (FX1 == 1)
             {
-                
+                //MIRAR LA TABLA
             }
         }
 
@@ -973,7 +994,7 @@ namespace Library
 
             if(FX1 == 1)
             {
-                float AOS_value = Functions.bintonum(octeto[4]);
+                float AOS_value = Functions.bintonum(octeto[4]);        //TODO BCD
                 float TRD_value = Functions.bintonum(octeto[5]);
                 float M3A_value = Functions.bintonum(octeto[6]);
                 float QI_value = Functions.bintonum(octeto[7]);
@@ -995,7 +1016,7 @@ namespace Library
             if (FX2 == 1)
             {
 
-                float FL_value = Functions.bintonum(octeto[11]);
+                float FL_value = Functions.bintonum(octeto[11]);    //TODO BCD
                 float SAL_value = Functions.bintonum(octeto[12]);
                 float FSA_value = Functions.bintonum(octeto[13]);
                 float AS_value = Functions.bintonum(octeto[14]);
