@@ -307,7 +307,7 @@ namespace Library
         // Data Item I010/041: Position in WGS-84 Co-ordinates
         public static void PositionWGS84Coordinates(string[] octetos) //COMPLEMENTO A DOS
         {
-            float latitude = Functions.bintonum(octetos[0] + octetos[1] + octetos[2] + octetos[3]);
+            float latitude = Functions.bintonum(Functions.ComplementoA2(octetos[0] + octetos[1] + octetos[2] + octetos[3]));
             float longitude = Functions.bintonum(octetos[4] + octetos[5] + octetos[6] + octetos[7]);
 
             CurrentData.latitude = latitude;

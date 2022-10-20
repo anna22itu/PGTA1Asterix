@@ -93,5 +93,29 @@ namespace Library
             Read.sumbyte(fxcounted); //this is the number of bytes read
             return fspec;
         }
+
+
+        public static string[] methods = { "ComplementoA2" };
+
+        public static Dictionary<char, string> BinaryComplement = new Dictionary<char, string> { { '0', "1" }, { '1', "0" } };
+        public static string ComplementoA2 (string bits)
+        {
+            string[] bitsC2 = new string[bits.Length];
+
+            for (int i=0; i< bits.Length;i++)
+            {
+                bitsC2[i] = BinaryComplement[bits[i]];
+            }
+
+            string result = bitsC2[0];
+            for (int i = 0; i < bitsC2.Length; i++)
+            {
+                result = result + bitsC2[i + 1];
+            }
+
+            return result;
+        }
+
+        public static Dictionary<int, string> BinaryToHex = new Dictionary<int, string> { { 0, "No differential correction (ADS-B)" }, { 1, "Differential correction (ADS-B)" } };
     }
 }
