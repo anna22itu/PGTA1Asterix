@@ -19,7 +19,7 @@ namespace Library
         //Abre la base de datos.
         {
             string dataSource = "Data Source =  Proyectos\\PracticaDB\\S\\project.db";
-            cnx = new SQLiteConnection(dataSource);
+            cnx = new (dataSource);
             cnx.Open();
         }
 

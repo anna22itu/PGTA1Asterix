@@ -94,13 +94,29 @@ namespace Library
             return fspec;
         }
 
+        public static string numtobin(int i)
+        {            
+            int number = i;
+            int remainder;
+            string binary = string.Empty;
 
-        public static string[] methods = { "ComplementoA2" };
+            while (number > 0)
+            {
+                remainder = number % 2;
+                number /= 2;
+                binary = remainder.ToString() + binary;
+            }
+            return binary;
+        }
+
+
+        public static string[] methods = { "ComplementoA2", "BinaryToHex" };
 
         public static Dictionary<char, string> BinaryComplement = new Dictionary<char, string> { { '0', "1" }, { '1', "0" } };
         public static string ComplementoA2 (string bits)
         {
             string[] bitsC2 = new string[bits.Length];
+            string resultbit = "";
 
             for (int i=0; i< bits.Length;i++)
             {
@@ -113,9 +129,22 @@ namespace Library
                 result = result + bitsC2[i + 1];
             }
 
-            return result;
+            resultbit = result + Functions.numtobin(1);
+
+            return resultbit;
         }
 
         public static Dictionary<int, string> BinaryToHex = new Dictionary<int, string> { { 0, "No differential correction (ADS-B)" }, { 1, "Differential correction (ADS-B)" } };
+
+        public static float BCD(string bits)
+        {
+            string[] bitsC2 = new string[bits.Length];
+            string resultbit = "";
+
+            return 0;
+        }
+
+
+
     }
 }

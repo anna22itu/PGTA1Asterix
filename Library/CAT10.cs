@@ -308,7 +308,7 @@ namespace Library
         public static void PositionWGS84Coordinates(string[] octetos) //COMPLEMENTO A DOS
         {
             float latitude = Functions.bintonum(Functions.ComplementoA2(octetos[0] + octetos[1] + octetos[2] + octetos[3]));
-            float longitude = Functions.bintonum(octetos[4] + octetos[5] + octetos[6] + octetos[7]);
+            float longitude = Functions.bintonum(Functions.ComplementoA2(octetos[4] + octetos[5] + octetos[6] + octetos[7]));
 
             CurrentData.latitude = latitude;
             CurrentData.longitude = longitude;
@@ -317,8 +317,8 @@ namespace Library
         // Data Item I010/042: Position in Cartesian Co-ordinates
         public static void PositionCartesianCoordinates(string[] octetos) //SI HAY MAS DE UNA COGEMOS ESTAS //BCD y COMPLEMENTO A DOS
         {
-            float x = Functions.bintonum(octetos[0] + octetos[1]);
-            float y = Functions.bintonum(octetos[2] + octetos[3]);
+            float x = Functions.BCD(Functions.ComplementoA2(octetos[0] + octetos[1]));
+            float y = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]));
 
             CurrentData.xpos = x;
             CurrentData.ypos = y;  
@@ -354,7 +354,7 @@ namespace Library
         {
             int V = Functions.strtoint(octeto1[0]);
             int G = Functions.strtoint(octeto1[1]);
-            int FL = Functions.bintonum(octeto1.Substring(3) + octeto2);
+            int FL = Functions.bintonum(Functions.ComplementoA2(octeto1.Substring(3) + octeto2));
 
 
             string messageV = CAT10Dict.FligthLevel_V[V];
@@ -369,7 +369,7 @@ namespace Library
         public static void MeasuredHeight(string octeto1, string octeto2) //TWO COMPLEMENT //BCD
         {
 
-            int Height = Functions.bintonum(octeto1 + octeto2);
+            float Height = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2));
 
             CurrentData.Height = Height;
 
@@ -386,7 +386,7 @@ namespace Library
         // Data Item I010/140: Time of Day
         public static void TimeOfDay(string octeto1, string octeto2, string octeto3) //BCD
         {
-            int TimeOfDay = Functions.bintonum(octeto1 + octeto2 + octeto3);
+            float TimeOfDay = Functions.BCD(octeto1 + octeto2 + octeto3);
 
             CurrentData.TimeDay = TimeOfDay;
         }
@@ -455,8 +455,8 @@ namespace Library
         // Data Item I010/200: Calculated Track Velocity in Polar Co-ordinates
         public static void CalculatedTrackVelocityPolarCoordinates(string[] octetos) //BCD 
         {
-            float GroundSpeed = Functions.bintonum(octetos[0] + octetos[1]);
-            float TrackAngle = Functions.bintonum(octetos[2] + octetos[3]);
+            float GroundSpeed = Functions.BCD(octetos[0] + octetos[1]);
+            float TrackAngle = Functions.BCD(octetos[2] + octetos[3]);
 
             CurrentData.GroundSpeed = GroundSpeed;
             CurrentData.TrackAngle = TrackAngle;
@@ -466,8 +466,8 @@ namespace Library
         // Data Item I010/202: Calculated Track Velocity in Cartesian Co-ordinates
         public static void CalculatedTrackVelocityCartesianCoordinates(string[] octetos) //TWO COMPLEMENT //BCD
         {
-            float Vx = Functions.bintonum(octetos[0]+ octetos[1]);
-            float Vy = Functions.bintonum(octetos[2]+octetos[3]);
+            float Vx = Functions.BCD(Functions.ComplementoA2(octetos[0]+ octetos[1]));
+            float Vy = Functions.BCD(Functions.ComplementoA2(octetos[2]+octetos[3]));
 
             CurrentData.Vx = Vx;
             CurrentData.Vy = Vy;
@@ -476,8 +476,8 @@ namespace Library
         // Data Item I010/210: Calculated Acceleration
         public static void CalculatedAcceleration(string octeto1, string octeto2) //TWO COMPLEMENT //BCD
         {
-            float Ax = Functions.bintonum(octeto1);
-            float Ay = Functions.bintonum(octeto2);
+            float Ax = Functions.BCD(Functions.ComplementoA2(octeto1));
+            float Ay = Functions.BCD(Functions.ComplementoA2(octeto2));
 
             CurrentData.Ax = Ax;
             CurrentData.Ay = Ay;
@@ -541,7 +541,7 @@ namespace Library
             if (nextents > 1)
             {
                 //Decodification of 1st extent byte //BCD
-                float OrientationLSB = Functions.bintonum(octeto[1].Substring(0, 7));
+                float OrientationLSB = Functions.BCD(octeto[1].Substring(0, 7));
 
                 CurrentData.OrientationLSB = OrientationLSB;
 
@@ -557,11 +557,11 @@ namespace Library
         }
 
         // Data Item I010/280: Presence
-        public static void Presence(string octeto1, string octeto2, string octeto3) //BCD //two-complement
+        public static void Presence(string octeto1, string octeto2, string octeto3) //BCD 
         {
             int N = Functions.bintonum(octeto1);
-            int DRHO = Functions.bintonum(octeto2);
-            float DTHETA = Functions.bintonum(octeto3);
+            float DRHO = Functions.BCD(octeto2);
+            float DTHETA = Functions.BCD(octeto3);
 
             CurrentData.N = N;
             CurrentData.DRHO = DRHO;
@@ -596,9 +596,9 @@ namespace Library
         // Data Item I010/500: Standard Deviation of Position
         public static void StandardDeviationPosition(string[] octetos) //BCD
         {
-            float SDx = Functions.bintonum(octetos[0]);
-            float SDy = Functions.bintonum(octetos[1]);
-            float Covariance = Functions.bintonum(octetos[2] + octetos[3]);   /// FALTA EL COMPLEMENTO A DOSSSSS
+            float SDx = Functions.BCD(octetos[0]);
+            float SDy = Functions.BCD(octetos[1]);
+            float Covariance = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]));   /// FALTA EL COMPLEMENTO A DOSSSSS
 
             CurrentData.SDx = SDx;
             CurrentData.SDy = SDy;
