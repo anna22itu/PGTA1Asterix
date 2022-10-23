@@ -8,7 +8,9 @@ namespace Library
 {
     internal class CAT21Dict
     {
-        public static string[] methods = { "AircraftOperationalStatus", "DataSourceIdentification", "ServiceIdentification", "ServiceManagement", "EmitterCategory", "TargetReportDescriptor", "Mode3/ACode", "TimeofApplicabilityforPosition", "TimeofApplicabilityforVelocity", "TimeofMessageReceptionforPosition", "TimeofMessageReceptionforPositionHighPrecision", "TimeofMessageReceptionforVelocity", "TimeofMessageReceptionforVelocityHighPrecision", "TimeofReportTransmission", "TargetAddress", "QualityIndicators", "TrajectoryIntent", "PositioninWGS84coordinates", "HighResolutionPositionWGS84Coordinates", "MessageAmplitude", "GeometricHeight", "FlightLevel", "SelectedAltitude", "FinalStateSelectedAltitude", "AirSpeed", "TrueAirSpeed", "MagneticHeading", "BarometricVerticalRate", "GeometricVerticalRate", "AirborneGroundVector", "TrackNumber", "TrackAngleRate", "TargetIdentification", "TargetStatus", "MOPSVersion", "MetInformation", "RollAngle", "ModeSMBData", "ACASResolutionAdvisoryReport", "SurfaceCapabilitiesandCharacteristics", "DataAges", "ReceiverID" };
+
+        public static string[] methods = { "DataSourceIdentification", "TargetReportDescriptor", "TrackNumber", "ServiceIdentification", "TimeofApplicabilityforPosition", "PositioninWGS84coordinates", "HighResolutionPositionWGS84Coordinates", "TimeofApplicabilityforVelocity", "AirSpeed", "TrueAirSpeed", "TargetAddress", "TimeofMessageReceptionforPosition", "TimeofMessageReceptionforPositionHighPrecision", "TimeofMessageReceptionforVelocity", "TimeofMessageReceptionforVelocityHighPrecision", "GeometricHeight", "QualityIndicators", "MOPSVersion", "Mode3/ACode", "RollAngle", "FlightLevel", "MagneticHeading", "TargetStatus", "BarometricVerticalRate", "GeometricVerticalRate", "AirborneGroundVector", "TrackAngleRate", "TimeofReportTransmission", "TargetIdentification", "EmitterCategory", "MetInformation", "SelectedAltitude", "FinalStateSelectedAltitude", "TrajectoryIntent", "ServiceManagement", "AircraftOperationalStatus", "SurfaceCapabilitiesandCharacteristics", "MessageAmplitude", "ModeSMBData", "ACASResolutionAdvisoryReport", "ReceiverID", "DataAges" };
+
 
         // 008
         public static IDictionary<int, string> AircraftOperationalStatus_RA = new Dictionary<int, string>() { { 0, "TCAS II or ACAS RA not active" }, { 1, "TCAS RA active" } };
@@ -162,16 +164,6 @@ namespace Library
         public static IDictionary<int, string> MOPSVersion_LTT = new Dictionary<int, string>() { { 0, "Other" }, { 1, "UAT" }, { 2, "1090 ES" }, { 3, "VDL 4" }, { 4, "Not assigned" }, { 5, "Not assigned" }, { 6, "Not assigned" }, { 7, "Not assigned" } };
 
 
-        // 220
-        public static IDictionary<int, string> MetInformation_WS = new Dictionary<int, string>() { { 0, "Absence of Subfield #1" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> MetInformation_WD = new Dictionary<int, string>() { { 0, "Absence of Subfield #2" }, { 1, "Presence of Subfield #2" } };
-
-        public static IDictionary<int, string> MetInformation_TMP = new Dictionary<int, string>() { { 0, "Absence of Subfield #3" }, { 1, "Presence of Subfield #3" } };
-
-        public static IDictionary<int, string> MetInformation_TRB = new Dictionary<int, string>() { { 0, "Absence of Subfield #4" }, { 1, "Presence of Subfield #4" } };
-
-
         // 271
         public static IDictionary<int, string> SurfaceCapabilities_POA = new Dictionary<int, string>() { { 0, "Position transmitted is not ADS-B position reference point" }, { 1, "Position transmitted is the ADS-B position reference point" } };
 
@@ -183,59 +175,7 @@ namespace Library
 
         public static IDictionary<int, string> SurfaceCapabilities_IDENT = new Dictionary<int, string>() { { 0, "IDENT switch not active" }, { 1, "IDENT switch active" } };
 
-
-
         public static IDictionary<int, string> SurfaceCapabilities_LengthWidth = new Dictionary<int, string>() { { 0, "" }, { 1, "" }, { 2, "" }, { 3, "" } , { 4, "" }, { 5, "" } , { 6, "IDENT switch not active" }, { 7, "IDENT switch active" } , { 8, "IDENT switch not active" }, { 9, "IDENT switch active" } , { 10, "IDENT switch not active" }, { 11, "IDENT switch active" } , { 12, "IDENT switch not active" }, { 13, "IDENT switch active" } , { 14, "IDENT switch not active" }, { 15, "IDENT switch active" } };
-
-
-        // 295
-        public static IDictionary<int, string> DataAges_AOS = new Dictionary<int, string>() { { 0, "Absence of Subfield #1" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_TRD = new Dictionary<int, string>() { { 0, "Absence of Subfield #2" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_M3A = new Dictionary<int, string>() { { 0, "Absence of Subfield #3" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_QI = new Dictionary<int, string>() { { 0, "Absence of Subfield #4" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_TI = new Dictionary<int, string>() { { 0, "Absence of Subfield #5" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_MAM = new Dictionary<int, string>() { { 0, "Absence of Subfield #6" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_GH = new Dictionary<int, string>() { { 0, "Absence of Subfield #7" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_FL = new Dictionary<int, string>() { { 0, "Absence of Subfield #8" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_SAL = new Dictionary<int, string>() { { 0, "Absence of Subfield #9" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_FSA = new Dictionary<int, string>() { { 0, "Absence of Subfield #10" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_AS = new Dictionary<int, string>() { { 0, "Absence of Subfield #11" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_TAS = new Dictionary<int, string>() { { 0, "Absence of Subfield #12" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_MH = new Dictionary<int, string>() { { 0, "Absence of Subfield #13" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_BVR = new Dictionary<int, string>() { { 0, "Absence of Subfield #14" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_GVR = new Dictionary<int, string>() { { 0, "Absence of Subfield #15" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_GV = new Dictionary<int, string>() { { 0, "Absence of Subfield #16" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_TAR = new Dictionary<int, string>() { { 0, "Absence of Subfield #17" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_TIdentification = new Dictionary<int, string>() { { 0, "Absence of Subfield #18" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_TS = new Dictionary<int, string>() { { 0, "Absence of Subfield #19" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_MET = new Dictionary<int, string>() { { 0, "Absence of Subfield #20" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_ROA = new Dictionary<int, string>() { { 0, "Absence of Subfield #21" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_ARA = new Dictionary<int, string>() { { 0, "Absence of Subfield #22" }, { 1, "Presence of Subfield #1" } };
-
-        public static IDictionary<int, string> DataAges_SCC = new Dictionary<int, string>() { { 0, "Absence of Subfield #23" }, { 1, "Presence of Subfield #1" } };
-
-
 
 
 

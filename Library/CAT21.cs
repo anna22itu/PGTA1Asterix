@@ -14,169 +14,322 @@ namespace Library
             {
                 case "AircraftOperationalStatus":
 
+                    AircraftOperationalStatus(dataitems[n]);
+                    Read.sumbyte(1);
+
                     break;
 
                 case "DataSourceIdentification":
+
+                    DataSourceIdentification(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
 
                     break;
 
                 case "ServiceIdentification":
 
+                    ServiceIdentification(dataitems[n]);
+                    Read.sumbyte(1);
+
                     break;
 
                 case "ServiceManagement":
+
+                    ServiceManagement(dataitems[n]);
+                    Read.sumbyte(1);
 
                     break;
 
                 case "EmitterCategory":
 
+                    EmitterCategory(dataitems[n]);
+                    Read.sumbyte(1);
+
                     break;
 
                 case "TargetReportDescriptor":
+
+                    int nextentstrd = 1;
+                    if (dataitems[n][7] == 1)
+                    {
+                        nextentstrd++;
+                        if (dataitems[n + 1][7] == 1)
+                        {
+                            nextentstrd++;
+                            if (dataitems[n + 2][7] == 1)
+                            {
+                                nextentstrd++;
+                                if (dataitems[n + 3][7] == 1)
+                                {
+                                    nextentstrd++;
+                                }
+                            }
+
+                        }
+                    }
+                    TargetReportDescriptor(Functions.subarray(dataitems, n, nextentstrd), nextentstrd);
+                    Read.sumbyte(nextentstrd);
 
                     break;
 
                 case "Mode3/ACode":
 
+                    Mode3ACodinOctalRepresentation(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
+
                     break;
 
                 case "TimeofApplicabilityforPosition":
+
+                    TimeofApplicabilityforPosition(dataitems[n], dataitems[n + 1], dataitems[n + 2]);
+                    Read.sumbyte(3);
 
                     break;
 
                 case "TimeofApplicabilityforVelocity":
 
+                    TimeofApplicabilityforVelocity(dataitems[n], dataitems[n + 1], dataitems[n + 2]);
+                    Read.sumbyte(3);
+
                     break;
 
                 case "TimeofMessageReceptionforPosition":
+
+                    TimeofMessageReceptionforPosition(dataitems[n], dataitems[n + 1], dataitems[n + 2]);
+                    Read.sumbyte(3);
 
                     break;
 
                 case "TimeofMessageReceptionforPositionHighPrecision":
 
+                    TimeofMessageReceptionofPositionHighPrecision(dataitems[n], dataitems[n + 1], dataitems[n + 2], dataitems[n+3]);
+                    Read.sumbyte(4);
+
                     break;
 
                 case "TimeofMessageReceptionforVelocity":
+
+                    TimeMessageReceptionVelocity(dataitems[n], dataitems[n + 1], dataitems[n + 2]);
+                    Read.sumbyte(3);
 
                     break;
 
                 case "TimeofMessageReceptionforVelocityHighPrecision":
 
+                    TimeMessageReceptionVelocityHighPrecision(dataitems[n], dataitems[n + 1], dataitems[n + 2], dataitems[n+3]);
+                    Read.sumbyte(4);
+
                     break;
 
                 case "TimeofReportTransmission":
+
+                    TimeASTERIXReportTransmission(dataitems[n], dataitems[n + 1], dataitems[n + 2]);
+                    Read.sumbyte(3);
 
                     break;
 
                 case "TargetAddress":
 
+                    TargetAddress(dataitems[n], dataitems[n + 1], dataitems[n + 2]);
+                    Read.sumbyte(3);
+
                     break;
 
                 case "QualityIndicators":
+
+
 
                     break;
 
                 case "TrajectoryIntent":
 
+                    int nextentsti = 1;
+                    if (dataitems[n][7] == 1)
+                    {
+                        nextentsti++;
+                        if (dataitems[n + 1][7] == 1)
+                        {
+                            nextentsti = nextentsti + 16;
+                        }
+                    }
+
+                    TrajectoryIntent(Functions.subarray(dataitems, n, nextentsti), nextentsti);
+                    Read.sumbyte(nextentsti);
+
                     break;
 
                 case "PositioninWGS84coordinates":
 
+                    PositionWGS84Coordinates(dataitems[n], dataitems[n + 1], dataitems[n + 2], dataitems[n + 3], dataitems[n + 4], dataitems[n + 5]);
+                    Read.sumbyte(6);
+                    
                     break;
 
                 case "HighResolutionPositionWGS84Coordinates":
+
+                    HighResolutionPositionWGS84Coordinates(dataitems[n], dataitems[n + 1], dataitems[n + 2], dataitems[n + 3], dataitems[n + 4], dataitems[n + 5], dataitems[n + 6], dataitems[n + 7]);
+                    Read.sumbyte(8);
 
                     break;
 
                 case "MessageAmplitude":
 
+                    MessageAmplitude(dataitems[n]);
+                    Read.sumbyte(1);
+
                     break;
 
                 case "GeometricHeight":
+
+                    GeometricHeight(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
 
                     break;
 
                 case "FlightLevel":
 
+                    FlightLevel(dataitems[n],dataitems[n + 1]);
+                    Read.sumbyte(2);
+
                     break;
 
                 case "SelectedAltitude":
+
+                    SelectedAltitude(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
 
                     break;
 
                 case "FinalStateSelectedAltitude":
 
+                    FinalStateSelectedAltitude(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
+
                     break;
 
                 case "AirSpeed":
+
+                    AirSpeed(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
 
                     break;
 
                 case "TrueAirSpeed":
 
+                    TrueAirspeed(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
+
                     break;
 
                 case "MagneticHeading":
+
+                    MagneticHeading(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
 
                     break;
 
                 case "BarometricVerticalRate":
 
+                    BarometricVerticalRate(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
+
                     break;
 
                 case "GeometricVerticalRate":
+
+                    GeometricVerticalRate(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
 
                     break;
 
                 case "AirborneGroundVector":
 
+                    AirborneGroundVector(dataitems[n], dataitems[n + 1], dataitems[n + 2], dataitems[n + 3]);
+                    Read.sumbyte(4);
+
                     break;
 
                 case "TrackNumber":
+
+                    TrackNumber(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
 
                     break;
 
                 case "TrackAngleRate":
 
+                    TrackAngleRate(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
+
                     break;
 
                 case "TargetIdentification":
+
+                    TargetIdentification(dataitems[n], dataitems[n + 1], dataitems[n + 2], dataitems[n + 3], dataitems[n + 4], dataitems[n + 5]);
+                    Read.sumbyte(6);
 
                     break;
 
                 case "TargetStatus":
 
+                    TargetStatus(dataitems[n]);
+                    Read.sumbyte(1);
+
                     break;
 
                 case "MOPSVersion":
+
+                    MOPSVersion(dataitems[n]);
+                    Read.sumbyte(1);
 
                     break;
 
                 case "MetInformation":
 
+                    MetInformation(dataitems);
+                    //El sumbyte el fem des de la funció
+
                     break;
 
                 case "RollAngle":
+
+                    RollAngle(dataitems[n], dataitems[n + 1]);
+                    Read.sumbyte(2);
 
                     break;
 
                 case "ModeSMBData":
 
+                    BDSRegisterData(Functions.subarray(dataitems, n, 9));
+                    Read.sumbyte(9);
+
                     break;
 
                 case "ACASResolutionAdvisoryReport":
+
+                    ACASResolutionAdvisoryReport(Functions.subarray(dataitems, n, 7));
+                    Read.sumbyte(7);
 
                     break;
 
                 case "SurfaceCapabilitiesandCharacteristics":
 
+                    SurfaceCapabilitiesCharacteristics(dataitems[n]);
+                    Read.sumbyte(1);
+
                     break;
 
                 case "DataAges":
 
+                    DataAges(dataitems);
+                    //el sumbyte el fem a la funció
+
                     break;
 
                 case "ReceiverID":
+
+                    ReceiverID(dataitems[n]);
+                    Read.sumbyte(1);
 
                     break;
 
@@ -252,7 +405,7 @@ namespace Library
         }
 
         // Data Item I021/040: Target Report Descriptor
-        private static void TargetReportDescriptor(string[] octeto)
+        private static void TargetReportDescriptor(string[] octeto, int nextents)
         {
             int ATP = Functions.bintonum(octeto[0].Substring(0,3));
             int ARC = Functions.bintonum(octeto[0].Substring(3, 2));
@@ -270,9 +423,7 @@ namespace Library
             CurrentData.RAB_21 = messageRAB21;
 
 
-            int FX1 = octeto[0][7];
-
-            if (FX1 == 1)
+            if (nextents > 1)
             {
                 //Decodification of 1st extent byte
                 int DCR = octeto[1][0];
@@ -295,10 +446,8 @@ namespace Library
                 CurrentData.TST_21 = messageTST;
                 CurrentData.SAA = messageSAA;
                 CurrentData.CL = messageCL;
-                
-                int FX2 = octeto[1][7];
 
-                if (FX2 == 1)
+                if (nextents > 2)
                 {
                     //Decodification of 2nd extent byte
                     int LLC = octeto[2][1];
@@ -322,11 +471,9 @@ namespace Library
                     CurrentData.LDPJ = messageLDPJ;
                     CurrentData.RCF = messageRCF;
 
-                    int FX3 = octeto[2][7];
-
-                    if (FX3== 1)
+                    if (nextents > 3)
                     {
-                        //Decodification of 2nd extent byte
+                        //Decodification of 3rd extent byte
                         int TBC_element = octeto[3][0];
                         int TBC_value = Functions.bintonum(octeto[3].Substring(1,6));
 
@@ -335,11 +482,9 @@ namespace Library
                         CurrentData.TBC_element = messageTBC_element;
                         CurrentData.TBC_value = TBC_value;
 
-                        int FX4 = octeto[3][7];
-
-                        if (FX4 == 1)
+                        if (nextents > 4)
                         {
-                            //Decodification of 2nd extent byte
+                            //Decodification of 4th extent byte
                             int MBC_element = octeto[3][0];
                             int MBC_value = Functions.bintonum(octeto[3].Substring(1, 6));
 
@@ -451,7 +596,7 @@ namespace Library
 
         }
         // Data Item I021/110: Trajectory Intent
-        private static void TrajectoryIntent(string[] octeto) //FALTA MIRAR TODOS LOS QUE SON BCD
+        private static void TrajectoryIntent(string[] octeto, int nextents) //FALTA MIRAR TODOS LOS QUE SON BCD
         {            
             int TIS = octeto[0][0];
             int TID = octeto[0][1];
@@ -463,9 +608,7 @@ namespace Library
             CurrentData.TID = messageARC;
 
 
-            int FX1 = octeto[0][7];
-
-            if (FX1 == 1)
+            if (nextents > 1)
             {
                 //Decodification of 1st extent byte
                 int NAV = octeto[1][0];
@@ -477,9 +620,7 @@ namespace Library
                 CurrentData.NAV = messageNAV;
                 CurrentData.NVB = messageNVB;
 
-                int FX2 = octeto[1][7];
-
-                if (FX2 == 1)
+                if (nextents > 2)
                 {
                     //Decodification of 2nd extent byte
                     float REP = Functions.bintonum(octeto[2]);
@@ -792,37 +933,42 @@ namespace Library
         // Data Item I021/220:  Met Information
         private static void MetInformation(string[] octeto)
         {
+            int nextents = 1;
             int WS = octeto[0][0];
             int WD = octeto[0][1];
             int TMP = octeto[0][2];
             int TRB = octeto[0][3];
 
-            string messageWS = CAT21Dict.MetInformation_WS[WS];
-            string messageWD = CAT21Dict.MetInformation_WD[WD];
-            string messageTMP = CAT21Dict.MetInformation_TMP[TMP];
-            string messageTRB = CAT21Dict.MetInformation_TRB[TRB];
-
-            CurrentData.ATP = messageWS;
-            CurrentData.WD = messageWD;
-            CurrentData.TMP = messageTMP;
-            CurrentData.TRB = messageTRB;
-
-
-            int FX1 = octeto[0][7];
-
-            if (FX1 == 1)
+            if (WS==1)
             {
-                //Decodification of 1st extent byte
-                float WindSpeed = Functions.BCD(octeto[1] + octeto[2]);          //TODOS BCD
-                float WindDirection = Functions.BCD(octeto[1] + octeto[2]);
-                float Temperature = Functions.BCD(octeto[1] + octeto[2]);
-                float Turbulence = Functions.BCD(octeto[1] + octeto[2]);
+                float WindSpeed = Functions.BCD(octeto[1] + octeto[2]);
+                nextents = nextents + 2;
 
                 CurrentData.WindSpeed = WindSpeed;
+            }
+            if (WD==1)
+            {
+                float WindDirection = Functions.BCD(octeto[nextents] + octeto[nextents+1]);
+                nextents = nextents + 2;
+
                 CurrentData.WindDirection = WindDirection;
+            }
+            if (TMP == 1)
+            {
+                float Temperature = Functions.BCD(octeto[nextents] + octeto[nextents + 1]);
+                nextents = nextents + 2;
+
                 CurrentData.Temperature = Temperature;
+            }
+            if (TRB == 1)
+            {
+                float Turbulence = Functions.BCD(octeto[nextents] + octeto[nextents + 1]);
+                nextents = nextents + 2;
+
                 CurrentData.Turbulence = Turbulence;
             }
+
+            Read.sumbyte(nextents);
         }
 
         // Data Item I021/230: Roll Angle
@@ -834,12 +980,12 @@ namespace Library
         }
 
         // Data Item I021/250: BDS Register Data
-        private static void BDSRegisterData(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7, string octeto8, string octeto9)
+        private static void BDSRegisterData(string[] octetos)
         {
-            float REP_BDS = Functions.bintonum(octeto1);
-            float BDSDATA = Functions.bintonum(octeto2 + octeto3 + octeto4 + octeto5 + octeto6 + octeto7 + octeto8);
-            float BDS1_BDS = Functions.bintonum(octeto9.Substring(0,4));
-            float BDS2_BDS = Functions.bintonum(octeto9.Substring(4,4));
+            float REP_BDS = Functions.bintonum(octetos[0]);
+            float BDSDATA = Functions.bintonum(octetos[1] + octetos[2] + octetos[3] + octetos[4] + octetos[5] + octetos[6] + octetos[7]);
+            float BDS1_BDS = Functions.bintonum(octetos[8].Substring(0,4));
+            float BDS2_BDS = Functions.bintonum(octetos[8].Substring(4,4));
 
 
             CurrentData.REP_BDS = REP_BDS;
@@ -850,16 +996,16 @@ namespace Library
         }
 
         // Data Item I021/260: ACAS Resolution Advisory Report
-        private static void ACASResolutionAdvisoryReport(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7)
+        private static void ACASResolutionAdvisoryReport(string[] octetos)
         {
-            float TYT = Functions.BCD(octeto1.Substring(0,5));                             //TODO BCD
-            float STYP = Functions.BCD(octeto1.Substring(5,3));
-            float ARA = Functions.BCD(octeto2 + octeto3.Substring(0, 6));
-            float RAC = Functions.BCD(octeto3.Substring(6, 2) + octeto4.Substring(0,2));
-            float RAT = octeto4[2];
-            float MTE = octeto4[3];
-            float TTI = Functions.BCD(octeto4.Substring(4, 2));
-            float TID_ACAS = Functions.BCD(octeto4.Substring(6,2) + octeto5 + octeto6 + octeto7);
+            float TYT = Functions.BCD(octetos[0].Substring(0,5));                             //TODO BCD
+            float STYP = Functions.BCD(octetos[0].Substring(5,3));
+            float ARA = Functions.BCD(octetos[1] + octetos[2].Substring(0, 6));
+            float RAC = Functions.BCD(octetos[2].Substring(6, 2) + octetos[3].Substring(0,2));
+            float RAT = octetos[3][2];
+            float MTE = octetos[3][3];
+            float TTI = Functions.BCD(octetos[3].Substring(4, 2));
+            float TID_ACAS = Functions.BCD(octetos[3].Substring(6,2) + octetos[4] + octetos[5] + octetos[6]);
 
 
             CurrentData.TYT = TYT;
@@ -906,164 +1052,199 @@ namespace Library
         // Data Item I021/295:  Data Ages
         private static void DataAges(string[] octeto)
         {
-            int AOS = octeto[0][0];
-            int TRD = octeto[0][1];
-            int M3A = octeto[0][2];
-            int QI = octeto[0][3];
-            int TI = octeto[0][4];
-            int MAM = octeto[0][5];
-            int GH = octeto[0][6];
-
-            int FL = octeto[1][0];
-            int SAL = octeto[1][1];
-            int FSA = octeto[1][2];
-            int AS = octeto[1][3];
-            int TAS = octeto[1][4];
-            int MH = octeto[1][5];
-            int BVR = octeto[1][6];
-
-            int GVR = octeto[2][0];
-            int GV = octeto[2][1];
-            int TAR = octeto[2][2];
-            int TIdentification = octeto[2][3];
-            int TS = octeto[2][4];
-            int MET = octeto[2][5];
-            int ROA = octeto[2][6];
-
-            int ARA = octeto[3][4];
-            int SCC = octeto[3][5];
-
-
-            string messageAOS = CAT21Dict.DataAges_AOS[AOS];
-            string messageTRD = CAT21Dict.DataAges_TRD[TRD];
-            string messageM3A = CAT21Dict.DataAges_M3A[M3A];
-            string messageQI = CAT21Dict.DataAges_QI[QI];
-            string messageTI = CAT21Dict.DataAges_TI[TI];
-            string messageMAM = CAT21Dict.DataAges_MAM[MAM];
-            string messageGH = CAT21Dict.DataAges_GH[GH];
-
-            string messageFL = CAT21Dict.DataAges_FL[FL];
-            string messageSAL = CAT21Dict.DataAges_SAL[SAL];
-            string messageFSA = CAT21Dict.DataAges_FSA[FSA];
-            string messageAS = CAT21Dict.DataAges_AS[AS];
-            string messageTAS = CAT21Dict.DataAges_TAS[TAS];
-            string messageMH = CAT21Dict.DataAges_MH[MH];
-            string messageBVR = CAT21Dict.DataAges_BVR[BVR];
-
-            string messageGVR = CAT21Dict.DataAges_GVR[GVR];
-            string messageGV = CAT21Dict.DataAges_GV[GV]; 
-            string messageTAR = CAT21Dict.DataAges_TAR[TAR];
-            string messageTIdentification = CAT21Dict.DataAges_TIdentification[TIdentification];
-            string messageTS = CAT21Dict.DataAges_TS[TS];
-            string messageMET = CAT21Dict.DataAges_MET[MET];
-            string messageROA = CAT21Dict.DataAges_ROA[ROA];
-
-            string messageARA = CAT21Dict.DataAges_ARA[ARA];
-            string messageSCC = CAT21Dict.DataAges_SCC[SCC];
-
-
-            CurrentData.AOS = messageAOS;
-            CurrentData.TRD = messageTRD;
-            CurrentData.M3A = messageM3A;
-            CurrentData.QI = messageQI;
-            CurrentData.TI = messageTI;
-            CurrentData.MessageAmplitude = messageMAM;
-            CurrentData.GHeight = messageGH;
-
-            CurrentData.FLevelAge = messageFL;
-            CurrentData.SAL = messageSAL;
-            CurrentData.FSA = messageFSA;
-            CurrentData.AS = messageAS;
-            CurrentData.TAS = messageTAS;
-            CurrentData.MH = messageMH;
-            CurrentData.BVR = messageBVR;
-
-            CurrentData.GVR = messageGVR;
-            CurrentData.GV = messageGV;
-            CurrentData.TAR = messageTAR;
-            CurrentData.TIdentification = messageTIdentification;
-            CurrentData.TS = messageTS;
-            CurrentData.MET = messageMET;
-            CurrentData.ROA = messageROA;
-
-            CurrentData.AResolution = messageARA;
-            CurrentData.SCC = messageSCC;
-
-
-            int FX1 = octeto[0][7];
-
-            if(FX1 == 1)
+            int nextents = 1;
+            int n = 1;
+            if (octeto[0][7] == 1)
             {
-                float AOS_value = Functions.BCD(octeto[4]);        //TODO BCD
-                float TRD_value = Functions.BCD(octeto[5]);
-                float M3A_value = Functions.BCD(octeto[6]);
-                float QI_value = Functions.BCD(octeto[7]);
-                float TI_value = Functions.BCD(octeto[8]);
-                float MAM_value = Functions.BCD(octeto[9]);
-                float GH_value = Functions.BCD(octeto[10]);
+                nextents++;
+                n++;
+                if (octeto[1][7] == 1)
+                {
+                    nextents++;
+                    n++;
+                    if (octeto[2][7] == 1)
+                    {
+                        nextents++;
+                        n++;
+                    }
+                }
+            }
+
+            if (octeto[0][0] == 1)
+            {
+                float AOS_value = Functions.BCD(octeto[n]);
+                n++;
 
                 CurrentData.AOS_value = AOS_value;
+            }
+            if (octeto[0][1] == 1)
+            {
+                float TRD_value = Functions.BCD(octeto[n]);
+                n++;
+
                 CurrentData.TRD_value = TRD_value;
+            }
+            if (octeto[0][2] == 1)
+            {
+                float M3A_value = Functions.BCD(octeto[n]);
+                n++;
+
                 CurrentData.M3A_value = M3A_value;
+            }
+            if (octeto[0][3] == 1)
+            {
+                float QI_value = Functions.BCD(octeto[n]);
+                n++;
+
                 CurrentData.QI_value = QI_value;
+            }
+            if (octeto[0][4] == 1)
+            {
+                float TI_value = Functions.BCD(octeto[n]);
+                n++;
+
                 CurrentData.TI_value = TI_value;
+            }
+            if (octeto[0][5] == 1)
+            {
+                float MAM_value = Functions.BCD(octeto[n]);
+                n++;
+
                 CurrentData.MAM_value = MAM_value;
+            }
+            if (octeto[0][6] == 1)
+            {
+                float GH_value = Functions.BCD(octeto[n]);
+                n++;
+
                 CurrentData.GH_value = GH_value;
             }
 
-            int FX2 = octeto[1][7];
-
-            if (FX2 == 1)
+            if (nextents > 1)
             {
+                if (octeto[1][0] == 1)
+                {
+                    float FL_value = Functions.BCD(octeto[n]);
+                    n++;
 
-                float FL_value = Functions.BCD(octeto[11]);    //TODO BCD
-                float SAL_value = Functions.BCD(octeto[12]);
-                float FSA_value = Functions.BCD(octeto[13]);
-                float AS_value = Functions.BCD(octeto[14]);
-                float TAS_value = Functions.BCD(octeto[15]);
-                float MH_value = Functions.BCD(octeto[16]);
-                float BVR_value = Functions.BCD(octeto[17]);
+                    CurrentData.FL_value = FL_value;
+                }
+                if (octeto[1][1] == 1)
+                {
+                    float SAL_value = Functions.BCD(octeto[n]);
+                    n++;
 
-                CurrentData.FL_value = FL_value;
-                CurrentData.SAL_value = SAL_value;
-                CurrentData.FSA_value = FSA_value;
-                CurrentData.AS_value = AS_value;
-                CurrentData.TAS_value = TAS_value;
-                CurrentData.MH_value = MH_value;
-                CurrentData.BVR_value = BVR_value;
+                    CurrentData.SAL_value = SAL_value;
+                }
+                if (octeto[1][2] == 1)
+                {
+                    float FSA_value = Functions.BCD(octeto[n]);
+                    n++;
+
+                    CurrentData.FSA_value = FSA_value;
+                }
+                if (octeto[1][3] == 1)
+                {
+                    float AS_value = Functions.BCD(octeto[n]);
+                    n++;
+
+                    CurrentData.AS_value = AS_value;
+                }
+                if (octeto[1][4] == 1)
+                {
+                    float TAS_value = Functions.BCD(octeto[n]);
+                    n++;
+
+                    CurrentData.TAS_value = TAS_value;
+                }
+                if (octeto[1][5] == 1)
+                {
+                    float MH_value = Functions.BCD(octeto[n]);
+                    n++;
+
+                    CurrentData.MH_value = MH_value;
+                }
+                if (octeto[1][6] == 1)
+                {
+                    float BVR_value = Functions.BCD(octeto[n]);
+                    n++;
+
+                    CurrentData.BVR_value = BVR_value;
+                }
+
+                if (nextents > 2)
+                {
+                    if (octeto[2][0] == 1)
+                    {
+                        float GVR_value = Functions.BCD(octeto[n]);
+                        n++;
+
+                        CurrentData.GVR_value = GVR_value;
+                    }
+                    if (octeto[2][1] == 1)
+                    {
+                        float GV_value = Functions.BCD(octeto[n]);
+                        n++;
+
+                        CurrentData.GV_value = GV_value;
+                    }
+                    if (octeto[2][2] == 1)
+                    {
+                        float TAR_value = Functions.BCD(octeto[n]);
+                        n++;
+
+                        CurrentData.TAR_value = TAR_value;
+                    }
+                    if (octeto[2][3] == 1)
+                    {
+                        float TIdentification_value = Functions.BCD(octeto[n]);
+                        n++;
+
+                        CurrentData.TIdentification_value = TIdentification_value;
+                    }
+                    if (octeto[2][4] == 1)
+                    {
+                        float TS_value = Functions.BCD(octeto[n]);
+                        n++;
+
+                        CurrentData.TS_value = TS_value;
+                    }
+                    if (octeto[2][5] == 1)
+                    {
+                        float MET_value = Functions.BCD(octeto[n]);
+                        n++;
+
+                        CurrentData.MET_value = MET_value;
+                    }
+                    if (octeto[2][6] == 1)
+                    {
+                        float ROA_value = Functions.BCD(octeto[n]);
+                        n++;
+
+                        CurrentData.ROA_value = ROA_value;
+                    }
+
+                    if (nextents > 3)
+                    {
+
+                        if (octeto[3][0] == 1)
+                        {
+                            float ARA_value = Functions.BCD(octeto[n]);
+                            n++;
+
+                            CurrentData.ARA_value = ARA_value;
+                        }
+                        if (octeto[3][1] == 1)
+                        {
+                            float SCC_value = Functions.BCD(octeto[n]);
+                            n++;
+
+                            CurrentData.SCC_value = SCC_value;
+                        }
+                    }
+                }
             }
-
-            int FX3 = octeto[2][7];
-
-            if (FX3 == 1)
-            {
-                float GVR_value = Functions.BCD(octeto[18]);
-                float GV_value = Functions.BCD(octeto[19]);
-                float TAR_value = Functions.BCD(octeto[20]);
-                float TIdentification_value = Functions.BCD(octeto[21]);
-                float TS_value = Functions.BCD(octeto[22]);
-                float MET_value = Functions.BCD(octeto[23]);
-                float ROA_value = Functions.BCD(octeto[24]);
-
-                CurrentData.GVR_value = GVR_value;
-                CurrentData.GV_value = GV_value;
-                CurrentData.TAR_value = TAR_value;
-                CurrentData.TIdentification_value = TIdentification_value;
-                CurrentData.TS_value = TS_value;
-                CurrentData.MET_value = MET_value;
-                CurrentData.ROA_value = ROA_value;
-            }
-
-            int FX4 = octeto[3][7];
-
-            if (FX4 == 1)
-            {
-                float ARA_value = Functions.BCD(octeto[25]);
-                float SCC_value = Functions.BCD(octeto[26]);
-
-                CurrentData.ARA_value = ARA_value;
-                CurrentData.SCC_value = SCC_value;
-            }
+            Read.sumbyte(n);
         }
 
         // Data Item I021/400: Receiver ID
