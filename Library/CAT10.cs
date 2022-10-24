@@ -296,7 +296,7 @@ namespace Library
         public static void MeasuredPositionPolarCoordinates(string[] octetos) //BCD
         {
             double LSBrho = 1; //meter
-            double LSBtheta = 360/(2^16); //deg
+            double LSBtheta = (double)360/Math.Pow(2,16); //deg
             double rho = Functions.BCD(octetos[0] + octetos[1], LSBrho);
             double theta = Functions.BCD(octetos[2] + octetos[3], LSBtheta);
 
@@ -307,7 +307,7 @@ namespace Library
         // Data Item I010/041: Position in WGS-84 Co-ordinates
         public static void PositionWGS84Coordinates(string[] octetos) //COMPLEMENTO A DOS
         {
-            double LSB = 180 / (2 ^ 31); //deg
+            double LSB = (double)180 / Math.Pow(2, 31); //deg
             double latitude = Functions.BCD(Functions.ComplementoA2(octetos[0] + octetos[1] + octetos[2] + octetos[3]),LSB);
             double longitude = Functions.BCD(Functions.ComplementoA2(octetos[4] + octetos[5] + octetos[6] + octetos[7]),LSB);
 
@@ -390,7 +390,7 @@ namespace Library
         // Data Item I010/140: Time of Day
         public static void TimeOfDay(string octeto1, string octeto2, string octeto3) //BCD
         {
-            double LSB = 1 / 128; //s
+            double LSB = (double)1 / 128; //s
             double TimeOfDay = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
 
             CurrentData.TimeDay = TimeOfDay;
@@ -461,7 +461,7 @@ namespace Library
         public static void CalculatedTrackVelocityPolarCoordinates(string[] octetos) //BCD 
         {
             double LSBgs = 0.22; //kt
-            double LSBta = 360 / (2 ^ 16); //deg
+            double LSBta =(double)360 / Math.Pow(2,16); //deg
 
             double GroundSpeed = Functions.BCD(octetos[0] + octetos[1], LSBgs);
             double TrackAngle = Functions.BCD(octetos[2] + octetos[3], LSBta);
@@ -552,7 +552,7 @@ namespace Library
             if (nextents > 1)
             {
                 //Decodification of 1st extent byte //BCD
-                double LSBori = 360 / 128; //deg
+                double LSBori = (double)360 / 128; //deg
                 double Orientation = Functions.BCD(octeto[1].Substring(0, 7), LSBori);
 
                 CurrentData.Orientation = Orientation;
