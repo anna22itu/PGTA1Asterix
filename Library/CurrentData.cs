@@ -51,16 +51,16 @@ namespace Library
         public static string SPI = "";
 
         //040
-        public static float rho = 0;
-        public static float theta = 0;
+        public static double rho = 0;
+        public static double theta = 0;
 
         //041
-        public static float latitude = 0;
-        public static float longitude = 0;
+        public static double latitude = 0;
+        public static double longitude = 0;
 
         //042
-        public static float xpos = 0;
-        public static float ypos = 0;
+        public static double xpos = 0;
+        public static double ypos = 0;
 
         //060
         public static string ModeV = "";
@@ -71,16 +71,16 @@ namespace Library
         //090
         public static string FLV = "";
         public static string FlG = "";
-        public static int FL = 0;
+        public static double FL = 0;
 
         //091
-        public static float Height = 0;
+        public static double Height = 0;
 
         //131
         public static int PAM = 0;
 
         //140
-        public static float TimeDay = 0;
+        public static double TimeDay = 0;
 
         //161
         public static int TrackNumber = 0;
@@ -101,23 +101,23 @@ namespace Library
 
 
         //200
-        public static float GroundSpeed = 0;
-        public static float TrackAngle = 0;
+        public static double GroundSpeed = 0;
+        public static double TrackAngle = 0;
 
         //202
-        public static float Vx = 0;
-        public static float Vy = 0;
+        public static double Vx = 0;
+        public static double Vy = 0;
 
         //210
-        public static float Ax = 0;
-        public static float Ay = 0;
+        public static double Ax = 0;
+        public static double Ay = 0;
 
         //220
         public static string TargetAddress = "";
 
         //245
         public static string STI = "";
-        public static int TargetIdentification = 0;
+        public static long TargetIdentification = 0;
 
 
         //250
@@ -127,14 +127,14 @@ namespace Library
         public static float BDS2 = 0;
 
         //270
-        public static int LengthLSB = 0;
-        public static float OrientationLSB = 0;
-        public static int WidthLSB = 0;
+        public static double Length = 0;
+        public static double Orientation = 0;
+        public static double Width = 0;
 
         //280
         public static int N = 0;
-        public static float DRHO = 0;
-        public static float DTHETA = 0;
+        public static double DRHO = 0;
+        public static double DTHETA = 0;
 
 
         //300
@@ -145,9 +145,9 @@ namespace Library
         public static string MSG = "";
 
         //500
-        public static float SDx = 0;
-        public static float SDy = 0;
-        public static float Covariance = 0;
+        public static double SDx = 0;
+        public static double SDy = 0;
+        public static double Covariance = 0;
 
         //550
         public static string NOGO = "";

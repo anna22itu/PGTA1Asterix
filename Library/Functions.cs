@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +56,7 @@ namespace Library
             }
             else
             {
-                f = 42;
+                f = 49;
             }
           
             int[] fspec = new int[f];
@@ -80,7 +81,7 @@ namespace Library
                     }
                     else //cal mirar si pot ser q no fos un 0 tambe i que dones error
                     {
-                        if (i + 8 * n <= 24)
+                        if (i + 8 * n <= f)
                         {
                             fspec[i + 8 * n - fxcounted] = 0;
                         }
@@ -109,39 +110,42 @@ namespace Library
             return binary;
         }
 
-
-        public static string[] methods = { "ComplementoA2", "BinaryToHex" };
-
         public static Dictionary<char, string> BinaryComplement = new Dictionary<char, string> { { '0', "1" }, { '1', "0" } };
         public static string ComplementoA2 (string bits)
         {
-            string[] bitsC2 = new string[bits.Length];
-            string resultbit = "";
+            
+            string result;
 
-            for (int i=0; i< bits.Length;i++)
+            if (strtoint(bits[0]) == 1) //el resultat és negatiu, cal fer proces
             {
-                bitsC2[i] = BinaryComplement[bits[i]];
+                string bc2="";
+                for (int i = 1; i < bits.Length; i++)
+                {
+                    bc2 = bc2 + BinaryComplement[bits[i]];
+                }
+                bc2 = bc2 + numtobin(1);
+                result = bc2;
             }
 
-            string result = bitsC2[0];
-            for (int i = 0; i < bitsC2.Length; i++)
+            else
             {
-                result = result + bitsC2[i + 1];
+                result = bits;
             }
 
-            resultbit = result + Functions.numtobin(1);
-
-            return resultbit;
+            return result;
         }
 
-        public static Dictionary<int, string> BinaryToHex = new Dictionary<int, string> { { 0, "No differential correction (ADS-B)" }, { 1, "Differential correction (ADS-B)" } };
-
-        public static float BCD(string bits)
+        public static double BCD(string bits, double LSB) 
         {
-            string[] bitsC2 = new string[bits.Length];
-            string resultbit = "";
+            double value = bintonum(bits) * LSB;
 
-            return 0;
+            return value;
+        }
+
+        public static string bintohex(string bin)
+        {
+            string hex = Convert.ToInt32(bin, 2).ToString("X");
+            return hex;
         }
 
 

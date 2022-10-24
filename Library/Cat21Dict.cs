@@ -8,8 +8,7 @@ namespace Library
 {
     internal class CAT21Dict
     {
-
-        public static string[] methods = { "DataSourceIdentification", "TargetReportDescriptor", "TrackNumber", "ServiceIdentification", "TimeofApplicabilityforPosition", "PositioninWGS84coordinates", "HighResolutionPositionWGS84Coordinates", "TimeofApplicabilityforVelocity", "AirSpeed", "TrueAirSpeed", "TargetAddress", "TimeofMessageReceptionforPosition", "TimeofMessageReceptionforPositionHighPrecision", "TimeofMessageReceptionforVelocity", "TimeofMessageReceptionforVelocityHighPrecision", "GeometricHeight", "QualityIndicators", "MOPSVersion", "Mode3/ACode", "RollAngle", "FlightLevel", "MagneticHeading", "TargetStatus", "BarometricVerticalRate", "GeometricVerticalRate", "AirborneGroundVector", "TrackAngleRate", "TimeofReportTransmission", "TargetIdentification", "EmitterCategory", "MetInformation", "SelectedAltitude", "FinalStateSelectedAltitude", "TrajectoryIntent", "ServiceManagement", "AircraftOperationalStatus", "SurfaceCapabilitiesandCharacteristics", "MessageAmplitude", "ModeSMBData", "ACASResolutionAdvisoryReport", "ReceiverID", "DataAges" };
+        public static string[] methods = { "DataSourceIdentification", "TargetReportDescriptor", "TrackNumber", "ServiceIdentification", "TimeofApplicabilityforPosition", "PositioninWGS84coordinates", "HighResolutionPositionWGS84Coordinates", "TimeofApplicabilityforVelocity", "AirSpeed", "TrueAirSpeed", "TargetAddress", "TimeofMessageReceptionforPosition", "TimeofMessageReceptionforPositionHighPrecision", "TimeofMessageReceptionforVelocity", "TimeofMessageReceptionforVelocityHighPrecision", "GeometricHeight", "QualityIndicators", "MOPSVersion", "Mode3/ACode", "RollAngle", "FlightLevel", "MagneticHeading", "TargetStatus", "BarometricVerticalRate", "GeometricVerticalRate", "AirborneGroundVector", "TrackAngleRate", "TimeofReportTransmission", "TargetIdentification", "EmitterCategory", "MetInformation", "SelectedAltitude", "FinalStateSelectedAltitude", "TrajectoryIntent", "ServiceManagement", "AircraftOperationalStatus", "SurfaceCapabilitiesandCharacteristics", "MessageAmplitude", "ModeSMBData", "ACASResolutionAdvisoryReport", "ReceiverID", "DataAges", "Not Used", "Not Used", "Not Used", "Not Used", "Not Used", "ReservedExpansionField", "SpecialPurposeField" };
 
 
         // 008
@@ -20,7 +19,7 @@ namespace Library
         public static IDictionary<int, string> AircraftOperationalStatus_TS = new Dictionary<int, string>() { { 0, "no capability to support Target State Reports" }, { 1, "capable of supporting target State Reports" } };
 
         public static IDictionary<int, string> AircraftOperationalStatus_ARV = new Dictionary<int, string>() { { 0, "no capability to generate ARV-reports" }, { 1, "capable of generate ARV-reports" } };
-        
+
         public static IDictionary<int, string> AircraftOperationalStatus_CDTIA = new Dictionary<int, string>() { { 0, "CDTI not operational" }, { 1, "CDTI operational" } };
 
         public static IDictionary<int, string> AircraftOperationalStatus_TCAS = new Dictionary<int, string>() { { 0, "TCAS operationaL" }, { 1, "TCAS not operational" } };
@@ -35,7 +34,7 @@ namespace Library
         // 040
         public static IDictionary<int, string> TargetReportDescriptor_ATP = new Dictionary<int, string>() { { 0, "24-Bit ICAO address" }, { 1, "Duplicate addres" }, { 2, "Surface vehicle address" }, { 3, "Anonymous address" }, { 4, "Reserved for future use" }, { 5, "Reserved for future use" }, { 6, "Reserved for future use" }, { 7, "Reserved for future use" } };
 
-        public static IDictionary<int, string> TargetReportDescriptor_ARC = new Dictionary<int, string>() { { 0, "25 ft" }, { 1,"100 ft" }, { 2, "Unknown" }, { 3, "Invalid" } };
+        public static IDictionary<int, string> TargetReportDescriptor_ARC = new Dictionary<int, string>() { { 0, "25 ft" }, { 1, "100 ft" }, { 2, "Unknown" }, { 3, "Invalid" } };
 
         public static IDictionary<int, string> TargetReportDescriptor_RC = new Dictionary<int, string>() { { 0, "Default" }, { 1, "Range Check passed, CPR Validation pending" } };
 
@@ -78,16 +77,16 @@ namespace Library
 
 
         // 074 
-        public static IDictionary<string, string> TimeMessageReceptionPosition_HP_FSI = new Dictionary<string, string>() { { "11", "Reserved" }, { "10", "TOMRp whole seconds = (I021/073) Whole seconds – 1" }, { "01", "TOMRp whole seconds = (I021/073) Whole seconds + 1" }, { "11", "TOMRp whole seconds = (I021/073) Whole seconds" } };
+        public static IDictionary<string, string> TimeMessageReceptionPosition_HP_FSI = new Dictionary<string, string>() { { "11", "Reserved" }, { "10", "TOMRp whole seconds = (I021/073) Whole seconds – 1" }, { "01", "TOMRp whole seconds = (I021/073) Whole seconds + 1" }, { "00", "TOMRp whole seconds = (I021/073) Whole seconds" } };
 
 
         // 076
-        public static IDictionary<string, string> TimeMessageReceptionVelocity_HP_FSI = new Dictionary<string, string>() { { "11", "Reserved" }, { "10", "TOMRp whole seconds = (I021/073) Whole seconds – 1" }, { "01", "TOMRp whole seconds = (I021/073) Whole seconds + 1" }, { "11", "TOMRp whole seconds = (I021/073) Whole seconds" } };
+        public static IDictionary<string, string> TimeMessageReceptionVelocity_HP_FSI = new Dictionary<string, string>() { { "11", "Reserved" }, { "10", "TOMRv whole seconds = (I021/073) Whole seconds – 1" }, { "01", "TOMRp whole seconds = (I021/073) Whole seconds + 1" }, { "00", "TOMRv whole seconds = (I021/073) Whole seconds" } };
 
 
         // 110
         public static IDictionary<int, string> TrajectoryIntent_TIS = new Dictionary<int, string>() { { 0, "Absence of Subfield #1" }, { 1, "Presence of Subfield #1" } };
-        
+
         public static IDictionary<int, string> TrajectoryIntent_TID = new Dictionary<int, string>() { { 0, "Absence of Subfield #2" }, { 1, "Presence of Subfield #2" } };
 
 
@@ -100,13 +99,13 @@ namespace Library
         public static IDictionary<int, string> TrajectoryIntent_TCA = new Dictionary<int, string>() { { 0, "TCP number available" }, { 1, "TCP number not available" } };
 
         public static IDictionary<int, string> TrajectoryIntent_NC = new Dictionary<int, string>() { { 0, "TCP compliance" }, { 1, "TCP non-compliance" } };
-        
+
         public static IDictionary<int, string> TrajectoryIntent_PointType = new Dictionary<int, string>() { { 0, "Unknown" }, { 1, "Fly by waypoint (LT)" }, { 2, "Fly over waypoint (LT)" }, { 3, "Hold pattern (LT)" }, { 4, "Procedure hold (LT)" }, { 5, "Procedure turn (LT)" }, { 6, "RF leg (LT)" }, { 7, "Top of climb (VT)" }, { 8, "Top of descent (VT)" }, { 9, "Start of level (VT)" }, { 10, "Cross-over altitude (VT)" }, { 11, "Transition altitude (VT)" } };
 
         public static IDictionary<string, string> TrajectoryIntent_TD = new Dictionary<string, string>() { { "00", "N/A" }, { "01", "Turn right" }, { "10", "Turn left" }, { "11", "No turn" } };
 
         public static IDictionary<int, string> TrajectoryIntent_TRA = new Dictionary<int, string>() { { 0, "TTR not available" }, { 1, "TTR available" } };
-        
+
         public static IDictionary<int, string> TrajectoryIntent_TOA = new Dictionary<int, string>() { { 0, "TOV available" }, { 1, "TOV not available" } };
 
 
@@ -153,7 +152,7 @@ namespace Library
 
         public static IDictionary<int, string> TargetStatus_PS = new Dictionary<int, string>() { { 0, "No emergency / not reported" }, { 1, "General emergency" }, { 2, "Lifeguard / medical emergency" }, { 3, "Minimum fuel" }, { 4, "No communications" }, { 5, "Unlawful interference" }, { 6, "“Downed” Aircraft" } };
 
-        public static IDictionary<int, string> TargetStatus_SS= new Dictionary<int, string>() { { 0, "No condition reported" }, { 1, "Permanent Alert (Emergency condition)" }, { 2, "Temporary Alert (change in Mode 3/A Code other than emergency)" }, { 3, "SPI set" } };
+        public static IDictionary<int, string> TargetStatus_SS = new Dictionary<int, string>() { { 0, "No condition reported" }, { 1, "Permanent Alert (Emergency condition)" }, { 2, "Temporary Alert (change in Mode 3/A Code other than emergency)" }, { 3, "SPI set" } };
 
 
         // 210
@@ -175,8 +174,7 @@ namespace Library
 
         public static IDictionary<int, string> SurfaceCapabilities_IDENT = new Dictionary<int, string>() { { 0, "IDENT switch not active" }, { 1, "IDENT switch active" } };
 
-        public static IDictionary<int, string> SurfaceCapabilities_LengthWidth = new Dictionary<int, string>() { { 0, "" }, { 1, "" }, { 2, "" }, { 3, "" } , { 4, "" }, { 5, "" } , { 6, "IDENT switch not active" }, { 7, "IDENT switch active" } , { 8, "IDENT switch not active" }, { 9, "IDENT switch active" } , { 10, "IDENT switch not active" }, { 11, "IDENT switch active" } , { 12, "IDENT switch not active" }, { 13, "IDENT switch active" } , { 14, "IDENT switch not active" }, { 15, "IDENT switch active" } };
-
+        public static IDictionary<int, string> SurfaceCapabilities_LengthWidth = new Dictionary<int, string>() { { 0, "" }, { 1, "" }, { 2, "" }, { 3, "" }, { 4, "" }, { 5, "" }, { 6, "IDENT switch not active" }, { 7, "IDENT switch active" }, { 8, "IDENT switch not active" }, { 9, "IDENT switch active" }, { 10, "IDENT switch not active" }, { 11, "IDENT switch active" }, { 12, "IDENT switch not active" }, { 13, "IDENT switch active" }, { 14, "IDENT switch not active" }, { 15, "IDENT switch active" } };
 
 
     }

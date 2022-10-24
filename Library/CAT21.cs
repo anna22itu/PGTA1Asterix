@@ -333,19 +333,33 @@ namespace Library
 
                     break;
 
+                case "ReservedExpansionField":
+
+                    ReservedExpansionField();
+                    //No se quants sumbytes
+
+                    break;
+
+                case "SpecialPurposeField":
+
+                    SpecialPurposeField();
+                    //No se quants sumbytes
+
+                    break;
+
             }
         }
 
         // Data Item I021/08: Aircraft Operational Status
         private static void AircraftOperationalStatus(string octeto1)
         {
-            int RA = octeto1[0];
+            int RA = Functions.strtoint(octeto1[0]);
             int TC = Functions.bintonum(octeto1.Substring(1, 2));
-            int TS = octeto1[3];
-            int ARV = octeto1[4];
-            int CDTIA = octeto1[5];
-            int TCAS = octeto1[6];
-            int SA = octeto1[7];
+            int TS = Functions.strtoint(octeto1[3]);
+            int ARV = Functions.strtoint(octeto1[4]);
+            int CDTIA = Functions.strtoint(octeto1[5]);
+            int TCAS = Functions.strtoint(octeto1[6]);
+            int SA = Functions.strtoint(octeto1[7]);
 
             string messageRA = CAT21Dict.AircraftOperationalStatus_RA[RA];
             string messageTC = CAT21Dict.AircraftOperationalStatus_TC[TC];
@@ -409,8 +423,8 @@ namespace Library
         {
             int ATP = Functions.bintonum(octeto[0].Substring(0,3));
             int ARC = Functions.bintonum(octeto[0].Substring(3, 2));
-            int RC = octeto[0][5];
-            int RAB21 = octeto[0][6];
+            int RC = Functions.strtoint(octeto[0][5]);
+            int RAB21 = Functions.strtoint(octeto[0][6]);
 
             string messageATP = CAT21Dict.TargetReportDescriptor_ATP[ATP];
             string messageARC = CAT21Dict.TargetReportDescriptor_ARC[ARC];
@@ -426,11 +440,11 @@ namespace Library
             if (nextents > 1)
             {
                 //Decodification of 1st extent byte
-                int DCR = octeto[1][0];
-                int GBS = octeto[1][1];
-                int SIM = octeto[1][2];
-                int TST = octeto[1][3];
-                int SAA = octeto[1][4];
+                int DCR = Functions.strtoint(octeto[1][0]);
+                int GBS = Functions.strtoint(octeto[1][1]);
+                int SIM = Functions.strtoint(octeto[1][2]);
+                int TST = Functions.strtoint(octeto[1][3]);
+                int SAA = Functions.strtoint(octeto[1][4]);
                 int CL = Functions.bintonum(octeto[1].Substring(5, 2));
 
                 string messageDCR = CAT21Dict.TargetReportDescriptor_DCR[DCR];
@@ -450,12 +464,12 @@ namespace Library
                 if (nextents > 2)
                 {
                     //Decodification of 2nd extent byte
-                    int LLC = octeto[2][1];
-                    int IPC = octeto[2][2];
-                    int NOGO = octeto[2][3];
-                    int CPR = octeto[2][4];
-                    int LDPJ = octeto[2][5];
-                    int RCF = octeto[2][6];
+                    int LLC = Functions.strtoint(octeto[2][1]);
+                    int IPC = Functions.strtoint(octeto[2][2]);
+                    int NOGO = Functions.strtoint(octeto[2][3]);
+                    int CPR = Functions.strtoint(octeto[2][4]);
+                    int LDPJ = Functions.strtoint(octeto[2][5]);
+                    int RCF = Functions.strtoint(octeto[2][6]);
 
                     string messageLLC = CAT21Dict.TargetReportDescriptor_LLC[LLC];
                     string messageIPC = CAT21Dict.TargetReportDescriptor_IPC[IPC];
@@ -474,7 +488,7 @@ namespace Library
                     if (nextents > 3)
                     {
                         //Decodification of 3rd extent byte
-                        int TBC_element = octeto[3][0];
+                        int TBC_element = Functions.strtoint(octeto[3][0]);
                         int TBC_value = Functions.bintonum(octeto[3].Substring(1,6));
 
                         string messageTBC_element = CAT21Dict.TargetReportDescriptor_TBC_element[TBC_element];
@@ -485,8 +499,8 @@ namespace Library
                         if (nextents > 4)
                         {
                             //Decodification of 4th extent byte
-                            int MBC_element = octeto[3][0];
-                            int MBC_value = Functions.bintonum(octeto[3].Substring(1, 6));
+                            int MBC_element = Functions.strtoint(octeto[4][0]);
+                            int MBC_value = Functions.bintonum(octeto[4].Substring(1, 6));
 
                             string messageMBC_element = CAT21Dict.TargetReportDescriptor_MBC_element[MBC_element];
 
@@ -598,8 +612,8 @@ namespace Library
         // Data Item I021/110: Trajectory Intent
         private static void TrajectoryIntent(string[] octeto, int nextents) //FALTA MIRAR TODOS LOS QUE SON BCD
         {            
-            int TIS = octeto[0][0];
-            int TID = octeto[0][1];
+            int TIS = Functions.strtoint(octeto[0][0]);
+            int TID = Functions.strtoint(octeto[0][1]);
 
             string messageTIS = CAT21Dict.TrajectoryIntent_TIS[TIS];
             string messageARC = CAT21Dict.TrajectoryIntent_TID[TID];
@@ -611,8 +625,8 @@ namespace Library
             if (nextents > 1)
             {
                 //Decodification of 1st extent byte
-                int NAV = octeto[1][0];
-                int NVB = octeto[1][1];
+                int NAV = Functions.strtoint(octeto[1][0]);
+                int NVB = Functions.strtoint(octeto[1][1]);
 
                 string messageNAV = CAT21Dict.TrajectoryIntent_NAV[NAV];
                 string messageNVB = CAT21Dict.TrajectoryIntent_NVB[NVB];
@@ -624,16 +638,16 @@ namespace Library
                 {
                     //Decodification of 2nd extent byte
                     float REP = Functions.bintonum(octeto[2]);
-                    int TCA = octeto[3][0];
-                    int NC = octeto[3][1];
+                    int TCA = Functions.strtoint(octeto[3][0]);
+                    int NC = Functions.strtoint(octeto[3][1]);
                     float TCP = Functions.bintonum(octeto[3].Substring(2,6));
                     float Altitude = Functions.BCD(octeto[4] + octeto[5]);
                     float Latitude = Functions.BCD(octeto[6] + octeto[7] + octeto[8]);
                     float Longitude = Functions.BCD(octeto[9] + octeto[10] + octeto[11]);
                     int PointType = Functions.bintonum(octeto[12].Substring(0,4));
                     string TD = octeto[12].Substring(4, 2);
-                    int TRA = octeto[12][6];
-                    int TOA = octeto[12][7];
+                    int TRA = Functions.strtoint(octeto[12][6]);
+                    int TOA = Functions.strtoint(octeto[12][7]);
                     float TOV = Functions.BCD(octeto[13] + octeto[14] + octeto[15]);
                     float TTR = Functions.BCD(octeto[16] + octeto[17]);
 
@@ -664,8 +678,8 @@ namespace Library
         // Data Item I021/130: Position in WGS-84 Co-ordinates
         private static void PositionWGS84Coordinates(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6)
         {
-            float Latitude_WGS = Functions.bintonum(Functions.ComplementoA2(octeto1 + octeto2 + octeto3));   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSS
-            float Longitude_WGS = Functions.bintonum(Functions.ComplementoA2(octeto4 + octeto5 + octeto6));   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
+            float Latitude_WGS = Functions.ComplementoA2(octeto1 + octeto2 + octeto3);   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSS
+            float Longitude_WGS =Functions.ComplementoA2(octeto4 + octeto5 + octeto6);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
             CurrentData.Latitude_WGS = Latitude_WGS;
             CurrentData.Longitude_WGS = Longitude_WGS;
@@ -692,8 +706,8 @@ namespace Library
         // Data Item I021/131: High-Resolution Position in WGS-84 Co-ordinates 
         private static void HighResolutionPositionWGS84Coordinates(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7, string octeto8)
         {
-            float Latitude_WGS_HP = Functions.bintonum(Functions.ComplementoA2(octeto1 + octeto2 + octeto3 + octeto4));   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-            float Longitude_WGS_HP = Functions.bintonum(Functions.ComplementoA2(octeto5 + octeto6 + octeto7 +  octeto8));   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
+            float Latitude_WGS_HP = Functions.ComplementoA2(octeto1 + octeto2 + octeto3 + octeto4);   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+            float Longitude_WGS_HP = Functions.ComplementoA2(octeto5 + octeto6 + octeto7 +  octeto8);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
             CurrentData.Latitude_WGS_HP = Latitude_WGS_HP;
             CurrentData.Longitude_WGS_HP = Longitude_WGS_HP;
@@ -720,7 +734,7 @@ namespace Library
         // Data Item I021/132:  Message Amplitude
         private static void MessageAmplitude(string octeto1)
         {
-            float MAM = Functions.BCD(Functions.ComplementoA2(octeto1)); //TWO COMPLEMENT BCD
+            float MAM = Functions.ComplementoA2(octeto1); // BCD
 
             CurrentData.MAM = MAM;
         }
@@ -728,8 +742,7 @@ namespace Library
         // Data Item I021/140: Geometric Height
         private static void GeometricHeight(string octeto1, string octeto2)
         {
-            float GH = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2)); //BCD TWO COMPLEMENT
-
+            float GH = Functions.ComplementoA2(octeto1 + octeto2); //BCD 
             CurrentData.GH = GH;
 
             if(octeto1 + octeto2 == "0111111111111111")
@@ -741,7 +754,7 @@ namespace Library
         // Data Item I021/145: Flight Level
         private static void FlightLevel(string octeto1, string octeto2) //TWO COMPLEMENT
         {
-            float FL = Functions.bintonum(Functions.ComplementoA2(octeto1 + octeto2));
+            float FL = Functions.ComplementoA2(octeto1 + octeto2);
 
             CurrentData.FL_21 = FL;
         }
@@ -749,9 +762,9 @@ namespace Library
         // Data Item I021/146: Selected Altitude
         private static void SelectedAltitude(string octeto1, string octeto2)
         {
-            int SAS = octeto1[0];
+            int SAS = Functions.strtoint(octeto1[0]);
             string Source = octeto1.Substring(1,2);
-            float SelectedAltitude = Functions.bintonum(Functions.ComplementoA2(octeto1.Substring(3, 5)+octeto2));   /// FALTA EL COMPLEMENTO A DOS
+            float SelectedAltitude = Functions.ComplementoA2(octeto1.Substring(3, 5)+octeto2);   /// FALTA EL COMPLEMENTO A DOS
 
             string messageSAS = CAT21Dict.SelectedAltitude_SAS[SAS];
             string messageARC = CAT21Dict.SelectedAltitude_Source[Source];
@@ -764,10 +777,10 @@ namespace Library
         // Data Item I021/148:Final State Selected Altitude
         private static void FinalStateSelectedAltitude(string octeto1, string octeto2)
         {
-            int MV = octeto1[0];
-            int AH = octeto1[1];
-            int AM = octeto1[2];
-            float AltitudeFinal = Functions.bintonum(Functions.ComplementoA2(octeto1.Substring(3, 5) + octeto2));   /// FALTA EL COMPLEMENTO A DOS
+            int MV = Functions.strtoint(octeto1[0]);
+            int AH = Functions.strtoint(octeto1[1]);
+            int AM = Functions.strtoint(octeto1[2]);
+            float AltitudeFinal = Functions.ComplementoA2(octeto1.Substring(3, 5) + octeto2);   /// FALTA EL COMPLEMENTO A DOS
 
             string messageMV = CAT21Dict.AltitudeFinal_MV[MV];
             string messageAH = CAT21Dict.AltitudeFinal_AH[AH];
@@ -782,7 +795,7 @@ namespace Library
         // Data Item I021/150: Air Speed
         private static void AirSpeed(string octeto1, string octeto2)
         {
-            int IM = octeto1[0];
+            int IM = Functions.strtoint(octeto1[0]);
             float AirSpeed = Functions.BCD(octeto1.Substring(2, 7) + octeto2); //BCD 
 
             string messageIM = CAT21Dict.AirSpeed_IM[IM];
@@ -794,8 +807,8 @@ namespace Library
         // Data Item I021/151: True Airspeed 
         private static void TrueAirspeed(string octeto1, string octeto2)
         {
-            int RE = octeto1[0];
-            float TrueAirSpeed = Functions.BCD(octeto1.Substring(2, 7) + octeto2);   //BCD
+            int RE = Functions.strtoint(octeto1[0]);
+            float TrueAirSpeed = Functions.BCD(octeto1.Substring(1, 7) + octeto2);   //BCD
 
             string messageRE = CAT21Dict.TrueAirSpeed_RE[RE];
 
@@ -813,8 +826,8 @@ namespace Library
         // Data Item I021/155: Barometric Vertical Rate
         private static void BarometricVerticalRate(string octeto1, string octeto2) 
         {
-            int RE_VR = octeto1[0];
-            float BarometricVerticalRate = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(2, 7) + octeto2)); //BCD TWO COMPLEMENT 
+            int RE_VR = Functions.strtoint(octeto1[0]);
+            float BarometricVerticalRate = Functions.ComplementoA2(octeto1.Substring(1, 7) + octeto2); //BCD TWO COMPLEMENT 
 
             string messageRE_VR = CAT21Dict.BarometricVerticalRate_RE[RE_VR];
 
@@ -825,8 +838,8 @@ namespace Library
         // Data Item I021/157: Geometric Vertical Rate
         private static void GeometricVerticalRate(string octeto1, string octeto2)
         {
-            int RE_G = octeto1[0];
-            float GeometricVerticalRate = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(2, 7) + octeto2)); //BCD TWO COMPLEMENT
+            int RE_G = Functions.strtoint(octeto1[0]);
+            float GeometricVerticalRate =Functions.ComplementoA2(octeto1.Substring(1, 7) + octeto2); //BCD
 
             string messageRE_G = CAT21Dict.GeometricVerticalRate_RE[RE_G];
 
@@ -837,8 +850,8 @@ namespace Library
         // Data Item I021/160: Airborne Ground Vector
         private static void AirborneGroundVector(string octeto1, string octeto2, string octeto3, string octeto4)
         {
-            int RE_A = octeto1[0];
-            float GroundSpeed = Functions.BCD(octeto1.Substring(2, 7) + octeto2); //BCD
+            int RE_A = Functions.strtoint(octeto1[0]);
+            float GroundSpeed = Functions.BCD(octeto1.Substring(1, 7) + octeto2); //BCD
             float TrackAngle = Functions.BCD(octeto3 + octeto4); //BCD
 
 
@@ -860,7 +873,7 @@ namespace Library
         // Data Item I021/165: Track Angle Rate
         private static void TrackAngleRate(string octeto1, string octeto2)
         {
-            float TrackAngleRate = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(5, 2) + octeto2)); //BCD TWO COMPLEMENT
+            float TrackAngleRate = Functions.ComplementoA2(octeto1.Substring(5, 2) + octeto2); //BCD
 
             CurrentData.TrackAngleRate = TrackAngleRate;
         }
@@ -868,16 +881,16 @@ namespace Library
         // Data Item I021/170: Target Identification
         private static void TargetIdentification(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6)
         {
-            string C1 = octeto1.Substring(0, 6);
-            string C2 = octeto1.Substring(6, 2) + octeto2.Substring(0, 4);
-            string C3 = octeto2.Substring(4, 4) + octeto3.Substring(0, 2);
-            string C4 = octeto3.Substring(2, 6);
-            string C5 = octeto4.Substring(0, 6);
-            string C6 = octeto4.Substring(6, 2) + octeto5.Substring(0, 4);
-            string C7 = octeto5.Substring(4, 4) + octeto6.Substring(0, 2);
-            string C8 = octeto6.Substring(2, 6);
+            string C1 = Functions.bintonum(octeto1.Substring(0, 6)).ToString();
+            string C2 = Functions.bintonum(octeto1.Substring(6, 2) + octeto2.Substring(0, 4)).ToString();
+            string C3 = Functions.bintonum(octeto2.Substring(4, 4) + octeto3.Substring(0, 2)).ToString();
+            string C4 = Functions.bintonum(octeto3.Substring(2, 6)).ToString();
+            string C5 = Functions.bintonum(octeto4.Substring(0, 6)).ToString();
+            string C6 = Functions.bintonum(octeto4.Substring(6, 2) + octeto5.Substring(0, 4)).ToString();
+            string C7 = Functions.bintonum(octeto5.Substring(4, 4) + octeto6.Substring(0, 2)).ToString();
+            string C8 = Functions.bintonum(octeto6.Substring(2, 6)).ToString();
 
-            int C = Convert.ToInt32(C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8);
+            long C = Convert.ToInt64(C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8);
 
             CurrentData.TargetIdentification = C;
         }
@@ -885,9 +898,9 @@ namespace Library
         // Data Item I021/200: Target Status
         private static void TargetStatus(string octeto1)
         {
-            int ICF = octeto1[0];
-            int LNAV = octeto1[1];
-            int ME = octeto1[2];
+            int ICF = Functions.strtoint(octeto1[0]);
+            int LNAV = Functions.strtoint(octeto1[1]);
+            int ME = Functions.strtoint(octeto1[2]);
             int PS = Functions.bintonum(octeto1.Substring(3, 3));
             int SS = Functions.bintonum(octeto1.Substring(6, 2));
 
@@ -908,7 +921,7 @@ namespace Library
         // Data Item I021/210: MOPS Version
         private static void MOPSVersion(string octeto1)
         {
-            int VNS = octeto1[1];
+            int VNS = Functions.strtoint(octeto1[1]);
             int LTT = Functions.bintonum(octeto1.Substring(5, 3));
 
             string messageVNS = CAT21Dict.MOPSVersion_VNS[VNS];
@@ -934,10 +947,10 @@ namespace Library
         private static void MetInformation(string[] octeto)
         {
             int nextents = 1;
-            int WS = octeto[0][0];
-            int WD = octeto[0][1];
-            int TMP = octeto[0][2];
-            int TRB = octeto[0][3];
+            int WS = Functions.strtoint(octeto[0][0]);
+            int WD = Functions.strtoint(octeto[0][1]);
+            int TMP = Functions.strtoint(octeto[0][2]);
+            int TRB = Functions.strtoint(octeto[0][3]);
 
             if (WS==1)
             {
@@ -974,7 +987,7 @@ namespace Library
         // Data Item I021/230: Roll Angle
         private static void RollAngle(string octeto1, string octeto2)
         {
-            float RollAngle = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2)); //TWO COMPLEMENT BCD
+            float RollAngle = Functions.ComplementoA2(octeto1 + octeto2); //BCD
 
             CurrentData.RollAngle = RollAngle;
         }
@@ -1002,8 +1015,8 @@ namespace Library
             float STYP = Functions.BCD(octetos[0].Substring(5,3));
             float ARA = Functions.BCD(octetos[1] + octetos[2].Substring(0, 6));
             float RAC = Functions.BCD(octetos[2].Substring(6, 2) + octetos[3].Substring(0,2));
-            float RAT = octetos[3][2];
-            float MTE = octetos[3][3];
+            int RAT = Functions.strtoint(octetos[3][2]);
+            int MTE = Functions.strtoint(octetos[3][3]);
             float TTI = Functions.BCD(octetos[3].Substring(4, 2));
             float TID_ACAS = Functions.BCD(octetos[3].Substring(6,2) + octetos[4] + octetos[5] + octetos[6]);
 
@@ -1021,11 +1034,11 @@ namespace Library
         // Data Item I021/271:  Surface Capabilities and Characteristics
         private static void SurfaceCapabilitiesCharacteristics(string octeto1)
         {
-            int POA = octeto1[2];
-            int CDTI = octeto1[3];
-            int B2 = octeto1[4];
-            int RAS = octeto1[5];
-            int IDENT = octeto1[6];
+            int POA = Functions.strtoint(octeto1[2]);
+            int CDTI = Functions.strtoint(octeto1[3]);
+            int B2 = Functions.strtoint(octeto1[4]);
+            int RAS = Functions.strtoint(octeto1[5]);
+            int IDENT = Functions.strtoint(octeto1[6]);
 
 
             string messagePOA = CAT21Dict.SurfaceCapabilities_POA[POA];
@@ -1254,6 +1267,21 @@ namespace Library
 
             CurrentData.ID = ID;
         }
+
+        //Data Item RE: Reserved Expansion Field
+        private static void ReservedExpansionField()
+        {
+
+        }
+
+        //Data Item SP: SpecialPurposeField
+        private static void SpecialPurposeField()
+        {
+
+        }
     }   
+
+
+
         
 }

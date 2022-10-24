@@ -219,8 +219,6 @@ namespace Library
             }
         }
         
-        //CAL DECIDIR SI DEIXEM CADA DATA ITEM EN UN METOD INTERN I EL CRIDEM PASSANTLI EL QUE TOCA DES DEL SWITCH O POSEM TOT EL CODI DINS EL SWITCH (OPTO PER OPCIO 1, SERA MES ORDENAT)
-
         // Data Item I010/000: MessageType
         private static void MessageType(string octeto)
         {
@@ -297,8 +295,10 @@ namespace Library
         // Data Item I010/040: Measured Position in Polar Co-ordinates
         public static void MeasuredPositionPolarCoordinates(string[] octetos) //BCD
         {
-            float rho = Functions.bintonum(octetos[0] + octetos[1]);
-            float theta = Functions.bintonum(octetos[2] + octetos[3]);
+            double LSBrho = 1; //meter
+            double LSBtheta = 360/(2^16); //deg
+            double rho = Functions.BCD(octetos[0] + octetos[1], LSBrho);
+            double theta = Functions.BCD(octetos[2] + octetos[3], LSBtheta);
 
             CurrentData.rho = rho;
             CurrentData.theta = theta;
@@ -307,18 +307,20 @@ namespace Library
         // Data Item I010/041: Position in WGS-84 Co-ordinates
         public static void PositionWGS84Coordinates(string[] octetos) //COMPLEMENTO A DOS
         {
-            float latitude = Functions.bintonum(Functions.ComplementoA2(octetos[0] + octetos[1] + octetos[2] + octetos[3]));
-            float longitude = Functions.bintonum(Functions.ComplementoA2(octetos[4] + octetos[5] + octetos[6] + octetos[7]));
+            double LSB = 180 / (2 ^ 31); //deg
+            double latitude = Functions.BCD(Functions.ComplementoA2(octetos[0] + octetos[1] + octetos[2] + octetos[3]),LSB);
+            double longitude = Functions.BCD(Functions.ComplementoA2(octetos[4] + octetos[5] + octetos[6] + octetos[7]),LSB);
 
             CurrentData.latitude = latitude;
             CurrentData.longitude = longitude;
         }
 
         // Data Item I010/042: Position in Cartesian Co-ordinates
-        public static void PositionCartesianCoordinates(string[] octetos) //SI HAY MAS DE UNA COGEMOS ESTAS //BCD y COMPLEMENTO A DOS
+        public static void PositionCartesianCoordinates(string[] octetos) //SI HAY MAS DE UNA COGEMOS ESTAS //BCD
         {
-            float x = Functions.BCD(Functions.ComplementoA2(octetos[0] + octetos[1]));
-            float y = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]));
+            double LSB = 1; //m
+            double x = Functions.BCD(Functions.ComplementoA2(octetos[0] + octetos[1]),LSB);
+            double y = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]),LSB);
 
             CurrentData.xpos = x;
             CurrentData.ypos = y;  
@@ -350,11 +352,13 @@ namespace Library
         }
 
         // Data Item I010/090: Flight Level in Binary Representation
-        public static void FlightLevelBinaryRepresentation(string octeto1, string octeto2) //TWO COMPLEMENT
+        public static void FlightLevelBinaryRepresentation(string octeto1, string octeto2) 
         {
             int V = Functions.strtoint(octeto1[0]);
             int G = Functions.strtoint(octeto1[1]);
-            int FL = Functions.bintonum(Functions.ComplementoA2(octeto1.Substring(3) + octeto2));
+
+            double LSB = 0.25; //FL
+            double FL = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(3) + octeto2),LSB);
 
 
             string messageV = CAT10Dict.FligthLevel_V[V];
@@ -366,10 +370,10 @@ namespace Library
         }
 
         // Data Item I010/091: Measured Height
-        public static void MeasuredHeight(string octeto1, string octeto2) //TWO COMPLEMENT //BCD
+        public static void MeasuredHeight(string octeto1, string octeto2)//BCD
         {
-
-            float Height = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2));
+            double LSB = 6.25; //ft
+            double Height = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2), LSB);
 
             CurrentData.Height = Height;
 
@@ -386,7 +390,8 @@ namespace Library
         // Data Item I010/140: Time of Day
         public static void TimeOfDay(string octeto1, string octeto2, string octeto3) //BCD
         {
-            float TimeOfDay = Functions.BCD(octeto1 + octeto2 + octeto3);
+            double LSB = 1 / 128; //s
+            double TimeOfDay = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
 
             CurrentData.TimeDay = TimeOfDay;
         }
@@ -455,8 +460,11 @@ namespace Library
         // Data Item I010/200: Calculated Track Velocity in Polar Co-ordinates
         public static void CalculatedTrackVelocityPolarCoordinates(string[] octetos) //BCD 
         {
-            float GroundSpeed = Functions.BCD(octetos[0] + octetos[1]);
-            float TrackAngle = Functions.BCD(octetos[2] + octetos[3]);
+            double LSBgs = 0.22; //kt
+            double LSBta = 360 / (2 ^ 16); //deg
+
+            double GroundSpeed = Functions.BCD(octetos[0] + octetos[1], LSBgs);
+            double TrackAngle = Functions.BCD(octetos[2] + octetos[3], LSBta);
 
             CurrentData.GroundSpeed = GroundSpeed;
             CurrentData.TrackAngle = TrackAngle;
@@ -464,20 +472,24 @@ namespace Library
         }
 
         // Data Item I010/202: Calculated Track Velocity in Cartesian Co-ordinates
-        public static void CalculatedTrackVelocityCartesianCoordinates(string[] octetos) //TWO COMPLEMENT //BCD
+        public static void CalculatedTrackVelocityCartesianCoordinates(string[] octetos)
         {
-            float Vx = Functions.BCD(Functions.ComplementoA2(octetos[0]+ octetos[1]));
-            float Vy = Functions.BCD(Functions.ComplementoA2(octetos[2]+octetos[3]));
+            double LSB = 0.25; //m/s
+            
+            double Vx = Functions.BCD(Functions.ComplementoA2(octetos[0]+ octetos[1]),LSB);
+            double Vy = Functions.BCD(Functions.ComplementoA2(octetos[2]+octetos[3]),LSB);
 
             CurrentData.Vx = Vx;
             CurrentData.Vy = Vy;
         }
 
         // Data Item I010/210: Calculated Acceleration
-        public static void CalculatedAcceleration(string octeto1, string octeto2) //TWO COMPLEMENT //BCD
+        public static void CalculatedAcceleration(string octeto1, string octeto2) 
         {
-            float Ax = Functions.BCD(Functions.ComplementoA2(octeto1));
-            float Ay = Functions.BCD(Functions.ComplementoA2(octeto2));
+            double LSB = 0.25; //m/s^2
+            
+            double Ax = Functions.BCD(Functions.ComplementoA2(octeto1),LSB);
+            double Ay = Functions.BCD(Functions.ComplementoA2(octeto2),LSB);
 
             CurrentData.Ax = Ax;
             CurrentData.Ay = Ay;
@@ -486,15 +498,13 @@ namespace Library
         // Data Item I010/220: Target Address
         public static void TargetAddress(string octeto1, string octeto2, string octeto3)
         {
-            float TA = Functions.bintonum(octeto1 + octeto2 + octeto3);
+            string TA = Functions.bintohex(octeto1 + octeto2 + octeto3);
 
-            string TargetAddress =  ""; //// FALTA AÑADIR QUE LO PASE A HEXAGEMINAL HACER FUNCION DE INT A HEXA
-
-            CurrentData.TargetAddress = TargetAddress;
+            CurrentData.TargetAddress = TA;
         }
 
         // Data Item I010/245: Target Identification
-        public static void TargetIdentification(string[] octetos) //Falta per fer
+        public static void TargetIdentification(string[] octetos)
         {
             string STI = octetos[0].Substring(0,2);
             string C1 = octetos[1].Substring(0,6);
@@ -534,23 +544,26 @@ namespace Library
         // Data Item I010/270: Target Size & Orientation
         public static void TargetSizeOrientation(string[] octeto, int nextents)
         {
-            int LengthLSB = Functions.bintonum(octeto[0].Substring(0,7));
+            double LSBlen = 1; //m
+            double Length = Functions.BCD(octeto[0].Substring(0,7),LSBlen);
             
-            CurrentData.LengthLSB = LengthLSB;
+            CurrentData.Length = Length;
 
             if (nextents > 1)
             {
                 //Decodification of 1st extent byte //BCD
-                float OrientationLSB = Functions.BCD(octeto[1].Substring(0, 7));
+                double LSBori = 360 / 128; //deg
+                double Orientation = Functions.BCD(octeto[1].Substring(0, 7), LSBori);
 
-                CurrentData.OrientationLSB = OrientationLSB;
+                CurrentData.Orientation = Orientation;
 
                 if (nextents > 2)
                 {
                     //Decodification of 2nd extent byte
-                    int WidthLSB = Functions.bintonum(octeto[2].Substring(0, 7));
+                    double LSBwid = 1; //m
+                    double Width = Functions.BCD(octeto[2].Substring(0, 7), LSBwid);
 
-                    CurrentData.WidthLSB = WidthLSB;
+                    CurrentData.Width = Width;
 
                 }
             }
@@ -560,8 +573,10 @@ namespace Library
         public static void Presence(string octeto1, string octeto2, string octeto3) //BCD 
         {
             int N = Functions.bintonum(octeto1);
-            float DRHO = Functions.BCD(octeto2);
-            float DTHETA = Functions.BCD(octeto3);
+            double LSBdrho = 1; //m
+            double DRHO = Functions.BCD(octeto2,LSBdrho);
+            double LSBdtheta = 0.15; //deg
+            double DTHETA = Functions.BCD(octeto3,LSBdtheta);
 
             CurrentData.N = N;
             CurrentData.DRHO = DRHO;
@@ -594,11 +609,12 @@ namespace Library
         }
 
         // Data Item I010/500: Standard Deviation of Position
-        public static void StandardDeviationPosition(string[] octetos) //BCD
+        public static void StandardDeviationPosition(string[] octetos)
         {
-            float SDx = Functions.BCD(octetos[0]);
-            float SDy = Functions.BCD(octetos[1]);
-            float Covariance = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]));   /// FALTA EL COMPLEMENTO A DOSSSSS
+            double LSB = 0.25; //m  m   m^2
+            double SDx = Functions.BCD(octetos[0], LSB);
+            double SDy = Functions.BCD(octetos[1], LSB);
+            double Covariance = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]),LSB); 
 
             CurrentData.SDx = SDx;
             CurrentData.SDy = SDy;
