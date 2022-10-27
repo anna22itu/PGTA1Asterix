@@ -175,10 +175,10 @@ namespace Library
             //SAME AS CAT10
 
         //015
-        public static float ServiceIdentification = 0;
+        public static int ServiceIdentification = 0;
 
         //016
-        public static float RP = 0;
+        public static double RP = 0;
 
         //020
         public static string ECAT = "";
@@ -210,30 +210,30 @@ namespace Library
         public static float MBC_value = 0;
 
         //071
-        public static float TimeApplicabilityPosition = 0;
+        public static double TimeApplicabilityPosition = 0;
 
         //072
-        public static float TimeApplicabilityVelocity = 0;
+        public static double TimeApplicabilityVelocity = 0;
 
         //073
-        public static float TimeMessagePosition = 0;
+        public static double TimeMessagePosition = 0;
 
         //074
-        public static float TimeMessagePosition_HP = 0;
+        public static double TimeMessagePosition_HP = 0;
         public static string FSI_Pos = "";
 
         //075
-        public static float TimeMessageVelocity = 0;
+        public static double TimeMessageVelocity = 0;
 
         //076
-        public static float TimeMessageVelocity_HP = 0;
+        public static double TimeMessageVelocity_HP = 0;
         public static string FSI_Vel = "";
 
         //077
-        public static float TimeAsterixTransmission = 0;
+        public static double TimeAsterixTransmission = 0;
 
         //080
-        public static float TargerAddress = 0;
+        public static double TargerAddress = 0;
 
         //110
         public static string TIS = "";
@@ -246,73 +246,73 @@ namespace Library
         public static string TCA = "";
         public static string NC = "";
         public static float TCP = 0;
-        public static float Altitude = 0;
-        public static float Latitude = 0;
-        public static float Longitude = 0;
+        public static double Altitude = 0;
+        public static double Latitude = 0;
+        public static double Longitude = 0;
         public static string PointType = "";
         public static string TD = "";
         public static string TRA = "";
         public static string TOA = "";
-        public static float TOV = 0;
-        public static float TTR = 0;
+        public static double TOV = 0;
+        public static double TTR = 0;
 
         //130
-        public static float Latitude_WGS = 0;
-        public static float Longitude_WGS = 0;
+        public static double Latitude_WGS = 0;
+        public static double Longitude_WGS = 0;
 
         //131
-        public static float Latitude_WGS_HP = 0;
-        public static float Longitude_WGS_HP = 0;
+        public static double Latitude_WGS_HP = 0;
+        public static double Longitude_WGS_HP = 0;
 
         //132
-        public static float MAM = 0;
+        public static double MAM = 0;
 
         //140
-        public static float GH = 0;
+        public static double GH = 0;
 
         //145
-        public static float FL_21 = 0;
+        public static double FL_21 = 0;
 
         //146
         public static string SAS = "";
         public static string Source = "";
-        public static float SelectedAltitude = 0;
+        public static double SelectedAltitude = 0;
 
         //148
         public static string MV = "";
         public static string AH = "";
         public static string AM = "";
-        public static float AltitudeFinal = 0;
+        public static double AltitudeFinal = 0;
 
         //150
         public static string IM = "";
-        public static float AirSpeed = 0;
+        public static double AirSpeed = 0;
 
         //151
         public static string RE = "";
-        public static float TrueAirSpeed = 0;
+        public static double TrueAirSpeed = 0;
 
         //152
-        public static float MagneticHeading = 0;
+        public static double MagneticHeading = 0;
 
         //155
         public static string RE_VR = "";
-        public static float BarometricVerticalRate = 0;
+        public static double BarometricVerticalRate = 0;
 
         //157
         public static string RE_G = "";
-        public static float GeometricVerticalRate = 0;
+        public static double GeometricVerticalRate = 0;
 
         //157
         public static string RE_A = "";
-        public static float GroundSpeed_21 = 0;
-        public static float TrackAngle_21 = 0;
+        public static double GroundSpeed_21 = 0;
+        public static double TrackAngle_21 = 0;
 
         //161
         public static int TrackNumber_21 = 0;
 
         //165
-        public static float TrackAngleRate = 0;
+        public static double TrackAngleRate = 0;
 
         //170
 
@@ -334,13 +334,13 @@ namespace Library
         public static string TMP = "";
         public static string TRB_Met = "";
 
-        public static float WindSpeed = 0;
-        public static float WindDirection = 0;
-        public static float Temperature = 0;
-        public static float Turbulence = 0;
+        public static double WindSpeed = 0;
+        public static double WindDirection = 0;
+        public static double Temperature = 0;
+        public static int Turbulence = 0;
 
         //230
-        public static float RollAngle = 0;
+        public static double RollAngle = 0;
 
         //250
         public static float REP_BDS = 0;
@@ -349,14 +349,14 @@ namespace Library
         public static float BDS2_BDS = 0;
 
         //260
-        public static float TYT = 0;
-        public static float STYP = 0;
-        public static float ARA = 0;
-        public static float RAC = 0;
-        public static float RAT = 0;
-        public static float MTE = 0;
-        public static float TTI = 0;
-        public static float TID_ACAS = 0;
+        public static int TYP_21 = 0;
+        public static int STYP = 0;
+        public static int ARA = 0;
+        public static int RAC = 0;
+        public static int RAT = 0;
+        public static int MTE = 0;
+        public static int TTI = 0;
+        public static int TID_ACAS = 0;
 
         //271
         public static string POA = "";
@@ -394,32 +394,32 @@ namespace Library
         public static string AResolution = "";
         public static string SCC = "";
 
-        public static float AOS_value = 0;
-        public static float TRD_value = 0;
-        public static float M3A_value = 0;
-        public static float QI_value = 0;
-        public static float TI_value = 0;
-        public static float MAM_value = 0;
-        public static float GH_value = 0;
+        public static double AOS_value = 0;
+        public static double TRD_value = 0;
+        public static double M3A_value = 0;
+        public static double QI_value = 0;
+        public static double TI_value = 0;
+        public static double MAM_value = 0;
+        public static double GH_value = 0;
 
-        public static float FL_value = 0;
-        public static float SAL_value = 0;
-        public static float FSA_value = 0;
-        public static float AS_value = 0;
-        public static float TAS_value = 0;
-        public static float MH_value = 0;
-        public static float BVR_value = 0;
+        public static double FL_value = 0;
+        public static double SAL_value = 0;
+        public static double FSA_value = 0;
+        public static double AS_value = 0;
+        public static double TAS_value = 0;
+        public static double MH_value = 0;
+        public static double BVR_value = 0;
 
-        public static float GVR_value = 0;
-        public static float GV_value = 0;
-        public static float TAR_value = 0;
-        public static float TIdentification_value = 0;
-        public static float TS_value = 0;
-        public static float MET_value = 0;
-        public static float ROA_value = 0;
+        public static double GVR_value = 0;
+        public static double GV_value = 0;
+        public static double TAR_value = 0;
+        public static double TIdentification_value = 0;
+        public static double TS_value = 0;
+        public static double MET_value = 0;
+        public static double ROA_value = 0;
 
-        public static float ARA_value = 0;
-        public static float SCC_value = 0;
+        public static double ARA_value = 0;
+        public static double SCC_value = 0;
 
         //400
         public static float ID = 0;

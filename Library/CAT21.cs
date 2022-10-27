@@ -392,6 +392,7 @@ namespace Library
         // Data Item I021/015: Service Identification.
         private static void ServiceIdentification(string octeto1)
         {
+            
             int ServiceIdentification = Functions.bintonum(octeto1);
 
             CurrentData.ServiceIdentification = ServiceIdentification;
@@ -401,7 +402,8 @@ namespace Library
         // Data Item I021/016: Service Management
         private static void ServiceManagement(string octeto1) //BCD
         {
-            float RP = Functions.BCD(octeto1);
+            double LSB = 0.5; //s
+            double RP = Functions.BCD(octeto1, LSB);
 
             CurrentData.RP = RP;
           
@@ -530,7 +532,8 @@ namespace Library
         // Data Item I021/071: Time of Applicability for Position
         private static void TimeofApplicabilityforPosition(string octeto1, string octeto2, string octeto3) //BCD
         {
-            float TimeApplicabilityPosition = Functions.BCD(octeto1 + octeto2 + octeto3);
+            double LSB = (double)1 / 128; //s
+            double TimeApplicabilityPosition = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
 
             CurrentData.TimeApplicabilityPosition = TimeApplicabilityPosition;
         }
@@ -538,7 +541,8 @@ namespace Library
         // Data Item I021/072: Time of Applicability for Velocity
         private static void TimeofApplicabilityforVelocity(string octeto1, string octeto2, string octeto3) //BCD
         {
-            float TimeApplicabilityVelocity = Functions.BCD(octeto1 + octeto2 + octeto3);
+            double LSB = (double)1 / 128; //s
+            double TimeApplicabilityVelocity = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
 
             CurrentData.TimeApplicabilityVelocity = TimeApplicabilityVelocity;
         }
@@ -546,7 +550,8 @@ namespace Library
         // Data Item I021/073: Time of Message Reception for Position
         private static void TimeofMessageReceptionforPosition(string octeto1, string octeto2, string octeto3) //BCD
         {
-            float TimeMessagePosition = Functions.BCD(octeto1 + octeto2 + octeto3);
+            double LSB = (double)1 / 128; //s
+            double TimeMessagePosition = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
 
             CurrentData.TimeMessagePosition = TimeMessagePosition;
         }
@@ -555,8 +560,9 @@ namespace Library
         // Data Item I021/074: Time of Message Reception of Position–High Precision .
         private static void TimeofMessageReceptionofPositionHighPrecision(string octeto1, string octeto2, string octeto3, string octeto4)
         {
+            double LSB = (double)Math.Pow(2,-30); //s
             string FSI_Pos = octeto1.Substring(0, 2);
-            float TimeMessagePositionHP = Functions.BCD(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4); //BCD
+            double TimeMessagePositionHP = Functions.BCD(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4, LSB); //BCD
 
             string messageFSI = CAT21Dict.TimeMessageReceptionPosition_HP_FSI[FSI_Pos];
 
@@ -568,7 +574,8 @@ namespace Library
         // Data Item I021/075: Time of Message Reception for Velocity
         private static void TimeMessageReceptionVelocity(string octeto1, string octeto2, string octeto3) //BCD
         {
-            float TimeMessageVelocity = Functions.BCD(octeto1 + octeto2 + octeto3);
+            double LSB = (double)1 / 128; //s
+            double TimeMessageVelocity = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
 
             CurrentData.TimeMessageVelocity = TimeMessageVelocity;
         }
@@ -576,9 +583,9 @@ namespace Library
         // Data Item I021/076: Time of Message Reception of Velocity–High Precision
         private static void TimeMessageReceptionVelocityHighPrecision(string octeto1, string octeto2, string octeto3, string octeto4)
         {
-
+            double LSB = (double)Math.Pow(2, -30); //s
             string FSI_Vel = octeto1.Substring(0, 2);
-            float TimeMessageVelocityHP = Functions.BCD(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4); //BCD
+            double TimeMessageVelocityHP = Functions.BCD(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4, LSB); //BCD
 
             string messageFSI = CAT21Dict.TimeMessageReceptionVelocity_HP_FSI[FSI_Vel];
 
@@ -589,7 +596,8 @@ namespace Library
         // Data Item I021/077: Time of ASTERIX Report Transmission
         private static void TimeASTERIXReportTransmission(string octeto1, string octeto2, string octeto3)
         {
-            float TimeAsterixTransmission = Functions.BCD(octeto1 + octeto2 + octeto3); //BCD
+            double LSB = (double)1 / 128; //s
+            double TimeAsterixTransmission = Functions.BCD(octeto1 + octeto2 + octeto3, LSB); //BCD
 
             CurrentData.TimeAsterixTransmission = TimeAsterixTransmission;
         }
@@ -597,10 +605,9 @@ namespace Library
         // Data Item I021/080: Target Address
         private static void TargetAddress(string octeto1, string octeto2, string octeto3)
         {
-            int TargetAddress = Functions.bintonum(octeto1 + octeto2 + octeto3);
-            string tahex="";
+            string ta=Functions.bintohex(octeto1 + octeto2 + octeto3);
 
-            CurrentData.TargetAddress = tahex;  // FALTA CAMBIAR A HEXAGESIMAL
+            CurrentData.TargetAddress = ta;
         }
 
         // Data Item I021/090:Quality Indicators
@@ -641,16 +648,19 @@ namespace Library
                     int TCA = Functions.strtoint(octeto[3][0]);
                     int NC = Functions.strtoint(octeto[3][1]);
                     float TCP = Functions.bintonum(octeto[3].Substring(2,6));
-                    float Altitude = Functions.BCD(octeto[4] + octeto[5]);
-                    float Latitude = Functions.BCD(octeto[6] + octeto[7] + octeto[8]);
-                    float Longitude = Functions.BCD(octeto[9] + octeto[10] + octeto[11]);
+                    double LSBalt = 10; //ft
+                    double Altitude = Functions.BCD(Functions.ComplementoA2(octeto[4] + octeto[5]),LSBalt);
+                    double LSBlatlong = (double)180 / Math.Pow(2, 23); //deg
+                    double Latitude = Functions.BCD(Functions.ComplementoA2(octeto[6] + octeto[7] + octeto[8]),LSBlatlong);
+                    double Longitude = Functions.BCD(Functions.ComplementoA2(octeto[9] + octeto[10] + octeto[11]), LSBlatlong);
                     int PointType = Functions.bintonum(octeto[12].Substring(0,4));
                     string TD = octeto[12].Substring(4, 2);
                     int TRA = Functions.strtoint(octeto[12][6]);
                     int TOA = Functions.strtoint(octeto[12][7]);
-                    float TOV = Functions.BCD(octeto[13] + octeto[14] + octeto[15]);
-                    float TTR = Functions.BCD(octeto[16] + octeto[17]);
-
+                    double LSBtov = 1; //s
+                    double TOV = Functions.BCD(octeto[13] + octeto[14] + octeto[15], LSBtov);
+                    double LSBttr = 0.01; //NM
+                    double TTR = Functions.BCD(octeto[16] + octeto[17], LSBttr);
                     string messageTCA = CAT21Dict.TrajectoryIntent_TCA[TCA];
                     string messageNC = CAT21Dict.TrajectoryIntent_NC[NC];
                     string messagePointType = CAT21Dict.TrajectoryIntent_PointType[PointType];
@@ -678,8 +688,9 @@ namespace Library
         // Data Item I021/130: Position in WGS-84 Co-ordinates
         private static void PositionWGS84Coordinates(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6)
         {
-            float Latitude_WGS = Functions.ComplementoA2(octeto1 + octeto2 + octeto3);   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSS
-            float Longitude_WGS =Functions.ComplementoA2(octeto4 + octeto5 + octeto6);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
+            double LSB = (double)180 / Math.Pow(2, 23); //deg
+            double Latitude_WGS = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2 + octeto3), LSB);  
+            double Longitude_WGS =Functions.BCD(Functions.ComplementoA2(octeto4 + octeto5 + octeto6), LSB);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
             CurrentData.Latitude_WGS = Latitude_WGS;
             CurrentData.Longitude_WGS = Longitude_WGS;
@@ -706,8 +717,9 @@ namespace Library
         // Data Item I021/131: High-Resolution Position in WGS-84 Co-ordinates 
         private static void HighResolutionPositionWGS84Coordinates(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6, string octeto7, string octeto8)
         {
-            float Latitude_WGS_HP = Functions.ComplementoA2(octeto1 + octeto2 + octeto3 + octeto4);   /////// FALTA COMPLEMENTO A DOSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-            float Longitude_WGS_HP = Functions.ComplementoA2(octeto5 + octeto6 + octeto7 +  octeto8);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
+            double LSB = (double)180 / Math.Pow(2, 30); //deg
+            double Latitude_WGS_HP = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2 + octeto3 + octeto4), LSB);  
+            double Longitude_WGS_HP = Functions.BCD(Functions.ComplementoA2(octeto5 + octeto6 + octeto7 +  octeto8),LSB);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
             CurrentData.Latitude_WGS_HP = Latitude_WGS_HP;
             CurrentData.Longitude_WGS_HP = Longitude_WGS_HP;
@@ -734,7 +746,8 @@ namespace Library
         // Data Item I021/132:  Message Amplitude
         private static void MessageAmplitude(string octeto1)
         {
-            float MAM = Functions.ComplementoA2(octeto1); // BCD
+            double LSB = 1; //dBm
+            double MAM = Functions.BCD(Functions.ComplementoA2(octeto1),LSB); 
 
             CurrentData.MAM = MAM;
         }
@@ -742,7 +755,8 @@ namespace Library
         // Data Item I021/140: Geometric Height
         private static void GeometricHeight(string octeto1, string octeto2)
         {
-            float GH = Functions.ComplementoA2(octeto1 + octeto2); //BCD 
+            double LSB = 6.5; //ft
+            double GH = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2), LSB);
             CurrentData.GH = GH;
 
             if(octeto1 + octeto2 == "0111111111111111")
@@ -754,7 +768,8 @@ namespace Library
         // Data Item I021/145: Flight Level
         private static void FlightLevel(string octeto1, string octeto2) //TWO COMPLEMENT
         {
-            float FL = Functions.ComplementoA2(octeto1 + octeto2);
+            double LSB = (double)1 / 4; ; //FL
+            double FL = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2),LSB);
 
             CurrentData.FL_21 = FL;
         }
@@ -764,7 +779,9 @@ namespace Library
         {
             int SAS = Functions.strtoint(octeto1[0]);
             string Source = octeto1.Substring(1,2);
-            float SelectedAltitude = Functions.ComplementoA2(octeto1.Substring(3, 5)+octeto2);   /// FALTA EL COMPLEMENTO A DOS
+
+            double LSB = 25;//ft
+            double SelectedAltitude = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(3, 5)+octeto2),LSB); 
 
             string messageSAS = CAT21Dict.SelectedAltitude_SAS[SAS];
             string messageARC = CAT21Dict.SelectedAltitude_Source[Source];
@@ -780,7 +797,9 @@ namespace Library
             int MV = Functions.strtoint(octeto1[0]);
             int AH = Functions.strtoint(octeto1[1]);
             int AM = Functions.strtoint(octeto1[2]);
-            float AltitudeFinal = Functions.ComplementoA2(octeto1.Substring(3, 5) + octeto2);   /// FALTA EL COMPLEMENTO A DOS
+
+            double LSB = 25; //ft
+            double AltitudeFinal = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(3, 5) + octeto2), LSB);
 
             string messageMV = CAT21Dict.AltitudeFinal_MV[MV];
             string messageAH = CAT21Dict.AltitudeFinal_AH[AH];
@@ -796,7 +815,17 @@ namespace Library
         private static void AirSpeed(string octeto1, string octeto2)
         {
             int IM = Functions.strtoint(octeto1[0]);
-            float AirSpeed = Functions.BCD(octeto1.Substring(2, 7) + octeto2); //BCD 
+            double LSB;
+            if (IM == 0)
+            {
+                LSB = (double)Math.Pow(2, -14); //NM/s
+            }
+            else
+            {
+                LSB = 0.001; //Mach
+            }
+            
+            double AirSpeed = Functions.BCD(octeto1.Substring(2, 7) + octeto2, LSB);
 
             string messageIM = CAT21Dict.AirSpeed_IM[IM];
 
@@ -808,7 +837,8 @@ namespace Library
         private static void TrueAirspeed(string octeto1, string octeto2)
         {
             int RE = Functions.strtoint(octeto1[0]);
-            float TrueAirSpeed = Functions.BCD(octeto1.Substring(1, 7) + octeto2);   //BCD
+            double LSB = 1; //kt
+            double TrueAirSpeed = Functions.BCD(octeto1.Substring(1, 7) + octeto2, LSB); 
 
             string messageRE = CAT21Dict.TrueAirSpeed_RE[RE];
 
@@ -819,7 +849,8 @@ namespace Library
         // Data Item I021/152:  Magnetic Heading
         private static void MagneticHeading(string octeto1, string octeto2)
         {
-            float MagneticHeading = Functions.BCD(octeto1 + octeto2); //BCD
+            double LSB = (double)360 / Math.Pow(2, 16);
+            double MagneticHeading = Functions.BCD(octeto1 + octeto2, LSB); //BCD
             CurrentData.MagneticHeading = MagneticHeading;
         }
 
@@ -827,7 +858,8 @@ namespace Library
         private static void BarometricVerticalRate(string octeto1, string octeto2) 
         {
             int RE_VR = Functions.strtoint(octeto1[0]);
-            float BarometricVerticalRate = Functions.ComplementoA2(octeto1.Substring(1, 7) + octeto2); //BCD TWO COMPLEMENT 
+            double LSB = 6.25; //ft/min
+            double BarometricVerticalRate = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(1, 7) + octeto2), LSB);
 
             string messageRE_VR = CAT21Dict.BarometricVerticalRate_RE[RE_VR];
 
@@ -839,7 +871,8 @@ namespace Library
         private static void GeometricVerticalRate(string octeto1, string octeto2)
         {
             int RE_G = Functions.strtoint(octeto1[0]);
-            float GeometricVerticalRate =Functions.ComplementoA2(octeto1.Substring(1, 7) + octeto2); //BCD
+            double LSB = 6.25; //ft
+            double GeometricVerticalRate =Functions.BCD(Functions.ComplementoA2(octeto1.Substring(1, 7) + octeto2), LSB); //BCD
 
             string messageRE_G = CAT21Dict.GeometricVerticalRate_RE[RE_G];
 
@@ -851,8 +884,10 @@ namespace Library
         private static void AirborneGroundVector(string octeto1, string octeto2, string octeto3, string octeto4)
         {
             int RE_A = Functions.strtoint(octeto1[0]);
-            float GroundSpeed = Functions.BCD(octeto1.Substring(1, 7) + octeto2); //BCD
-            float TrackAngle = Functions.BCD(octeto3 + octeto4); //BCD
+            double LSBgs = Math.Pow(2, -14); //NM/s
+            double GroundSpeed = Functions.BCD(octeto1.Substring(1, 7) + octeto2, LSBgs);
+            double LSBta = (double)360 / Math.Pow(2, 16); //deg
+            double TrackAngle = Functions.BCD(octeto3 + octeto4, LSBta);
 
 
             string messageRE_A = CAT21Dict.AirborneGroundVector_RE[RE_A];
@@ -873,7 +908,8 @@ namespace Library
         // Data Item I021/165: Track Angle Rate
         private static void TrackAngleRate(string octeto1, string octeto2)
         {
-            float TrackAngleRate = Functions.ComplementoA2(octeto1.Substring(5, 2) + octeto2); //BCD
+            double LSB = (double)1 / 32; //deg/s
+            double TrackAngleRate = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(5, 2) + octeto2), LSB);
 
             CurrentData.TrackAngleRate = TrackAngleRate;
         }
@@ -954,28 +990,32 @@ namespace Library
 
             if (WS==1)
             {
-                float WindSpeed = Functions.BCD(octeto[1] + octeto[2]);
+                double LSBws = 1; //kt
+                double WindSpeed = Functions.BCD(octeto[1] + octeto[2], LSBws);
                 nextents = nextents + 2;
 
                 CurrentData.WindSpeed = WindSpeed;
             }
             if (WD==1)
             {
-                float WindDirection = Functions.BCD(octeto[nextents] + octeto[nextents+1]);
+                double LSBwd = 1;//deg
+                double WindDirection = Functions.BCD(octeto[nextents] + octeto[nextents+1], LSBwd);
                 nextents = nextents + 2;
 
                 CurrentData.WindDirection = WindDirection;
             }
             if (TMP == 1)
             {
-                float Temperature = Functions.BCD(octeto[nextents] + octeto[nextents + 1]);
+                double LSBtmp = 0.25; //celsius
+                double Temperature = Functions.BCD(octeto[nextents] + octeto[nextents + 1], LSBtmp);
                 nextents = nextents + 2;
 
                 CurrentData.Temperature = Temperature;
             }
             if (TRB == 1)
             {
-                float Turbulence = Functions.BCD(octeto[nextents] + octeto[nextents + 1]);
+
+                int Turbulence = Functions.bintonum(octeto[nextents] + octeto[nextents + 1]);
                 nextents = nextents + 2;
 
                 CurrentData.Turbulence = Turbulence;
@@ -987,7 +1027,8 @@ namespace Library
         // Data Item I021/230: Roll Angle
         private static void RollAngle(string octeto1, string octeto2)
         {
-            float RollAngle = Functions.ComplementoA2(octeto1 + octeto2); //BCD
+            double LSB = 0.01; //deg
+            double RollAngle = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2),LSB); //BCD
 
             CurrentData.RollAngle = RollAngle;
         }
@@ -1011,17 +1052,17 @@ namespace Library
         // Data Item I021/260: ACAS Resolution Advisory Report
         private static void ACASResolutionAdvisoryReport(string[] octetos)
         {
-            float TYT = Functions.BCD(octetos[0].Substring(0,5));                             //TODO BCD
-            float STYP = Functions.BCD(octetos[0].Substring(5,3));
-            float ARA = Functions.BCD(octetos[1] + octetos[2].Substring(0, 6));
-            float RAC = Functions.BCD(octetos[2].Substring(6, 2) + octetos[3].Substring(0,2));
+            int TYP = Functions.bintonum(octetos[0].Substring(0,5));       
+            int STYP = Functions.bintonum(octetos[0].Substring(5,3));
+            int ARA = Functions.bintonum(octetos[1] + octetos[2].Substring(0, 6));
+            int RAC = Functions.bintonum(octetos[2].Substring(6, 2) + octetos[3].Substring(0,2));
             int RAT = Functions.strtoint(octetos[3][2]);
             int MTE = Functions.strtoint(octetos[3][3]);
-            float TTI = Functions.BCD(octetos[3].Substring(4, 2));
-            float TID_ACAS = Functions.BCD(octetos[3].Substring(6,2) + octetos[4] + octetos[5] + octetos[6]);
+            int TTI = Functions.bintonum(octetos[3].Substring(4, 2));
+            int TID_ACAS = Functions.bintonum(octetos[3].Substring(6,2) + octetos[4] + octetos[5] + octetos[6]);
 
 
-            CurrentData.TYT = TYT;
+            CurrentData.TYP_21 = TYP;
             CurrentData.STYP = STYP;
             CurrentData.ARA = ARA;
             CurrentData.RAC = RAC;
@@ -1039,7 +1080,6 @@ namespace Library
             int B2 = Functions.strtoint(octeto1[4]);
             int RAS = Functions.strtoint(octeto1[5]);
             int IDENT = Functions.strtoint(octeto1[6]);
-
 
             string messagePOA = CAT21Dict.SurfaceCapabilities_POA[POA];
             string messageCDTI = CAT21Dict.SurfaceCapabilities_CDTI[CDTI];
@@ -1083,51 +1123,54 @@ namespace Library
                 }
             }
 
+            double LSB = 0.1; //s
+
             if (octeto[0][0] == 1)
             {
-                float AOS_value = Functions.BCD(octeto[n]);
+                double AOS_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
                 CurrentData.AOS_value = AOS_value;
             }
             if (octeto[0][1] == 1)
             {
-                float TRD_value = Functions.BCD(octeto[n]);
+                double TRD_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
                 CurrentData.TRD_value = TRD_value;
             }
             if (octeto[0][2] == 1)
             {
-                float M3A_value = Functions.BCD(octeto[n]);
+                
+                double M3A_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
                 CurrentData.M3A_value = M3A_value;
             }
             if (octeto[0][3] == 1)
             {
-                float QI_value = Functions.BCD(octeto[n]);
+                double QI_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
                 CurrentData.QI_value = QI_value;
             }
             if (octeto[0][4] == 1)
             {
-                float TI_value = Functions.BCD(octeto[n]);
+                double TI_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
                 CurrentData.TI_value = TI_value;
             }
             if (octeto[0][5] == 1)
             {
-                float MAM_value = Functions.BCD(octeto[n]);
+                double MAM_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
                 CurrentData.MAM_value = MAM_value;
             }
             if (octeto[0][6] == 1)
             {
-                float GH_value = Functions.BCD(octeto[n]);
+                double GH_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
                 CurrentData.GH_value = GH_value;
@@ -1137,49 +1180,49 @@ namespace Library
             {
                 if (octeto[1][0] == 1)
                 {
-                    float FL_value = Functions.BCD(octeto[n]);
+                    double FL_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
                     CurrentData.FL_value = FL_value;
                 }
                 if (octeto[1][1] == 1)
                 {
-                    float SAL_value = Functions.BCD(octeto[n]);
+                    double SAL_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
                     CurrentData.SAL_value = SAL_value;
                 }
                 if (octeto[1][2] == 1)
                 {
-                    float FSA_value = Functions.BCD(octeto[n]);
+                    double FSA_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
                     CurrentData.FSA_value = FSA_value;
                 }
                 if (octeto[1][3] == 1)
                 {
-                    float AS_value = Functions.BCD(octeto[n]);
+                    double AS_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
                     CurrentData.AS_value = AS_value;
                 }
                 if (octeto[1][4] == 1)
                 {
-                    float TAS_value = Functions.BCD(octeto[n]);
+                    double TAS_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
                     CurrentData.TAS_value = TAS_value;
                 }
                 if (octeto[1][5] == 1)
                 {
-                    float MH_value = Functions.BCD(octeto[n]);
+                    double MH_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
                     CurrentData.MH_value = MH_value;
                 }
                 if (octeto[1][6] == 1)
                 {
-                    float BVR_value = Functions.BCD(octeto[n]);
+                    double BVR_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
                     CurrentData.BVR_value = BVR_value;
@@ -1189,49 +1232,49 @@ namespace Library
                 {
                     if (octeto[2][0] == 1)
                     {
-                        float GVR_value = Functions.BCD(octeto[n]);
+                        double GVR_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
                         CurrentData.GVR_value = GVR_value;
                     }
                     if (octeto[2][1] == 1)
                     {
-                        float GV_value = Functions.BCD(octeto[n]);
+                        double GV_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
                         CurrentData.GV_value = GV_value;
                     }
                     if (octeto[2][2] == 1)
                     {
-                        float TAR_value = Functions.BCD(octeto[n]);
+                        double TAR_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
                         CurrentData.TAR_value = TAR_value;
                     }
                     if (octeto[2][3] == 1)
                     {
-                        float TIdentification_value = Functions.BCD(octeto[n]);
+                        double TIdentification_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
                         CurrentData.TIdentification_value = TIdentification_value;
                     }
                     if (octeto[2][4] == 1)
                     {
-                        float TS_value = Functions.BCD(octeto[n]);
+                        double TS_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
                         CurrentData.TS_value = TS_value;
                     }
                     if (octeto[2][5] == 1)
                     {
-                        float MET_value = Functions.BCD(octeto[n]);
+                        double MET_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
                         CurrentData.MET_value = MET_value;
                     }
                     if (octeto[2][6] == 1)
                     {
-                        float ROA_value = Functions.BCD(octeto[n]);
+                        double ROA_value = Functions.BCD(octeto[n],LSB);
                         n++;
 
                         CurrentData.ROA_value = ROA_value;
@@ -1242,14 +1285,14 @@ namespace Library
 
                         if (octeto[3][0] == 1)
                         {
-                            float ARA_value = Functions.BCD(octeto[n]);
+                            double ARA_value = Functions.BCD(octeto[n], LSB);
                             n++;
 
                             CurrentData.ARA_value = ARA_value;
                         }
                         if (octeto[3][1] == 1)
                         {
-                            float SCC_value = Functions.BCD(octeto[n]);
+                            double SCC_value = Functions.BCD(octeto[n], LSB);
                             n++;
 
                             CurrentData.SCC_value = SCC_value;
