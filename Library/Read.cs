@@ -77,7 +77,18 @@ namespace Library
                     }
 
                     //un cop acabat de llegir tot el data block
-                    readBytes=Functions.subarray(readBytes,n, readBytes.Length-n); //resetejem el readbytes per començar amb n=0 des del següent byte
+                    if (currentCategory == 10)
+                    {
+                        CAT10.loaddata();
+                        CAT10.resetdataload();
+                    }
+                    else
+                    {
+                        CAT21.loaddata();
+                        CAT21.resetdataload();
+                    }
+                    int l = length_dataitems + 3;
+                    readBytes = Functions.subarray(readBytes, l , readBytes.Length-l); //resetejem el readbytes per començar amb n=0 des del següent byte
                     sumbyte(-n);//per resetejar a 0 la n
                 }
 

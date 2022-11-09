@@ -10,6 +10,16 @@ namespace Library
     public class CAT10
     {
         //La funció no ha de retornar res, des del metod ja anem ficant les dades on toquin (objecte avió o lo que sigui)
+        static Target dataload = new Target();
+        public static void resetdataload()
+        {
+            dataload.reset();
+        }
+
+        public static void loaddata()
+        {
+            dataload.loaddata();
+        }
         public static void DICalling(string Case, string[] dataitems, int n)
         {
             switch (Case)
@@ -31,10 +41,10 @@ namespace Library
                 case "TargetReportDescriptor":
 
                     int nextentstrd = 1;
-                    if (dataitems[n][7] == 1)
+                    if (Functions.strtoint(dataitems[n][7]) == 1)
                     {
                         nextentstrd++;
-                        if(dataitems[n+1][7] == 1)
+                        if(Functions.strtoint(dataitems[n+1][7]) == 1)
                         {
                             nextentstrd++;//Cal preguntar si podem tenir més de 3 bit es a dir 2 extents
                         }
@@ -110,10 +120,10 @@ namespace Library
                 case "TrackStatus":
 
                     int nextentsts = 1;
-                    if (dataitems[n][7] == 1)
+                    if (Functions.strtoint(dataitems[n][7]) == 1)
                     {
                         nextentsts++;
-                        if (dataitems[n + 1][7] == 1)
+                        if (Functions.strtoint(dataitems[n + 1][7]) == 1)
                         {
                             nextentsts++;//Cal preguntar si podem tenir més de 3 bit es a dir 2 extents
                         }
@@ -168,10 +178,10 @@ namespace Library
                 case "TargetSizeOrientation":
 
                     int nextentstso = 1;
-                    if (dataitems[n][7] == 1)
+                    if (Functions.strtoint(dataitems[n][7]) == 1)
                     {
                         nextentstso++;
-                        if (dataitems[n + 1][7] == 1)
+                        if (Functions.strtoint(dataitems[n + 1][7]) == 1)
                         {
                             nextentstso++;//Cal preguntar si podem tenir més de 3 bit es a dir 2 extents
                         }
@@ -223,7 +233,8 @@ namespace Library
         private static void MessageType(string octeto)
         {
             string message = CAT10Dict.MessageType[Functions.bintonum(octeto)];
-            CurrentData.MessageType = message;
+            dataload.add("MessageType", message);
+
         }
 
         // Data Item I010/010: Data Source Identifier
@@ -231,8 +242,8 @@ namespace Library
         {
             int SAC = Functions.bintonum(octeto1);
             int SIC = Functions.bintonum(octeto2);
-            CurrentData.SAC = SAC;
-            CurrentData.SIC = SIC;
+            dataload.add("SAC", SAC);
+            dataload.add("SIC", SIC);
         }
 
         // Data Item I010/020: Target Report Descriptor
@@ -244,17 +255,11 @@ namespace Library
             int GBS = Functions.strtoint(octeto[0][5]);
             int CRT = Functions.strtoint(octeto[0][6]);
 
-            string messageTYP = CAT10Dict.TargetReportDescriptor_TYP[TYP];
-            string messageDCR = CAT10Dict.TargetReportDescriptor_DCR[DCR];
-            string messageCHN = CAT10Dict.TargetReportDescriptor_CHN[CHN];
-            string messageGBS = CAT10Dict.TargetReportDescriptor_GBS[GBS];
-            string messageCRT = CAT10Dict.TargetReportDescriptor_CRT[CRT];
-
-            CurrentData.TYP = messageTYP;
-            CurrentData.DCR = messageDCR;
-            CurrentData.CHN = messageCHN;
-            CurrentData.GBS = messageGBS;
-            CurrentData.CRT = messageCRT;
+            dataload.add("TYP", TYP);
+            dataload.add("DCR", DCR);
+            dataload.add("CHN", CHN);
+            dataload.add("GBS", GBS);
+            dataload.add("CRT", CRT);
 
             if (nextents > 1)
             {
@@ -265,26 +270,18 @@ namespace Library
                 string LOP = octeto[1].Substring(3, 2);
                 string TOT = octeto[1].Substring(5, 2);
 
-                string messageSIM = CAT10Dict.TargetReportDescriptor_SIM[SIM];
-                string messageTST = CAT10Dict.TargetReportDescriptor_TST[TST];
-                string messageRAB = CAT10Dict.TargetReportDescriptor_RAB[RAB];
-                string messageLOP = CAT10Dict.TargetReportDescriptor_LOP[LOP];
-                string messageTOT = CAT10Dict.TargetReportDescriptor_TOT[TOT];
-
-                CurrentData.SIM = messageSIM;
-                CurrentData.TST = messageTST;
-                CurrentData.RAB = messageRAB;
-                CurrentData.LOP = messageLOP;
-                CurrentData.TOT = messageTOT;
+                dataload.add("SIM", SIM);
+                dataload.add("TST", TST);
+                dataload.add("RAB", RAB);
+                dataload.add("LOP", LOP);
+                dataload.add("TOT", TOT);
 
                 if (nextents > 2)
                 {
                     //Decodification of 2nd extent byte
                     int SPI = Functions.strtoint(octeto[2][0]);
 
-                    string messageSPI = CAT10Dict.TargetReportDescriptor_SPI[SPI];
-
-                    CurrentData.SPI = messageSPI;
+                    dataload.add("SPI", SPI);
 
                 }
 
@@ -300,8 +297,8 @@ namespace Library
             double rho = Functions.BCD(octetos[0] + octetos[1], LSBrho);
             double theta = Functions.BCD(octetos[2] + octetos[3], LSBtheta);
 
-            CurrentData.rho = rho;
-            CurrentData.theta = theta;
+            dataload.add("rho", rho);
+            dataload.add("theta", theta);
         }
 
         // Data Item I010/041: Position in WGS-84 Co-ordinates
@@ -311,8 +308,8 @@ namespace Library
             double latitude = Functions.BCD(Functions.ComplementoA2(octetos[0] + octetos[1] + octetos[2] + octetos[3]),LSB);
             double longitude = Functions.BCD(Functions.ComplementoA2(octetos[4] + octetos[5] + octetos[6] + octetos[7]),LSB);
 
-            CurrentData.latitude = latitude;
-            CurrentData.longitude = longitude;
+            dataload.add("Latitude WGS84", latitude);
+            dataload.add("Longitude WGS84", longitude);
         }
 
         // Data Item I010/042: Position in Cartesian Co-ordinates
@@ -322,8 +319,8 @@ namespace Library
             double x = Functions.BCD(Functions.ComplementoA2(octetos[0] + octetos[1]),LSB);
             double y = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]),LSB);
 
-            CurrentData.xpos = x;
-            CurrentData.ypos = y;  
+            dataload.add("X Cartesian", x);
+            dataload.add("Y Cartesian", y);
         }
 
         // Data Item I010/060: Mode-3/A Code in Octal Representation
@@ -338,17 +335,12 @@ namespace Library
             string C = Functions.bintonum(octeto2.Substring(2, 3)).ToString();
             string D = Functions.bintonum(octeto2.Substring(5, 3)).ToString();
 
-
-            string messageV = CAT10Dict.Mode3ACodeOctalRepresentation_V[V];
-            string messageG = CAT10Dict.Mode3ACodeOctalRepresentation_G[G];
-            string messageL = CAT10Dict.Mode3ACodeOctalRepresentation_L[L];
-
             int ABCD = Convert.ToInt32(A+B+C+D);
 
-            CurrentData.ModeV = messageV;
-            CurrentData.ModeG = messageG;
-            CurrentData.ModeL = messageL;
-            CurrentData.ABCD = ABCD;
+            dataload.add("Mode3/A V", V);
+            dataload.add("Mode3/A G", G);
+            dataload.add("Mode3/A L", L);
+            dataload.add("Mode3/A ABCD", ABCD);
         }
 
         // Data Item I010/090: Flight Level in Binary Representation
@@ -360,13 +352,9 @@ namespace Library
             double LSB = 0.25; //FL
             double FL = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(3) + octeto2),LSB);
 
-
-            string messageV = CAT10Dict.FligthLevel_V[V];
-            string messageG = CAT10Dict.FligthLevel_G[G];
-
-            CurrentData.FLV = messageV;
-            CurrentData.FlG = messageG;
-            CurrentData.FL = FL;
+            dataload.add("FL V", V);
+            dataload.add("FL G", G);
+            dataload.add("FL", FL);
         }
 
         // Data Item I010/091: Measured Height
@@ -375,8 +363,7 @@ namespace Library
             double LSB = 6.25; //ft
             double Height = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2), LSB);
 
-            CurrentData.Height = Height;
-
+            dataload.add("Height", Height);
         }
 
         // Data Item I010/131: Amplitude of Primary Plot
@@ -384,7 +371,7 @@ namespace Library
         {
             int PAM = Functions.bintonum(octeto1);
 
-            CurrentData.PAM = PAM;
+            dataload.add("Amplitude", PAM);
         }
 
         // Data Item I010/140: Time of Day
@@ -393,7 +380,7 @@ namespace Library
             double LSB = (double)1 / 128; //s
             double TimeOfDay = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
 
-            CurrentData.TimeDay = TimeOfDay;
+            dataload.add("Time of Day", TimeOfDay);
         }
 
         // Data Item I010/161: Track Number
@@ -401,7 +388,7 @@ namespace Library
         {
             int TrackNumber = Functions.bintonum(octeto1[4].ToString() + octeto1[5].ToString() + octeto1[6].ToString() + octeto1[7].ToString() + octeto2);
 
-            CurrentData.TrackNumber = TrackNumber;
+            dataload.add("Track Number", TrackNumber);
         }
 
         // Data Item I010/170: Track Status
@@ -414,19 +401,12 @@ namespace Library
             int TCC = Functions.strtoint(octeto[0][5]);
             int STH = Functions.strtoint(octeto[0][6]);
 
-            string messageCNF = CAT10Dict.TrackStatus_CNF[CNF];
-            string messageTRE = CAT10Dict.TrackStatus_TRE[TRE];
-            string messageCST = CAT10Dict.TrackStatus_CST[CST];
-            string messageMAH = CAT10Dict.TrackStatus_MAH[MAH];
-            string messageTCC = CAT10Dict.TrackStatus_TCC[TCC];
-            string messageSTH = CAT10Dict.TrackStatus_STH[STH];
-
-            CurrentData.CNF = messageCNF;
-            CurrentData.TRE = messageTRE;
-            CurrentData.CST = messageCST;
-            CurrentData.MAH = messageMAH;
-            CurrentData.TCC = messageTCC;
-            CurrentData.STH = messageSTH;
+            dataload.add("CNF", CNF);
+            dataload.add("TRE", TRE);
+            dataload.add("CST", CST);
+            dataload.add("MAH", MAH);
+            dataload.add("TCC", TCC);
+            dataload.add("STH", STH);
 
             if (nextents > 1)
             {
@@ -435,24 +415,16 @@ namespace Library
                 string DOU = octeto[1].Substring(2,3);
                 string MRS = octeto[1].Substring(5,2);
 
-                string messageTOM = CAT10Dict.TrackStatus_TOM[TOM];
-                string messageDOU = CAT10Dict.TrackStatus_DOU[DOU];
-                string messageMRS = CAT10Dict.TrackStatus_MRS[MRS];
-
-                CurrentData.TOM = messageTOM;
-                CurrentData.DOU = messageDOU;
-                CurrentData.MRS = messageMRS;
-
+                dataload.add("TOM", TOM);
+                dataload.add("DOU", DOU);
+                dataload.add("MRS", MRS);
 
                 if (nextents > 2)
                 {
                     //Decodification of 2nd extent byte
                     int GHO = Functions.strtoint(octeto[2][0]);
 
-                    string messageGHO = CAT10Dict.TrackStatus_GHO[GHO];
-
-                    CurrentData.GHO = messageGHO;
-
+                    dataload.add("GHO", GHO);
                 }
             }
         }
@@ -466,9 +438,8 @@ namespace Library
             double GroundSpeed = Functions.BCD(octetos[0] + octetos[1], LSBgs);
             double TrackAngle = Functions.BCD(octetos[2] + octetos[3], LSBta);
 
-            CurrentData.GroundSpeed = GroundSpeed;
-            CurrentData.TrackAngle = TrackAngle;
-
+            dataload.add("Ground Speed", GroundSpeed);
+            dataload.add("Track Angle", TrackAngle);
         }
 
         // Data Item I010/202: Calculated Track Velocity in Cartesian Co-ordinates
@@ -479,8 +450,8 @@ namespace Library
             double Vx = Functions.BCD(Functions.ComplementoA2(octetos[0]+ octetos[1]),LSB);
             double Vy = Functions.BCD(Functions.ComplementoA2(octetos[2]+octetos[3]),LSB);
 
-            CurrentData.Vx = Vx;
-            CurrentData.Vy = Vy;
+            dataload.add("Velocity X Cart", Vx);
+            dataload.add("Velocity Y Cart", Vy);
         }
 
         // Data Item I010/210: Calculated Acceleration
@@ -491,8 +462,8 @@ namespace Library
             double Ax = Functions.BCD(Functions.ComplementoA2(octeto1),LSB);
             double Ay = Functions.BCD(Functions.ComplementoA2(octeto2),LSB);
 
-            CurrentData.Ax = Ax;
-            CurrentData.Ay = Ay;
+            dataload.add("Acceleration X", Ax);
+            dataload.add("Acceleration Y", Ay);
         }
 
         // Data Item I010/220: Target Address
@@ -500,7 +471,7 @@ namespace Library
         {
             string TA = Functions.bintohex(octeto1 + octeto2 + octeto3);
 
-            CurrentData.TargetAddress = TA;
+            dataload.add("Target Address", TA);
         }
 
         // Data Item I010/245: Target Identification
@@ -516,14 +487,10 @@ namespace Library
             string C7 = octetos[5].Substring(4, 4) + octetos[6].Substring(0, 2);
             string C8 = octetos[6].Substring(2, 6);
 
-
-
-            string messageSTI = CAT10Dict.TargetIdentification_STI[STI];
             int C = Convert.ToInt32(C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8);
 
-            CurrentData.STI = messageSTI;
-            CurrentData.TargetIdentification = C;
-
+            dataload.add("STI", STI);
+            dataload.add("Target Identification", C);
         }
 
         // Data Item I010/250: Mode S MB Data
@@ -534,11 +501,10 @@ namespace Library
             float BDS1 = Functions.bintonum(octetos[8].Substring(0,4));
             float BDS2 = Functions.bintonum(octetos[8].Substring(4,4));
 
-            CurrentData.REP = REP;
-            CurrentData.MB = MB;
-            CurrentData.BDS1 = BDS1;
-            CurrentData.BDS2 = BDS2;
-
+            dataload.add("REP", REP);
+            dataload.add("MB", MB);
+            dataload.add("BDS1", BDS1);
+            dataload.add("BDS2", BDS2);
         }
 
         // Data Item I010/270: Target Size & Orientation
@@ -546,8 +512,8 @@ namespace Library
         {
             double LSBlen = 1; //m
             double Length = Functions.BCD(octeto[0].Substring(0,7),LSBlen);
-            
-            CurrentData.Length = Length;
+
+            dataload.add("Target Length", Length);
 
             if (nextents > 1)
             {
@@ -555,7 +521,7 @@ namespace Library
                 double LSBori = (double)360 / 128; //deg
                 double Orientation = Functions.BCD(octeto[1].Substring(0, 7), LSBori);
 
-                CurrentData.Orientation = Orientation;
+                dataload.add("Target Orientation", Orientation);
 
                 if (nextents > 2)
                 {
@@ -563,8 +529,7 @@ namespace Library
                     double LSBwid = 1; //m
                     double Width = Functions.BCD(octeto[2].Substring(0, 7), LSBwid);
 
-                    CurrentData.Width = Width;
-
+                    dataload.add("Target Width", Width);
                 }
             }
         }
@@ -578,10 +543,9 @@ namespace Library
             double LSBdtheta = 0.15; //deg
             double DTHETA = Functions.BCD(octeto3,LSBdtheta);
 
-            CurrentData.N = N;
-            CurrentData.DRHO = DRHO;
-            CurrentData.DTHETA = DTHETA;
-
+            dataload.add("Presence N", N);
+            dataload.add("Presence rho", DRHO);
+            dataload.add("Presence theta", DTHETA);
         }
 
         // Data Item I010/300: Vehicle Fleet Identification
@@ -589,9 +553,7 @@ namespace Library
         {
             int VFI = Functions.bintonum(octeto1);
 
-            string messageVFI = CAT10Dict.VehicleFleetIdentification_VFI[VFI];
-
-            CurrentData.VFI = messageVFI;
+            dataload.add("Vehicle Fleet Identification", VFI);
         }
 
         // Data Item I010/310: Pre-programmed Message
@@ -600,12 +562,8 @@ namespace Library
             int TRB = Functions.strtoint(octeto1[0]);
             int MSG = Functions.bintonum(octeto1.Substring(1,7));
 
-            string messageTRB = CAT10Dict.PreprogrammedMessage_TRB[TRB];
-            string messageMSG = CAT10Dict.PreprogrammedMessage_MSG[MSG];
-
-            CurrentData.TRB = messageTRB;
-            CurrentData.MSG = messageMSG;
-
+            dataload.add("TRB", TRB);
+            dataload.add("MSG", MSG);
         }
 
         // Data Item I010/500: Standard Deviation of Position
@@ -614,12 +572,11 @@ namespace Library
             double LSB = 0.25; //m  m   m^2
             double SDx = Functions.BCD(octetos[0], LSB);
             double SDy = Functions.BCD(octetos[1], LSB);
-            double Covariance = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]),LSB); 
+            double Covariance = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]),LSB);
 
-            CurrentData.SDx = SDx;
-            CurrentData.SDy = SDy;
-            CurrentData.Covariance = Covariance;
-
+            dataload.add("Standard Deviation X", SDx);
+            dataload.add("Standard Deviation y", SDy);
+            dataload.add("Covariance", Covariance);
         }
 
         // Data Item I010/550: System Status
@@ -631,18 +588,11 @@ namespace Library
             int DIV = Functions.strtoint(octeto1[4]);
             int TTF = Functions.strtoint(octeto1[5]);
 
-
-            string messageNOGO = CAT10Dict.SystemStatus_NOGO[NOGO];
-            string messageOVL = CAT10Dict.SystemStatus_OVL[OVL];
-            string messageTSV = CAT10Dict.SystemStatus_TSV[TSV];
-            string messageDIV = CAT10Dict.SystemStatus_DIV[DIV];
-            string messageTTF = CAT10Dict.SystemStatus_TTF[TTF];
-
-            CurrentData.NOGO = messageNOGO;
-            CurrentData.OVL = messageOVL;
-            CurrentData.TSV = messageTSV;
-            CurrentData.DIV = messageDIV;
-            CurrentData.TTF = messageTTF;
+            dataload.add("NOGO", NOGO);
+            dataload.add("OVL", OVL);
+            dataload.add("TSV", TSV);
+            dataload.add("DIV", DIV);
+            dataload.add("TTF", TTF);
         }
 
     }

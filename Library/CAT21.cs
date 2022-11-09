@@ -8,6 +8,15 @@ namespace Library
 {
     public class CAT21
     {
+        static Target dataload = new Target();
+        public static void resetdataload()
+        {
+            dataload.reset();
+        }
+        public static void loaddata()
+        {
+            dataload.loaddata();
+        }
         public static void DICalling(string Case, string[] dataitems, int n)
         {
             switch (Case)

@@ -111,6 +111,7 @@ namespace Library
         }
 
         public static Dictionary<char, string> BinaryComplement = new Dictionary<char, string> { { '0', "1" }, { '1', "0" } };
+        static bool isnegative = false;
         public static string ComplementoA2 (string bits)
         {
             
@@ -118,12 +119,13 @@ namespace Library
 
             if (strtoint(bits[0]) == 1) //el resultat és negatiu, cal fer proces
             {
+                isnegative = true;
                 string bc2="";
                 for (int i = 1; i < bits.Length; i++)
                 {
-                    bc2 = bc2 + BinaryComplement[bits[i]];
+                    bc2 = bc2+BinaryComplement[bits[i]];
                 }
-                bc2 = bc2 + numtobin(1);
+                bc2 = Convert.ToString(Convert.ToInt32(bc2, 2) + 1, 2);
                 result = bc2;
             }
 
@@ -137,7 +139,13 @@ namespace Library
 
         public static double BCD(string bits, double LSB) 
         {
+            if (isnegative == true)
+            {
+                LSB = -LSB;
+            }
+
             double value = bintonum(bits) * LSB;
+            isnegative = false;
 
             return value;
         }
