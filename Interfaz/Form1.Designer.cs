@@ -30,7 +30,7 @@
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button1 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -39,7 +39,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(283, 327);
+            this.button1.Location = new System.Drawing.Point(299, 329);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(155, 42);
             this.button1.TabIndex = 3;
@@ -47,13 +47,9 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // richTextBox1
+            // openFileDialog2
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(243, 75);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(257, 191);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.openFileDialog2.FileName = "openFileDialog2";
             // 
             // Form1
             // 
@@ -61,7 +57,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -72,6 +67,6 @@
 
         private OpenFileDialog openFileDialog1;
         private Button button1;
-        private RichTextBox richTextBox1;
+        private OpenFileDialog openFileDialog2;
     }
 }

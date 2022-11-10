@@ -15,7 +15,6 @@ namespace Library
         {
             dataload.reset();
         }
-
         public static void loaddata()
         {
             dataload.loaddata();
@@ -298,7 +297,7 @@ namespace Library
             double theta = Functions.BCD(octetos[2] + octetos[3], LSBtheta);
 
             dataload.add("rho", rho);
-            dataload.add("theta", theta);
+            dataload.add("theta", Math.Round(theta,3));
         }
 
         // Data Item I010/041: Position in WGS-84 Co-ordinates
@@ -379,8 +378,10 @@ namespace Library
         {
             double LSB = (double)1 / 128; //s
             double TimeOfDay = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
+            TimeSpan time = TimeSpan.FromSeconds(TimeOfDay);
+            string str = time.ToString(@"hh\:mm\:ss");
 
-            dataload.add("Time of Day", TimeOfDay);
+            dataload.add("Time of Day", str);
         }
 
         // Data Item I010/161: Track Number
@@ -438,8 +439,8 @@ namespace Library
             double GroundSpeed = Functions.BCD(octetos[0] + octetos[1], LSBgs);
             double TrackAngle = Functions.BCD(octetos[2] + octetos[3], LSBta);
 
-            dataload.add("Ground Speed", GroundSpeed);
-            dataload.add("Track Angle", TrackAngle);
+            dataload.add("Ground Speed", Math.Round(GroundSpeed,3));
+            dataload.add("Track Angle", Math.Round(TrackAngle,3));
         }
 
         // Data Item I010/202: Calculated Track Velocity in Cartesian Co-ordinates
@@ -521,7 +522,7 @@ namespace Library
                 double LSBori = (double)360 / 128; //deg
                 double Orientation = Functions.BCD(octeto[1].Substring(0, 7), LSBori);
 
-                dataload.add("Target Orientation", Orientation);
+                dataload.add("Target Orientation", Math.Round(Orientation,3));
 
                 if (nextents > 2)
                 {

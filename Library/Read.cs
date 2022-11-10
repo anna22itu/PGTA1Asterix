@@ -97,8 +97,7 @@ namespace Library
                     //dialog de que hi ha un error amb la categoria o ja veiem que fem potser es corrupte o lo que sigui
                 }
             }
-
-            
+            Target.export();
         }
 
         public static void setReadBytes(string str)
