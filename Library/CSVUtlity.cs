@@ -18,7 +18,7 @@ namespace Library
                 sw.Write(dtDataTable.Columns[i]);
                 if (i < dtDataTable.Columns.Count - 1)
                 {
-                    sw.Write(",");
+                    sw.Write(";");
                 }
             }
             sw.Write(sw.NewLine);
@@ -29,7 +29,7 @@ namespace Library
                     if (!Convert.IsDBNull(dr[i]))
                     {
                         string value = dr[i].ToString();
-                        if (value.Contains(','))
+                        if (value.Contains(';'))
                         {
                             value = String.Format("\"{0}\"", value);
                             sw.Write(value);
@@ -41,7 +41,7 @@ namespace Library
                     }
                     if (i < dtDataTable.Columns.Count - 1)
                     {
-                        sw.Write(",");
+                        sw.Write(";");
                     }
                 }
                 sw.Write(sw.NewLine);

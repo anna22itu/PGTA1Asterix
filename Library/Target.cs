@@ -7,13 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Apache.Arrow;
 using Microsoft.Data.Analysis;
+using static Microsoft.ML.DataViewSchema;
 
 namespace Library
 {
     public class Target
     {
         //cada target tindra el seu dataframe amb totes les dades, es comproba si la columna que volem existeix, si no, s'afegeix
-        static List<Target> allSMR = new List<Target>();
+        static List<Target> byKind = new List<Target>();
+        static List<Target> byTarget = new List<Target>();
+        public static IDictionary<object, int> targets = new Dictionary<object, int>() { };
 
         //atributs
         //https://learn.microsoft.com/es-es/dotnet/api/system.data.datatable?view=net-7.0
@@ -21,10 +24,22 @@ namespace Library
         DataTable dt;
         public static void export()
         {
-            allSMR[0].dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\SMR\\TR.csv");
-            allSMR[1].dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\SMR\\SUC.csv");
-            allSMR[2].dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\SMR\\PSM.csv");
-            allSMR[3].dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\SMR\\EtSM.csv");
+            if (byKind.Count>0)
+            {
+                byKind[0].dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\Data\\TR.csv");
+                byKind[1].dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\Data\\SUC.csv");
+                byKind[2].dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\Data\\PSM.csv");
+                byKind[3].dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\Data\\EtSM.csv");
+            }
+
+            if (byTarget.Count>0)
+            {
+                foreach (Target target in byTarget)
+                {
+                    string name = target.dt.Rows[0]["Track Number"].ToString()+".csv";
+                    target.dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\Data\\" + name);
+                }
+            }            
         }
         public Target()
         {
@@ -51,36 +66,66 @@ namespace Library
         }
         public void loaddata()
         {
-            int index = CAT10Dict.MessageType.FirstOrDefault(x => x.Value == dt.Rows[0]["MessageType"].ToString()).Key - 1;
-            if (dt.Columns.Contains("Target Address")==false) //es SMR
+            //És SMR o MLAT i podem separar per tipus
+            if (dt.Columns.Contains("MessageType"))
             {
-                if (allSMR.Count == 0) //Target Report , Start of Update Cycle , Periodic Status Message , Event-triggered Status Message
+                int index = CAT10Dict.MessageType.FirstOrDefault(x => x.Value == dt.Rows[0]["MessageType"].ToString()).Key - 1;
+                if (byKind.Count == 0) //Target Report , Start of Update Cycle , Periodic Status Message , Event-triggered Status Message
                 {
                     Target TR = new Target();
                     Target SUC = new Target();
                     Target PSM = new Target();
                     Target EtSM = new Target();
-                    allSMR.Add(TR);
-                    allSMR.Add(SUC);
-                    allSMR.Add(PSM);
-                    allSMR.Add(EtSM);
+                    byKind.Add(TR);
+                    byKind.Add(SUC);
+                    byKind.Add(PSM);
+                    byKind.Add(EtSM);
                 }
-                allSMR[index].dt.Rows.Add();
-                foreach (DataColumn column in dt.Columns)
+                byKind[index].dt.Rows.Add();
+
+                foreach (DataColumn column1 in dt.Columns)
                 {
-                    if (allSMR[index].dt.Columns.Contains(column.ColumnName) == false)
+                    if (byKind[index].dt.Columns.Contains(column1.ColumnName) == false)
                     {
-                        DataColumn col = new DataColumn();
-                        col.DataType = Type.GetType("System.Object");
-                        col.ColumnName = column.ColumnName;
-                        allSMR[index].dt.Columns.Add(col);
+                        DataColumn col1 = new DataColumn();
+                        col1.DataType = Type.GetType("System.Object");
+                        col1.ColumnName = column1.ColumnName;
+                        byKind[index].dt.Columns.Add(col1);
                     }
-                    allSMR[index].dt.Rows[allSMR[index].dt.Rows.Count - 1][column.ColumnName] = dt.Rows[0][column.ColumnName];
+                    byKind[index].dt.Rows[byKind[index].dt.Rows.Count - 1][column1.ColumnName] = dt.Rows[0][column1.ColumnName];
+                }
+
+                if (dt.Rows[0]["MessageType"].ToString()=="Target Report")
+                {
+                    if (targets.ContainsKey(Convert.ToInt32(dt.Rows[0]["Track Number"])) == false)
+                    {
+                        if (dt.Columns.Contains("Target Address")) //Classifica per target address si esta, i sino per track number
+                        {
+                            targets[dt.Rows[0]["Target Address"]] = byTarget.Count;
+                        }
+                        else
+                        {
+                            targets[Convert.ToInt32(dt.Rows[0]["Track Number"])] = byTarget.Count;
+                        }
+                        Target target = new Target();
+                        byTarget.Add(target);
+                    }
+
+                    index = targets[Convert.ToInt32(dt.Rows[0]["Track Number"])];
+                    byTarget[index].dt.Rows.Add();
+                    foreach (DataColumn column2 in dt.Columns)
+                    {
+                        if (byTarget[index].dt.Columns.Contains(column2.ColumnName) == false)
+                        {
+                            DataColumn col2 = new DataColumn();
+                            col2.DataType = Type.GetType("System.Object");
+                            col2.ColumnName = column2.ColumnName;
+                            byTarget[index].dt.Columns.Add(col2);
+                        }
+                        byTarget[index].dt.Rows[byTarget[index].dt.Rows.Count - 1][column2.ColumnName] = dt.Rows[0][column2.ColumnName];
+                    }
                 }
             }
-
-
-
         }
         public void reset()
         {
