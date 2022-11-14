@@ -59,16 +59,16 @@ namespace Library
                 case "TargetReportDescriptor":
 
                     int nextentstrd = 1;
-                    if (dataitems[n][7] == 1)
+                    if (Functions.strtoint(dataitems[n][7]) == 1)
                     {
                         nextentstrd++;
-                        if (dataitems[n + 1][7] == 1)
+                        if (Functions.strtoint(dataitems[n + 1][7]) == 1)
                         {
                             nextentstrd++;
-                            if (dataitems[n + 2][7] == 1)
+                            if (Functions.strtoint(dataitems[n + 2][7]) == 1)
                             {
                                 nextentstrd++;
-                                if (dataitems[n + 3][7] == 1)
+                                if (Functions.strtoint(dataitems[n + 3][7]) == 1)
                                 {
                                     nextentstrd++;
                                 }
@@ -153,10 +153,10 @@ namespace Library
                 case "TrajectoryIntent":
 
                     int nextentsti = 1;
-                    if (dataitems[n][7] == 1)
+                    if (Functions.strtoint(dataitems[n][7]) == 1)
                     {
                         nextentsti++;
-                        if (dataitems[n + 1][7] == 1)
+                        if (Functions.strtoint(dataitems[n + 1][7]) == 1)
                         {
                             nextentsti = nextentsti + 16;
                         }
@@ -370,22 +370,13 @@ namespace Library
             int TCAS = Functions.strtoint(octeto1[6]);
             int SA = Functions.strtoint(octeto1[7]);
 
-            string messageRA = CAT21Dict.AircraftOperationalStatus_RA[RA];
-            string messageTC = CAT21Dict.AircraftOperationalStatus_TC[TC];
-            string messageTS = CAT21Dict.AircraftOperationalStatus_TS[TS];
-            string messageARV = CAT21Dict.AircraftOperationalStatus_ARV[ARV];
-            string messageCDTIA = CAT21Dict.AircraftOperationalStatus_CDTIA[CDTIA];
-            string messageTCAS = CAT21Dict.AircraftOperationalStatus_TCAS[TCAS];
-            string messageSA = CAT21Dict.AircraftOperationalStatus_SA[SA];
-
-            CurrentData.RA = messageRA;
-            CurrentData.TC = messageTC;
-            CurrentData.TS = messageTS;
-            CurrentData.ARV = messageARV;
-            CurrentData.CDTIA = messageCDTIA;
-            CurrentData.TCAS = messageTCAS;
-            CurrentData.SA = messageSA;
-
+            dataload.add("RA", RA);
+            dataload.add("TC", TC);
+            dataload.add("TS", TS);
+            dataload.add("ARV", ARV);
+            dataload.add("CDTIA", CDTIA);
+            dataload.add("TCAS", TCAS);
+            dataload.add("SA", SA);
         }
 
         // Data Item I021/010: Data Source Identification 
@@ -394,8 +385,8 @@ namespace Library
             int SAC = Functions.bintonum(octeto1);
             int SIC = Functions.bintonum(octeto2);
 
-            CurrentData.SAC = SAC;
-            CurrentData.SIC = SIC;
+            dataload.add("SAC", SAC);
+            dataload.add("SIC", SIC);
         }
 
         // Data Item I021/015: Service Identification.
@@ -404,8 +395,7 @@ namespace Library
             
             int ServiceIdentification = Functions.bintonum(octeto1);
 
-            CurrentData.ServiceIdentification = ServiceIdentification;
-
+            dataload.add("Service Identification", ServiceIdentification);
         }
 
         // Data Item I021/016: Service Management
@@ -414,8 +404,7 @@ namespace Library
             double LSB = 0.5; //s
             double RP = Functions.BCD(octeto1, LSB);
 
-            CurrentData.RP = RP;
-          
+            dataload.add("RP", RP);
         }
 
         // Data Item I021/020: Emitter Category
@@ -423,10 +412,7 @@ namespace Library
         {
             int ECAT = Functions.bintonum(octeto1);
 
-            string messageECAT = CAT21Dict.EmitterCategory_ECAT[ECAT];
-
-            CurrentData.ECAT = messageECAT;
-
+            dataload.add("Emitter Category", ECAT);
         }
 
         // Data Item I021/040: Target Report Descriptor
@@ -437,16 +423,10 @@ namespace Library
             int RC = Functions.strtoint(octeto[0][5]);
             int RAB21 = Functions.strtoint(octeto[0][6]);
 
-            string messageATP = CAT21Dict.TargetReportDescriptor_ATP[ATP];
-            string messageARC = CAT21Dict.TargetReportDescriptor_ARC[ARC];
-            string messageRC = CAT21Dict.TargetReportDescriptor_RC[RC];
-            string messageRAB21 = CAT21Dict.TargetReportDescriptor_RAB[RAB21];
-
-            CurrentData.ATP = messageATP;
-            CurrentData.ARC = messageARC;
-            CurrentData.RC = messageRC;
-            CurrentData.RAB_21 = messageRAB21;
-
+            dataload.add("ATP", ATP);
+            dataload.add("ARC", ARC);
+            dataload.add("RC", RC);
+            dataload.add("RAB", RAB21);
 
             if (nextents > 1)
             {
@@ -458,19 +438,12 @@ namespace Library
                 int SAA = Functions.strtoint(octeto[1][4]);
                 int CL = Functions.bintonum(octeto[1].Substring(5, 2));
 
-                string messageDCR = CAT21Dict.TargetReportDescriptor_DCR[DCR];
-                string messageGBS = CAT21Dict.TargetReportDescriptor_GBS[GBS];
-                string messageSIM = CAT21Dict.TargetReportDescriptor_SIM[SIM];
-                string messageTST = CAT21Dict.TargetReportDescriptor_TST[TST];
-                string messageSAA = CAT21Dict.TargetReportDescriptor_SAA[SAA];
-                string messageCL = CAT21Dict.TargetReportDescriptor_CL[CL];
-
-                CurrentData.DCR_21 = messageDCR;
-                CurrentData.GBS_21 = messageGBS;
-                CurrentData.SIM_21 = messageSIM;
-                CurrentData.TST_21 = messageTST;
-                CurrentData.SAA = messageSAA;
-                CurrentData.CL = messageCL;
+                dataload.add("DCR", DCR);
+                dataload.add("GBS", GBS);
+                dataload.add("SIM", SIM);
+                dataload.add("TST", TST);
+                dataload.add("SAA", SAA);
+                dataload.add("CL", CL);
 
                 if (nextents > 2)
                 {
@@ -482,19 +455,12 @@ namespace Library
                     int LDPJ = Functions.strtoint(octeto[2][5]);
                     int RCF = Functions.strtoint(octeto[2][6]);
 
-                    string messageLLC = CAT21Dict.TargetReportDescriptor_LLC[LLC];
-                    string messageIPC = CAT21Dict.TargetReportDescriptor_IPC[IPC];
-                    string messageNOGO = CAT21Dict.TargetReportDescriptor_NOGO[NOGO];
-                    string messageCPR = CAT21Dict.TargetReportDescriptor_CPR[CPR];
-                    string messageLDPJ = CAT21Dict.TargetReportDescriptor_LDPJ[LDPJ];
-                    string messageRCF = CAT21Dict.TargetReportDescriptor_RCF[RCF];
-
-                    CurrentData.LLC = messageLLC;
-                    CurrentData.IPC = messageIPC;
-                    CurrentData.NOGO_21 = messageNOGO;
-                    CurrentData.CPR = messageCPR;
-                    CurrentData.LDPJ = messageLDPJ;
-                    CurrentData.RCF = messageRCF;
+                    dataload.add("LLC", LLC);
+                    dataload.add("IPC", IPC);
+                    dataload.add("NOGO", NOGO);
+                    dataload.add("CPR", CPR);
+                    dataload.add("LDPJ", LDPJ);
+                    dataload.add("RCF", RCF);
 
                     if (nextents > 3)
                     {
@@ -502,10 +468,8 @@ namespace Library
                         int TBC_element = Functions.strtoint(octeto[3][0]);
                         int TBC_value = Functions.bintonum(octeto[3].Substring(1,6));
 
-                        string messageTBC_element = CAT21Dict.TargetReportDescriptor_TBC_element[TBC_element];
-
-                        CurrentData.TBC_element = messageTBC_element;
-                        CurrentData.TBC_value = TBC_value;
+                        dataload.add("TBC element", TBC_element);
+                        dataload.add("TBC value", TBC_value);
 
                         if (nextents > 4)
                         {
@@ -513,11 +477,8 @@ namespace Library
                             int MBC_element = Functions.strtoint(octeto[4][0]);
                             int MBC_value = Functions.bintonum(octeto[4].Substring(1, 6));
 
-                            string messageMBC_element = CAT21Dict.TargetReportDescriptor_MBC_element[MBC_element];
-
-                            CurrentData.MBC_element = messageMBC_element;
-                            CurrentData.MBC_value = MBC_value;
-
+                            dataload.add("MBC element", MBC_element);
+                            dataload.add("MBC value", MBC_value);
                         }
                     }
                 }
@@ -535,7 +496,7 @@ namespace Library
 
             int ABCD = Convert.ToInt32(A + B + C + D);
 
-            CurrentData.ABCD = ABCD;
+            dataload.add("Mode 3/A ABCD", ABCD);
         }
 
         // Data Item I021/071: Time of Applicability for Position
@@ -543,8 +504,10 @@ namespace Library
         {
             double LSB = (double)1 / 128; //s
             double TimeApplicabilityPosition = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
+            TimeSpan time = TimeSpan.FromSeconds(TimeApplicabilityPosition);
+            string str = time.ToString(@"hh\:mm\:ss");
 
-            CurrentData.TimeApplicabilityPosition = TimeApplicabilityPosition;
+            dataload.add("Time of Applicability Position", str);
         }
 
         // Data Item I021/072: Time of Applicability for Velocity
@@ -552,8 +515,10 @@ namespace Library
         {
             double LSB = (double)1 / 128; //s
             double TimeApplicabilityVelocity = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
+            TimeSpan time = TimeSpan.FromSeconds(TimeApplicabilityVelocity);
+            string str = time.ToString(@"hh\:mm\:ss");
 
-            CurrentData.TimeApplicabilityVelocity = TimeApplicabilityVelocity;
+            dataload.add("Time of Applicability Velocity", str);
         }
 
         // Data Item I021/073: Time of Message Reception for Position
@@ -561,8 +526,10 @@ namespace Library
         {
             double LSB = (double)1 / 128; //s
             double TimeMessagePosition = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
+            TimeSpan time = TimeSpan.FromSeconds(TimeMessagePosition);
+            string str = time.ToString(@"hh\:mm\:ss");
 
-            CurrentData.TimeMessagePosition = TimeMessagePosition;
+            dataload.add("Time of Message Reception Position", str);
         }
 
 
@@ -571,12 +538,12 @@ namespace Library
         {
             double LSB = (double)Math.Pow(2,-30); //s
             string FSI_Pos = octeto1.Substring(0, 2);
-            double TimeMessagePositionHP = Functions.BCD(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4, LSB); //BCD
+            double TimeMessagePositionHP = Functions.BCD(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4, LSB);
+            TimeSpan time = TimeSpan.FromSeconds(TimeMessagePositionHP);
+            string str = time.ToString(@"hh\:mm\:ss");
 
-            string messageFSI = CAT21Dict.TimeMessageReceptionPosition_HP_FSI[FSI_Pos];
-
-            CurrentData.FSI_Pos = messageFSI;
-            CurrentData.TimeMessagePosition_HP = TimeMessagePositionHP;
+            dataload.add("FSI Position", FSI_Pos);
+            dataload.add("Time of Message Reception Position HP", str);
         }
 
 
@@ -585,8 +552,10 @@ namespace Library
         {
             double LSB = (double)1 / 128; //s
             double TimeMessageVelocity = Functions.BCD(octeto1 + octeto2 + octeto3, LSB);
+            TimeSpan time = TimeSpan.FromSeconds(TimeMessageVelocity);
+            string str = time.ToString(@"hh\:mm\:ss");
 
-            CurrentData.TimeMessageVelocity = TimeMessageVelocity;
+            dataload.add("Time of Message Reception Velocity", str);
         }
 
         // Data Item I021/076: Time of Message Reception of Velocity–High Precision
@@ -595,11 +564,11 @@ namespace Library
             double LSB = (double)Math.Pow(2, -30); //s
             string FSI_Vel = octeto1.Substring(0, 2);
             double TimeMessageVelocityHP = Functions.BCD(octeto1.Substring(2, 6) + octeto2 + octeto3 + octeto4, LSB); //BCD
+            TimeSpan time = TimeSpan.FromSeconds(TimeMessageVelocityHP);
+            string str = time.ToString(@"hh\:mm\:ss");
 
-            string messageFSI = CAT21Dict.TimeMessageReceptionVelocity_HP_FSI[FSI_Vel];
-
-            CurrentData.FSI_Vel = messageFSI;
-            CurrentData.TimeMessageVelocity_HP = TimeMessageVelocityHP;
+            dataload.add("FSI Velocity", FSI_Vel);
+            dataload.add("Time of Message Reception Velocity HP", str);
         }
 
         // Data Item I021/077: Time of ASTERIX Report Transmission
@@ -607,8 +576,10 @@ namespace Library
         {
             double LSB = (double)1 / 128; //s
             double TimeAsterixTransmission = Functions.BCD(octeto1 + octeto2 + octeto3, LSB); //BCD
+            TimeSpan time = TimeSpan.FromSeconds(TimeAsterixTransmission);
+            string str = time.ToString(@"hh\:mm\:ss");
 
-            CurrentData.TimeAsterixTransmission = TimeAsterixTransmission;
+            dataload.add("Time of Asterix Transmission", str);
         }
 
         // Data Item I021/080: Target Address
@@ -616,7 +587,7 @@ namespace Library
         {
             string ta=Functions.bintohex(octeto1 + octeto2 + octeto3);
 
-            CurrentData.TargetAddress = ta;
+            dataload.add("Target Address", ta);
         }
 
         // Data Item I021/090:Quality Indicators
@@ -631,12 +602,8 @@ namespace Library
             int TIS = Functions.strtoint(octeto[0][0]);
             int TID = Functions.strtoint(octeto[0][1]);
 
-            string messageTIS = CAT21Dict.TrajectoryIntent_TIS[TIS];
-            string messageARC = CAT21Dict.TrajectoryIntent_TID[TID];
-
-            CurrentData.TIS = messageTIS;
-            CurrentData.TID = messageARC;
-
+            dataload.add("TIS", TIS);
+            dataload.add("TID", TID);
 
             if (nextents > 1)
             {
@@ -644,11 +611,8 @@ namespace Library
                 int NAV = Functions.strtoint(octeto[1][0]);
                 int NVB = Functions.strtoint(octeto[1][1]);
 
-                string messageNAV = CAT21Dict.TrajectoryIntent_NAV[NAV];
-                string messageNVB = CAT21Dict.TrajectoryIntent_NVB[NVB];
-
-                CurrentData.NAV = messageNAV;
-                CurrentData.NVB = messageNVB;
+                dataload.add("NAV", NAV);
+                dataload.add("NVB", NVB);
 
                 if (nextents > 2)
                 {
@@ -670,26 +634,20 @@ namespace Library
                     double TOV = Functions.BCD(octeto[13] + octeto[14] + octeto[15], LSBtov);
                     double LSBttr = 0.01; //NM
                     double TTR = Functions.BCD(octeto[16] + octeto[17], LSBttr);
-                    string messageTCA = CAT21Dict.TrajectoryIntent_TCA[TCA];
-                    string messageNC = CAT21Dict.TrajectoryIntent_NC[NC];
-                    string messagePointType = CAT21Dict.TrajectoryIntent_PointType[PointType];
-                    string messageTD = CAT21Dict.TrajectoryIntent_TD[TD];
-                    string messageTRA = CAT21Dict.TrajectoryIntent_TRA[TRA];
-                    string messageTOA = CAT21Dict.TrajectoryIntent_TOA[TOA];
 
-                    CurrentData.REP_21 = REP;
-                    CurrentData.TCA = messageTCA;
-                    CurrentData.NC = messageNC;
-                    CurrentData.TCP = TCP;
-                    CurrentData.Altitude = Altitude;
-                    CurrentData.Latitude = Latitude;
-                    CurrentData.Longitude = Longitude;
-                    CurrentData.PointType = messagePointType;
-                    CurrentData.TD = messageTD;
-                    CurrentData.TRA = messageTRA;
-                    CurrentData.TOA = messageTOA;
-                    CurrentData.TOV = TOV;
-                    CurrentData.TTR = TTR;
+                    dataload.add("REP", REP);
+                    dataload.add("TCA", TCA);
+                    dataload.add("NC", NC);
+                    dataload.add("TCP", TCP);
+                    dataload.add("Altitude Intention", Altitude);
+                    dataload.add("Latitude Intention", Latitude);
+                    dataload.add("Longitude Intention", Longitude);
+                    dataload.add("Point Type", PointType);
+                    dataload.add("TD", TD);
+                    dataload.add("TRA", TRA);
+                    dataload.add("TOA", TOA);
+                    dataload.add("TOV", TOV);
+                    dataload.add("TTR", TTR);
                                        
                 }
             }
@@ -701,26 +659,9 @@ namespace Library
             double Latitude_WGS = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2 + octeto3), LSB);  
             double Longitude_WGS =Functions.BCD(Functions.ComplementoA2(octeto4 + octeto5 + octeto6), LSB);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
-            CurrentData.Latitude_WGS = Latitude_WGS;
-            CurrentData.Longitude_WGS = Longitude_WGS;
+            dataload.add("Latitude WGS84", Math.Round(Latitude_WGS,3));
+            dataload.add("Longitude WGS84", Math.Round(Longitude_WGS,3));
 
-            if (Latitude_WGS > 0)
-            {
-                //NORTE
-            }
-            else
-            {
-                //SUR
-            }
-
-            if (Longitude_WGS > 0)
-            {
-                //ESTE
-            }
-            else
-            { 
-                //OESTE
-            }
         }
 
         // Data Item I021/131: High-Resolution Position in WGS-84 Co-ordinates 
@@ -730,35 +671,19 @@ namespace Library
             double Latitude_WGS_HP = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2 + octeto3 + octeto4), LSB);  
             double Longitude_WGS_HP = Functions.BCD(Functions.ComplementoA2(octeto5 + octeto6 + octeto7 +  octeto8),LSB);   ///// TENEMOS QUE INDICAR EL ESTE Y EL OESTE
 
-            CurrentData.Latitude_WGS_HP = Latitude_WGS_HP;
-            CurrentData.Longitude_WGS_HP = Longitude_WGS_HP;
+            dataload.add("Latitude WGS84 HP", Math.Round(Latitude_WGS_HP,3));
+            dataload.add("Longitude WGS84 HP", Math.Round(Longitude_WGS_HP,3));
 
-            if (Latitude_WGS_HP > 0)
-            {
-                //NORTE
-            }
-            else
-            {
-                //SUR
-            }
-
-            if (Longitude_WGS_HP > 0)
-            {
-                //ESTE
-            }
-            else
-            {
-                //OESTE
-            }
         }
 
         // Data Item I021/132:  Message Amplitude
         private static void MessageAmplitude(string octeto1)
         {
             double LSB = 1; //dBm
-            double MAM = Functions.BCD(Functions.ComplementoA2(octeto1),LSB); 
+            double MAM = Functions.BCD(Functions.ComplementoA2(octeto1),LSB);
 
-            CurrentData.MAM = MAM;
+            dataload.add("Amplitude", MAM);
+
         }
 
         // Data Item I021/140: Geometric Height
@@ -766,7 +691,8 @@ namespace Library
         {
             double LSB = 6.5; //ft
             double GH = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2), LSB);
-            CurrentData.GH = GH;
+
+            dataload.add("Geometric Height", GH);
 
             if(octeto1 + octeto2 == "0111111111111111")
             {
@@ -780,7 +706,8 @@ namespace Library
             double LSB = (double)1 / 4; ; //FL
             double FL = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2),LSB);
 
-            CurrentData.FL_21 = FL;
+            dataload.add("FL", FL);
+
         }
 
         // Data Item I021/146: Selected Altitude
@@ -792,12 +719,9 @@ namespace Library
             double LSB = 25;//ft
             double SelectedAltitude = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(3, 5)+octeto2),LSB); 
 
-            string messageSAS = CAT21Dict.SelectedAltitude_SAS[SAS];
-            string messageARC = CAT21Dict.SelectedAltitude_Source[Source];
-
-            CurrentData.SAS = messageSAS;
-            CurrentData.TID = messageARC;
-            CurrentData.SelectedAltitude = SelectedAltitude;
+            dataload.add("SAS", SAS);
+            dataload.add("TID", Source);
+            dataload.add("Selected Altitude", SelectedAltitude);
         }
 
         // Data Item I021/148:Final State Selected Altitude
@@ -810,14 +734,10 @@ namespace Library
             double LSB = 25; //ft
             double AltitudeFinal = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(3, 5) + octeto2), LSB);
 
-            string messageMV = CAT21Dict.AltitudeFinal_MV[MV];
-            string messageAH = CAT21Dict.AltitudeFinal_AH[AH];
-            string messageAM = CAT21Dict.AltitudeFinal_AM[AM];
-
-            CurrentData.MV = messageMV;
-            CurrentData.AH = messageAH;
-            CurrentData.AM = messageAM;
-            CurrentData.AltitudeFinal = AltitudeFinal;
+            dataload.add("MV", MV);
+            dataload.add("AH", AH);
+            dataload.add("AM", AM);
+            dataload.add("Altitude Final", AltitudeFinal);
         }
 
         // Data Item I021/150: Air Speed
@@ -836,10 +756,8 @@ namespace Library
             
             double AirSpeed = Functions.BCD(octeto1.Substring(2, 7) + octeto2, LSB);
 
-            string messageIM = CAT21Dict.AirSpeed_IM[IM];
-
-            CurrentData.IM = messageIM;
-            CurrentData.AirSpeed = AirSpeed;
+            dataload.add("IM", IM);
+            dataload.add("Air Speed", AirSpeed);
         }
 
         // Data Item I021/151: True Airspeed 
@@ -847,12 +765,11 @@ namespace Library
         {
             int RE = Functions.strtoint(octeto1[0]);
             double LSB = 1; //kt
-            double TrueAirSpeed = Functions.BCD(octeto1.Substring(1, 7) + octeto2, LSB); 
+            double TAS = Functions.BCD(octeto1.Substring(1, 7) + octeto2, LSB); 
 
-            string messageRE = CAT21Dict.TrueAirSpeed_RE[RE];
+            dataload.add("RE", RE);
+            dataload.add("True Airspeed", TAS);
 
-            CurrentData.RE = messageRE;
-            CurrentData.TrueAirSpeed = TrueAirSpeed;
         }
 
         // Data Item I021/152:  Magnetic Heading
@@ -860,7 +777,8 @@ namespace Library
         {
             double LSB = (double)360 / Math.Pow(2, 16);
             double MagneticHeading = Functions.BCD(octeto1 + octeto2, LSB); //BCD
-            CurrentData.MagneticHeading = MagneticHeading;
+
+            dataload.add("Magnetic Heading", MagneticHeading);
         }
 
         // Data Item I021/155: Barometric Vertical Rate
@@ -870,10 +788,8 @@ namespace Library
             double LSB = 6.25; //ft/min
             double BarometricVerticalRate = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(1, 7) + octeto2), LSB);
 
-            string messageRE_VR = CAT21Dict.BarometricVerticalRate_RE[RE_VR];
-
-            CurrentData.RE_VR = messageRE_VR;
-            CurrentData.BarometricVerticalRate = BarometricVerticalRate;
+            dataload.add("RE_VR", RE_VR);
+            dataload.add("Barometric Vertical Rate", BarometricVerticalRate);
         }
 
         // Data Item I021/157: Geometric Vertical Rate
@@ -883,10 +799,8 @@ namespace Library
             double LSB = 6.25; //ft
             double GeometricVerticalRate =Functions.BCD(Functions.ComplementoA2(octeto1.Substring(1, 7) + octeto2), LSB); //BCD
 
-            string messageRE_G = CAT21Dict.GeometricVerticalRate_RE[RE_G];
-
-            CurrentData.RE_G = messageRE_G;
-            CurrentData.GeometricVerticalRate = GeometricVerticalRate;
+            dataload.add("RE_G", RE_G);
+            dataload.add("Geometric Vertical Rate", GeometricVerticalRate);
         }
 
         // Data Item I021/160: Airborne Ground Vector
@@ -898,12 +812,9 @@ namespace Library
             double LSBta = (double)360 / Math.Pow(2, 16); //deg
             double TrackAngle = Functions.BCD(octeto3 + octeto4, LSBta);
 
-
-            string messageRE_A = CAT21Dict.AirborneGroundVector_RE[RE_A];
-
-            CurrentData.RE_A = messageRE_A;
-            CurrentData.GroundSpeed_21 = GroundSpeed;
-            CurrentData.TrackAngle_21 = TrackAngle;
+            dataload.add("RE_A", RE_A);
+            dataload.add("Ground Speed", Math.Round(GroundSpeed,3));
+            dataload.add("Track Angle", Math.Round(TrackAngle,3));
         }
 
         // Data Item I021/161: Track Number
@@ -911,7 +822,7 @@ namespace Library
         {
             int TrackNumber = Functions.bintonum(octeto1.Substring(3, 4) + octeto2);
 
-            CurrentData.TrackNumber_21 = TrackNumber;
+            dataload.add("Track Number", TrackNumber);
         }
 
         // Data Item I021/165: Track Angle Rate
@@ -920,7 +831,7 @@ namespace Library
             double LSB = (double)1 / 32; //deg/s
             double TrackAngleRate = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(5, 2) + octeto2), LSB);
 
-            CurrentData.TrackAngleRate = TrackAngleRate;
+            dataload.add("Track Angle Rate", TrackAngleRate);
         }
 
         // Data Item I021/170: Target Identification
@@ -937,7 +848,7 @@ namespace Library
 
             long C = Convert.ToInt64(C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8);
 
-            CurrentData.TargetIdentification = C;
+            dataload.add("Target Identification", C);
         }
 
         // Data Item I021/200: Target Status
@@ -949,17 +860,11 @@ namespace Library
             int PS = Functions.bintonum(octeto1.Substring(3, 3));
             int SS = Functions.bintonum(octeto1.Substring(6, 2));
 
-            string messageICF = CAT21Dict.TargetStatus_ICF[ICF];
-            string messageLNAV = CAT21Dict.TargetStatus_LNAV[LNAV];
-            string messageME = CAT21Dict.TargetStatus_ME[ME];
-            string messagePS = CAT21Dict.TargetStatus_PS[PS];
-            string messageSS = CAT21Dict.TargetStatus_SS[SS];
-
-            CurrentData.ICF = messageICF;
-            CurrentData.LNAV = messageLNAV;
-            CurrentData.ME = messageME;
-            CurrentData.PS = messagePS;
-            CurrentData.SS = messageSS;
+            dataload.add("ICF", ICF);
+            dataload.add("LNAV", LNAV);
+            dataload.add("ME", ME);
+            dataload.add("PS", PS);
+            dataload.add("SS", SS);
 
         }
 
@@ -969,22 +874,20 @@ namespace Library
             int VNS = Functions.strtoint(octeto1[1]);
             int LTT = Functions.bintonum(octeto1.Substring(5, 3));
 
-            string messageVNS = CAT21Dict.MOPSVersion_VNS[VNS];
-            string messageLTT = CAT21Dict.MOPSVersion_LTT[LTT];
-
-            CurrentData.VNS = messageVNS;
-            CurrentData.LTT = messageLTT;
+            dataload.add("VNS", VNS);
+            dataload.add("LTT", LTT);
 
             if (LTT == 2)
             {
                 int VN = Functions.bintonum(octeto1.Substring(2, 3));
-                string messageVN = CAT21Dict.MOPSVersion_VN[VN];
-                CurrentData.VN = messageVN;
+
+                dataload.add("VN", VN);
 
             }
             else
             {
-                CurrentData.VN = "null";
+                dataload.add("VN", null);
+
             }
         }
 
@@ -1003,7 +906,7 @@ namespace Library
                 double WindSpeed = Functions.BCD(octeto[1] + octeto[2], LSBws);
                 nextents = nextents + 2;
 
-                CurrentData.WindSpeed = WindSpeed;
+                dataload.add("Wind Speed", WindSpeed);
             }
             if (WD==1)
             {
@@ -1011,7 +914,7 @@ namespace Library
                 double WindDirection = Functions.BCD(octeto[nextents] + octeto[nextents+1], LSBwd);
                 nextents = nextents + 2;
 
-                CurrentData.WindDirection = WindDirection;
+                dataload.add("Wind Direction", WindDirection);
             }
             if (TMP == 1)
             {
@@ -1019,7 +922,7 @@ namespace Library
                 double Temperature = Functions.BCD(octeto[nextents] + octeto[nextents + 1], LSBtmp);
                 nextents = nextents + 2;
 
-                CurrentData.Temperature = Temperature;
+                dataload.add("Temperature", Temperature);
             }
             if (TRB == 1)
             {
@@ -1027,7 +930,7 @@ namespace Library
                 int Turbulence = Functions.bintonum(octeto[nextents] + octeto[nextents + 1]);
                 nextents = nextents + 2;
 
-                CurrentData.Turbulence = Turbulence;
+                dataload.add("Turbulence", Turbulence);
             }
 
             Read.sumbyte(nextents);
@@ -1039,7 +942,7 @@ namespace Library
             double LSB = 0.01; //deg
             double RollAngle = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2),LSB); //BCD
 
-            CurrentData.RollAngle = RollAngle;
+            dataload.add("Roll Angle", RollAngle);
         }
 
         // Data Item I021/250: BDS Register Data
@@ -1050,11 +953,10 @@ namespace Library
             float BDS1_BDS = Functions.bintonum(octetos[8].Substring(0,4));
             float BDS2_BDS = Functions.bintonum(octetos[8].Substring(4,4));
 
-
-            CurrentData.REP_BDS = REP_BDS;
-            CurrentData.BDSDATA = BDSDATA;
-            CurrentData.BDS1_BDS = BDS1_BDS;
-            CurrentData.BDS2_BDS = BDS2_BDS;
+            dataload.add("REP_BDS", REP_BDS);
+            dataload.add("BDSDATA", BDSDATA);
+            dataload.add("BDS1_BDS", BDS1_BDS);
+            dataload.add("BDS2_BDS", BDS2_BDS);
 
         }
 
@@ -1071,14 +973,14 @@ namespace Library
             int TID_ACAS = Functions.bintonum(octetos[3].Substring(6,2) + octetos[4] + octetos[5] + octetos[6]);
 
 
-            CurrentData.TYP_21 = TYP;
-            CurrentData.STYP = STYP;
-            CurrentData.ARA = ARA;
-            CurrentData.RAC = RAC;
-            CurrentData.RAT = RAT;
-            CurrentData.MTE = MTE;
-            CurrentData.TTI = TTI;
-            CurrentData.TID_ACAS = TID_ACAS;
+            dataload.add("TYP", TYP);
+            dataload.add("STYP", STYP);
+            dataload.add("ARA", ARA);
+            dataload.add("RAC", RAC);
+            dataload.add("RAT", RAT);
+            dataload.add("MTE", MTE);
+            dataload.add("TTI", TTI);
+            dataload.add("TID_ACAS", TID_ACAS);
         }
 
         // Data Item I021/271:  Surface Capabilities and Characteristics
@@ -1090,20 +992,14 @@ namespace Library
             int RAS = Functions.strtoint(octeto1[5]);
             int IDENT = Functions.strtoint(octeto1[6]);
 
-            string messagePOA = CAT21Dict.SurfaceCapabilities_POA[POA];
-            string messageCDTI = CAT21Dict.SurfaceCapabilities_CDTI[CDTI];
-            string messageB2 = CAT21Dict.SurfaceCapabilities_B2[B2];
-            string messageRAS = CAT21Dict.SurfaceCapabilities_RAS[RAS];
-            string messageIDENT = CAT21Dict.SurfaceCapabilities_IDENT[IDENT];
-
-            CurrentData.POA = messagePOA;
-            CurrentData.CDTI = messageCDTI;
-            CurrentData.B2 = messageB2;
-            CurrentData.RAS = messageRAS;
-            CurrentData.IDENT = messageIDENT;
+            dataload.add("POA", POA);
+            dataload.add("CDTI", CDTI);
+            dataload.add("B2", B2);
+            dataload.add("RAS", RAS);
+            dataload.add("IDENT", IDENT);
 
 
-            int FX1 = octeto1[7];
+            int FX1 = Functions.strtoint(octeto1[7]);
 
             if (FX1 == 1)
             {
@@ -1116,15 +1012,15 @@ namespace Library
         {
             int nextents = 1;
             int n = 1;
-            if (octeto[0][7] == 1)
+            if (Functions.strtoint(octeto[0][7]) == 1)
             {
                 nextents++;
                 n++;
-                if (octeto[1][7] == 1)
+                if (Functions.strtoint(octeto[1][7]) == 1)
                 {
                     nextents++;
                     n++;
-                    if (octeto[2][7] == 1)
+                    if (Functions.strtoint(octeto[2][7]) == 1)
                     {
                         nextents++;
                         n++;
@@ -1134,177 +1030,177 @@ namespace Library
 
             double LSB = 0.1; //s
 
-            if (octeto[0][0] == 1)
+            if (Functions.strtoint(octeto[0][0]) == 1)
             {
                 double AOS_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
-                CurrentData.AOS_value = AOS_value;
+                dataload.add("AOS Value", AOS_value);
             }
-            if (octeto[0][1] == 1)
+            if (Functions.strtoint(octeto[0][1]) == 1)
             {
                 double TRD_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
-                CurrentData.TRD_value = TRD_value;
+                dataload.add("TRD Value", TRD_value);
             }
-            if (octeto[0][2] == 1)
+            if (Functions.strtoint(octeto[0][2]) == 1)
             {
                 
                 double M3A_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
-                CurrentData.M3A_value = M3A_value;
+                dataload.add("M3A Value", M3A_value);
             }
-            if (octeto[0][3] == 1)
+            if (Functions.strtoint(octeto[0][3]) == 1)
             {
                 double QI_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
-                CurrentData.QI_value = QI_value;
+                dataload.add("QI Value", Math.Round(QI_value,3));
             }
-            if (octeto[0][4] == 1)
+            if (Functions.strtoint(octeto[0][4]) == 1)
             {
                 double TI_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
-                CurrentData.TI_value = TI_value;
+                dataload.add("TI Value", TI_value);
             }
-            if (octeto[0][5] == 1)
+            if (Functions.strtoint(octeto[0][5]) == 1)
             {
                 double MAM_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
-                CurrentData.MAM_value = MAM_value;
+                dataload.add("MAM Value", MAM_value);
             }
-            if (octeto[0][6] == 1)
+            if (Functions.strtoint(octeto[0][6]) == 1)
             {
                 double GH_value = Functions.BCD(octeto[n], LSB);
                 n++;
 
-                CurrentData.GH_value = GH_value;
+                dataload.add("GH Value", GH_value);
             }
 
             if (nextents > 1)
             {
-                if (octeto[1][0] == 1)
+                if (Functions.strtoint(octeto[1][0]) == 1)
                 {
                     double FL_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
-                    CurrentData.FL_value = FL_value;
+                    dataload.add("FL Value", FL_value);
                 }
-                if (octeto[1][1] == 1)
+                if (Functions.strtoint(octeto[1][1]) == 1)
                 {
                     double SAL_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
-                    CurrentData.SAL_value = SAL_value;
+                    dataload.add("SAL Value", SAL_value);
                 }
-                if (octeto[1][2] == 1)
+                if (Functions.strtoint(octeto[1][2]) == 1)
                 {
                     double FSA_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
-                    CurrentData.FSA_value = FSA_value;
+                    dataload.add("FSA Value", FSA_value);
                 }
-                if (octeto[1][3] == 1)
+                if (Functions.strtoint(octeto[1][3]) == 1)
                 {
                     double AS_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
-                    CurrentData.AS_value = AS_value;
+                    dataload.add("AS Value", AS_value);
                 }
-                if (octeto[1][4] == 1)
+                if (Functions.strtoint(octeto[1][4]) == 1)
                 {
                     double TAS_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
-                    CurrentData.TAS_value = TAS_value;
+                    dataload.add("TAS Value", TAS_value);
                 }
-                if (octeto[1][5] == 1)
+                if (Functions.strtoint(octeto[1][5]) == 1)
                 {
                     double MH_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
-                    CurrentData.MH_value = MH_value;
+                    dataload.add("MH Value", MH_value);
                 }
-                if (octeto[1][6] == 1)
+                if (Functions.strtoint(octeto[1][6]) == 1)
                 {
                     double BVR_value = Functions.BCD(octeto[n], LSB);
                     n++;
 
-                    CurrentData.BVR_value = BVR_value;
+                    dataload.add("BVR Value", BVR_value);
                 }
 
                 if (nextents > 2)
                 {
-                    if (octeto[2][0] == 1)
+                    if (Functions.strtoint(octeto[2][0]) == 1)
                     {
                         double GVR_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
-                        CurrentData.GVR_value = GVR_value;
+                        dataload.add("GVR Value", GVR_value);
                     }
-                    if (octeto[2][1] == 1)
+                    if (Functions.strtoint(octeto[2][1]) == 1)
                     {
                         double GV_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
-                        CurrentData.GV_value = GV_value;
+                        dataload.add("GV Value", GV_value);
                     }
-                    if (octeto[2][2] == 1)
+                    if (Functions.strtoint(octeto[2][2]) == 1)
                     {
                         double TAR_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
-                        CurrentData.TAR_value = TAR_value;
+                        dataload.add("TAR Value", TAR_value);
                     }
-                    if (octeto[2][3] == 1)
+                    if (Functions.strtoint(octeto[2][3]) == 1)
                     {
                         double TIdentification_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
-                        CurrentData.TIdentification_value = TIdentification_value;
+                        dataload.add("TIdentification Value", TIdentification_value);
                     }
-                    if (octeto[2][4] == 1)
+                    if (Functions.strtoint(octeto[2][4]) == 1)
                     {
                         double TS_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
-                        CurrentData.TS_value = TS_value;
+                        dataload.add("TS Value", TS_value);
                     }
-                    if (octeto[2][5] == 1)
+                    if (Functions.strtoint(octeto[2][5]) == 1)
                     {
                         double MET_value = Functions.BCD(octeto[n], LSB);
                         n++;
 
-                        CurrentData.MET_value = MET_value;
+                        dataload.add("MET Value", MET_value);
                     }
-                    if (octeto[2][6] == 1)
+                    if (Functions.strtoint(octeto[2][6]) == 1)
                     {
                         double ROA_value = Functions.BCD(octeto[n],LSB);
                         n++;
 
-                        CurrentData.ROA_value = ROA_value;
+                        dataload.add("ROA Value", ROA_value);
                     }
 
                     if (nextents > 3)
                     {
 
-                        if (octeto[3][0] == 1)
+                        if (Functions.strtoint(octeto[3][0]) == 1)
                         {
                             double ARA_value = Functions.BCD(octeto[n], LSB);
                             n++;
 
-                            CurrentData.ARA_value = ARA_value;
+                            dataload.add("ARA Value", ARA_value);
                         }
-                        if (octeto[3][1] == 1)
+                        if (Functions.strtoint(octeto[3][1]) == 1)
                         {
                             double SCC_value = Functions.BCD(octeto[n], LSB);
                             n++;
 
-                            CurrentData.SCC_value = SCC_value;
+                            dataload.add("SCC Value", SCC_value);
                         }
                     }
                 }
@@ -1317,7 +1213,7 @@ namespace Library
         {
             float ID = Functions.bintonum(octeto1);
 
-            CurrentData.ID = ID;
+            dataload.add("Receiver ID", ID);
         }
 
         //Data Item RE: Reserved Expansion Field

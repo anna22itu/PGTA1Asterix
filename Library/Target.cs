@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Apache.Arrow;
@@ -97,21 +98,25 @@ namespace Library
 
                 if (dt.Rows[0]["MessageType"].ToString()=="Target Report")
                 {
-                    if (targets.ContainsKey(Convert.ToInt32(dt.Rows[0]["Track Number"])) == false)
+                    if (dt.Columns.Contains("Target Address")==true)
                     {
-                        if (dt.Columns.Contains("Target Address")) //Classifica per target address si esta, i sino per track number
+                        if (targets.ContainsKey(dt.Rows[0]["Target Address"]) == false)
                         {
                             targets[dt.Rows[0]["Target Address"]] = byTarget.Count;
+                            Target target = new Target();
+                            byTarget.Add(target);
+                            index = targets[dt.Rows[0]["Target Address"]];
                         }
-                        else
-                        {
-                            targets[Convert.ToInt32(dt.Rows[0]["Track Number"])] = byTarget.Count;
-                        }
+                        
+                    }
+                    else if (targets.ContainsKey(Convert.ToInt32(dt.Rows[0]["Track Number"])) == false)
+                    {
+                        targets[Convert.ToInt32(dt.Rows[0]["Track Number"])] = byTarget.Count;
                         Target target = new Target();
                         byTarget.Add(target);
+                        index = targets[Convert.ToInt32(dt.Rows[0]["Track Number"])];
                     }
 
-                    index = targets[Convert.ToInt32(dt.Rows[0]["Track Number"])];
                     byTarget[index].dt.Rows.Add();
                     foreach (DataColumn column2 in dt.Columns)
                     {
@@ -125,6 +130,31 @@ namespace Library
                         byTarget[index].dt.Rows[byTarget[index].dt.Rows.Count - 1][column2.ColumnName] = dt.Rows[0][column2.ColumnName];
                     }
                 }
+            }
+
+            else //Es ASD-B
+            {
+                if (targets.ContainsKey(dt.Rows[0]["Target Address"]) == false)
+                {
+                    targets[dt.Rows[0]["Target Address"]] = byTarget.Count;
+                    Target target = new Target();
+                    byTarget.Add(target);
+                }
+
+                int index = targets[dt.Rows[0]["Target Address"]];
+                byTarget[index].dt.Rows.Add();
+                foreach (DataColumn column3 in dt.Columns)
+                {
+                    if (byTarget[index].dt.Columns.Contains(column3.ColumnName) == false)
+                    {
+                        DataColumn col3 = new DataColumn();
+                        col3.DataType = Type.GetType("System.Object");
+                        col3.ColumnName = column3.ColumnName;
+                        byTarget[index].dt.Columns.Add(col3);
+                    }
+                    byTarget[index].dt.Rows[byTarget[index].dt.Rows.Count - 1][column3.ColumnName] = dt.Rows[0][column3.ColumnName];
+                }
+
             }
         }
         public void reset()

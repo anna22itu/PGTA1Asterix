@@ -114,7 +114,7 @@ namespace Library
         static bool isnegative = false;
         public static string ComplementoA2 (string bits)
         {
-            
+            isnegative = false;
             string result;
 
             if (strtoint(bits[0]) == 1) //el resultat és negatiu, cal fer proces
