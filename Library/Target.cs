@@ -105,7 +105,6 @@ namespace Library
                             targets[dt.Rows[0]["Target Address"]] = byTarget.Count;
                             Target target = new Target();
                             byTarget.Add(target);
-                            index = targets[dt.Rows[0]["Target Address"]];
                         }
                         
                     }
@@ -114,6 +113,14 @@ namespace Library
                         targets[Convert.ToInt32(dt.Rows[0]["Track Number"])] = byTarget.Count;
                         Target target = new Target();
                         byTarget.Add(target);
+                        
+                    }
+                    if (dt.Columns.Contains("Target Address") == true)
+                    {
+                        index = targets[dt.Rows[0]["Target Address"]];
+                    }
+                    else
+                    {
                         index = targets[Convert.ToInt32(dt.Rows[0]["Track Number"])];
                     }
 

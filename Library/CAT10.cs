@@ -478,7 +478,6 @@ namespace Library
         public static void TargetIdentification(string[] octetos)
         {
             string STI = octetos[0].Substring(0,2);
-            string STImessage = CAT10Dict.TargetIdentification_STI[STI];
 
             string C1 = octetos[1].Substring(0,6);
             string C1message = CAT10Dict.TargetIdentification_octetos[C1];
@@ -507,7 +506,7 @@ namespace Library
 
             string C = C1message + C2message + C3message + C4message + C5message + C6message + C7message + C8message;
 
-            dataload.add("STI", STImessage);
+            dataload.add("STI", STI);
             dataload.add("Target Identification", C);
         }
 
