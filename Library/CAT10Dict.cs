@@ -81,6 +81,8 @@ namespace Library
         //245
         public static IDictionary<string, string> TargetIdentification_STI = new Dictionary<string, string>() { { "00", "Callsign or registration downlinked from transponde" }, { "01", "Callsign not downlinked from transponde" }, { "10", "Registration not downlinked from transponder" } };
 
+        public static IDictionary<string, string> TargetIdentification_octetos = new Dictionary<string, string>() { { "000100", "A" }, { "001000", "B" }, { "001100", "C" }, { "010000", "D" }, { "010100", "E" }, { "011000", "F" }, { "011100", "G" }, { "100000", "H" }, { "100100", "I" }, { "101000", "J" }, { "101100", "K" }, { "110000", "L" }, { "110100", "M" }, { "111000", "N" } , { "111100", "O" }, { "000010", "P" } , { "000110", "Q" }, { "001010", "R" }, { "001110", "S" }, { "010010", "T" }, { "010110", "U" }, { "011010", "V" }, { "011110", "W" }, { "100010", "X" }, { "100110", "Y" }, { "101010", "Z" }, { "000001", "SP" }, { "000011", "0" }, { "000111", "1" }, { "001011", "2" }, { "001111", "3" }, { "010011", "4" }, { "010111", "5" }, { "011011", "6" }, { "011111", "7" }, { "100011", "8" }, { "100111", "9" } };
+
 
         //300
         public static IDictionary<int, string> VehicleFleetIdentification_VFI = new Dictionary<int, string>() { { 0, "Unknown" }, { 1, "ATC equipment maintenance" }, { 2, "Airport maintenance" }, { 3, "Fire" }, { 4, "Bird scarer" }, { 5, "Snow plough" }, { 6, "Runway sweeper" }, { 7, "Emergency" }, { 8, "Police" }, { 9, "Bus" }, { 10, "Tug (push/tow)" }, { 11, "Grass cutter" }, { 12, "Fuel" }, { 13, "Baggage" }, { 14, "Catering" }, { 15, "Aircraft maintenance" }, { 16, "Flyco(follow me)" } };

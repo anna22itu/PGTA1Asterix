@@ -478,18 +478,36 @@ namespace Library
         public static void TargetIdentification(string[] octetos)
         {
             string STI = octetos[0].Substring(0,2);
-            string C1 = Functions.bintonum(octetos[1].Substring(0,6)).ToString();
-            string C2 = Functions.bintonum(octetos[1].Substring(6, 2) + octetos[2].Substring(0, 4)).ToString();
-            string C3 = Functions.bintonum(octetos[2].Substring(4, 4) + octetos[3].Substring(0, 2)).ToString();
-            string C4 = Functions.bintonum(octetos[3].Substring(2, 6)).ToString();
-            string C5 = Functions.bintonum(octetos[4].Substring(0, 6)).ToString();
-            string C6 = Functions.bintonum(octetos[4].Substring(6, 2) + octetos[5].Substring(0, 4)).ToString();
-            string C7 = Functions.bintonum(octetos[5].Substring(4, 4) + octetos[6].Substring(0, 2)).ToString();
-            string C8 = Functions.bintonum(octetos[6].Substring(2, 6)).ToString();
+            string STImessage = CAT10Dict.TargetIdentification_STI[STI];
 
-            int C = Convert.ToInt32(C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8);
+            string C1 = octetos[1].Substring(0,6);
+            string C1message = CAT10Dict.TargetIdentification_octetos[C1];
 
-            dataload.add("STI", STI);
+            string C2 = octetos[1].Substring(6, 2) + octetos[2].Substring(0, 4);
+            string C2message = CAT10Dict.TargetIdentification_octetos[C2];
+
+            string C3 =octetos[2].Substring(4, 4) + octetos[3].Substring(0, 2);
+            string C3message = CAT10Dict.TargetIdentification_octetos[C3];
+
+            string C4 = octetos[3].Substring(2, 6);
+            string C4message = CAT10Dict.TargetIdentification_octetos[C4];
+
+            string C5 = octetos[4].Substring(0, 6);
+            string C5message = CAT10Dict.TargetIdentification_octetos[C5];
+
+            string C6 = octetos[4].Substring(6, 2) + octetos[5].Substring(0, 4);
+            string C6message = CAT10Dict.TargetIdentification_octetos[C6];
+
+            string C7 = octetos[5].Substring(4, 4) + octetos[6].Substring(0, 2);
+            string C7message = CAT10Dict.TargetIdentification_octetos[C7];
+
+            string C8 = octetos[6].Substring(2, 6);
+            string C8message = CAT10Dict.TargetIdentification_octetos[C8];
+
+
+            string C = C1message + C2message + C3message + C4message + C5message + C6message + C7message + C8message;
+
+            dataload.add("STI", STImessage);
             dataload.add("Target Identification", C);
         }
 

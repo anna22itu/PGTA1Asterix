@@ -596,6 +596,8 @@ namespace Library
 
 
         }
+
+
         // Data Item I021/110: Trajectory Intent
         private static void TrajectoryIntent(string[] octeto, int nextents) //FALTA MIRAR TODOS LOS QUE SON BCD
         {            
@@ -837,16 +839,26 @@ namespace Library
         // Data Item I021/170: Target Identification
         private static void TargetIdentification(string octeto1, string octeto2, string octeto3, string octeto4, string octeto5, string octeto6)
         {
-            string C1 = Functions.bintonum(octeto1.Substring(0, 6)).ToString();
-            string C2 = Functions.bintonum(octeto1.Substring(6, 2) + octeto2.Substring(0, 4)).ToString();
-            string C3 = Functions.bintonum(octeto2.Substring(4, 4) + octeto3.Substring(0, 2)).ToString();
-            string C4 = Functions.bintonum(octeto3.Substring(2, 6)).ToString();
-            string C5 = Functions.bintonum(octeto4.Substring(0, 6)).ToString();
-            string C6 = Functions.bintonum(octeto4.Substring(6, 2) + octeto5.Substring(0, 4)).ToString();
-            string C7 = Functions.bintonum(octeto5.Substring(4, 4) + octeto6.Substring(0, 2)).ToString();
-            string C8 = Functions.bintonum(octeto6.Substring(2, 6)).ToString();
+            string C1 = octeto1.Substring(0, 6);
+            string C2 = octeto1.Substring(6, 2) + octeto2.Substring(0, 4);
+            string C3 = octeto2.Substring(4, 4) + octeto3.Substring(0, 2);
+            string C4 = octeto3.Substring(2, 6);
+            string C5 = octeto4.Substring(0, 6);
+            string C6 = octeto4.Substring(6, 2) + octeto5.Substring(0, 4);
+            string C7 = octeto5.Substring(4, 4) + octeto6.Substring(0, 2);
+            string C8 = octeto6.Substring(2, 6);
+;
+            string C1message = CAT21Dict.TargetIdentification_octetos[C1];
+            string C2message = CAT21Dict.TargetIdentification_octetos[C2];
+            string C3message = CAT21Dict.TargetIdentification_octetos[C3];
+            string C4message = CAT21Dict.TargetIdentification_octetos[C4];
+            string C5message = CAT21Dict.TargetIdentification_octetos[C5];
+            string C6message = CAT21Dict.TargetIdentification_octetos[C6];
+            string C7message = CAT21Dict.TargetIdentification_octetos[C7];
+            string C8message = CAT21Dict.TargetIdentification_octetos[C8];
 
-            long C = Convert.ToInt64(C1 + C2 + C3 + C4 + C5 + C6 + C7 + C8);
+
+            string C = C1message + C2message + C3message + C4message + C5message + C6message + C7message + C8message;
 
             dataload.add("Target Identification", C);
         }

@@ -142,6 +142,9 @@ namespace Library
         // 157
         public static IDictionary<int, string> AirborneGroundVector_RE = new Dictionary<int, string>() { { 0, "Value in defined range" }, { 1, "Value exceeds defined range" } };
 
+        // 170
+        public static IDictionary<string, string> TargetIdentification_octetos = new Dictionary<string, string>() { { "000100", "A" }, { "001000", "B" }, { "001100", "C" }, { "010000", "D" }, { "010100", "E" }, { "011000", "F" }, { "011100", "G" }, { "100000", "H" }, { "100100", "I" }, { "101000", "J" }, { "101100", "K" }, { "110000", "L" }, { "110100", "M" }, { "111000", "N" }, { "111100", "O" }, { "000010", "P" }, { "000110", "Q" }, { "001010", "R" }, { "001110", "S" }, { "010010", "T" }, { "010110", "U" }, { "011010", "V" }, { "011110", "W" }, { "100010", "X" }, { "100110", "Y" }, { "101010", "Z" }, { "000001", "SP" }, { "000011", "0" }, { "000111", "1" }, { "001011", "2" }, { "001111", "3" }, { "010011", "4" }, { "010111", "5" }, { "011011", "6" }, { "011111", "7" }, { "100011", "8" }, { "100111", "9" } };
+
 
         // 200
         public static IDictionary<int, string> TargetStatus_ICF = new Dictionary<int, string>() { { 0, "No intent change active" }, { 1, "Intent change flag raised" } };
