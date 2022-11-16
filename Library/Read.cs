@@ -39,19 +39,19 @@ namespace Library
                     //passem els dos octets del len
                     int length_dataitems = Functions.Len(readBytes[n], readBytes[n + 1]) - 3;
 
-                    string[] fspec_dataitems = Functions.subarray(readBytes, n, length_dataitems);
+                    string[] fspec_dataitems = readBytes[n..(n + length_dataitems)]; //Functions.subarray(readBytes, n, length_dataitems);
 
                     int[] found_di = Functions.Fspec(fspec_dataitems, currentCategory); //retornara un vector de 25 o 42 posicions (25 di pot haver en cat10) amb 1 si hi es, 0 si no hi es
 
-                    string[] dataitems =Functions.subarray(fspec_dataitems,n-3, length_dataitems+3-n); //array dels data items sense el fspec
+                    string[] dataitems = fspec_dataitems[(n - 3)..length_dataitems]; //Functions.subarray(fspec_dataitems,n-3, length_dataitems+3-n); //array dels data items sense el fspec
 
                     sumbyte(-n); //Resetejem la n a 0 per quan cridem DICalling a dataitems
 
                     //Si, a la cat10, al missatge no tenim el primer data item (message type) és un error
-                    if (currentCategory == 10 & found_di[0] == 0)
+                    if (currentCategory == 10 && found_di[0] == 0)
                     {
-                        n = n + dataitems.Length;
-                        readBytes = Functions.subarray(readBytes, n, readBytes.Length - n); //resetejem el readbytes per començar amb n=0 des del següent byte
+                        int m = length_dataitems + 3;
+                        readBytes = readBytes[m..readBytes.Length]; // Functions.subarray(readBytes, n, readBytes.Length - n); //resetejem el readbytes per començar amb n=0 des del següent byte
                         sumbyte(-n);//per resetejar a 0 la n
                         break;
                     }
@@ -88,7 +88,7 @@ namespace Library
                         CAT21.resetdataload();
                     }
                     int l = length_dataitems + 3;
-                    readBytes = Functions.subarray(readBytes, l , readBytes.Length-l); //resetejem el readbytes per començar amb n=0 des del següent byte
+                    readBytes = readBytes[l..readBytes.Length]; //Functions.subarray(readBytes, l , readBytes.Length-l); //resetejem el readbytes per començar amb n=0 des del següent byte
                     sumbyte(-n);//per resetejar a 0 la n
                 }
 

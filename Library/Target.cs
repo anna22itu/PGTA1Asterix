@@ -35,10 +35,14 @@ namespace Library
 
             if (byTarget.Count>0)
             {
+                int i = 0;
                 foreach (Target target in byTarget)
                 {
-                    string name = target.dt.Rows[0]["Track Number"].ToString()+".csv";
+                    
+                    var myKey = targets.FirstOrDefault(x => x.Value == i).Key.ToString();
+                    string name = myKey.ToString()+".csv";
                     target.dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\Data\\" + name);
+                    i++;
                 }
             }            
         }
