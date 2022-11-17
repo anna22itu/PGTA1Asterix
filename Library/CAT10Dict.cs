@@ -82,8 +82,10 @@ namespace Library
         public static IDictionary<string, string> TargetIdentification_STI = new Dictionary<string, string>() { { "00", "Callsign or registration downlinked from transponde" }, { "01", "Callsign not downlinked from transponde" }, { "10", "Registration not downlinked from transponder" } };
 
         public static IDictionary<string, string> TargetIdentification_octetos = new Dictionary<string, string>() { { "000001", "A" }, { "000010", "B" }, { "000011", "C" }, { "000100", "D" }, { "000101", "E" }, { "000110", "F" }, { "000111", "G" }, { "001000", "H" }, { "001001", "I" }, { "001010", "J" }, { "001011", "K" }, { "001100", "L" }, { "001101", "M" }, { "001110", "N" }, { "001111", "O" }, { "010000", "P" }, { "010001", "Q" }, { "010010", "R" }, { "010011", "S" }, { "010100", "T" }, { "010101", "U" }, { "010110", "V" }, { "010111", "W" }, { "011000", "X" }, { "011001", "Y" }, { "011010", "Z" }, { "100000", " " }, { "110000", "0" }, { "110001", "1" }, { "110010", "2" }, { "110011", "3" }, { "110100", "4" }, { "110101", "5" }, { "110110", "6" }, { "110111", "7" }, { "111000", "8" }, { "111001", "9" } };
-       
-        
+
+        public static string[,] TargetIdentification = new string[16, 4] { { "", "P", " ", "0" }, { "A", "Q", "", "1" }, { "B", "R", "", "2" }, { "C", "S", "", "3" }, { "D", "T", "", "4" }, { "E", "U", "", "5" }, { "F", "V", "", "6" }, { "G", "W", "", "7" }, { "H", "X", "", "8" }, { "I", "Y", "", "9" }, { "J", "Z", "", "" }, { "K", "", "", "" }, { "L", "", "", "" }, { "M", "", "", "" }, { "N", "", "", "" }, { "O", "", "", "" } };
+
+
         //300
         public static IDictionary<int, string> VehicleFleetIdentification_VFI = new Dictionary<int, string>() { { 0, "Unknown" }, { 1, "ATC equipment maintenance" }, { 2, "Airport maintenance" }, { 3, "Fire" }, { 4, "Bird scarer" }, { 5, "Snow plough" }, { 6, "Runway sweeper" }, { 7, "Emergency" }, { 8, "Police" }, { 9, "Bus" }, { 10, "Tug (push/tow)" }, { 11, "Grass cutter" }, { 12, "Fuel" }, { 13, "Baggage" }, { 14, "Catering" }, { 15, "Aircraft maintenance" }, { 16, "Flyco(follow me)" } };
 

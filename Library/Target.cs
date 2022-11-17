@@ -44,7 +44,7 @@ namespace Library
                     target.dt.ToCSV("C:\\Users\\alexg\\OneDrive\\UPC\\EETAC\\4A\\PGTA\\Pr1\\Data\\" + name);
                     i++;
                 }
-            }            
+            }
         }
         public Target()
         {
@@ -145,26 +145,32 @@ namespace Library
 
             else //Es ASD-B
             {
-                if (targets.ContainsKey(dt.Rows[0]["Target Address"]) == false)
+                if (dt.Columns.Contains("Target Address"))
                 {
-                    targets[dt.Rows[0]["Target Address"]] = byTarget.Count;
-                    Target target = new Target();
-                    byTarget.Add(target);
-                }
-
-                int index = targets[dt.Rows[0]["Target Address"]];
-                byTarget[index].dt.Rows.Add();
-                foreach (DataColumn column3 in dt.Columns)
-                {
-                    if (byTarget[index].dt.Columns.Contains(column3.ColumnName) == false)
+                    if (targets.ContainsKey(dt.Rows[0]["Target Address"]) == false)
                     {
-                        DataColumn col3 = new DataColumn();
-                        col3.DataType = Type.GetType("System.Object");
-                        col3.ColumnName = column3.ColumnName;
-                        byTarget[index].dt.Columns.Add(col3);
+                        targets[dt.Rows[0]["Target Address"]] = byTarget.Count;
+                        Target target = new Target();
+                        byTarget.Add(target);
                     }
-                    byTarget[index].dt.Rows[byTarget[index].dt.Rows.Count - 1][column3.ColumnName] = dt.Rows[0][column3.ColumnName];
+
+                    int index = targets[dt.Rows[0]["Target Address"]];
+                    byTarget[index].dt.Rows.Add();
+                    foreach (DataColumn column3 in dt.Columns)
+                    {
+                        if (byTarget[index].dt.Columns.Contains(column3.ColumnName) == false)
+                        {
+                            DataColumn col3 = new DataColumn();
+                            col3.DataType = Type.GetType("System.Object");
+                            col3.ColumnName = column3.ColumnName;
+                            byTarget[index].dt.Columns.Add(col3);
+                        }
+                        byTarget[index].dt.Rows[byTarget[index].dt.Rows.Count - 1][column3.ColumnName] = dt.Rows[0][column3.ColumnName];
+                    }
                 }
+                    
+                
+                
 
             }
         }
