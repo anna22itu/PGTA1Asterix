@@ -28,18 +28,19 @@ namespace Library
 
         private static void main()
         {
-            while (readBytes.Length != 0)
+            int alreadyread = 0;
+            while (alreadyread != readBytes.Length) //readBytes.Length != 0
             {
                 //identifiquem la categoria
-                int currentCategory = Functions.bintonum(readBytes[n]);
+                int currentCategory = Functions.bintonum(readBytes[n + alreadyread]);
                 sumbyte(1);
 
                 if (currentCategory == 10 | currentCategory == 21)
                 {
                     //passem els dos octets del len
-                    int length_dataitems = Functions.Len(readBytes[n], readBytes[n + 1]) - 3;
+                    int length_dataitems = Functions.Len(readBytes[n + alreadyread], readBytes[n + 1 + alreadyread]) - 3;
 
-                    string[] fspec_dataitems = readBytes[n..(n + length_dataitems)]; //Functions.subarray(readBytes, n, length_dataitems);
+                    string[] fspec_dataitems = readBytes[(n + alreadyread)..((n + alreadyread) + length_dataitems)]; //Functions.subarray(readBytes, n, length_dataitems);
 
                     int[] found_di = Functions.Fspec(fspec_dataitems, currentCategory); //retornara un vector de 25 o 42 posicions (25 di pot haver en cat10) amb 1 si hi es, 0 si no hi es
 
@@ -51,7 +52,7 @@ namespace Library
                     if (currentCategory == 10 && found_di[0] == 0)
                     {
                         int m = length_dataitems + 3;
-                        readBytes = readBytes[m..readBytes.Length]; // Functions.subarray(readBytes, n, readBytes.Length - n); //resetejem el readbytes per començar amb n=0 des del següent byte
+                        alreadyread = alreadyread + m;
                         sumbyte(-n);//per resetejar a 0 la n
                         break;
                     }
@@ -88,13 +89,15 @@ namespace Library
                         CAT21.resetdataload();
                     }
                     int l = length_dataitems + 3;
-                    readBytes = readBytes[l..readBytes.Length]; //Functions.subarray(readBytes, l , readBytes.Length-l); //resetejem el readbytes per començar amb n=0 des del següent byte
+                    alreadyread = alreadyread + l;
                     sumbyte(-n);//per resetejar a 0 la n
                 }
 
                 else
                 {
-                    //dialog de que hi ha un error amb la categoria o ja veiem que fem potser es corrupte o lo que sigui
+                    int length_catout = Functions.Len(readBytes[n + alreadyread], readBytes[n + 1 + alreadyread]);
+                    alreadyread = alreadyread + length_catout;
+                    sumbyte(-n);//per resetejar a 0 la n
                 }
             }
             Target.export();

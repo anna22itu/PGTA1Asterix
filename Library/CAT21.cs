@@ -146,7 +146,22 @@ namespace Library
 
                 case "QualityIndicators":
 
+                    int nextentsqi = 1;
+                    if (Functions.strtoint(dataitems[n][7]) == 1)
+                    {
+                        nextentsqi++;
+                        if (Functions.strtoint(dataitems[n + 1][7]) == 1)
+                        {
+                            nextentsqi++;
+                            if (Functions.strtoint(dataitems[n + 2][7]) == 1)
+                            {
+                                nextentsqi++;
+                            }
 
+                        }
+                    }
+                    //QualityIndicators(Functions.subarray(dataitems, n, nextentsqi), nextentsqi);
+                    Read.sumbyte(nextentsqi);
 
                     break;
 
@@ -847,15 +862,15 @@ namespace Library
             string C6 = octeto4.Substring(6, 2) + octeto5.Substring(0, 4);
             string C7 = octeto5.Substring(4, 4) + octeto6.Substring(0, 2);
             string C8 = octeto6.Substring(2, 6);
-;
-            string C1message = CAT21Dict.TargetIdentification_octetos[C1];
-            string C2message = CAT21Dict.TargetIdentification_octetos[C2];
-            string C3message = CAT21Dict.TargetIdentification_octetos[C3];
-            string C4message = CAT21Dict.TargetIdentification_octetos[C4];
-            string C5message = CAT21Dict.TargetIdentification_octetos[C5];
-            string C6message = CAT21Dict.TargetIdentification_octetos[C6];
-            string C7message = CAT21Dict.TargetIdentification_octetos[C7];
-            string C8message = CAT21Dict.TargetIdentification_octetos[C8];
+
+            string C1message = CAT21Dict.TargetIdentification[Functions.bintonum(C1[2..]), Functions.bintonum(C1[..2])];
+            string C2message = CAT21Dict.TargetIdentification[Functions.bintonum(C2[2..]), Functions.bintonum(C2[..2])];
+            string C3message = CAT21Dict.TargetIdentification[Functions.bintonum(C3[2..]), Functions.bintonum(C3[..2])];
+            string C4message = CAT21Dict.TargetIdentification[Functions.bintonum(C4[2..]), Functions.bintonum(C4[..2])];
+            string C5message = CAT21Dict.TargetIdentification[Functions.bintonum(C5[2..]), Functions.bintonum(C5[..2])];
+            string C6message = CAT21Dict.TargetIdentification[Functions.bintonum(C6[2..]), Functions.bintonum(C6[..2])];
+            string C7message = CAT21Dict.TargetIdentification[Functions.bintonum(C7[2..]), Functions.bintonum(C7[..2])];
+            string C8message = CAT21Dict.TargetIdentification[Functions.bintonum(C8[2..]), Functions.bintonum(C8[..2])];
 
 
             string C = C1message + C2message + C3message + C4message + C5message + C6message + C7message + C8message;
