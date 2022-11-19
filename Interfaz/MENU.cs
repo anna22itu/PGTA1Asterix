@@ -4,10 +4,10 @@ using Library;
 
 namespace Interfaz
 {
-    public partial class Form1 : Form
+    public partial class MENU : Form
     {
         
-        public Form1()
+        public MENU()
         {
             InitializeComponent();
         }
@@ -32,6 +32,11 @@ namespace Interfaz
         private void button2_Click(object sender, EventArgs e)
         {
             DataTable.export();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

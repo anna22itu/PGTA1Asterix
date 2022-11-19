@@ -1,6 +1,6 @@
 ﻿namespace Interfaz
 {
-    partial class Form1
+    partial class MENU
     {
         /// <summary>
         ///  Required designer variable.

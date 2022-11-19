@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaz", "Interfaz\Interfaz.csproj", "{A8217893-8278-47F2-AE11-C7C044B701E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asterix Decoder", "Interfaz\Asterix Decoder.csproj", "{A8217893-8278-47F2-AE11-C7C044B701E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "Library\Library.csproj", "{4458BAA9-061B-4345-A725-D101BAFCEAE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library", "Library\Library.csproj", "{4458BAA9-061B-4345-A725-D101BAFCEAE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
