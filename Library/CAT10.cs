@@ -9,16 +9,6 @@ namespace Library
 {
     public class CAT10
     {
-        //La funció no ha de retornar res, des del metod ja anem ficant les dades on toquin (objecte avió o lo que sigui)
-        static Target dataload = new Target();
-        public static void resetdataload()
-        {
-            dataload.reset();
-        }
-        public static void loaddata()
-        {
-            dataload.loaddata();
-        }
         public static void DICalling(string Case, string[] dataitems, int n)
         {
             switch (Case)
@@ -232,7 +222,7 @@ namespace Library
         private static void MessageType(string octeto)
         {
             string message = CAT10Dict.MessageType[Functions.bintonum(octeto)];
-            dataload.add("MessageType", message);
+            DataTable.add("MessageType", message);
 
         }
 
@@ -241,8 +231,8 @@ namespace Library
         {
             int SAC = Functions.bintonum(octeto1);
             int SIC = Functions.bintonum(octeto2);
-            dataload.add("SAC", SAC);
-            dataload.add("SIC", SIC);
+            DataTable.add("SAC", SAC);
+            DataTable.add("SIC", SIC);
         }
 
         // Data Item I010/020: Target Report Descriptor
@@ -254,11 +244,11 @@ namespace Library
             int GBS = Functions.strtoint(octeto[0][5]);
             int CRT = Functions.strtoint(octeto[0][6]);
 
-            dataload.add("TYP", TYP);
-            dataload.add("DCR", DCR);
-            dataload.add("CHN", CHN);
-            dataload.add("GBS", GBS);
-            dataload.add("CRT", CRT);
+            DataTable.add("TYP", TYP);
+            DataTable.add("DCR", DCR);
+            DataTable.add("CHN", CHN);
+            DataTable.add("GBS", GBS);
+            DataTable.add("CRT", CRT);
 
             if (nextents > 1)
             {
@@ -269,18 +259,18 @@ namespace Library
                 string LOP = octeto[1].Substring(3, 2);
                 string TOT = octeto[1].Substring(5, 2);
 
-                dataload.add("SIM", SIM);
-                dataload.add("TST", TST);
-                dataload.add("RAB", RAB);
-                dataload.add("LOP", LOP);
-                dataload.add("TOT", TOT);
+                DataTable.add("SIM", SIM);
+                DataTable.add("TST", TST);
+                DataTable.add("RAB", RAB);
+                DataTable.add("LOP", LOP);
+                DataTable.add("TOT", TOT);
 
                 if (nextents > 2)
                 {
                     //Decodification of 2nd extent byte
                     int SPI = Functions.strtoint(octeto[2][0]);
 
-                    dataload.add("SPI", SPI);
+                    DataTable.add("SPI", SPI);
 
                 }
 
@@ -296,8 +286,8 @@ namespace Library
             double rho = Functions.BCD(octetos[0] + octetos[1], LSBrho);
             double theta = Functions.BCD(octetos[2] + octetos[3], LSBtheta);
 
-            dataload.add("rho", rho);
-            dataload.add("theta", Math.Round(theta,3));
+            DataTable.add("rho", rho);
+            DataTable.add("theta", Math.Round(theta,3));
         }
 
         // Data Item I010/041: Position in WGS-84 Co-ordinates
@@ -307,8 +297,8 @@ namespace Library
             double latitude = Functions.BCD(Functions.ComplementoA2(octetos[0] + octetos[1] + octetos[2] + octetos[3]),LSB);
             double longitude = Functions.BCD(Functions.ComplementoA2(octetos[4] + octetos[5] + octetos[6] + octetos[7]),LSB);
 
-            dataload.add("Latitude WGS84", latitude);
-            dataload.add("Longitude WGS84", longitude);
+            DataTable.add("Latitude WGS84", latitude);
+            DataTable.add("Longitude WGS84", longitude);
         }
 
         // Data Item I010/042: Position in Cartesian Co-ordinates
@@ -318,8 +308,8 @@ namespace Library
             double x = Functions.BCD(Functions.ComplementoA2(octetos[0] + octetos[1]),LSB);
             double y = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]),LSB);
 
-            dataload.add("X Cartesian", x);
-            dataload.add("Y Cartesian", y);
+            DataTable.add("X Cartesian", x);
+            DataTable.add("Y Cartesian", y);
         }
 
         // Data Item I010/060: Mode-3/A Code in Octal Representation
@@ -336,10 +326,10 @@ namespace Library
 
             int ABCD = Convert.ToInt32(A+B+C+D);
 
-            dataload.add("Mode3/A V", V);
-            dataload.add("Mode3/A G", G);
-            dataload.add("Mode3/A L", L);
-            dataload.add("Mode3/A ABCD", ABCD);
+            DataTable.add("Mode3/A V", V);
+            DataTable.add("Mode3/A G", G);
+            DataTable.add("Mode3/A L", L);
+            DataTable.add("Mode3/A ABCD", ABCD);
         }
 
         // Data Item I010/090: Flight Level in Binary Representation
@@ -351,9 +341,9 @@ namespace Library
             double LSB = 0.25; //FL
             double FL = Functions.BCD(Functions.ComplementoA2(octeto1.Substring(3) + octeto2),LSB);
 
-            dataload.add("FL V", V);
-            dataload.add("FL G", G);
-            dataload.add("FL", FL);
+            DataTable.add("FL V", V);
+            DataTable.add("FL G", G);
+            DataTable.add("FL", FL);
         }
 
         // Data Item I010/091: Measured Height
@@ -362,7 +352,7 @@ namespace Library
             double LSB = 6.25; //ft
             double Height = Functions.BCD(Functions.ComplementoA2(octeto1 + octeto2), LSB);
 
-            dataload.add("Height", Height);
+            DataTable.add("Height", Height);
         }
 
         // Data Item I010/131: Amplitude of Primary Plot
@@ -370,7 +360,7 @@ namespace Library
         {
             int PAM = Functions.bintonum(octeto1);
 
-            dataload.add("Amplitude", PAM);
+            DataTable.add("Amplitude", PAM);
         }
 
         // Data Item I010/140: Time of Day
@@ -381,7 +371,7 @@ namespace Library
             TimeSpan time = TimeSpan.FromSeconds(TimeOfDay);
             string str = time.ToString(@"hh\:mm\:ss");
 
-            dataload.add("Time of Day", str);
+            DataTable.add("Time of Day", str);
         }
 
         // Data Item I010/161: Track Number
@@ -389,7 +379,7 @@ namespace Library
         {
             int TrackNumber = Functions.bintonum(octeto1[4].ToString() + octeto1[5].ToString() + octeto1[6].ToString() + octeto1[7].ToString() + octeto2);
 
-            dataload.add("Track Number", TrackNumber);
+            DataTable.add("Track Number", TrackNumber);
         }
 
         // Data Item I010/170: Track Status
@@ -402,12 +392,12 @@ namespace Library
             int TCC = Functions.strtoint(octeto[0][5]);
             int STH = Functions.strtoint(octeto[0][6]);
 
-            dataload.add("CNF", CNF);
-            dataload.add("TRE", TRE);
-            dataload.add("CST", CST);
-            dataload.add("MAH", MAH);
-            dataload.add("TCC", TCC);
-            dataload.add("STH", STH);
+            DataTable.add("CNF", CNF);
+            DataTable.add("TRE", TRE);
+            DataTable.add("CST", CST);
+            DataTable.add("MAH", MAH);
+            DataTable.add("TCC", TCC);
+            DataTable.add("STH", STH);
 
             if (nextents > 1)
             {
@@ -416,16 +406,16 @@ namespace Library
                 string DOU = octeto[1].Substring(2,3);
                 string MRS = octeto[1].Substring(5,2);
 
-                dataload.add("TOM", TOM);
-                dataload.add("DOU", DOU);
-                dataload.add("MRS", MRS);
+                DataTable.add("TOM", TOM);
+                DataTable.add("DOU", DOU);
+                DataTable.add("MRS", MRS);
 
                 if (nextents > 2)
                 {
                     //Decodification of 2nd extent byte
                     int GHO = Functions.strtoint(octeto[2][0]);
 
-                    dataload.add("GHO", GHO);
+                    DataTable.add("GHO", GHO);
                 }
             }
         }
@@ -439,8 +429,8 @@ namespace Library
             double GroundSpeed = Functions.BCD(octetos[0] + octetos[1], LSBgs);
             double TrackAngle = Functions.BCD(octetos[2] + octetos[3], LSBta);
 
-            dataload.add("Ground Speed", Math.Round(GroundSpeed,3));
-            dataload.add("Track Angle", Math.Round(TrackAngle,3));
+            DataTable.add("Ground Speed", Math.Round(GroundSpeed,3));
+            DataTable.add("Track Angle", Math.Round(TrackAngle,3));
         }
 
         // Data Item I010/202: Calculated Track Velocity in Cartesian Co-ordinates
@@ -451,8 +441,8 @@ namespace Library
             double Vx = Functions.BCD(Functions.ComplementoA2(octetos[0]+ octetos[1]),LSB);
             double Vy = Functions.BCD(Functions.ComplementoA2(octetos[2]+octetos[3]),LSB);
 
-            dataload.add("Velocity X Cart", Vx);
-            dataload.add("Velocity Y Cart", Vy);
+            DataTable.add("Velocity X Cart", Vx);
+            DataTable.add("Velocity Y Cart", Vy);
         }
 
         // Data Item I010/210: Calculated Acceleration
@@ -463,15 +453,15 @@ namespace Library
             double Ax = Functions.BCD(Functions.ComplementoA2(octeto1),LSB);
             double Ay = Functions.BCD(Functions.ComplementoA2(octeto2),LSB);
 
-            dataload.add("Acceleration X", Ax);
-            dataload.add("Acceleration Y", Ay);
+            DataTable.add("Acceleration X", Ax);
+            DataTable.add("Acceleration Y", Ay);
         }
 
         // Data Item I010/220: Target Address
         public static void TargetAddress(string octeto1, string octeto2, string octeto3)
         {
             string TA = Functions.bintohex(octeto1 + octeto2 + octeto3);
-            dataload.add("Target Address", TA);
+            DataTable.add("Target Address", TA);
         }
 
         // Data Item I010/245: Target Identification
@@ -506,8 +496,8 @@ namespace Library
 
             string C = C1message + C2message + C3message + C4message + C5message + C6message + C7message + C8message;
 
-            dataload.add("STI", STI);
-            dataload.add("Target Identification", C);
+            DataTable.add("STI", STI);
+            DataTable.add("Target Identification", C);
         }
 
         // Data Item I010/250: Mode S MB Data
@@ -518,10 +508,10 @@ namespace Library
             float BDS1 = Functions.bintonum(octetos[8].Substring(0,4));
             float BDS2 = Functions.bintonum(octetos[8].Substring(4,4));
 
-            dataload.add("REP", REP);
-            dataload.add("MB", MB);
-            dataload.add("BDS1", BDS1);
-            dataload.add("BDS2", BDS2);
+            DataTable.add("REP", REP);
+            DataTable.add("MB", MB);
+            DataTable.add("BDS1", BDS1);
+            DataTable.add("BDS2", BDS2);
         }
 
         // Data Item I010/270: Target Size & Orientation
@@ -530,7 +520,7 @@ namespace Library
             double LSBlen = 1; //m
             double Length = Functions.BCD(octeto[0].Substring(0,7),LSBlen);
 
-            dataload.add("Target Length", Length);
+            DataTable.add("Target Length", Length);
 
             if (nextents > 1)
             {
@@ -538,7 +528,7 @@ namespace Library
                 double LSBori = (double)360 / 128; //deg
                 double Orientation = Functions.BCD(octeto[1].Substring(0, 7), LSBori);
 
-                dataload.add("Target Orientation", Math.Round(Orientation,3));
+                DataTable.add("Target Orientation", Math.Round(Orientation,3));
 
                 if (nextents > 2)
                 {
@@ -546,7 +536,7 @@ namespace Library
                     double LSBwid = 1; //m
                     double Width = Functions.BCD(octeto[2].Substring(0, 7), LSBwid);
 
-                    dataload.add("Target Width", Width);
+                    DataTable.add("Target Width", Width);
                 }
             }
         }
@@ -560,9 +550,9 @@ namespace Library
             double LSBdtheta = 0.15; //deg
             double DTHETA = Functions.BCD(octeto3,LSBdtheta);
 
-            dataload.add("Presence N", N);
-            dataload.add("Presence rho", DRHO);
-            dataload.add("Presence theta", DTHETA);
+            DataTable.add("Presence N", N);
+            DataTable.add("Presence rho", DRHO);
+            DataTable.add("Presence theta", DTHETA);
         }
 
         // Data Item I010/300: Vehicle Fleet Identification
@@ -570,7 +560,7 @@ namespace Library
         {
             int VFI = Functions.bintonum(octeto1);
 
-            dataload.add("Vehicle Fleet Identification", VFI);
+            DataTable.add("Vehicle Fleet Identification", VFI);
         }
 
         // Data Item I010/310: Pre-programmed Message
@@ -579,8 +569,8 @@ namespace Library
             int TRB = Functions.strtoint(octeto1[0]);
             int MSG = Functions.bintonum(octeto1.Substring(1,7));
 
-            dataload.add("TRB", TRB);
-            dataload.add("MSG", MSG);
+            DataTable.add("TRB", TRB);
+            DataTable.add("MSG", MSG);
         }
 
         // Data Item I010/500: Standard Deviation of Position
@@ -591,9 +581,9 @@ namespace Library
             double SDy = Functions.BCD(octetos[1], LSB);
             double Covariance = Functions.BCD(Functions.ComplementoA2(octetos[2] + octetos[3]),LSB);
 
-            dataload.add("Standard Deviation X", SDx);
-            dataload.add("Standard Deviation y", SDy);
-            dataload.add("Covariance", Covariance);
+            DataTable.add("Standard Deviation X", SDx);
+            DataTable.add("Standard Deviation y", SDy);
+            DataTable.add("Covariance", Covariance);
         }
 
         // Data Item I010/550: System Status
@@ -605,11 +595,11 @@ namespace Library
             int DIV = Functions.strtoint(octeto1[4]);
             int TTF = Functions.strtoint(octeto1[5]);
 
-            dataload.add("NOGO", NOGO);
-            dataload.add("OVL", OVL);
-            dataload.add("TSV", TSV);
-            dataload.add("DIV", DIV);
-            dataload.add("TTF", TTF);
+            DataTable.add("NOGO", NOGO);
+            DataTable.add("OVL", OVL);
+            DataTable.add("TSV", TSV);
+            DataTable.add("DIV", DIV);
+            DataTable.add("TTF", TTF);
         }
 
     }

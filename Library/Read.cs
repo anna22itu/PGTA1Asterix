@@ -57,6 +57,7 @@ namespace Library
                         break;
                     }
 
+
                     //Depenent del found_di, utilitzem la funcio DICalling per cridar el metod que toca
                     for (int i=0; i < found_di.Length; i++){
                         
@@ -77,17 +78,7 @@ namespace Library
                         
                     }
 
-                    //un cop acabat de llegir tot el data block
-                    if (currentCategory == 10)
-                    {
-                        CAT10.loaddata();
-                        CAT10.resetdataload();
-                    }
-                    else
-                    {
-                        CAT21.loaddata();
-                        CAT21.resetdataload();
-                    }
+                    DataTable.nextblock();
                     int l = length_dataitems + 3;
                     alreadyread = alreadyread + l;
                     sumbyte(-n);//per resetejar a 0 la n
@@ -100,7 +91,6 @@ namespace Library
                     sumbyte(-n);//per resetejar a 0 la n
                 }
             }
-            Target.export();
         }
 
         public static void setReadBytes(string str)
