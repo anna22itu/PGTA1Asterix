@@ -9,7 +9,7 @@ namespace Library
 {
     public static class CSVUtlity {
 
-        public static void ToCSV(this DataTable dtDataTable, string strFilePath)
+        public static void ToCSV(this System.Data.DataTable dtDataTable, string strFilePath)
         {
             StreamWriter sw = new StreamWriter(strFilePath, false);
             //headers    
