@@ -25,6 +25,7 @@ namespace Asterix_Decoder
             Refresh();
             textBoxSearch.Visible = false;
             btnSearch.Visible = false;
+            panelFilter.Visible = false;
         }
 
         public void Refresh()
@@ -34,7 +35,7 @@ namespace Asterix_Decoder
 
         private void iconBtnDTClose_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
         }
 
         private void iconBtnDTMax_Click(object sender, EventArgs e)
@@ -57,7 +58,12 @@ namespace Asterix_Decoder
         private void iconPictureBoxSearch_Click(object sender, EventArgs e)
         {
             textBoxSearch.Visible = true;
-            btnSearch.Visible = false;
+            btnSearch.Visible = true;
+        }
+
+        private void iconBtnFlecha_MouseEnter(object sender, EventArgs e)
+        {
+            panelFilter.Visible = true;
         }
     }
 }

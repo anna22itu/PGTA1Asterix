@@ -1,6 +1,6 @@
 using System.IO;
 using Library;
-
+using Asterix_Decoder;
 
 
 namespace Interfaz
@@ -80,9 +80,13 @@ namespace Interfaz
 
         private void BtnDataView_Click(object sender, EventArgs e)
         {
-            //TableData.Show();
+            Form f = new TableData();
+            f.Show();
         }
 
-      
+        private void iconBtnMenuBars_Click(object sender, EventArgs e)
+        {
+            panelMENU.Hide();
+        }
     }
 }

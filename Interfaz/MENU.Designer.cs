@@ -57,7 +57,7 @@
             this.iconPictureBox4 = new FontAwesome.Sharp.IconPictureBox();
             this.iconPictureBox5 = new FontAwesome.Sharp.IconPictureBox();
             this.panelIcon = new System.Windows.Forms.Panel();
-            this.iconPictureBox7 = new FontAwesome.Sharp.IconPictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BtnAboutUs = new System.Windows.Forms.Button();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
@@ -81,7 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).BeginInit();
             this.panelIcon.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
@@ -204,26 +204,22 @@
             // 
             // panelIcon
             // 
-            this.panelIcon.Controls.Add(this.iconPictureBox7);
+            this.panelIcon.Controls.Add(this.pictureBox1);
             this.panelIcon.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelIcon.Location = new System.Drawing.Point(0, 0);
             this.panelIcon.Name = "panelIcon";
-            this.panelIcon.Size = new System.Drawing.Size(220, 90);
+            this.panelIcon.Size = new System.Drawing.Size(220, 110);
             this.panelIcon.TabIndex = 11;
             // 
-            // iconPictureBox7
+            // pictureBox1
             // 
-            this.iconPictureBox7.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.iconPictureBox7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.iconPictureBox7.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconPictureBox7.IconColor = System.Drawing.SystemColors.ControlText;
-            this.iconPictureBox7.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox7.IconSize = 60;
-            this.iconPictureBox7.Location = new System.Drawing.Point(15, 15);
-            this.iconPictureBox7.Name = "iconPictureBox7";
-            this.iconPictureBox7.Size = new System.Drawing.Size(190, 60);
-            this.iconPictureBox7.TabIndex = 8;
-            this.iconPictureBox7.TabStop = false;
+            this.pictureBox1.Image = global::AsterixDecoder.Properties.Resources.AD_3;
+            this.pictureBox1.Location = new System.Drawing.Point(10, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(200, 90);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
             // 
             // BtnAboutUs
             // 
@@ -385,6 +381,7 @@
             this.iconBtnMenuBars.Size = new System.Drawing.Size(45, 45);
             this.iconBtnMenuBars.TabIndex = 8;
             this.iconBtnMenuBars.UseVisualStyleBackColor = true;
+            this.iconBtnMenuBars.Click += new System.EventHandler(this.iconBtnMenuBars_Click);
             // 
             // labelHora
             // 
@@ -441,7 +438,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).EndInit();
             this.panelIcon.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
@@ -451,8 +448,6 @@
             this.PerformLayout();
 
         }
-
-        private FontAwesome.Sharp.IconPictureBox iconPictureBox7;
         private FontAwesome.Sharp.IconButton iconBtnMenuBars;
         private Label labelHora;
         private System.Windows.Forms.Timer Hora;
@@ -465,5 +460,6 @@
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
         private FontAwesome.Sharp.IconButton iconBtnMinus;
         private FontAwesome.Sharp.IconButton iconBtnMaximize;
+        private PictureBox pictureBox1;
     }
 }

@@ -25,6 +25,8 @@
         private void InitializeComponent()
         {
             this.guna2PanelDT = new Guna.UI2.WinForms.Guna2Panel();
+            this.iconBtnFlecha = new FontAwesome.Sharp.IconButton();
+            this.btnFiltrar = new System.Windows.Forms.Button();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.iconPictureBoxSearch = new FontAwesome.Sharp.IconPictureBox();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -32,11 +34,13 @@
             this.iconBtnDTMax = new FontAwesome.Sharp.IconButton();
             this.iconBtnDTClose = new FontAwesome.Sharp.IconButton();
             this.dataGridDT = new System.Windows.Forms.DataGridView();
-            this.btnFiltrar = new System.Windows.Forms.Button();
-            this.iconBtnFlecha = new FontAwesome.Sharp.IconButton();
+            this.panelFilter = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.guna2PanelDT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBoxSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDT)).BeginInit();
+            this.panelFilter.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2PanelDT
@@ -53,8 +57,32 @@
             this.guna2PanelDT.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2PanelDT.Location = new System.Drawing.Point(0, 0);
             this.guna2PanelDT.Name = "guna2PanelDT";
-            this.guna2PanelDT.Size = new System.Drawing.Size(881, 65);
+            this.guna2PanelDT.Size = new System.Drawing.Size(1140, 65);
             this.guna2PanelDT.TabIndex = 0;
+            // 
+            // iconBtnFlecha
+            // 
+            this.iconBtnFlecha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnFlecha.IconChar = FontAwesome.Sharp.IconChar.ChevronDown;
+            this.iconBtnFlecha.IconColor = System.Drawing.Color.Black;
+            this.iconBtnFlecha.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnFlecha.IconSize = 25;
+            this.iconBtnFlecha.Location = new System.Drawing.Point(589, 10);
+            this.iconBtnFlecha.Name = "iconBtnFlecha";
+            this.iconBtnFlecha.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.iconBtnFlecha.Size = new System.Drawing.Size(45, 45);
+            this.iconBtnFlecha.TabIndex = 13;
+            this.iconBtnFlecha.UseVisualStyleBackColor = true;
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFiltrar.Location = new System.Drawing.Point(523, 10);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(60, 45);
+            this.btnFiltrar.TabIndex = 12;
+            this.btnFiltrar.Text = "Filter";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
             // 
             // textBoxSearch
             // 
@@ -95,7 +123,7 @@
             this.iconButton1.IconColor = System.Drawing.Color.Black;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton1.IconSize = 30;
-            this.iconButton1.Location = new System.Drawing.Point(746, 0);
+            this.iconButton1.Location = new System.Drawing.Point(1005, 0);
             this.iconButton1.Name = "iconButton1";
             this.iconButton1.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.iconButton1.Size = new System.Drawing.Size(45, 65);
@@ -111,7 +139,7 @@
             this.iconBtnDTMax.IconColor = System.Drawing.Color.Black;
             this.iconBtnDTMax.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnDTMax.IconSize = 30;
-            this.iconBtnDTMax.Location = new System.Drawing.Point(791, 0);
+            this.iconBtnDTMax.Location = new System.Drawing.Point(1050, 0);
             this.iconBtnDTMax.Name = "iconBtnDTMax";
             this.iconBtnDTMax.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
             this.iconBtnDTMax.Size = new System.Drawing.Size(45, 65);
@@ -127,7 +155,7 @@
             this.iconBtnDTClose.IconColor = System.Drawing.Color.Black;
             this.iconBtnDTClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnDTClose.IconSize = 25;
-            this.iconBtnDTClose.Location = new System.Drawing.Point(836, 0);
+            this.iconBtnDTClose.Location = new System.Drawing.Point(1095, 0);
             this.iconBtnDTClose.Name = "iconBtnDTClose";
             this.iconBtnDTClose.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.iconBtnDTClose.Size = new System.Drawing.Size(45, 65);
@@ -138,42 +166,48 @@
             // dataGridDT
             // 
             this.dataGridDT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridDT.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridDT.Location = new System.Drawing.Point(0, 65);
+            this.dataGridDT.Location = new System.Drawing.Point(25, 90);
             this.dataGridDT.Name = "dataGridDT";
             this.dataGridDT.RowHeadersWidth = 62;
             this.dataGridDT.RowTemplate.Height = 33;
-            this.dataGridDT.Size = new System.Drawing.Size(881, 455);
+            this.dataGridDT.Size = new System.Drawing.Size(1090, 585);
             this.dataGridDT.TabIndex = 1;
             // 
-            // btnFiltrar
+            // panelFilter
             // 
-            this.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFiltrar.Location = new System.Drawing.Point(523, 10);
-            this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(60, 45);
-            this.btnFiltrar.TabIndex = 12;
-            this.btnFiltrar.Text = "Filter";
-            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.panelFilter.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panelFilter.Controls.Add(this.button2);
+            this.panelFilter.Controls.Add(this.button1);
+            this.panelFilter.Location = new System.Drawing.Point(523, 61);
+            this.panelFilter.Name = "panelFilter";
+            this.panelFilter.Size = new System.Drawing.Size(213, 101);
+            this.panelFilter.TabIndex = 14;
             // 
-            // iconBtnFlecha
+            // button2
             // 
-            this.iconBtnFlecha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnFlecha.IconChar = FontAwesome.Sharp.IconChar.ChevronDown;
-            this.iconBtnFlecha.IconColor = System.Drawing.Color.Black;
-            this.iconBtnFlecha.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnFlecha.IconSize = 25;
-            this.iconBtnFlecha.Location = new System.Drawing.Point(589, 10);
-            this.iconBtnFlecha.Name = "iconBtnFlecha";
-            this.iconBtnFlecha.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.iconBtnFlecha.Size = new System.Drawing.Size(45, 45);
-            this.iconBtnFlecha.TabIndex = 13;
-            this.iconBtnFlecha.UseVisualStyleBackColor = true;
+            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button2.Location = new System.Drawing.Point(0, 34);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(213, 39);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(213, 34);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // TableData
             // 
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(881, 520);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(1140, 700);
+            this.Controls.Add(this.panelFilter);
             this.Controls.Add(this.dataGridDT);
             this.Controls.Add(this.guna2PanelDT);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -183,6 +217,7 @@
             this.guna2PanelDT.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBoxSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDT)).EndInit();
+            this.panelFilter.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -197,5 +232,8 @@
         private TextBox textBoxSearch;
         private Button btnFiltrar;
         private FontAwesome.Sharp.IconButton iconBtnFlecha;
+        private Panel panelFilter;
+        private Button button2;
+        private Button button1;
     }
 }
