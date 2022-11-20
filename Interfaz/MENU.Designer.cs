@@ -32,7 +32,7 @@
         private Button BtnLoadFile;
         private Button BtnExportFile;
         private Panel panelMENU;
-        private Panel panel1;
+        private Panel panelBarraArriba;
         private Button BtnMapView;
         private Button BtnAboutUs;
         private Button BtnDataView;
@@ -52,13 +52,6 @@
             this.BtnExportFile = new System.Windows.Forms.Button();
             this.panelMENU = new System.Windows.Forms.Panel();
             this.iconPictureBox6 = new FontAwesome.Sharp.IconPictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.iconBtnCross = new FontAwesome.Sharp.IconButton();
-            this.labelCurrentFilenameResponse = new System.Windows.Forms.Label();
-            this.iconBtnMaxim = new FontAwesome.Sharp.IconButton();
-            this.labelCurrentFile = new System.Windows.Forms.Label();
-            this.iconButtonMinimize = new FontAwesome.Sharp.IconButton();
-            this.iconBtnMenuBars = new FontAwesome.Sharp.IconButton();
             this.BtnExit = new System.Windows.Forms.Button();
             this.BtnDataView = new System.Windows.Forms.Button();
             this.iconPictureBox4 = new FontAwesome.Sharp.IconPictureBox();
@@ -70,14 +63,21 @@
             this.iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
             this.BtnMapView = new System.Windows.Forms.Button();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
+            this.panelBarraArriba = new System.Windows.Forms.Panel();
+            this.iconBtnMinus = new FontAwesome.Sharp.IconButton();
+            this.iconBtnMaximize = new FontAwesome.Sharp.IconButton();
+            this.iconBtnCross = new FontAwesome.Sharp.IconButton();
+            this.labelCurrentFilenameResponse = new System.Windows.Forms.Label();
+            this.labelCurrentFile = new System.Windows.Forms.Label();
+            this.iconBtnMenuBars = new FontAwesome.Sharp.IconButton();
             this.labelHora = new System.Windows.Forms.Label();
             this.Hora = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).BeginInit();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).BeginInit();
             this.panelIcon.SuspendLayout();
@@ -85,6 +85,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
+            this.panelBarraArriba.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnLoadFile
@@ -111,6 +112,7 @@
             this.BtnExportFile.TabIndex = 4;
             this.BtnExportFile.Text = "EXPORT FILE";
             this.BtnExportFile.UseVisualStyleBackColor = true;
+            this.BtnExportFile.Click += new System.EventHandler(this.BtnExportFile_Click);
             // 
             // panelMENU
             // 
@@ -131,7 +133,7 @@
             this.panelMENU.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMENU.Location = new System.Drawing.Point(0, 0);
             this.panelMENU.Name = "panelMENU";
-            this.panelMENU.Size = new System.Drawing.Size(220, 801);
+            this.panelMENU.Size = new System.Drawing.Size(220, 800);
             this.panelMENU.TabIndex = 6;
             // 
             // iconPictureBox6
@@ -148,94 +150,6 @@
             this.iconPictureBox6.TabIndex = 9;
             this.iconPictureBox6.TabStop = false;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.panel1.Controls.Add(this.iconBtnCross);
-            this.panel1.Controls.Add(this.labelCurrentFilenameResponse);
-            this.panel1.Controls.Add(this.labelCurrentFile);
-            this.panel1.Controls.Add(this.iconBtnMenuBars);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(220, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1157, 65);
-            this.panel1.TabIndex = 7;
-            // 
-            // iconBtnCross
-            // 
-            this.iconBtnCross.Dock = System.Windows.Forms.DockStyle.Right;
-            this.iconBtnCross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnCross.IconChar = FontAwesome.Sharp.IconChar.X;
-            this.iconBtnCross.IconColor = System.Drawing.Color.Black;
-            this.iconBtnCross.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnCross.IconSize = 25;
-            this.iconBtnCross.Location = new System.Drawing.Point(1112, 0);
-            this.iconBtnCross.Name = "iconBtnCross";
-            this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.iconBtnCross.Size = new System.Drawing.Size(45, 65);
-            this.iconBtnCross.TabIndex = 11;
-            this.iconBtnCross.UseVisualStyleBackColor = true;
-            // 
-            // labelCurrentFilenameResponse
-            // 
-            this.labelCurrentFilenameResponse.AutoSize = true;
-            this.labelCurrentFilenameResponse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(470, 19);
-            this.labelCurrentFilenameResponse.Name = "labelCurrentFilenameResponse";
-            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 28);
-            this.labelCurrentFilenameResponse.TabIndex = 10;
-            // 
-            // iconBtnMaxim
-            // 
-            this.iconBtnMaxim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnMaxim.IconChar = FontAwesome.Sharp.IconChar.Expand;
-            this.iconBtnMaxim.IconColor = System.Drawing.Color.Black;
-            this.iconBtnMaxim.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnMaxim.IconSize = 35;
-            this.iconBtnMaxim.Location = new System.Drawing.Point(1124, 155);
-            this.iconBtnMaxim.Name = "iconBtnMaxim";
-            this.iconBtnMaxim.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.iconBtnMaxim.Size = new System.Drawing.Size(45, 45);
-            this.iconBtnMaxim.TabIndex = 10;
-            this.iconBtnMaxim.UseVisualStyleBackColor = true;
-            // 
-            // labelCurrentFile
-            // 
-            this.labelCurrentFile.AutoSize = true;
-            this.labelCurrentFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFile.Location = new System.Drawing.Point(184, 17);
-            this.labelCurrentFile.Name = "labelCurrentFile";
-            this.labelCurrentFile.Size = new System.Drawing.Size(256, 28);
-            this.labelCurrentFile.TabIndex = 9;
-            this.labelCurrentFile.Text = "THE CURRENT FILENAME IS:";
-            // 
-            // iconButtonMinimize
-            // 
-            this.iconButtonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButtonMinimize.IconChar = FontAwesome.Sharp.IconChar.Minus;
-            this.iconButtonMinimize.IconColor = System.Drawing.Color.Black;
-            this.iconButtonMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButtonMinimize.IconSize = 35;
-            this.iconButtonMinimize.Location = new System.Drawing.Point(1039, 155);
-            this.iconButtonMinimize.Name = "iconButtonMinimize";
-            this.iconButtonMinimize.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.iconButtonMinimize.Size = new System.Drawing.Size(45, 45);
-            this.iconButtonMinimize.TabIndex = 9;
-            this.iconButtonMinimize.UseVisualStyleBackColor = true;
-            // 
-            // iconBtnMenuBars
-            // 
-            this.iconBtnMenuBars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnMenuBars.IconChar = FontAwesome.Sharp.IconChar.BarChart;
-            this.iconBtnMenuBars.IconColor = System.Drawing.Color.Black;
-            this.iconBtnMenuBars.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnMenuBars.IconSize = 45;
-            this.iconBtnMenuBars.Location = new System.Drawing.Point(20, 10);
-            this.iconBtnMenuBars.Name = "iconBtnMenuBars";
-            this.iconBtnMenuBars.Size = new System.Drawing.Size(45, 45);
-            this.iconBtnMenuBars.TabIndex = 8;
-            this.iconBtnMenuBars.UseVisualStyleBackColor = true;
-            // 
             // BtnExit
             // 
             this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -245,6 +159,7 @@
             this.BtnExit.TabIndex = 10;
             this.BtnExit.Text = "EXIT";
             this.BtnExit.UseVisualStyleBackColor = true;
+            this.BtnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // BtnDataView
             // 
@@ -369,11 +284,107 @@
             this.iconPictureBox2.TabIndex = 12;
             this.iconPictureBox2.TabStop = false;
             // 
+            // panelBarraArriba
+            // 
+            this.panelBarraArriba.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panelBarraArriba.Controls.Add(this.iconBtnMinus);
+            this.panelBarraArriba.Controls.Add(this.iconBtnMaximize);
+            this.panelBarraArriba.Controls.Add(this.iconBtnCross);
+            this.panelBarraArriba.Controls.Add(this.labelCurrentFilenameResponse);
+            this.panelBarraArriba.Controls.Add(this.labelCurrentFile);
+            this.panelBarraArriba.Controls.Add(this.iconBtnMenuBars);
+            this.panelBarraArriba.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelBarraArriba.Location = new System.Drawing.Point(220, 0);
+            this.panelBarraArriba.Name = "panelBarraArriba";
+            this.panelBarraArriba.Size = new System.Drawing.Size(1220, 65);
+            this.panelBarraArriba.TabIndex = 7;
+            // 
+            // iconBtnMinus
+            // 
+            this.iconBtnMinus.Dock = System.Windows.Forms.DockStyle.Right;
+            this.iconBtnMinus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnMinus.IconChar = FontAwesome.Sharp.IconChar.Minus;
+            this.iconBtnMinus.IconColor = System.Drawing.Color.Black;
+            this.iconBtnMinus.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnMinus.IconSize = 30;
+            this.iconBtnMinus.Location = new System.Drawing.Point(1085, 0);
+            this.iconBtnMinus.Name = "iconBtnMinus";
+            this.iconBtnMinus.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            this.iconBtnMinus.Size = new System.Drawing.Size(45, 65);
+            this.iconBtnMinus.TabIndex = 11;
+            this.iconBtnMinus.UseVisualStyleBackColor = true;
+            this.iconBtnMinus.Click += new System.EventHandler(this.iconBtnMinus_Click);
+            // 
+            // iconBtnMaximize
+            // 
+            this.iconBtnMaximize.Dock = System.Windows.Forms.DockStyle.Right;
+            this.iconBtnMaximize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnMaximize.Flip = FontAwesome.Sharp.FlipOrientation.Horizontal;
+            this.iconBtnMaximize.IconChar = FontAwesome.Sharp.IconChar.Expand;
+            this.iconBtnMaximize.IconColor = System.Drawing.Color.Black;
+            this.iconBtnMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnMaximize.IconSize = 30;
+            this.iconBtnMaximize.Location = new System.Drawing.Point(1130, 0);
+            this.iconBtnMaximize.Name = "iconBtnMaximize";
+            this.iconBtnMaximize.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
+            this.iconBtnMaximize.Size = new System.Drawing.Size(45, 65);
+            this.iconBtnMaximize.TabIndex = 12;
+            this.iconBtnMaximize.UseVisualStyleBackColor = true;
+            this.iconBtnMaximize.Click += new System.EventHandler(this.iconBtnMaximize_Click);
+            // 
+            // iconBtnCross
+            // 
+            this.iconBtnCross.Dock = System.Windows.Forms.DockStyle.Right;
+            this.iconBtnCross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnCross.IconChar = FontAwesome.Sharp.IconChar.X;
+            this.iconBtnCross.IconColor = System.Drawing.Color.Black;
+            this.iconBtnCross.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnCross.IconSize = 25;
+            this.iconBtnCross.Location = new System.Drawing.Point(1175, 0);
+            this.iconBtnCross.Name = "iconBtnCross";
+            this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.iconBtnCross.Size = new System.Drawing.Size(45, 65);
+            this.iconBtnCross.TabIndex = 11;
+            this.iconBtnCross.UseVisualStyleBackColor = true;
+            this.iconBtnCross.Click += new System.EventHandler(this.iconBtnCross_Click);
+            // 
+            // labelCurrentFilenameResponse
+            // 
+            this.labelCurrentFilenameResponse.AutoSize = true;
+            this.labelCurrentFilenameResponse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(470, 19);
+            this.labelCurrentFilenameResponse.Name = "labelCurrentFilenameResponse";
+            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 28);
+            this.labelCurrentFilenameResponse.TabIndex = 10;
+            // 
+            // labelCurrentFile
+            // 
+            this.labelCurrentFile.AutoSize = true;
+            this.labelCurrentFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCurrentFile.Location = new System.Drawing.Point(184, 17);
+            this.labelCurrentFile.Name = "labelCurrentFile";
+            this.labelCurrentFile.Size = new System.Drawing.Size(256, 28);
+            this.labelCurrentFile.TabIndex = 9;
+            this.labelCurrentFile.Text = "THE CURRENT FILENAME IS:";
+            // 
+            // iconBtnMenuBars
+            // 
+            this.iconBtnMenuBars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnMenuBars.IconChar = FontAwesome.Sharp.IconChar.BarChart;
+            this.iconBtnMenuBars.IconColor = System.Drawing.Color.Black;
+            this.iconBtnMenuBars.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnMenuBars.IconSize = 45;
+            this.iconBtnMenuBars.Location = new System.Drawing.Point(20, 10);
+            this.iconBtnMenuBars.Name = "iconBtnMenuBars";
+            this.iconBtnMenuBars.Size = new System.Drawing.Size(45, 45);
+            this.iconBtnMenuBars.TabIndex = 8;
+            this.iconBtnMenuBars.UseVisualStyleBackColor = true;
+            // 
             // labelHora
             // 
             this.labelHora.AutoSize = true;
             this.labelHora.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelHora.Location = new System.Drawing.Point(1240, 97);
+            this.labelHora.Location = new System.Drawing.Point(1274, 100);
             this.labelHora.Name = "labelHora";
             this.labelHora.Size = new System.Drawing.Size(99, 41);
             this.labelHora.TabIndex = 8;
@@ -399,17 +410,21 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
+            // guna2DragControl1
+            // 
+            this.guna2DragControl1.DockIndicatorTransparencyValue = 0.6D;
+            this.guna2DragControl1.TargetControl = this.panelBarraArriba;
+            this.guna2DragControl1.UseTransparentDrag = true;
+            // 
             // MENU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1377, 801);
+            this.ClientSize = new System.Drawing.Size(1440, 800);
             this.Controls.Add(this.labelHora);
-            this.Controls.Add(this.iconBtnMaxim);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelBarraArriba);
             this.Controls.Add(this.panelMENU);
-            this.Controls.Add(this.iconButtonMinimize);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MENU";
@@ -417,8 +432,6 @@
             this.Text = "MENU";
             this.panelMENU.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).EndInit();
             this.panelIcon.ResumeLayout(false);
@@ -426,6 +439,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
+            this.panelBarraArriba.ResumeLayout(false);
+            this.panelBarraArriba.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -438,10 +453,11 @@
         private Label labelCurrentFile;
         private Label labelCurrentFilenameResponse;
         private FontAwesome.Sharp.IconButton iconBtnCross;
-        private FontAwesome.Sharp.IconButton iconBtnMaxim;
-        private FontAwesome.Sharp.IconButton iconButtonMinimize;
         private OpenFileDialog openFileDialog1;
         private ContextMenuStrip contextMenuStrip1;
         private NotifyIcon notifyIcon1;
+        private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
+        private FontAwesome.Sharp.IconButton iconBtnMinus;
+        private FontAwesome.Sharp.IconButton iconBtnMaximize;
     }
 }

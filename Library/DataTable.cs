@@ -32,7 +32,7 @@ namespace Library
             datait = new object[193];
         }
 
-        public static void export()
+        public static bool export()
         {
             string path = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName; // return the application.exe current folder
             string name = DateTime.Now.ToString(@"ddMMyyyyhhmmtt");
@@ -40,30 +40,39 @@ namespace Library
             StreamWriter sw = new StreamWriter(fileName, false);
 
             //headers
-            string headers = "";
-            foreach (string item in dataitems)
+            try
             {
-                headers = headers + item + ";";
-            }
-            sw.WriteLine(headers);
-
-            foreach (object[] datablock in TotalItems)
-            {
-                string data = "";
-                foreach (object item in datablock)
+                string headers = "";
+                foreach (string item in dataitems)
                 {
-                    if(item != null)
-                    {
-                        data = data + item.ToString() + ";";
-                    }
-                    else
-                    {
-                        data = data + ";";
-                    }
+                    headers = headers + item + ";";
                 }
-                sw.WriteLine(data);
+                sw.WriteLine(headers);
+
+                foreach (object[] datablock in TotalItems)
+                {
+                    string data = "";
+                    foreach (object item in datablock)
+                    {
+                        if (item != null)
+                        {
+                            data = data + item.ToString() + ";";
+                        }
+                        else
+                        {
+                            data = data + ";";
+                        }
+                    }
+                    sw.WriteLine(data);
+                }
+                sw.Close();
+                return true;
             }
-            sw.Close();
+            catch
+            {
+                return false;
+            }
+     
         }
 
 
