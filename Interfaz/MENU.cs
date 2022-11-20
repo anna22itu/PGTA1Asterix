@@ -2,6 +2,7 @@ using System.IO;
 using Library;
 
 
+
 namespace Interfaz
 {
     public partial class MENU : Form
@@ -76,5 +77,12 @@ namespace Interfaz
                 MessageBox.Show("ERROR: EL Fichero no se ha exportado correctamente.");
             }
         }
+
+        private void BtnDataView_Click(object sender, EventArgs e)
+        {
+            TableData.Show();
+        }
+
+      
     }
 }

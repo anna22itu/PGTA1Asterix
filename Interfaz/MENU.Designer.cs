@@ -146,6 +146,7 @@
             this.iconPictureBox6.IconSize = 45;
             this.iconPictureBox6.Location = new System.Drawing.Point(20, 280);
             this.iconPictureBox6.Name = "iconPictureBox6";
+            this.iconPictureBox6.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.iconPictureBox6.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBox6.TabIndex = 9;
             this.iconPictureBox6.TabStop = false;
@@ -170,6 +171,7 @@
             this.BtnDataView.TabIndex = 10;
             this.BtnDataView.Text = "DATA VIEW";
             this.BtnDataView.UseVisualStyleBackColor = true;
+            this.BtnDataView.Click += new System.EventHandler(this.BtnDataView_Click);
             // 
             // iconPictureBox4
             // 
@@ -181,6 +183,7 @@
             this.iconPictureBox4.IconSize = 45;
             this.iconPictureBox4.Location = new System.Drawing.Point(20, 420);
             this.iconPictureBox4.Name = "iconPictureBox4";
+            this.iconPictureBox4.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.iconPictureBox4.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBox4.TabIndex = 14;
             this.iconPictureBox4.TabStop = false;
@@ -242,6 +245,7 @@
             this.iconPictureBox1.IconSize = 45;
             this.iconPictureBox1.Location = new System.Drawing.Point(20, 350);
             this.iconPictureBox1.Name = "iconPictureBox1";
+            this.iconPictureBox1.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.iconPictureBox1.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBox1.TabIndex = 11;
             this.iconPictureBox1.TabStop = false;
@@ -256,6 +260,7 @@
             this.iconPictureBox3.IconSize = 45;
             this.iconPictureBox3.Location = new System.Drawing.Point(20, 210);
             this.iconPictureBox3.Name = "iconPictureBox3";
+            this.iconPictureBox3.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
             this.iconPictureBox3.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBox3.TabIndex = 13;
             this.iconPictureBox3.TabStop = false;
@@ -280,6 +285,7 @@
             this.iconPictureBox2.IconSize = 45;
             this.iconPictureBox2.Location = new System.Drawing.Point(20, 140);
             this.iconPictureBox2.Name = "iconPictureBox2";
+            this.iconPictureBox2.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.iconPictureBox2.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBox2.TabIndex = 12;
             this.iconPictureBox2.TabStop = false;
