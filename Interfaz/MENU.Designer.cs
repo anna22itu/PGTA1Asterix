@@ -29,8 +29,6 @@
 
 
         #endregion
-
-        private OpenFileDialog openFileDialog1;
         private Button BtnLoadFile;
         private Button BtnExportFile;
         private Panel panelMENU;
@@ -38,7 +36,7 @@
         private Button BtnMapView;
         private Button BtnAboutUs;
         private Button BtnDataView;
-        private Panel panel2;
+        private Panel panelIcon;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox3;
@@ -50,43 +48,44 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.BtnLoadFile = new System.Windows.Forms.Button();
             this.BtnExportFile = new System.Windows.Forms.Button();
             this.panelMENU = new System.Windows.Forms.Panel();
             this.iconPictureBox6 = new FontAwesome.Sharp.IconPictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.iconBtnCross = new FontAwesome.Sharp.IconButton();
+            this.labelCurrentFilenameResponse = new System.Windows.Forms.Label();
+            this.iconBtnMaxim = new FontAwesome.Sharp.IconButton();
+            this.labelCurrentFile = new System.Windows.Forms.Label();
+            this.iconButtonMinimize = new FontAwesome.Sharp.IconButton();
+            this.iconBtnMenuBars = new FontAwesome.Sharp.IconButton();
             this.BtnExit = new System.Windows.Forms.Button();
             this.BtnDataView = new System.Windows.Forms.Button();
             this.iconPictureBox4 = new FontAwesome.Sharp.IconPictureBox();
             this.iconPictureBox5 = new FontAwesome.Sharp.IconPictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelIcon = new System.Windows.Forms.Panel();
             this.iconPictureBox7 = new FontAwesome.Sharp.IconPictureBox();
             this.BtnAboutUs = new System.Windows.Forms.Button();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.iconPictureBox3 = new FontAwesome.Sharp.IconPictureBox();
             this.BtnMapView = new System.Windows.Forms.Button();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.labelCurrentFilenameResponse = new System.Windows.Forms.Label();
-            this.labelCurrentFile = new System.Windows.Forms.Label();
-            this.iconBtnMenuBars = new FontAwesome.Sharp.IconButton();
             this.labelHora = new System.Windows.Forms.Label();
             this.Hora = new System.Windows.Forms.Timer(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).BeginInit();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.panelIcon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // BtnLoadFile
             // 
@@ -122,7 +121,7 @@
             this.panelMENU.Controls.Add(this.BtnExportFile);
             this.panelMENU.Controls.Add(this.iconPictureBox4);
             this.panelMENU.Controls.Add(this.iconPictureBox5);
-            this.panelMENU.Controls.Add(this.panel2);
+            this.panelMENU.Controls.Add(this.panelIcon);
             this.panelMENU.Controls.Add(this.BtnAboutUs);
             this.panelMENU.Controls.Add(this.iconPictureBox1);
             this.panelMENU.Controls.Add(this.iconPictureBox3);
@@ -132,7 +131,7 @@
             this.panelMENU.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMENU.Location = new System.Drawing.Point(0, 0);
             this.panelMENU.Name = "panelMENU";
-            this.panelMENU.Size = new System.Drawing.Size(220, 808);
+            this.panelMENU.Size = new System.Drawing.Size(220, 801);
             this.panelMENU.TabIndex = 6;
             // 
             // iconPictureBox6
@@ -148,6 +147,94 @@
             this.iconPictureBox6.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBox6.TabIndex = 9;
             this.iconPictureBox6.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panel1.Controls.Add(this.iconBtnCross);
+            this.panel1.Controls.Add(this.labelCurrentFilenameResponse);
+            this.panel1.Controls.Add(this.labelCurrentFile);
+            this.panel1.Controls.Add(this.iconBtnMenuBars);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(220, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1157, 65);
+            this.panel1.TabIndex = 7;
+            // 
+            // iconBtnCross
+            // 
+            this.iconBtnCross.Dock = System.Windows.Forms.DockStyle.Right;
+            this.iconBtnCross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnCross.IconChar = FontAwesome.Sharp.IconChar.X;
+            this.iconBtnCross.IconColor = System.Drawing.Color.Black;
+            this.iconBtnCross.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnCross.IconSize = 25;
+            this.iconBtnCross.Location = new System.Drawing.Point(1112, 0);
+            this.iconBtnCross.Name = "iconBtnCross";
+            this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.iconBtnCross.Size = new System.Drawing.Size(45, 65);
+            this.iconBtnCross.TabIndex = 11;
+            this.iconBtnCross.UseVisualStyleBackColor = true;
+            // 
+            // labelCurrentFilenameResponse
+            // 
+            this.labelCurrentFilenameResponse.AutoSize = true;
+            this.labelCurrentFilenameResponse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(470, 19);
+            this.labelCurrentFilenameResponse.Name = "labelCurrentFilenameResponse";
+            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 28);
+            this.labelCurrentFilenameResponse.TabIndex = 10;
+            // 
+            // iconBtnMaxim
+            // 
+            this.iconBtnMaxim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnMaxim.IconChar = FontAwesome.Sharp.IconChar.Expand;
+            this.iconBtnMaxim.IconColor = System.Drawing.Color.Black;
+            this.iconBtnMaxim.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnMaxim.IconSize = 35;
+            this.iconBtnMaxim.Location = new System.Drawing.Point(1124, 155);
+            this.iconBtnMaxim.Name = "iconBtnMaxim";
+            this.iconBtnMaxim.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
+            this.iconBtnMaxim.Size = new System.Drawing.Size(45, 45);
+            this.iconBtnMaxim.TabIndex = 10;
+            this.iconBtnMaxim.UseVisualStyleBackColor = true;
+            // 
+            // labelCurrentFile
+            // 
+            this.labelCurrentFile.AutoSize = true;
+            this.labelCurrentFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCurrentFile.Location = new System.Drawing.Point(184, 17);
+            this.labelCurrentFile.Name = "labelCurrentFile";
+            this.labelCurrentFile.Size = new System.Drawing.Size(256, 28);
+            this.labelCurrentFile.TabIndex = 9;
+            this.labelCurrentFile.Text = "THE CURRENT FILENAME IS:";
+            // 
+            // iconButtonMinimize
+            // 
+            this.iconButtonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButtonMinimize.IconChar = FontAwesome.Sharp.IconChar.Minus;
+            this.iconButtonMinimize.IconColor = System.Drawing.Color.Black;
+            this.iconButtonMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButtonMinimize.IconSize = 35;
+            this.iconButtonMinimize.Location = new System.Drawing.Point(1039, 155);
+            this.iconButtonMinimize.Name = "iconButtonMinimize";
+            this.iconButtonMinimize.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            this.iconButtonMinimize.Size = new System.Drawing.Size(45, 45);
+            this.iconButtonMinimize.TabIndex = 9;
+            this.iconButtonMinimize.UseVisualStyleBackColor = true;
+            // 
+            // iconBtnMenuBars
+            // 
+            this.iconBtnMenuBars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnMenuBars.IconChar = FontAwesome.Sharp.IconChar.BarChart;
+            this.iconBtnMenuBars.IconColor = System.Drawing.Color.Black;
+            this.iconBtnMenuBars.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnMenuBars.IconSize = 45;
+            this.iconBtnMenuBars.Location = new System.Drawing.Point(20, 10);
+            this.iconBtnMenuBars.Name = "iconBtnMenuBars";
+            this.iconBtnMenuBars.Size = new System.Drawing.Size(45, 45);
+            this.iconBtnMenuBars.TabIndex = 8;
+            this.iconBtnMenuBars.UseVisualStyleBackColor = true;
             // 
             // BtnExit
             // 
@@ -197,14 +284,14 @@
             this.iconPictureBox5.TabIndex = 8;
             this.iconPictureBox5.TabStop = false;
             // 
-            // panel2
+            // panelIcon
             // 
-            this.panel2.Controls.Add(this.iconPictureBox7);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(220, 90);
-            this.panel2.TabIndex = 11;
+            this.panelIcon.Controls.Add(this.iconPictureBox7);
+            this.panelIcon.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelIcon.Location = new System.Drawing.Point(0, 0);
+            this.panelIcon.Name = "panelIcon";
+            this.panelIcon.Size = new System.Drawing.Size(220, 90);
+            this.panelIcon.TabIndex = 11;
             // 
             // iconPictureBox7
             // 
@@ -282,50 +369,6 @@
             this.iconPictureBox2.TabIndex = 12;
             this.iconPictureBox2.TabStop = false;
             // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.panel1.Controls.Add(this.labelCurrentFilenameResponse);
-            this.panel1.Controls.Add(this.labelCurrentFile);
-            this.panel1.Controls.Add(this.iconBtnMenuBars);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(220, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1156, 65);
-            this.panel1.TabIndex = 7;
-            // 
-            // labelCurrentFilenameResponse
-            // 
-            this.labelCurrentFilenameResponse.AutoSize = true;
-            this.labelCurrentFilenameResponse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(470, 19);
-            this.labelCurrentFilenameResponse.Name = "labelCurrentFilenameResponse";
-            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 28);
-            this.labelCurrentFilenameResponse.TabIndex = 10;
-            // 
-            // labelCurrentFile
-            // 
-            this.labelCurrentFile.AutoSize = true;
-            this.labelCurrentFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFile.Location = new System.Drawing.Point(184, 17);
-            this.labelCurrentFile.Name = "labelCurrentFile";
-            this.labelCurrentFile.Size = new System.Drawing.Size(256, 28);
-            this.labelCurrentFile.TabIndex = 9;
-            this.labelCurrentFile.Text = "THE CURRENT FILENAME IS:";
-            // 
-            // iconBtnMenuBars
-            // 
-            this.iconBtnMenuBars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnMenuBars.IconChar = FontAwesome.Sharp.IconChar.BarChart;
-            this.iconBtnMenuBars.IconColor = System.Drawing.Color.Black;
-            this.iconBtnMenuBars.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnMenuBars.IconSize = 45;
-            this.iconBtnMenuBars.Location = new System.Drawing.Point(20, 10);
-            this.iconBtnMenuBars.Name = "iconBtnMenuBars";
-            this.iconBtnMenuBars.Size = new System.Drawing.Size(45, 45);
-            this.iconBtnMenuBars.TabIndex = 8;
-            this.iconBtnMenuBars.UseVisualStyleBackColor = true;
-            // 
             // labelHora
             // 
             this.labelHora.AutoSize = true;
@@ -341,29 +384,48 @@
             this.Hora.Enabled = true;
             this.Hora.Tick += new System.EventHandler(this.Hora_Tick);
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
             // MENU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1376, 808);
+            this.ClientSize = new System.Drawing.Size(1377, 801);
             this.Controls.Add(this.labelHora);
+            this.Controls.Add(this.iconBtnMaxim);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelMENU);
+            this.Controls.Add(this.iconButtonMinimize);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MENU";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MENU";
             this.panelMENU.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).EndInit();
-            this.panel2.ResumeLayout(false);
+            this.panelIcon.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,5 +437,11 @@
         private System.Windows.Forms.Timer Hora;
         private Label labelCurrentFile;
         private Label labelCurrentFilenameResponse;
+        private FontAwesome.Sharp.IconButton iconBtnCross;
+        private FontAwesome.Sharp.IconButton iconBtnMaxim;
+        private FontAwesome.Sharp.IconButton iconButtonMinimize;
+        private OpenFileDialog openFileDialog1;
+        private ContextMenuStrip contextMenuStrip1;
+        private NotifyIcon notifyIcon1;
     }
 }
