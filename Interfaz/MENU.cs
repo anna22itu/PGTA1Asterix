@@ -1,7 +1,7 @@
 using System.IO;
 using Library;
 using Asterix_Decoder;
-
+using AsterixDecoder;
 
 namespace Interfaz
 {
@@ -61,7 +61,8 @@ namespace Interfaz
 
         private void BtnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Form f = new SeguridadClose();
+            f.Show();
         }
 
         private void BtnExportFile_Click(object sender, EventArgs e)
@@ -87,6 +88,12 @@ namespace Interfaz
         private void iconBtnMenuBars_Click(object sender, EventArgs e)
         {
             panelMENU.Hide();
+        }
+
+        private void BtnAboutUs_Click(object sender, EventArgs e)
+        {
+            Form f = new AboutUs();
+            f.Show();
         }
     }
 }

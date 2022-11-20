@@ -230,6 +230,7 @@
             this.BtnAboutUs.TabIndex = 9;
             this.BtnAboutUs.Text = "ABOUT US";
             this.BtnAboutUs.UseVisualStyleBackColor = true;
+            this.BtnAboutUs.Click += new System.EventHandler(this.BtnAboutUs_Click);
             // 
             // iconPictureBox1
             // 
