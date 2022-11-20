@@ -80,7 +80,7 @@ namespace Interfaz
 
         private void BtnDataView_Click(object sender, EventArgs e)
         {
-            TableData.Show();
+            //TableData.Show();
         }
 
       

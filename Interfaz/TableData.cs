@@ -18,6 +18,20 @@ namespace Asterix_Decoder
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
 
+        
+
+        private void TableData_Load(object sender, EventArgs e)
+        {
+            Refresh();
+            textBoxSearch.Visible = false;
+            btnSearch.Visible = false;
+        }
+
+        public void Refresh()
+        {
+
+        }
+
         private void iconBtnDTClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -35,9 +49,15 @@ namespace Asterix_Decoder
             }
         }
 
-        private void iconBtnDTMin_Click(object sender, EventArgs e)
+        private void iconButton1_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void iconPictureBoxSearch_Click(object sender, EventArgs e)
+        {
+            textBoxSearch.Visible = true;
+            btnSearch.Visible = false;
         }
     }
 }
