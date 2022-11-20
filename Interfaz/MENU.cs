@@ -21,6 +21,7 @@ namespace Interfaz
                 string bitString = BitConverter.ToString(fileBytes);
                 Read.setReadBytes(bitString);
                 MessageBox.Show("EL Fichero se ha cargado correctamente.");
+                labelCurrentFilenameResponse.Text = filename;
             }
             else
             {
@@ -33,5 +34,7 @@ namespace Interfaz
         {
             labelHora.Text = DateTime.Now.ToLongTimeString();
         }
+
+        
     }
 }

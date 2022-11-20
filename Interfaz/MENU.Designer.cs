@@ -67,6 +67,8 @@
             this.BtnMapView = new System.Windows.Forms.Button();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelCurrentFilenameResponse = new System.Windows.Forms.Label();
+            this.labelCurrentFile = new System.Windows.Forms.Label();
             this.iconBtnMenuBars = new FontAwesome.Sharp.IconButton();
             this.labelHora = new System.Windows.Forms.Label();
             this.Hora = new System.Windows.Forms.Timer(this.components);
@@ -283,12 +285,33 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panel1.Controls.Add(this.labelCurrentFilenameResponse);
+            this.panel1.Controls.Add(this.labelCurrentFile);
             this.panel1.Controls.Add(this.iconBtnMenuBars);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(220, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1156, 65);
             this.panel1.TabIndex = 7;
+            // 
+            // labelCurrentFilenameResponse
+            // 
+            this.labelCurrentFilenameResponse.AutoSize = true;
+            this.labelCurrentFilenameResponse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(470, 19);
+            this.labelCurrentFilenameResponse.Name = "labelCurrentFilenameResponse";
+            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 28);
+            this.labelCurrentFilenameResponse.TabIndex = 10;
+            // 
+            // labelCurrentFile
+            // 
+            this.labelCurrentFile.AutoSize = true;
+            this.labelCurrentFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCurrentFile.Location = new System.Drawing.Point(184, 17);
+            this.labelCurrentFile.Name = "labelCurrentFile";
+            this.labelCurrentFile.Size = new System.Drawing.Size(256, 28);
+            this.labelCurrentFile.TabIndex = 9;
+            this.labelCurrentFile.Text = "THE CURRENT FILENAME IS:";
             // 
             // iconBtnMenuBars
             // 
@@ -306,11 +329,12 @@
             // labelHora
             // 
             this.labelHora.AutoSize = true;
-            this.labelHora.Location = new System.Drawing.Point(1226, 105);
+            this.labelHora.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelHora.Location = new System.Drawing.Point(1240, 97);
             this.labelHora.Name = "labelHora";
-            this.labelHora.Size = new System.Drawing.Size(59, 25);
+            this.labelHora.Size = new System.Drawing.Size(99, 41);
             this.labelHora.TabIndex = 8;
-            this.labelHora.Text = "label1";
+            this.labelHora.Text = "HORA";
             // 
             // Hora
             // 
@@ -339,6 +363,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -348,5 +373,7 @@
         private FontAwesome.Sharp.IconButton iconBtnMenuBars;
         private Label labelHora;
         private System.Windows.Forms.Timer Hora;
+        private Label labelCurrentFile;
+        private Label labelCurrentFilenameResponse;
     }
 }
