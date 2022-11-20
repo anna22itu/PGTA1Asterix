@@ -7,7 +7,8 @@ namespace Interfaz
 {
     public partial class MENU : Form
     {
-        
+        public bool result = true;
+
         public MENU()
         {
             InitializeComponent();
@@ -87,7 +88,17 @@ namespace Interfaz
 
         private void iconBtnMenuBars_Click(object sender, EventArgs e)
         {
-            panelMENU.Hide();
+
+            if (result== true)
+            {
+                panelMENU.Hide();
+                result = false;
+            }
+            else
+            {
+                panelMENU.Show();
+                result = true;
+            }
         }
 
         private void BtnAboutUs_Click(object sender, EventArgs e)
