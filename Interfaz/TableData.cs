@@ -108,5 +108,6 @@ namespace Asterix_Decoder
             panelFilter.Visible = true;
         }
 
+        
     }
 }

@@ -2,6 +2,7 @@ using System.IO;
 using Library;
 using Asterix_Decoder;
 using AsterixDecoder;
+using System.Windows.Forms;
 
 namespace Interfaz
 {
@@ -84,6 +85,9 @@ namespace Interfaz
         private void BtnDataView_Click(object sender, EventArgs e)
         {
             Form f = new TableData();
+            
+            MessageBox.Show("La tabla de datos se està cargando. Esto podria tardar algunos minutos."); 
+            
             f.Show();
         }
 

@@ -92,9 +92,10 @@
             // 
             this.BtnLoadFile.BackColor = System.Drawing.Color.CornflowerBlue;
             this.BtnLoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnLoadFile.Location = new System.Drawing.Point(56, 84);
+            this.BtnLoadFile.Location = new System.Drawing.Point(80, 140);
+            this.BtnLoadFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnLoadFile.Name = "BtnLoadFile";
-            this.BtnLoadFile.Size = new System.Drawing.Size(84, 27);
+            this.BtnLoadFile.Size = new System.Drawing.Size(120, 45);
             this.BtnLoadFile.TabIndex = 3;
             this.BtnLoadFile.Text = "OPEN FILE";
             this.BtnLoadFile.UseVisualStyleBackColor = false;
@@ -104,9 +105,10 @@
             // 
             this.BtnExportFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnExportFile.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnExportFile.Location = new System.Drawing.Point(56, 126);
+            this.BtnExportFile.Location = new System.Drawing.Point(80, 210);
+            this.BtnExportFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnExportFile.Name = "BtnExportFile";
-            this.BtnExportFile.Size = new System.Drawing.Size(84, 27);
+            this.BtnExportFile.Size = new System.Drawing.Size(120, 45);
             this.BtnExportFile.TabIndex = 4;
             this.BtnExportFile.Text = "EXPORT FILE";
             this.BtnExportFile.UseVisualStyleBackColor = true;
@@ -130,9 +132,8 @@
             this.panelMENU.Controls.Add(this.iconPictureBox2);
             this.panelMENU.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMENU.Location = new System.Drawing.Point(0, 0);
-            this.panelMENU.Margin = new System.Windows.Forms.Padding(2);
             this.panelMENU.Name = "panelMENU";
-            this.panelMENU.Size = new System.Drawing.Size(154, 480);
+            this.panelMENU.Size = new System.Drawing.Size(220, 800);
             this.panelMENU.TabIndex = 6;
             // 
             // iconPictureBox6
@@ -142,22 +143,20 @@
             this.iconPictureBox6.IconChar = FontAwesome.Sharp.IconChar.Table;
             this.iconPictureBox6.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox6.IconSize = 27;
-            this.iconPictureBox6.Location = new System.Drawing.Point(14, 168);
-            this.iconPictureBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.iconPictureBox6.IconSize = 45;
+            this.iconPictureBox6.Location = new System.Drawing.Point(20, 280);
             this.iconPictureBox6.Name = "iconPictureBox6";
-            this.iconPictureBox6.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.iconPictureBox6.Size = new System.Drawing.Size(32, 27);
+            this.iconPictureBox6.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.iconPictureBox6.Size = new System.Drawing.Size(46, 45);
             this.iconPictureBox6.TabIndex = 9;
             this.iconPictureBox6.TabStop = false;
             // 
             // BtnExit
             // 
             this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnExit.Location = new System.Drawing.Point(56, 442);
-            this.BtnExit.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnExit.Location = new System.Drawing.Point(80, 737);
             this.BtnExit.Name = "BtnExit";
-            this.BtnExit.Size = new System.Drawing.Size(84, 27);
+            this.BtnExit.Size = new System.Drawing.Size(120, 45);
             this.BtnExit.TabIndex = 10;
             this.BtnExit.Text = "EXIT";
             this.BtnExit.UseVisualStyleBackColor = true;
@@ -166,10 +165,9 @@
             // BtnDataView
             // 
             this.BtnDataView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDataView.Location = new System.Drawing.Point(56, 168);
-            this.BtnDataView.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnDataView.Location = new System.Drawing.Point(80, 280);
             this.BtnDataView.Name = "BtnDataView";
-            this.BtnDataView.Size = new System.Drawing.Size(84, 27);
+            this.BtnDataView.Size = new System.Drawing.Size(120, 45);
             this.BtnDataView.TabIndex = 10;
             this.BtnDataView.Text = "DATA VIEW";
             this.BtnDataView.UseVisualStyleBackColor = true;
@@ -182,12 +180,11 @@
             this.iconPictureBox4.IconChar = FontAwesome.Sharp.IconChar.AddressBook;
             this.iconPictureBox4.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox4.IconSize = 27;
-            this.iconPictureBox4.Location = new System.Drawing.Point(14, 252);
-            this.iconPictureBox4.Margin = new System.Windows.Forms.Padding(2);
+            this.iconPictureBox4.IconSize = 45;
+            this.iconPictureBox4.Location = new System.Drawing.Point(20, 420);
             this.iconPictureBox4.Name = "iconPictureBox4";
-            this.iconPictureBox4.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.iconPictureBox4.Size = new System.Drawing.Size(32, 27);
+            this.iconPictureBox4.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.iconPictureBox4.Size = new System.Drawing.Size(46, 45);
             this.iconPictureBox4.TabIndex = 14;
             this.iconPictureBox4.TabStop = false;
             // 
@@ -198,11 +195,10 @@
             this.iconPictureBox5.IconChar = FontAwesome.Sharp.IconChar.ArrowUpFromBracket;
             this.iconPictureBox5.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox5.IconSize = 27;
-            this.iconPictureBox5.Location = new System.Drawing.Point(14, 442);
-            this.iconPictureBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.iconPictureBox5.IconSize = 45;
+            this.iconPictureBox5.Location = new System.Drawing.Point(20, 737);
             this.iconPictureBox5.Name = "iconPictureBox5";
-            this.iconPictureBox5.Size = new System.Drawing.Size(32, 27);
+            this.iconPictureBox5.Size = new System.Drawing.Size(46, 45);
             this.iconPictureBox5.TabIndex = 8;
             this.iconPictureBox5.TabStop = false;
             // 
@@ -211,18 +207,16 @@
             this.panelIcon.Controls.Add(this.pictureBox1);
             this.panelIcon.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelIcon.Location = new System.Drawing.Point(0, 0);
-            this.panelIcon.Margin = new System.Windows.Forms.Padding(2);
             this.panelIcon.Name = "panelIcon";
-            this.panelIcon.Size = new System.Drawing.Size(154, 66);
+            this.panelIcon.Size = new System.Drawing.Size(220, 110);
             this.panelIcon.TabIndex = 11;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::AsterixDecoder.Properties.Resources.AD_3;
-            this.pictureBox1.Location = new System.Drawing.Point(7, 6);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Location = new System.Drawing.Point(10, 10);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(140, 54);
+            this.pictureBox1.Size = new System.Drawing.Size(200, 90);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
@@ -230,10 +224,9 @@
             // BtnAboutUs
             // 
             this.BtnAboutUs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAboutUs.Location = new System.Drawing.Point(56, 252);
-            this.BtnAboutUs.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnAboutUs.Location = new System.Drawing.Point(80, 420);
             this.BtnAboutUs.Name = "BtnAboutUs";
-            this.BtnAboutUs.Size = new System.Drawing.Size(84, 27);
+            this.BtnAboutUs.Size = new System.Drawing.Size(120, 45);
             this.BtnAboutUs.TabIndex = 9;
             this.BtnAboutUs.Text = "ABOUT US";
             this.BtnAboutUs.UseVisualStyleBackColor = true;
@@ -246,12 +239,11 @@
             this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.MapMarkerAlt;
             this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox1.IconSize = 27;
-            this.iconPictureBox1.Location = new System.Drawing.Point(14, 210);
-            this.iconPictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.iconPictureBox1.IconSize = 45;
+            this.iconPictureBox1.Location = new System.Drawing.Point(20, 350);
             this.iconPictureBox1.Name = "iconPictureBox1";
-            this.iconPictureBox1.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.iconPictureBox1.Size = new System.Drawing.Size(32, 27);
+            this.iconPictureBox1.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.iconPictureBox1.Size = new System.Drawing.Size(46, 45);
             this.iconPictureBox1.TabIndex = 11;
             this.iconPictureBox1.TabStop = false;
             // 
@@ -262,22 +254,20 @@
             this.iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.FileImport;
             this.iconPictureBox3.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox3.IconSize = 27;
-            this.iconPictureBox3.Location = new System.Drawing.Point(14, 126);
-            this.iconPictureBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.iconPictureBox3.IconSize = 45;
+            this.iconPictureBox3.Location = new System.Drawing.Point(20, 210);
             this.iconPictureBox3.Name = "iconPictureBox3";
-            this.iconPictureBox3.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.iconPictureBox3.Size = new System.Drawing.Size(32, 27);
+            this.iconPictureBox3.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.iconPictureBox3.Size = new System.Drawing.Size(46, 45);
             this.iconPictureBox3.TabIndex = 13;
             this.iconPictureBox3.TabStop = false;
             // 
             // BtnMapView
             // 
             this.BtnMapView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMapView.Location = new System.Drawing.Point(56, 210);
-            this.BtnMapView.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnMapView.Location = new System.Drawing.Point(80, 350);
             this.BtnMapView.Name = "BtnMapView";
-            this.BtnMapView.Size = new System.Drawing.Size(84, 27);
+            this.BtnMapView.Size = new System.Drawing.Size(120, 45);
             this.BtnMapView.TabIndex = 8;
             this.BtnMapView.Text = "MAP VIEW";
             this.BtnMapView.UseVisualStyleBackColor = true;
@@ -289,12 +279,11 @@
             this.iconPictureBox2.IconChar = FontAwesome.Sharp.IconChar.FileAlt;
             this.iconPictureBox2.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox2.IconSize = 27;
-            this.iconPictureBox2.Location = new System.Drawing.Point(14, 84);
-            this.iconPictureBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.iconPictureBox2.IconSize = 45;
+            this.iconPictureBox2.Location = new System.Drawing.Point(20, 140);
             this.iconPictureBox2.Name = "iconPictureBox2";
-            this.iconPictureBox2.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
-            this.iconPictureBox2.Size = new System.Drawing.Size(32, 27);
+            this.iconPictureBox2.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.iconPictureBox2.Size = new System.Drawing.Size(46, 45);
             this.iconPictureBox2.TabIndex = 12;
             this.iconPictureBox2.TabStop = false;
             // 
@@ -308,10 +297,9 @@
             this.panelBarraArriba.Controls.Add(this.labelCurrentFile);
             this.panelBarraArriba.Controls.Add(this.iconBtnMenuBars);
             this.panelBarraArriba.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelBarraArriba.Location = new System.Drawing.Point(154, 0);
-            this.panelBarraArriba.Margin = new System.Windows.Forms.Padding(2);
+            this.panelBarraArriba.Location = new System.Drawing.Point(220, 0);
             this.panelBarraArriba.Name = "panelBarraArriba";
-            this.panelBarraArriba.Size = new System.Drawing.Size(854, 39);
+            this.panelBarraArriba.Size = new System.Drawing.Size(1220, 65);
             this.panelBarraArriba.TabIndex = 7;
             // 
             // iconBtnMinus
@@ -322,11 +310,10 @@
             this.iconBtnMinus.IconColor = System.Drawing.Color.Black;
             this.iconBtnMinus.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMinus.IconSize = 30;
-            this.iconBtnMinus.Location = new System.Drawing.Point(758, 0);
-            this.iconBtnMinus.Margin = new System.Windows.Forms.Padding(2);
+            this.iconBtnMinus.Location = new System.Drawing.Point(1082, 0);
             this.iconBtnMinus.Name = "iconBtnMinus";
-            this.iconBtnMinus.Padding = new System.Windows.Forms.Padding(0, 9, 0, 0);
-            this.iconBtnMinus.Size = new System.Drawing.Size(32, 39);
+            this.iconBtnMinus.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            this.iconBtnMinus.Size = new System.Drawing.Size(46, 65);
             this.iconBtnMinus.TabIndex = 11;
             this.iconBtnMinus.UseVisualStyleBackColor = true;
             this.iconBtnMinus.Click += new System.EventHandler(this.iconBtnMinus_Click);
@@ -340,11 +327,10 @@
             this.iconBtnMaximize.IconColor = System.Drawing.Color.Black;
             this.iconBtnMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMaximize.IconSize = 30;
-            this.iconBtnMaximize.Location = new System.Drawing.Point(790, 0);
-            this.iconBtnMaximize.Margin = new System.Windows.Forms.Padding(2);
+            this.iconBtnMaximize.Location = new System.Drawing.Point(1128, 0);
             this.iconBtnMaximize.Name = "iconBtnMaximize";
-            this.iconBtnMaximize.Padding = new System.Windows.Forms.Padding(0, 1, 1, 0);
-            this.iconBtnMaximize.Size = new System.Drawing.Size(32, 39);
+            this.iconBtnMaximize.Padding = new System.Windows.Forms.Padding(0, 2, 1, 0);
+            this.iconBtnMaximize.Size = new System.Drawing.Size(46, 65);
             this.iconBtnMaximize.TabIndex = 12;
             this.iconBtnMaximize.UseVisualStyleBackColor = true;
             this.iconBtnMaximize.Click += new System.EventHandler(this.iconBtnMaximize_Click);
@@ -357,11 +343,10 @@
             this.iconBtnCross.IconColor = System.Drawing.Color.Black;
             this.iconBtnCross.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnCross.IconSize = 25;
-            this.iconBtnCross.Location = new System.Drawing.Point(822, 0);
-            this.iconBtnCross.Margin = new System.Windows.Forms.Padding(2);
+            this.iconBtnCross.Location = new System.Drawing.Point(1174, 0);
             this.iconBtnCross.Name = "iconBtnCross";
-            this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.iconBtnCross.Size = new System.Drawing.Size(32, 39);
+            this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.iconBtnCross.Size = new System.Drawing.Size(46, 65);
             this.iconBtnCross.TabIndex = 11;
             this.iconBtnCross.UseVisualStyleBackColor = true;
             this.iconBtnCross.Click += new System.EventHandler(this.iconBtnCross_Click);
@@ -370,20 +355,18 @@
             // 
             this.labelCurrentFilenameResponse.AutoSize = true;
             this.labelCurrentFilenameResponse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(329, 11);
-            this.labelCurrentFilenameResponse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(470, 18);
             this.labelCurrentFilenameResponse.Name = "labelCurrentFilenameResponse";
-            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 19);
+            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 28);
             this.labelCurrentFilenameResponse.TabIndex = 10;
             // 
             // labelCurrentFile
             // 
             this.labelCurrentFile.AutoSize = true;
             this.labelCurrentFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFile.Location = new System.Drawing.Point(129, 10);
-            this.labelCurrentFile.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelCurrentFile.Location = new System.Drawing.Point(184, 17);
             this.labelCurrentFile.Name = "labelCurrentFile";
-            this.labelCurrentFile.Size = new System.Drawing.Size(182, 19);
+            this.labelCurrentFile.Size = new System.Drawing.Size(256, 28);
             this.labelCurrentFile.TabIndex = 9;
             this.labelCurrentFile.Text = "THE CURRENT FILENAME IS:";
             // 
@@ -394,10 +377,9 @@
             this.iconBtnMenuBars.IconColor = System.Drawing.Color.Black;
             this.iconBtnMenuBars.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMenuBars.IconSize = 45;
-            this.iconBtnMenuBars.Location = new System.Drawing.Point(14, 6);
-            this.iconBtnMenuBars.Margin = new System.Windows.Forms.Padding(2);
+            this.iconBtnMenuBars.Location = new System.Drawing.Point(20, 10);
             this.iconBtnMenuBars.Name = "iconBtnMenuBars";
-            this.iconBtnMenuBars.Size = new System.Drawing.Size(32, 27);
+            this.iconBtnMenuBars.Size = new System.Drawing.Size(46, 45);
             this.iconBtnMenuBars.TabIndex = 8;
             this.iconBtnMenuBars.UseVisualStyleBackColor = true;
             this.iconBtnMenuBars.Click += new System.EventHandler(this.iconBtnMenuBars_Click);
@@ -406,10 +388,9 @@
             // 
             this.labelHora.AutoSize = true;
             this.labelHora.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelHora.Location = new System.Drawing.Point(892, 60);
-            this.labelHora.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelHora.Location = new System.Drawing.Point(1274, 100);
             this.labelHora.Name = "labelHora";
-            this.labelHora.Size = new System.Drawing.Size(66, 28);
+            this.labelHora.Size = new System.Drawing.Size(99, 41);
             this.labelHora.TabIndex = 8;
             this.labelHora.Text = "HORA";
             // 
@@ -441,14 +422,15 @@
             // 
             // MENU
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1008, 480);
+            this.ClientSize = new System.Drawing.Size(1440, 800);
             this.Controls.Add(this.labelHora);
             this.Controls.Add(this.panelBarraArriba);
             this.Controls.Add(this.panelMENU);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MENU";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MENU";

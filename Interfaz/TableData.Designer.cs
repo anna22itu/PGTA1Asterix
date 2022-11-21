@@ -88,7 +88,7 @@
             // 
             this.textBoxSearch.Location = new System.Drawing.Point(87, 17);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(150, 23);
+            this.textBoxSearch.Size = new System.Drawing.Size(150, 31);
             this.textBoxSearch.TabIndex = 2;
             // 
             // iconPictureBoxSearch
