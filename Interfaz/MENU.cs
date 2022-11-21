@@ -23,8 +23,9 @@ namespace Interfaz
                 byte[] fileBytes = File.ReadAllBytes(filename);
                 string bitString = BitConverter.ToString(fileBytes);
                 Read.setReadBytes(bitString);
+                labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
                 MessageBox.Show("EL Fichero se ha cargado correctamente.");
-                labelCurrentFilenameResponse.Text = filename;
+                
             }
             else
             {
@@ -68,7 +69,7 @@ namespace Interfaz
 
         private void BtnExportFile_Click(object sender, EventArgs e)
         {
-            bool result = DataTable.export();
+            bool result = Data.export();
 
             if (result == true)
             {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Library;
 
 namespace Asterix_Decoder
 {
@@ -26,7 +27,48 @@ namespace Asterix_Decoder
             textBoxSearch.Visible = false;
             btnSearch.Visible = false;
             panelFilter.Visible = false;
+            ShowData();
+            Refresh();
         }
+
+        private void ShowData()
+        {
+            int i = 0;
+            foreach (string column in Data.dataitems) //afegim totes les columnes que tenen algun valor
+            {
+                dataGridDT.ColumnCount = Data.DIAppears.Sum();
+                if (Data.DIAppears[Data.columns[column]]==1) //column has any value
+                {
+                    dataGridDT.Columns[i].Name=column;
+                    i++;
+                }
+            }
+            
+            foreach (object[] item in Data.TotalItems)
+            {
+                object[] toadd = new object[dataGridDT.ColumnCount];
+                int w = 0;
+                for (int u=0; u<Data.DIAppears.Length; u++)
+                {
+                    if (Data.DIAppears[u]==1) //this value appears at least once
+                    {
+                        if (item[u]!=null) //we add a value
+                        {
+                            toadd[w] = item[u];
+                        }
+                        else
+                        {
+                            toadd[w] = "";
+                        }
+                        w++;
+                    }
+
+                }
+                dataGridDT.Rows.Add(toadd);
+            }
+            
+        }
+
 
         public void Refresh()
         {
@@ -65,5 +107,6 @@ namespace Asterix_Decoder
         {
             panelFilter.Visible = true;
         }
+
     }
 }

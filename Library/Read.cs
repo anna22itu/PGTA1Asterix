@@ -29,6 +29,7 @@ namespace Library
         private static void main()
         {
             int alreadyread = 0;
+            Data.resetData();
             while (alreadyread != readBytes.Length) //readBytes.Length != 0
             {
                 //identifiquem la categoria
@@ -78,7 +79,7 @@ namespace Library
                         
                     }
 
-                    DataTable.nextblock();
+                    Data.nextblock();
                     int l = length_dataitems + 3;
                     alreadyread = alreadyread + l;
                     sumbyte(-n);//per resetejar a 0 la n
