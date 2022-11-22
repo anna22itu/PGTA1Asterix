@@ -76,6 +76,13 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
+            this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
+            this.BtnPlay = new FontAwesome.Sharp.IconButton();
+            this.BtnParar = new FontAwesome.Sharp.IconButton();
+            this.labelLat = new System.Windows.Forms.Label();
+            this.labelLong = new System.Windows.Forms.Label();
+            this.textBoxLong = new System.Windows.Forms.TextBox();
+            this.textBoxLAT = new System.Windows.Forms.TextBox();
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).BeginInit();
@@ -133,7 +140,7 @@
             this.panelMENU.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMENU.Location = new System.Drawing.Point(0, 0);
             this.panelMENU.Name = "panelMENU";
-            this.panelMENU.Size = new System.Drawing.Size(220, 800);
+            this.panelMENU.Size = new System.Drawing.Size(220, 865);
             this.panelMENU.TabIndex = 6;
             // 
             // iconPictureBox6
@@ -154,7 +161,7 @@
             // BtnExit
             // 
             this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnExit.Location = new System.Drawing.Point(80, 737);
+            this.BtnExit.Location = new System.Drawing.Point(80, 796);
             this.BtnExit.Name = "BtnExit";
             this.BtnExit.Size = new System.Drawing.Size(120, 45);
             this.BtnExit.TabIndex = 10;
@@ -196,7 +203,7 @@
             this.iconPictureBox5.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox5.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconPictureBox5.IconSize = 45;
-            this.iconPictureBox5.Location = new System.Drawing.Point(20, 737);
+            this.iconPictureBox5.Location = new System.Drawing.Point(20, 796);
             this.iconPictureBox5.Name = "iconPictureBox5";
             this.iconPictureBox5.Size = new System.Drawing.Size(46, 45);
             this.iconPictureBox5.TabIndex = 8;
@@ -271,6 +278,7 @@
             this.BtnMapView.TabIndex = 8;
             this.BtnMapView.Text = "MAP VIEW";
             this.BtnMapView.UseVisualStyleBackColor = true;
+            this.BtnMapView.Click += new System.EventHandler(this.BtnMapView_Click);
             // 
             // iconPictureBox2
             // 
@@ -299,7 +307,7 @@
             this.panelBarraArriba.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelBarraArriba.Location = new System.Drawing.Point(220, 0);
             this.panelBarraArriba.Name = "panelBarraArriba";
-            this.panelBarraArriba.Size = new System.Drawing.Size(1220, 65);
+            this.panelBarraArriba.Size = new System.Drawing.Size(1345, 65);
             this.panelBarraArriba.TabIndex = 7;
             // 
             // iconBtnMinus
@@ -310,7 +318,7 @@
             this.iconBtnMinus.IconColor = System.Drawing.Color.Black;
             this.iconBtnMinus.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMinus.IconSize = 30;
-            this.iconBtnMinus.Location = new System.Drawing.Point(1082, 0);
+            this.iconBtnMinus.Location = new System.Drawing.Point(1207, 0);
             this.iconBtnMinus.Name = "iconBtnMinus";
             this.iconBtnMinus.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.iconBtnMinus.Size = new System.Drawing.Size(46, 65);
@@ -327,7 +335,7 @@
             this.iconBtnMaximize.IconColor = System.Drawing.Color.Black;
             this.iconBtnMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMaximize.IconSize = 30;
-            this.iconBtnMaximize.Location = new System.Drawing.Point(1128, 0);
+            this.iconBtnMaximize.Location = new System.Drawing.Point(1253, 0);
             this.iconBtnMaximize.Name = "iconBtnMaximize";
             this.iconBtnMaximize.Padding = new System.Windows.Forms.Padding(0, 2, 1, 0);
             this.iconBtnMaximize.Size = new System.Drawing.Size(46, 65);
@@ -343,7 +351,7 @@
             this.iconBtnCross.IconColor = System.Drawing.Color.Black;
             this.iconBtnCross.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnCross.IconSize = 25;
-            this.iconBtnCross.Location = new System.Drawing.Point(1174, 0);
+            this.iconBtnCross.Location = new System.Drawing.Point(1299, 0);
             this.iconBtnCross.Name = "iconBtnCross";
             this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.iconBtnCross.Size = new System.Drawing.Size(46, 65);
@@ -388,7 +396,7 @@
             // 
             this.labelHora.AutoSize = true;
             this.labelHora.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelHora.Location = new System.Drawing.Point(1274, 100);
+            this.labelHora.Location = new System.Drawing.Point(1441, 101);
             this.labelHora.Name = "labelHora";
             this.labelHora.Size = new System.Drawing.Size(99, 41);
             this.labelHora.TabIndex = 8;
@@ -420,12 +428,107 @@
             this.guna2DragControl1.TargetControl = this.panelBarraArriba;
             this.guna2DragControl1.UseTransparentDrag = true;
             // 
+            // gMapControl1
+            // 
+            this.gMapControl1.Bearing = 0F;
+            this.gMapControl1.CanDragMap = true;
+            this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
+            this.gMapControl1.GrayScaleMode = false;
+            this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.gMapControl1.LevelsKeepInMemory = 5;
+            this.gMapControl1.Location = new System.Drawing.Point(566, 174);
+            this.gMapControl1.MarkersEnabled = true;
+            this.gMapControl1.MaxZoom = 2;
+            this.gMapControl1.MinZoom = 2;
+            this.gMapControl1.MouseWheelZoomEnabled = true;
+            this.gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gMapControl1.Name = "gMapControl1";
+            this.gMapControl1.NegativeMode = false;
+            this.gMapControl1.PolygonsEnabled = true;
+            this.gMapControl1.RetryLoadTile = 0;
+            this.gMapControl1.RoutesEnabled = true;
+            this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gMapControl1.ShowTileGridLines = false;
+            this.gMapControl1.Size = new System.Drawing.Size(927, 558);
+            this.gMapControl1.TabIndex = 9;
+            this.gMapControl1.Zoom = 0D;
+            this.gMapControl1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseDoubleClick);
+            // 
+            // BtnPlay
+            // 
+            this.BtnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnPlay.IconChar = FontAwesome.Sharp.IconChar.Play;
+            this.BtnPlay.IconColor = System.Drawing.Color.Black;
+            this.BtnPlay.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BtnPlay.IconSize = 40;
+            this.BtnPlay.Location = new System.Drawing.Point(1016, 776);
+            this.BtnPlay.Name = "BtnPlay";
+            this.BtnPlay.Padding = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.BtnPlay.Size = new System.Drawing.Size(45, 45);
+            this.BtnPlay.TabIndex = 10;
+            this.BtnPlay.UseVisualStyleBackColor = true;
+            this.BtnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
+            // 
+            // BtnParar
+            // 
+            this.BtnParar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnParar.IconChar = FontAwesome.Sharp.IconChar.Pause;
+            this.BtnParar.IconColor = System.Drawing.Color.Black;
+            this.BtnParar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.BtnParar.IconSize = 40;
+            this.BtnParar.Location = new System.Drawing.Point(1016, 776);
+            this.BtnParar.Name = "BtnParar";
+            this.BtnParar.Size = new System.Drawing.Size(45, 45);
+            this.BtnParar.TabIndex = 11;
+            this.BtnParar.UseVisualStyleBackColor = true;
+            this.BtnParar.Click += new System.EventHandler(this.BtnParar_Click);
+            // 
+            // labelLat
+            // 
+            this.labelLat.AutoSize = true;
+            this.labelLat.Location = new System.Drawing.Point(706, 126);
+            this.labelLat.Name = "labelLat";
+            this.labelLat.Size = new System.Drawing.Size(89, 25);
+            this.labelLat.TabIndex = 12;
+            this.labelLat.Text = "LATITUDE";
+            // 
+            // labelLong
+            // 
+            this.labelLong.AutoSize = true;
+            this.labelLong.Location = new System.Drawing.Point(1037, 126);
+            this.labelLong.Name = "labelLong";
+            this.labelLong.Size = new System.Drawing.Size(106, 25);
+            this.labelLong.TabIndex = 13;
+            this.labelLong.Text = "LONGITUDE";
+            // 
+            // textBoxLong
+            // 
+            this.textBoxLong.Location = new System.Drawing.Point(1149, 123);
+            this.textBoxLong.Name = "textBoxLong";
+            this.textBoxLong.Size = new System.Drawing.Size(150, 31);
+            this.textBoxLong.TabIndex = 14;
+            // 
+            // textBoxLAT
+            // 
+            this.textBoxLAT.Location = new System.Drawing.Point(801, 120);
+            this.textBoxLAT.Name = "textBoxLAT";
+            this.textBoxLAT.Size = new System.Drawing.Size(150, 31);
+            this.textBoxLAT.TabIndex = 15;
+            // 
             // MENU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1440, 800);
+            this.ClientSize = new System.Drawing.Size(1565, 865);
+            this.Controls.Add(this.textBoxLAT);
+            this.Controls.Add(this.textBoxLong);
+            this.Controls.Add(this.labelLong);
+            this.Controls.Add(this.labelLat);
+            this.Controls.Add(this.BtnParar);
+            this.Controls.Add(this.BtnPlay);
+            this.Controls.Add(this.gMapControl1);
             this.Controls.Add(this.labelHora);
             this.Controls.Add(this.panelBarraArriba);
             this.Controls.Add(this.panelMENU);
@@ -462,5 +565,12 @@
         private FontAwesome.Sharp.IconButton iconBtnMinus;
         private FontAwesome.Sharp.IconButton iconBtnMaximize;
         private PictureBox pictureBox1;
+        private GMap.NET.WindowsForms.GMapControl gMapControl1;
+        private FontAwesome.Sharp.IconButton BtnPlay;
+        private FontAwesome.Sharp.IconButton BtnParar;
+        private Label labelLat;
+        private Label labelLong;
+        private TextBox textBoxLong;
+        private TextBox textBoxLAT;
     }
 }

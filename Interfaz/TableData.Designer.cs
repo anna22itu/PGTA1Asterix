@@ -24,6 +24,7 @@
 
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.guna2PanelDT = new Guna.UI2.WinForms.Guna2Panel();
             this.iconBtnFlecha = new FontAwesome.Sharp.IconButton();
             this.btnFiltrar = new System.Windows.Forms.Button();
@@ -37,6 +38,7 @@
             this.panelFilter = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2PanelDT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBoxSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDT)).BeginInit();
@@ -203,6 +205,12 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // guna2DragControl1
+            // 
+            this.guna2DragControl1.DockIndicatorTransparencyValue = 0.6D;
+            this.guna2DragControl1.TargetControl = this.guna2PanelDT;
+            this.guna2DragControl1.UseTransparentDrag = true;
+            // 
             // TableData
             // 
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
@@ -235,5 +243,6 @@
         private Panel panelFilter;
         private Button button2;
         private Button button1;
+        private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
     }
 }
