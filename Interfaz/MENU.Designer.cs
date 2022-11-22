@@ -88,6 +88,7 @@
             this.labelAicraft = new System.Windows.Forms.Label();
             this.textBoxAircraft = new System.Windows.Forms.TextBox();
             this.btnClearAicraft = new System.Windows.Forms.Button();
+            this.pictureBoxMapaDifuminado = new System.Windows.Forms.PictureBox();
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).BeginInit();
@@ -99,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             this.panelBarraArriba.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapaDifuminado)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnLoadFile
@@ -567,12 +569,22 @@
             this.btnClearAicraft.UseVisualStyleBackColor = true;
             this.btnClearAicraft.Click += new System.EventHandler(this.btnClearAicraft_Click);
             // 
+            // pictureBoxMapaDifuminado
+            // 
+            this.pictureBoxMapaDifuminado.Image = global::AsterixDecoder.Properties.Resources.imageMAPA;
+            this.pictureBoxMapaDifuminado.Location = new System.Drawing.Point(581, 175);
+            this.pictureBoxMapaDifuminado.Name = "pictureBoxMapaDifuminado";
+            this.pictureBoxMapaDifuminado.Size = new System.Drawing.Size(936, 558);
+            this.pictureBoxMapaDifuminado.TabIndex = 21;
+            this.pictureBoxMapaDifuminado.TabStop = false;
+            // 
             // MENU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1565, 865);
+            this.Controls.Add(this.pictureBoxMapaDifuminado);
             this.Controls.Add(this.btnClearAicraft);
             this.Controls.Add(this.textBoxAircraft);
             this.Controls.Add(this.labelAicraft);
@@ -605,6 +617,7 @@
             this.panelBarraArriba.ResumeLayout(false);
             this.panelBarraArriba.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapaDifuminado)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -634,5 +647,6 @@
         private Label labelAicraft;
         private TextBox textBoxAircraft;
         private Button btnClearAicraft;
+        private PictureBox pictureBoxMapaDifuminado;
     }
 }

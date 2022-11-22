@@ -8,6 +8,7 @@ using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using System.Data;
+using System.Windows.Media.Effects;
 
 namespace Interfaz
 {
@@ -27,6 +28,7 @@ namespace Interfaz
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             BtnParar.Hide();
             gMapControl1.Hide();
+            pictureBoxMapaDifuminado.Show();
         }
 
         private void BtnLoadFile_Click(object sender, EventArgs e)
@@ -139,6 +141,7 @@ namespace Interfaz
 
         private void BtnMapView_Click(object sender, EventArgs e)
         {
+            pictureBoxMapaDifuminado.Hide();
             gMapControl1.Show();
             gMapControl1.DragButton = MouseButtons.Left;
             gMapControl1.CanDragMap = true;
@@ -187,5 +190,7 @@ namespace Interfaz
         {
             // Cuando selecionamos se borra toda la información del avión y cuando seleccionemos otro avión se volverá a llenar
         }
+
+       
     }
 }
