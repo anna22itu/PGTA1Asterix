@@ -13,9 +13,6 @@ namespace Interfaz
             ApplicationConfiguration.Initialize();
             Application.Run(new MENU());
 
-
-
-
         }
     }
 }

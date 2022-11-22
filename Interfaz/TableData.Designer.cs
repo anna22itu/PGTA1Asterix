@@ -75,6 +75,8 @@
             this.iconBtnFlecha.Size = new System.Drawing.Size(45, 45);
             this.iconBtnFlecha.TabIndex = 13;
             this.iconBtnFlecha.UseVisualStyleBackColor = true;
+            this.iconBtnFlecha.MouseEnter += new System.EventHandler(this.iconBtnFlecha_MouseEnter);
+            this.iconBtnFlecha.MouseLeave += new System.EventHandler(this.iconBtnFlecha_MouseLeave);
             // 
             // btnFiltrar
             // 

@@ -108,6 +108,9 @@ namespace Asterix_Decoder
             panelFilter.Visible = true;
         }
 
-        
+        private void iconBtnFlecha_MouseLeave(object sender, EventArgs e)
+        {
+            panelFilter.Visible = false;
+        }
     }
 }

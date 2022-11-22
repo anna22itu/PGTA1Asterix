@@ -83,6 +83,11 @@
             this.labelLong = new System.Windows.Forms.Label();
             this.textBoxLong = new System.Windows.Forms.TextBox();
             this.textBoxLAT = new System.Windows.Forms.TextBox();
+            this.dataGridViewInfoAircraft = new System.Windows.Forms.DataGridView();
+            this.labelInfoAircraft = new System.Windows.Forms.Label();
+            this.labelAicraft = new System.Windows.Forms.Label();
+            this.textBoxAircraft = new System.Windows.Forms.TextBox();
+            this.btnClearAicraft = new System.Windows.Forms.Button();
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox4)).BeginInit();
@@ -93,6 +98,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             this.panelBarraArriba.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnLoadFile
@@ -396,7 +402,7 @@
             // 
             this.labelHora.AutoSize = true;
             this.labelHora.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelHora.Location = new System.Drawing.Point(1441, 101);
+            this.labelHora.Location = new System.Drawing.Point(1385, 113);
             this.labelHora.Name = "labelHora";
             this.labelHora.Size = new System.Drawing.Size(99, 41);
             this.labelHora.TabIndex = 8;
@@ -436,7 +442,7 @@
             this.gMapControl1.GrayScaleMode = false;
             this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMapControl1.LevelsKeepInMemory = 5;
-            this.gMapControl1.Location = new System.Drawing.Point(566, 174);
+            this.gMapControl1.Location = new System.Drawing.Point(590, 175);
             this.gMapControl1.MarkersEnabled = true;
             this.gMapControl1.MaxZoom = 2;
             this.gMapControl1.MinZoom = 2;
@@ -496,7 +502,7 @@
             // labelLong
             // 
             this.labelLong.AutoSize = true;
-            this.labelLong.Location = new System.Drawing.Point(1037, 126);
+            this.labelLong.Location = new System.Drawing.Point(993, 126);
             this.labelLong.Name = "labelLong";
             this.labelLong.Size = new System.Drawing.Size(106, 25);
             this.labelLong.TabIndex = 13;
@@ -504,7 +510,7 @@
             // 
             // textBoxLong
             // 
-            this.textBoxLong.Location = new System.Drawing.Point(1149, 123);
+            this.textBoxLong.Location = new System.Drawing.Point(1105, 123);
             this.textBoxLong.Name = "textBoxLong";
             this.textBoxLong.Size = new System.Drawing.Size(150, 31);
             this.textBoxLong.TabIndex = 14;
@@ -516,12 +522,62 @@
             this.textBoxLAT.Size = new System.Drawing.Size(150, 31);
             this.textBoxLAT.TabIndex = 15;
             // 
+            // dataGridViewInfoAircraft
+            // 
+            this.dataGridViewInfoAircraft.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewInfoAircraft.Location = new System.Drawing.Point(260, 325);
+            this.dataGridViewInfoAircraft.Name = "dataGridViewInfoAircraft";
+            this.dataGridViewInfoAircraft.RowHeadersWidth = 62;
+            this.dataGridViewInfoAircraft.RowTemplate.Height = 33;
+            this.dataGridViewInfoAircraft.Size = new System.Drawing.Size(300, 321);
+            this.dataGridViewInfoAircraft.TabIndex = 16;
+            // 
+            // labelInfoAircraft
+            // 
+            this.labelInfoAircraft.AutoSize = true;
+            this.labelInfoAircraft.Location = new System.Drawing.Point(252, 290);
+            this.labelInfoAircraft.Name = "labelInfoAircraft";
+            this.labelInfoAircraft.Size = new System.Drawing.Size(320, 25);
+            this.labelInfoAircraft.TabIndex = 17;
+            this.labelInfoAircraft.Text = "Information about the selected aircraft:";
+            // 
+            // labelAicraft
+            // 
+            this.labelAicraft.AutoSize = true;
+            this.labelAicraft.Location = new System.Drawing.Point(260, 101);
+            this.labelAicraft.Name = "labelAicraft";
+            this.labelAicraft.Size = new System.Drawing.Size(140, 25);
+            this.labelAicraft.TabIndex = 18;
+            this.labelAicraft.Text = "Selected Aircraft";
+            // 
+            // textBoxAircraft
+            // 
+            this.textBoxAircraft.Location = new System.Drawing.Point(252, 140);
+            this.textBoxAircraft.Name = "textBoxAircraft";
+            this.textBoxAircraft.Size = new System.Drawing.Size(150, 31);
+            this.textBoxAircraft.TabIndex = 19;
+            // 
+            // btnClearAicraft
+            // 
+            this.btnClearAicraft.Location = new System.Drawing.Point(260, 652);
+            this.btnClearAicraft.Name = "btnClearAicraft";
+            this.btnClearAicraft.Size = new System.Drawing.Size(142, 34);
+            this.btnClearAicraft.TabIndex = 20;
+            this.btnClearAicraft.Text = "Clear Selection";
+            this.btnClearAicraft.UseVisualStyleBackColor = true;
+            this.btnClearAicraft.Click += new System.EventHandler(this.btnClearAicraft_Click);
+            // 
             // MENU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1565, 865);
+            this.Controls.Add(this.btnClearAicraft);
+            this.Controls.Add(this.textBoxAircraft);
+            this.Controls.Add(this.labelAicraft);
+            this.Controls.Add(this.labelInfoAircraft);
+            this.Controls.Add(this.dataGridViewInfoAircraft);
             this.Controls.Add(this.textBoxLAT);
             this.Controls.Add(this.textBoxLong);
             this.Controls.Add(this.labelLong);
@@ -548,6 +604,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
             this.panelBarraArriba.ResumeLayout(false);
             this.panelBarraArriba.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -572,5 +629,10 @@
         private Label labelLong;
         private TextBox textBoxLong;
         private TextBox textBoxLAT;
+        private DataGridView dataGridViewInfoAircraft;
+        private Label labelInfoAircraft;
+        private Label labelAicraft;
+        private TextBox textBoxAircraft;
+        private Button btnClearAicraft;
     }
 }

@@ -7,8 +7,7 @@ using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-
-
+using System.Data;
 
 namespace Interfaz
 {
@@ -19,6 +18,7 @@ namespace Interfaz
         GMapOverlay overlay;
         double LatInicial = 41.27575;
         double LongInicial = 1.98721;
+        DataTable dtInf;
 
 
         public MENU()
@@ -38,12 +38,12 @@ namespace Interfaz
                 string bitString = BitConverter.ToString(fileBytes);
                 Read.setReadBytes(bitString);
                 labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
-                MessageBox.Show("EL Fichero se ha cargado correctamente.");
+                MessageBox.Show("The file has been loaded successfully.");
                 
             }
             else
             {
-                MessageBox.Show("ERROR: EL Fichero no se ha cargado correctamente.");
+                MessageBox.Show("ERROR:The file has not been loaded successfully.");
                 //caldrà printar en un dialogbox que no s'ha importat bé el fitxer (tb si dona error o lo q sigui)
             }
         }
@@ -87,11 +87,11 @@ namespace Interfaz
 
             if (result == true)
             {
-                MessageBox.Show("EL Fichero se ha exportado correctamente./n Lo podrás encontrar en Interfaz/bin/Debug/net6.0-windows/ como un fichero excel");
+                MessageBox.Show("The file has been exported correctly./n You can find it in Interface/bin/Debug/net6.0-windows/ as an excel file");
             }
             else
             {
-                MessageBox.Show("ERROR: EL Fichero no se ha exportado correctamente.");
+                MessageBox.Show("ERROR: The file has not been exported correctly.");
             }
         }
 
@@ -99,7 +99,7 @@ namespace Interfaz
         {
             Form f = new TableData();
             
-            MessageBox.Show("La tabla de datos se està cargando. Esto podria tardar algunos minutos."); 
+            MessageBox.Show("The data table is being loaded. This could take a few minutes."); 
             
             f.Show();
         }
@@ -155,7 +155,19 @@ namespace Interfaz
             overlay.Markers.Add(marker); // lo agregamos al mapa
             gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
 
-            // agregamos un tooltip de texto en los marcad
+            dtInf = new DataTable();
+            dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewInfoAircraft.Font, FontStyle.Bold);
+            dtInf.Columns.Add("    Field");
+            dtInf.Columns.Add("    Value");
+
+            dtInf.Rows.Add("       Callsing");
+            dtInf.Rows.Add("        ICAO");
+            dtInf.Rows.Add("           FL");
+            dtInf.Rows.Add("       Track Nº");
+            dtInf.Rows.Add("  Ground Speed");
+            dtInf.Rows.Add("       Packets");
+
+            dataGridViewInfoAircraft.DataSource = dtInf;
 
         }
 
@@ -169,6 +181,11 @@ namespace Interfaz
             textBoxLong.Text = lng.ToString();
 
             marker.Position= new PointLatLng(lat, lng);
+        }
+
+        private void btnClearAicraft_Click(object sender, EventArgs e)
+        {
+            // Cuando selecionamos se borra toda la información del avión y cuando seleccionemos otro avión se volverá a llenar
         }
     }
 }
