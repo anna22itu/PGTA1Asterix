@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Library
 {
@@ -26,8 +27,10 @@ namespace Library
             n = n + num;
         }
 
-        private static void main()
+        public static void main(string str, IProgress<int> loadingEnded)
         {
+            readBytes = Functions.hextobin(str.Split("-"));
+
             int alreadyread = 0;
             Data.resetData();
             while (alreadyread != readBytes.Length) //readBytes.Length != 0
@@ -57,7 +60,7 @@ namespace Library
                         sumbyte(-n);//per resetejar a 0 la n
                         break;
                     }
-
+                    
 
                     //Depenent del found_di, utilitzem la funcio DICalling per cridar el metod que toca
                     for (int i=0; i < found_di.Length; i++){
@@ -92,14 +95,7 @@ namespace Library
                     sumbyte(-n);//per resetejar a 0 la n
                 }
             }
+            loadingEnded.Report(1);
         }
-
-        public static void setReadBytes(string str)
-        {
-            readBytes = Functions.hextobin(str.Split("-"));
-            //un cop tenim llegit l'arxiu, executem el main on s'aniram executant totes les funcions necessaries
-            main();
-        }
-
     }
 }

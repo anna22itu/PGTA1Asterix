@@ -30,7 +30,16 @@ namespace Interfaz
             gMapControl1.Hide();
             pictureBoxMapaDifuminado.Show();
         }
-
+        private void loadingRead()
+        {
+            iconPictureBox2.Hide();
+            pictureBox2.Show();
+        }
+        private void stoploadingRead(int i)
+        {
+            pictureBox2.Hide();
+            iconPictureBox2.Show();
+        }
         private void BtnLoadFile_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -38,10 +47,17 @@ namespace Interfaz
                 string filename = openFileDialog1.FileName;
                 byte[] fileBytes = File.ReadAllBytes(filename);
                 string bitString = BitConverter.ToString(fileBytes);
-                Read.setReadBytes(bitString);
+                var loadingended = new Progress<int>(stoploadingRead);
+
+                loadingRead();
+                Thread thread = new Thread(() => 
+                {
+                    Read.main(bitString, loadingended);
+                    MessageBox.Show("The file has been loaded successfully."); 
+                });
+                thread.Start();
                 labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
-                MessageBox.Show("The file has been loaded successfully.");
-                
+
             }
             else
             {
