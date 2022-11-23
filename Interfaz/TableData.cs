@@ -101,6 +101,7 @@ namespace Asterix_Decoder
         {
             textBoxSearch.Visible = true;
             btnSearch.Visible = true;
+            textBoxSearch.Text = "Enter a DataItem";
         }
 
         private void iconBtnFlecha_MouseEnter(object sender, EventArgs e)
@@ -111,6 +112,16 @@ namespace Asterix_Decoder
         private void iconBtnFlecha_MouseLeave(object sender, EventArgs e)
         {
             panelFilter.Visible = false;
+        }
+
+        private void textBoxSearch_MouseEnter(object sender, EventArgs e)
+        {
+            textBoxSearch.Text = string.Empty;
+        }
+
+        private void textBoxSearch_MouseLeave(object sender, EventArgs e)
+        {
+            textBoxSearch.Text = "Enter a DataItem";
         }
     }
 }

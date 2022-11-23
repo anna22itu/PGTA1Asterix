@@ -69,7 +69,7 @@
             this.iconBtnFlecha.IconColor = System.Drawing.Color.Black;
             this.iconBtnFlecha.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnFlecha.IconSize = 25;
-            this.iconBtnFlecha.Location = new System.Drawing.Point(589, 10);
+            this.iconBtnFlecha.Location = new System.Drawing.Point(749, 12);
             this.iconBtnFlecha.Name = "iconBtnFlecha";
             this.iconBtnFlecha.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.iconBtnFlecha.Size = new System.Drawing.Size(45, 45);
@@ -81,7 +81,7 @@
             // btnFiltrar
             // 
             this.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFiltrar.Location = new System.Drawing.Point(523, 10);
+            this.btnFiltrar.Location = new System.Drawing.Point(683, 12);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(60, 45);
             this.btnFiltrar.TabIndex = 12;
@@ -92,8 +92,10 @@
             // 
             this.textBoxSearch.Location = new System.Drawing.Point(87, 17);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(150, 31);
+            this.textBoxSearch.Size = new System.Drawing.Size(143, 31);
             this.textBoxSearch.TabIndex = 2;
+            this.textBoxSearch.MouseEnter += new System.EventHandler(this.textBoxSearch_MouseEnter);
+            this.textBoxSearch.MouseLeave += new System.EventHandler(this.textBoxSearch_MouseLeave);
             // 
             // iconPictureBoxSearch
             // 
@@ -112,7 +114,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(250, 10);
+            this.btnSearch.Location = new System.Drawing.Point(236, 10);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 45);
             this.btnSearch.TabIndex = 1;
@@ -182,7 +184,7 @@
             this.panelFilter.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panelFilter.Controls.Add(this.button2);
             this.panelFilter.Controls.Add(this.button1);
-            this.panelFilter.Location = new System.Drawing.Point(523, 61);
+            this.panelFilter.Location = new System.Drawing.Point(683, 71);
             this.panelFilter.Name = "panelFilter";
             this.panelFilter.Size = new System.Drawing.Size(213, 101);
             this.panelFilter.TabIndex = 14;

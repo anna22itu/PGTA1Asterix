@@ -15,6 +15,7 @@ namespace Interfaz
     public partial class MENU : Form
     {
         public bool result = true;
+        public bool result2 = false;
         GMarkerGoogle marker;
         GMapOverlay overlay;
         double LatInicial = 41.27575;
@@ -61,7 +62,7 @@ namespace Interfaz
             }
             else
             {
-                MessageBox.Show("ERROR:The file has not been loaded successfully.");
+                MessageBox.Show("ERROR: The file has not been loaded successfully.");
                 //caldrà printar en un dialogbox que no s'ha importat bé el fitxer (tb si dona error o lo q sigui)
             }
         }
@@ -116,10 +117,22 @@ namespace Interfaz
         private void BtnDataView_Click(object sender, EventArgs e)
         {
             Form f = new TableData();
-            
-            MessageBox.Show("The data table is being loaded. This could take a few minutes."); 
-            
+            //bool r = MENU.BtnLoadFile_Click();
+
+            MessageBox.Show("The data table is being loaded. This could take a few minutes.");
+
             f.Show();
+
+            /**
+            if (r == true)
+            {
+                MessageBox.Show("The data table is being loaded. This could take a few minutes.");
+
+                f.Show();
+            }
+            else {
+                MessageBox.Show("The data table is not available, load the file first please");
+            }*/
         }
 
         private void iconBtnMenuBars_Click(object sender, EventArgs e)
@@ -157,8 +170,8 @@ namespace Interfaz
 
         private void BtnMapView_Click(object sender, EventArgs e)
         {
-            pictureBoxMapaDifuminado.Hide();
             gMapControl1.Show();
+            pictureBoxMapaDifuminado.Hide();
             gMapControl1.DragButton = MouseButtons.Left;
             gMapControl1.CanDragMap = true;
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
@@ -190,7 +203,13 @@ namespace Interfaz
 
         }
 
-        private void gMapControl1_MouseDoubleClick(object sender, MouseEventArgs e)
+   
+        private void btnClearAicraft_Click(object sender, EventArgs e)
+        {
+            // Cuando selecionamos se borra toda la información del avión y cuando seleccionemos otro avión se volverá a llenar
+        }
+
+        private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
         {
             // para obtener los datos de la lat y long donde el user ha presionado
             double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
@@ -199,14 +218,7 @@ namespace Interfaz
             textBoxLAT.Text = lat.ToString();
             textBoxLong.Text = lng.ToString();
 
-            marker.Position= new PointLatLng(lat, lng);
+            marker.Position = new PointLatLng(lat, lng);
         }
-
-        private void btnClearAicraft_Click(object sender, EventArgs e)
-        {
-            // Cuando selecionamos se borra toda la información del avión y cuando seleccionemos otro avión se volverá a llenar
-        }
-
-       
     }
 }
