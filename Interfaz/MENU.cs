@@ -13,6 +13,8 @@ using System.Data;
 using System.Windows.Media.Effects;
 using System.Media;
 using System.Drawing;
+using static Guna.UI2.WinForms.Suite.Descriptions;
+
 
 namespace Interfaz
 {
@@ -21,10 +23,14 @@ namespace Interfaz
         public bool result = true;
         public bool result2 = false;
         GMarkerGoogle marker;
+        GMarkerGoogle markerAircraft;
         GMapOverlay overlay;
+        GMapOverlay overlay2;
         double LatInicial = 41.27575;
         double LongInicial = 1.98721;
         DataTable dtInf;
+        Bitmap Bmpaircraft = (Bitmap)Image.FromFile(@"..\..\aircraft.png");
+        Bitmap BmpAircraftR;
 
 
         public MENU()
@@ -147,15 +153,16 @@ namespace Interfaz
         }
 
         public static bool dataLoaded = false;
+        
         private void loadingDataTable(int i)
         {
-            iconPictureBox6.Hide();
-            pictureBox3.Show();
+            //iconPictureBox6.Hide();
+            //pictureBox3.Show();
         }
         private void stoploadingDataTable(int i)
         {
-            pictureBox3.Hide();
-            iconPictureBox6.Show();
+            //pictureBox3.Hide();
+            //iconPictureBox6.Show();
         }
         public static Form globalForm = new Form();
         private void BtnDataView_Click(object sender, EventArgs e)
@@ -227,39 +234,24 @@ namespace Interfaz
 
         private void BtnMapView_Click(object sender, EventArgs e)
         {
-            // Caracteristicas del mapa
-            gMapControl1.Show();
-            pictureBoxMapaDifuminado.Hide();
-            gMapControl1.DragButton = MouseButtons.Left;
-            gMapControl1.CanDragMap = true;
-            gMapControl1.MapProvider = GMapProviders.GoogleMap;
-            gMapControl1.Position = new PointLatLng(LatInicial, LongInicial);
-            gMapControl1.MinZoom = 1;
-            gMapControl1.MaxZoom = 30;
-            gMapControl1.Zoom = 15;
-            gMapControl1.AutoScroll = true;
-
-            // Marcador
-            overlay = new GMapOverlay("Marker");
-            marker = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), GMarkerGoogleType.green);
-            overlay.Markers.Add(marker); // lo agregamos al mapa
-            gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
+            gMapControl1_Load(sender, e);
 
             // Avion
             try
             {
-                PictureBox p1 = new PictureBox();
+                // MarcadorGreenDot
+                overlay = new GMapOverlay("Marker");
+                marker = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), GMarkerGoogleType.green);
+                overlay.Markers.Add(marker); // lo agregamos al mapa
+                gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
 
-                p1.Width = 20;
-                p1.Height = 20;
-                p1.ClientSize = new Size(20, 20);
-                p1.Location = new Point(Convert.ToInt32(LatInicial), Convert.ToInt32(LongInicial));
-                p1.SizeMode = PictureBoxSizeMode.StretchImage;
+                // MarcadorGAircraft
+                this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width /10, Bmpaircraft.Height /10));
+                overlay2 = new GMapOverlay("Marker");
+                markerAircraft = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
+                overlay2.Markers.Add(markerAircraft); // lo agregamos al mapa
+                gMapControl1.Overlays.Add(overlay2); // lo agregamos a nuestro mapa
 
-                Bitmap image1 = new Bitmap("aircraft.png");
-                p1.Image = (Image)image1;
-                gMapControl1.Controls.Add(p1);
-                
             }
             catch (NullReferenceException)
             {
@@ -274,15 +266,20 @@ namespace Interfaz
             // Data de información
             dtInf = new DataTable();
             dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewInfoAircraft.Font, FontStyle.Bold);
-            dtInf.Columns.Add("    Field");
-            dtInf.Columns.Add("    Value");
+            dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dtInf.Rows.Add("       Callsing");
-            dtInf.Rows.Add("        ICAO");
-            dtInf.Rows.Add("           FL");
-            dtInf.Rows.Add("       Track Nº");
-            dtInf.Rows.Add("  Ground Speed");
-            dtInf.Rows.Add("       Packets");
+            //dataGridViewInfoAircraft.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            
+
+            dtInf.Columns.Add("Field");
+            dtInf.Columns.Add("Value");
+
+            dtInf.Rows.Add("Callsing");
+            dtInf.Rows.Add("ICAO");
+            dtInf.Rows.Add("FL");
+            dtInf.Rows.Add("Track Nº");
+            dtInf.Rows.Add("Ground Speed");
+            dtInf.Rows.Add("Packets");
 
             dataGridViewInfoAircraft.DataSource = dtInf;
 
@@ -304,6 +301,25 @@ namespace Interfaz
             textBoxLong.Text = lng.ToString();
 
             marker.Position = new PointLatLng(lat, lng);
+        }
+
+        private void gMapControl1_Load(object sender, EventArgs e)
+        {
+            // Caracteristicas del mapa
+            gMapControl1.Show();
+            pictureBoxMapaDifuminado.Hide();
+            gMapControl1.DragButton = MouseButtons.Left;
+            gMapControl1.CanDragMap = true;
+            gMapControl1.MapProvider = GMapProviders.GoogleMap;
+            gMapControl1.Position = new PointLatLng(LatInicial, LongInicial);
+            gMapControl1.MinZoom = 1;
+            gMapControl1.MaxZoom = 30;
+            gMapControl1.Zoom = 15;
+            gMapControl1.AutoScroll = true;
+
+            
+
+
         }
     }
 }
