@@ -89,6 +89,7 @@
             this.textBoxAircraft = new System.Windows.Forms.TextBox();
             this.btnClearAicraft = new System.Windows.Forms.Button();
             this.pictureBoxMapaDifuminado = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox6)).BeginInit();
@@ -102,16 +103,16 @@
             this.panelBarraArriba.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapaDifuminado)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnLoadFile
             // 
             this.BtnLoadFile.BackColor = System.Drawing.Color.CornflowerBlue;
             this.BtnLoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnLoadFile.Location = new System.Drawing.Point(80, 140);
-            this.BtnLoadFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BtnLoadFile.Location = new System.Drawing.Point(56, 84);
             this.BtnLoadFile.Name = "BtnLoadFile";
-            this.BtnLoadFile.Size = new System.Drawing.Size(120, 45);
+            this.BtnLoadFile.Size = new System.Drawing.Size(84, 32);
             this.BtnLoadFile.TabIndex = 3;
             this.BtnLoadFile.Text = "OPEN FILE";
             this.BtnLoadFile.UseVisualStyleBackColor = false;
@@ -121,10 +122,9 @@
             // 
             this.BtnExportFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnExportFile.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnExportFile.Location = new System.Drawing.Point(80, 210);
-            this.BtnExportFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BtnExportFile.Location = new System.Drawing.Point(56, 126);
             this.BtnExportFile.Name = "BtnExportFile";
-            this.BtnExportFile.Size = new System.Drawing.Size(120, 45);
+            this.BtnExportFile.Size = new System.Drawing.Size(84, 32);
             this.BtnExportFile.TabIndex = 4;
             this.BtnExportFile.Text = "EXPORT FILE";
             this.BtnExportFile.UseVisualStyleBackColor = true;
@@ -133,6 +133,7 @@
             // panelMENU
             // 
             this.panelMENU.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panelMENU.Controls.Add(this.pictureBox3);
             this.panelMENU.Controls.Add(this.pictureBox2);
             this.panelMENU.Controls.Add(this.iconPictureBox6);
             this.panelMENU.Controls.Add(this.BtnExit);
@@ -149,18 +150,18 @@
             this.panelMENU.Controls.Add(this.iconPictureBox2);
             this.panelMENU.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMENU.Location = new System.Drawing.Point(0, 0);
+            this.panelMENU.Margin = new System.Windows.Forms.Padding(2);
             this.panelMENU.Name = "panelMENU";
-            this.panelMENU.Size = new System.Drawing.Size(220, 865);
+            this.panelMENU.Size = new System.Drawing.Size(154, 519);
             this.panelMENU.TabIndex = 6;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::AsterixDecoder.Properties.Resources.loadinggif;
             this.pictureBox2.InitialImage = null;
-            this.pictureBox2.Location = new System.Drawing.Point(20, 140);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox2.Location = new System.Drawing.Point(14, 84);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox2.Size = new System.Drawing.Size(32, 32);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 23;
             this.pictureBox2.TabStop = false;
@@ -173,11 +174,11 @@
             this.iconPictureBox6.IconChar = FontAwesome.Sharp.IconChar.Table;
             this.iconPictureBox6.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox6.IconSize = 45;
-            this.iconPictureBox6.Location = new System.Drawing.Point(20, 280);
+            this.iconPictureBox6.Location = new System.Drawing.Point(14, 168);
+            this.iconPictureBox6.Margin = new System.Windows.Forms.Padding(2);
             this.iconPictureBox6.Name = "iconPictureBox6";
-            this.iconPictureBox6.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.iconPictureBox6.Size = new System.Drawing.Size(46, 45);
+            this.iconPictureBox6.Padding = new System.Windows.Forms.Padding(1, 2, 0, 0);
+            this.iconPictureBox6.Size = new System.Drawing.Size(32, 32);
             this.iconPictureBox6.TabIndex = 9;
             this.iconPictureBox6.TabStop = false;
             // 
@@ -185,9 +186,10 @@
             // 
             this.BtnExit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnExit.Location = new System.Drawing.Point(80, 797);
+            this.BtnExit.Location = new System.Drawing.Point(56, 478);
+            this.BtnExit.Margin = new System.Windows.Forms.Padding(2);
             this.BtnExit.Name = "BtnExit";
-            this.BtnExit.Size = new System.Drawing.Size(120, 45);
+            this.BtnExit.Size = new System.Drawing.Size(84, 27);
             this.BtnExit.TabIndex = 10;
             this.BtnExit.Text = "EXIT";
             this.BtnExit.UseVisualStyleBackColor = true;
@@ -196,9 +198,10 @@
             // BtnDataView
             // 
             this.BtnDataView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDataView.Location = new System.Drawing.Point(80, 280);
+            this.BtnDataView.Location = new System.Drawing.Point(56, 168);
+            this.BtnDataView.Margin = new System.Windows.Forms.Padding(2);
             this.BtnDataView.Name = "BtnDataView";
-            this.BtnDataView.Size = new System.Drawing.Size(120, 45);
+            this.BtnDataView.Size = new System.Drawing.Size(84, 32);
             this.BtnDataView.TabIndex = 10;
             this.BtnDataView.Text = "DATA VIEW";
             this.BtnDataView.UseVisualStyleBackColor = true;
@@ -211,11 +214,11 @@
             this.iconPictureBox4.IconChar = FontAwesome.Sharp.IconChar.AddressBook;
             this.iconPictureBox4.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox4.IconSize = 45;
-            this.iconPictureBox4.Location = new System.Drawing.Point(20, 420);
+            this.iconPictureBox4.Location = new System.Drawing.Point(14, 252);
+            this.iconPictureBox4.Margin = new System.Windows.Forms.Padding(2);
             this.iconPictureBox4.Name = "iconPictureBox4";
-            this.iconPictureBox4.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.iconPictureBox4.Size = new System.Drawing.Size(46, 45);
+            this.iconPictureBox4.Padding = new System.Windows.Forms.Padding(1, 2, 0, 0);
+            this.iconPictureBox4.Size = new System.Drawing.Size(32, 32);
             this.iconPictureBox4.TabIndex = 14;
             this.iconPictureBox4.TabStop = false;
             // 
@@ -227,10 +230,11 @@
             this.iconPictureBox5.IconChar = FontAwesome.Sharp.IconChar.ArrowUpFromBracket;
             this.iconPictureBox5.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox5.IconSize = 45;
-            this.iconPictureBox5.Location = new System.Drawing.Point(20, 797);
+            this.iconPictureBox5.IconSize = 27;
+            this.iconPictureBox5.Location = new System.Drawing.Point(14, 478);
+            this.iconPictureBox5.Margin = new System.Windows.Forms.Padding(2);
             this.iconPictureBox5.Name = "iconPictureBox5";
-            this.iconPictureBox5.Size = new System.Drawing.Size(46, 45);
+            this.iconPictureBox5.Size = new System.Drawing.Size(32, 27);
             this.iconPictureBox5.TabIndex = 8;
             this.iconPictureBox5.TabStop = false;
             // 
@@ -239,16 +243,18 @@
             this.panelIcon.Controls.Add(this.pictureBox1);
             this.panelIcon.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelIcon.Location = new System.Drawing.Point(0, 0);
+            this.panelIcon.Margin = new System.Windows.Forms.Padding(2);
             this.panelIcon.Name = "panelIcon";
-            this.panelIcon.Size = new System.Drawing.Size(220, 110);
+            this.panelIcon.Size = new System.Drawing.Size(154, 66);
             this.panelIcon.TabIndex = 11;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::AsterixDecoder.Properties.Resources.AD_3;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 10);
+            this.pictureBox1.Location = new System.Drawing.Point(7, 6);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 90);
+            this.pictureBox1.Size = new System.Drawing.Size(140, 54);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
@@ -256,9 +262,10 @@
             // BtnAboutUs
             // 
             this.BtnAboutUs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAboutUs.Location = new System.Drawing.Point(80, 420);
+            this.BtnAboutUs.Location = new System.Drawing.Point(56, 252);
+            this.BtnAboutUs.Margin = new System.Windows.Forms.Padding(2);
             this.BtnAboutUs.Name = "BtnAboutUs";
-            this.BtnAboutUs.Size = new System.Drawing.Size(120, 45);
+            this.BtnAboutUs.Size = new System.Drawing.Size(84, 32);
             this.BtnAboutUs.TabIndex = 9;
             this.BtnAboutUs.Text = "ABOUT US";
             this.BtnAboutUs.UseVisualStyleBackColor = true;
@@ -271,11 +278,11 @@
             this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.MapMarkerAlt;
             this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox1.IconSize = 45;
-            this.iconPictureBox1.Location = new System.Drawing.Point(20, 350);
+            this.iconPictureBox1.Location = new System.Drawing.Point(14, 210);
+            this.iconPictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.iconPictureBox1.Name = "iconPictureBox1";
-            this.iconPictureBox1.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.iconPictureBox1.Size = new System.Drawing.Size(46, 45);
+            this.iconPictureBox1.Padding = new System.Windows.Forms.Padding(1, 2, 0, 0);
+            this.iconPictureBox1.Size = new System.Drawing.Size(32, 32);
             this.iconPictureBox1.TabIndex = 11;
             this.iconPictureBox1.TabStop = false;
             // 
@@ -286,20 +293,21 @@
             this.iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.FileImport;
             this.iconPictureBox3.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox3.IconSize = 45;
-            this.iconPictureBox3.Location = new System.Drawing.Point(20, 210);
+            this.iconPictureBox3.Location = new System.Drawing.Point(14, 126);
+            this.iconPictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.iconPictureBox3.Name = "iconPictureBox3";
-            this.iconPictureBox3.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.iconPictureBox3.Size = new System.Drawing.Size(46, 45);
+            this.iconPictureBox3.Padding = new System.Windows.Forms.Padding(1, 2, 0, 0);
+            this.iconPictureBox3.Size = new System.Drawing.Size(32, 32);
             this.iconPictureBox3.TabIndex = 13;
             this.iconPictureBox3.TabStop = false;
             // 
             // BtnMapView
             // 
             this.BtnMapView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMapView.Location = new System.Drawing.Point(80, 350);
+            this.BtnMapView.Location = new System.Drawing.Point(56, 210);
+            this.BtnMapView.Margin = new System.Windows.Forms.Padding(2);
             this.BtnMapView.Name = "BtnMapView";
-            this.BtnMapView.Size = new System.Drawing.Size(120, 45);
+            this.BtnMapView.Size = new System.Drawing.Size(84, 32);
             this.BtnMapView.TabIndex = 8;
             this.BtnMapView.Text = "MAP VIEW";
             this.BtnMapView.UseVisualStyleBackColor = true;
@@ -312,11 +320,11 @@
             this.iconPictureBox2.IconChar = FontAwesome.Sharp.IconChar.FileAlt;
             this.iconPictureBox2.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox2.IconSize = 45;
-            this.iconPictureBox2.Location = new System.Drawing.Point(20, 140);
+            this.iconPictureBox2.Location = new System.Drawing.Point(14, 84);
+            this.iconPictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.iconPictureBox2.Name = "iconPictureBox2";
-            this.iconPictureBox2.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
-            this.iconPictureBox2.Size = new System.Drawing.Size(45, 45);
+            this.iconPictureBox2.Padding = new System.Windows.Forms.Padding(1, 2, 0, 0);
+            this.iconPictureBox2.Size = new System.Drawing.Size(32, 32);
             this.iconPictureBox2.TabIndex = 12;
             this.iconPictureBox2.TabStop = false;
             // 
@@ -330,9 +338,10 @@
             this.panelBarraArriba.Controls.Add(this.labelCurrentFile);
             this.panelBarraArriba.Controls.Add(this.iconBtnMenuBars);
             this.panelBarraArriba.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelBarraArriba.Location = new System.Drawing.Point(220, 0);
+            this.panelBarraArriba.Location = new System.Drawing.Point(154, 0);
+            this.panelBarraArriba.Margin = new System.Windows.Forms.Padding(2);
             this.panelBarraArriba.Name = "panelBarraArriba";
-            this.panelBarraArriba.Size = new System.Drawing.Size(1346, 65);
+            this.panelBarraArriba.Size = new System.Drawing.Size(942, 39);
             this.panelBarraArriba.TabIndex = 7;
             // 
             // iconBtnMinus
@@ -343,10 +352,11 @@
             this.iconBtnMinus.IconColor = System.Drawing.Color.Black;
             this.iconBtnMinus.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMinus.IconSize = 30;
-            this.iconBtnMinus.Location = new System.Drawing.Point(1208, 0);
+            this.iconBtnMinus.Location = new System.Drawing.Point(846, 0);
+            this.iconBtnMinus.Margin = new System.Windows.Forms.Padding(2);
             this.iconBtnMinus.Name = "iconBtnMinus";
-            this.iconBtnMinus.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
-            this.iconBtnMinus.Size = new System.Drawing.Size(46, 65);
+            this.iconBtnMinus.Padding = new System.Windows.Forms.Padding(0, 9, 0, 0);
+            this.iconBtnMinus.Size = new System.Drawing.Size(32, 39);
             this.iconBtnMinus.TabIndex = 11;
             this.iconBtnMinus.UseVisualStyleBackColor = true;
             this.iconBtnMinus.Click += new System.EventHandler(this.iconBtnMinus_Click);
@@ -360,10 +370,11 @@
             this.iconBtnMaximize.IconColor = System.Drawing.Color.Black;
             this.iconBtnMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMaximize.IconSize = 30;
-            this.iconBtnMaximize.Location = new System.Drawing.Point(1254, 0);
+            this.iconBtnMaximize.Location = new System.Drawing.Point(878, 0);
+            this.iconBtnMaximize.Margin = new System.Windows.Forms.Padding(2);
             this.iconBtnMaximize.Name = "iconBtnMaximize";
-            this.iconBtnMaximize.Padding = new System.Windows.Forms.Padding(0, 2, 1, 0);
-            this.iconBtnMaximize.Size = new System.Drawing.Size(46, 65);
+            this.iconBtnMaximize.Padding = new System.Windows.Forms.Padding(0, 1, 1, 0);
+            this.iconBtnMaximize.Size = new System.Drawing.Size(32, 39);
             this.iconBtnMaximize.TabIndex = 12;
             this.iconBtnMaximize.UseVisualStyleBackColor = true;
             this.iconBtnMaximize.Click += new System.EventHandler(this.iconBtnMaximize_Click);
@@ -376,10 +387,11 @@
             this.iconBtnCross.IconColor = System.Drawing.Color.Black;
             this.iconBtnCross.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnCross.IconSize = 25;
-            this.iconBtnCross.Location = new System.Drawing.Point(1300, 0);
+            this.iconBtnCross.Location = new System.Drawing.Point(910, 0);
+            this.iconBtnCross.Margin = new System.Windows.Forms.Padding(2);
             this.iconBtnCross.Name = "iconBtnCross";
-            this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.iconBtnCross.Size = new System.Drawing.Size(46, 65);
+            this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.iconBtnCross.Size = new System.Drawing.Size(32, 39);
             this.iconBtnCross.TabIndex = 11;
             this.iconBtnCross.UseVisualStyleBackColor = true;
             this.iconBtnCross.Click += new System.EventHandler(this.iconBtnCross_Click);
@@ -388,18 +400,20 @@
             // 
             this.labelCurrentFilenameResponse.AutoSize = true;
             this.labelCurrentFilenameResponse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(470, 18);
+            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(329, 11);
+            this.labelCurrentFilenameResponse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCurrentFilenameResponse.Name = "labelCurrentFilenameResponse";
-            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 28);
+            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 19);
             this.labelCurrentFilenameResponse.TabIndex = 10;
             // 
             // labelCurrentFile
             // 
             this.labelCurrentFile.AutoSize = true;
             this.labelCurrentFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFile.Location = new System.Drawing.Point(184, 17);
+            this.labelCurrentFile.Location = new System.Drawing.Point(129, 10);
+            this.labelCurrentFile.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCurrentFile.Name = "labelCurrentFile";
-            this.labelCurrentFile.Size = new System.Drawing.Size(256, 28);
+            this.labelCurrentFile.Size = new System.Drawing.Size(182, 19);
             this.labelCurrentFile.TabIndex = 9;
             this.labelCurrentFile.Text = "THE CURRENT FILENAME IS:";
             // 
@@ -410,9 +424,10 @@
             this.iconBtnMenuBars.IconColor = System.Drawing.Color.Black;
             this.iconBtnMenuBars.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMenuBars.IconSize = 45;
-            this.iconBtnMenuBars.Location = new System.Drawing.Point(20, 10);
+            this.iconBtnMenuBars.Location = new System.Drawing.Point(14, 6);
+            this.iconBtnMenuBars.Margin = new System.Windows.Forms.Padding(2);
             this.iconBtnMenuBars.Name = "iconBtnMenuBars";
-            this.iconBtnMenuBars.Size = new System.Drawing.Size(46, 45);
+            this.iconBtnMenuBars.Size = new System.Drawing.Size(32, 27);
             this.iconBtnMenuBars.TabIndex = 8;
             this.iconBtnMenuBars.UseVisualStyleBackColor = true;
             this.iconBtnMenuBars.Click += new System.EventHandler(this.iconBtnMenuBars_Click);
@@ -421,9 +436,10 @@
             // 
             this.labelHora.AutoSize = true;
             this.labelHora.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelHora.Location = new System.Drawing.Point(1386, 113);
+            this.labelHora.Location = new System.Drawing.Point(970, 68);
+            this.labelHora.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelHora.Name = "labelHora";
-            this.labelHora.Size = new System.Drawing.Size(99, 41);
+            this.labelHora.Size = new System.Drawing.Size(66, 28);
             this.labelHora.TabIndex = 8;
             this.labelHora.Text = "HORA";
             // 
@@ -465,7 +481,8 @@
             this.gMapControl1.GrayScaleMode = false;
             this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMapControl1.LevelsKeepInMemory = 5;
-            this.gMapControl1.Location = new System.Drawing.Point(590, 175);
+            this.gMapControl1.Location = new System.Drawing.Point(413, 105);
+            this.gMapControl1.Margin = new System.Windows.Forms.Padding(2);
             this.gMapControl1.MarkersEnabled = true;
             this.gMapControl1.MaxZoom = 2;
             this.gMapControl1.MinZoom = 2;
@@ -479,7 +496,7 @@
             this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(930, 560);
+            this.gMapControl1.Size = new System.Drawing.Size(651, 336);
             this.gMapControl1.TabIndex = 9;
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.gMapControl1_MouseClick);
@@ -492,10 +509,11 @@
             this.BtnPlay.IconColor = System.Drawing.Color.Black;
             this.BtnPlay.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnPlay.IconSize = 40;
-            this.BtnPlay.Location = new System.Drawing.Point(1016, 777);
+            this.BtnPlay.Location = new System.Drawing.Point(711, 466);
+            this.BtnPlay.Margin = new System.Windows.Forms.Padding(2);
             this.BtnPlay.Name = "BtnPlay";
-            this.BtnPlay.Padding = new System.Windows.Forms.Padding(1, 2, 0, 0);
-            this.BtnPlay.Size = new System.Drawing.Size(46, 45);
+            this.BtnPlay.Padding = new System.Windows.Forms.Padding(1, 1, 0, 0);
+            this.BtnPlay.Size = new System.Drawing.Size(32, 27);
             this.BtnPlay.TabIndex = 10;
             this.BtnPlay.UseVisualStyleBackColor = true;
             this.BtnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
@@ -508,9 +526,10 @@
             this.BtnParar.IconColor = System.Drawing.Color.Black;
             this.BtnParar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnParar.IconSize = 40;
-            this.BtnParar.Location = new System.Drawing.Point(1016, 777);
+            this.BtnParar.Location = new System.Drawing.Point(711, 466);
+            this.BtnParar.Margin = new System.Windows.Forms.Padding(2);
             this.BtnParar.Name = "BtnParar";
-            this.BtnParar.Size = new System.Drawing.Size(46, 45);
+            this.BtnParar.Size = new System.Drawing.Size(32, 27);
             this.BtnParar.TabIndex = 11;
             this.BtnParar.UseVisualStyleBackColor = true;
             this.BtnParar.Click += new System.EventHandler(this.BtnParar_Click);
@@ -518,75 +537,84 @@
             // labelLat
             // 
             this.labelLat.AutoSize = true;
-            this.labelLat.Location = new System.Drawing.Point(706, 127);
+            this.labelLat.Location = new System.Drawing.Point(494, 76);
+            this.labelLat.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLat.Name = "labelLat";
-            this.labelLat.Size = new System.Drawing.Size(89, 25);
+            this.labelLat.Size = new System.Drawing.Size(57, 15);
             this.labelLat.TabIndex = 12;
             this.labelLat.Text = "LATITUDE";
             // 
             // labelLong
             // 
             this.labelLong.AutoSize = true;
-            this.labelLong.Location = new System.Drawing.Point(993, 127);
+            this.labelLong.Location = new System.Drawing.Point(695, 76);
+            this.labelLong.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLong.Name = "labelLong";
-            this.labelLong.Size = new System.Drawing.Size(106, 25);
+            this.labelLong.Size = new System.Drawing.Size(70, 15);
             this.labelLong.TabIndex = 13;
             this.labelLong.Text = "LONGITUDE";
             // 
             // textBoxLong
             // 
-            this.textBoxLong.Location = new System.Drawing.Point(1106, 123);
+            this.textBoxLong.Location = new System.Drawing.Point(774, 74);
+            this.textBoxLong.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxLong.Name = "textBoxLong";
-            this.textBoxLong.Size = new System.Drawing.Size(150, 31);
+            this.textBoxLong.Size = new System.Drawing.Size(106, 23);
             this.textBoxLong.TabIndex = 14;
             // 
             // textBoxLAT
             // 
-            this.textBoxLAT.Location = new System.Drawing.Point(801, 120);
+            this.textBoxLAT.Location = new System.Drawing.Point(561, 72);
+            this.textBoxLAT.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxLAT.Name = "textBoxLAT";
-            this.textBoxLAT.Size = new System.Drawing.Size(150, 31);
+            this.textBoxLAT.Size = new System.Drawing.Size(106, 23);
             this.textBoxLAT.TabIndex = 15;
             // 
             // dataGridViewInfoAircraft
             // 
             this.dataGridViewInfoAircraft.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewInfoAircraft.Location = new System.Drawing.Point(260, 325);
+            this.dataGridViewInfoAircraft.Location = new System.Drawing.Point(182, 195);
+            this.dataGridViewInfoAircraft.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewInfoAircraft.Name = "dataGridViewInfoAircraft";
             this.dataGridViewInfoAircraft.RowHeadersWidth = 62;
             this.dataGridViewInfoAircraft.RowTemplate.Height = 33;
-            this.dataGridViewInfoAircraft.Size = new System.Drawing.Size(300, 322);
+            this.dataGridViewInfoAircraft.Size = new System.Drawing.Size(210, 193);
             this.dataGridViewInfoAircraft.TabIndex = 16;
             // 
             // labelInfoAircraft
             // 
             this.labelInfoAircraft.AutoSize = true;
-            this.labelInfoAircraft.Location = new System.Drawing.Point(251, 290);
+            this.labelInfoAircraft.Location = new System.Drawing.Point(176, 174);
+            this.labelInfoAircraft.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelInfoAircraft.Name = "labelInfoAircraft";
-            this.labelInfoAircraft.Size = new System.Drawing.Size(320, 25);
+            this.labelInfoAircraft.Size = new System.Drawing.Size(213, 15);
             this.labelInfoAircraft.TabIndex = 17;
             this.labelInfoAircraft.Text = "Information about the selected aircraft:";
             // 
             // labelAicraft
             // 
             this.labelAicraft.AutoSize = true;
-            this.labelAicraft.Location = new System.Drawing.Point(260, 102);
+            this.labelAicraft.Location = new System.Drawing.Point(182, 61);
+            this.labelAicraft.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAicraft.Name = "labelAicraft";
-            this.labelAicraft.Size = new System.Drawing.Size(140, 25);
+            this.labelAicraft.Size = new System.Drawing.Size(93, 15);
             this.labelAicraft.TabIndex = 18;
             this.labelAicraft.Text = "Selected Aircraft";
             // 
             // textBoxAircraft
             // 
-            this.textBoxAircraft.Location = new System.Drawing.Point(251, 140);
+            this.textBoxAircraft.Location = new System.Drawing.Point(176, 84);
+            this.textBoxAircraft.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxAircraft.Name = "textBoxAircraft";
-            this.textBoxAircraft.Size = new System.Drawing.Size(150, 31);
+            this.textBoxAircraft.Size = new System.Drawing.Size(106, 23);
             this.textBoxAircraft.TabIndex = 19;
             // 
             // btnClearAicraft
             // 
-            this.btnClearAicraft.Location = new System.Drawing.Point(260, 652);
+            this.btnClearAicraft.Location = new System.Drawing.Point(182, 391);
+            this.btnClearAicraft.Margin = new System.Windows.Forms.Padding(2);
             this.btnClearAicraft.Name = "btnClearAicraft";
-            this.btnClearAicraft.Size = new System.Drawing.Size(141, 33);
+            this.btnClearAicraft.Size = new System.Drawing.Size(99, 20);
             this.btnClearAicraft.TabIndex = 20;
             this.btnClearAicraft.Text = "Clear Selection";
             this.btnClearAicraft.UseVisualStyleBackColor = true;
@@ -598,18 +626,31 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxMapaDifuminado.Image = global::AsterixDecoder.Properties.Resources.imageMAPA;
-            this.pictureBoxMapaDifuminado.Location = new System.Drawing.Point(590, 175);
+            this.pictureBoxMapaDifuminado.Location = new System.Drawing.Point(413, 105);
+            this.pictureBoxMapaDifuminado.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBoxMapaDifuminado.Name = "pictureBoxMapaDifuminado";
-            this.pictureBoxMapaDifuminado.Size = new System.Drawing.Size(925, 556);
+            this.pictureBoxMapaDifuminado.Size = new System.Drawing.Size(930, 560);
             this.pictureBoxMapaDifuminado.TabIndex = 21;
             this.pictureBoxMapaDifuminado.TabStop = false;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::AsterixDecoder.Properties.Resources.loadinggif;
+            this.pictureBox3.InitialImage = null;
+            this.pictureBox3.Location = new System.Drawing.Point(14, 168);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 24;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Visible = false;
+            // 
             // MENU
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1566, 865);
+            this.ClientSize = new System.Drawing.Size(1096, 519);
             this.Controls.Add(this.pictureBoxMapaDifuminado);
             this.Controls.Add(this.btnClearAicraft);
             this.Controls.Add(this.textBoxAircraft);
@@ -627,7 +668,6 @@
             this.Controls.Add(this.panelBarraArriba);
             this.Controls.Add(this.panelMENU);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MENU";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MENU";
@@ -645,6 +685,7 @@
             this.panelBarraArriba.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapaDifuminado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -677,5 +718,6 @@
         private PictureBox pictureBoxMapaDifuminado;
         public FontAwesome.Sharp.IconPictureBox iconPictureBox2;
         public PictureBox pictureBox2;
+        public PictureBox pictureBox3;
     }
 }

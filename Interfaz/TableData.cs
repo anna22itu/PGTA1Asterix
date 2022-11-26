@@ -13,25 +13,33 @@ namespace Asterix_Decoder
 {
     public partial class TableData : Form
     {
-        public TableData()
+        public TableData(bool dataLoaded, IProgress<int> loadingStarted, IProgress<int> loadingEnded) //
         {
-            InitializeComponent();
+            if (dataLoaded)
+            {
+                dataGridDT.Columns.Clear();
+            }
+            loadingStarted.Report(1);
+            InitializeComponent(loadingEnded);
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            
         }
 
         
-
-        private void TableData_Load(object sender, EventArgs e)
+        public void clearTable()
         {
-            Refresh();
+            dataGridDT.Columns.Clear();
+         
+        }
+        public void TableData_Load(object sender, EventArgs e)
+        {
+
             textBoxSearch.Visible = false;
             btnSearch.Visible = false;
             panelFilter.Visible = false;
-            ShowData();
-            Refresh();
         }
 
-        private void ShowData()
+        private void ShowData(IProgress<int> loadingEnded)
         {
             int i = 0;
             foreach (string column in Data.dataitems) //afegim totes les columnes que tenen algun valor
@@ -66,7 +74,8 @@ namespace Asterix_Decoder
                 }
                 dataGridDT.Rows.Add(toadd);
             }
-            
+            loadingEnded.Report(1);
+
         }
 
 
