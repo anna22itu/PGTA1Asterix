@@ -85,7 +85,7 @@
             this.textBoxLongGreenDot = new System.Windows.Forms.TextBox();
             this.textBoxLATGreenDot = new System.Windows.Forms.TextBox();
             this.dataGridViewInfoAircraft = new System.Windows.Forms.DataGridView();
-            this.labelInfoAircraft = new System.Windows.Forms.Label();
+            this.labelInfoTableAircraft = new System.Windows.Forms.Label();
             this.labelAicraft = new System.Windows.Forms.Label();
             this.textBoxAircraft = new System.Windows.Forms.TextBox();
             this.btnClearAicraft = new System.Windows.Forms.Button();
@@ -101,6 +101,8 @@
             this.labelStopPlay = new System.Windows.Forms.Label();
             this.iconBtnKML = new FontAwesome.Sharp.IconButton();
             this.labelExportFileKML = new System.Windows.Forms.Label();
+            this.labelInfoPinGreenDot = new System.Windows.Forms.Label();
+            this.labelAircraftInfo = new System.Windows.Forms.Label();
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -592,14 +594,14 @@
             this.dataGridViewInfoAircraft.Size = new System.Drawing.Size(300, 322);
             this.dataGridViewInfoAircraft.TabIndex = 16;
             // 
-            // labelInfoAircraft
+            // labelInfoTableAircraft
             // 
-            this.labelInfoAircraft.AutoSize = true;
-            this.labelInfoAircraft.Location = new System.Drawing.Point(251, 290);
-            this.labelInfoAircraft.Name = "labelInfoAircraft";
-            this.labelInfoAircraft.Size = new System.Drawing.Size(320, 25);
-            this.labelInfoAircraft.TabIndex = 17;
-            this.labelInfoAircraft.Text = "Information about the selected aircraft:";
+            this.labelInfoTableAircraft.AutoSize = true;
+            this.labelInfoTableAircraft.Location = new System.Drawing.Point(251, 290);
+            this.labelInfoTableAircraft.Name = "labelInfoTableAircraft";
+            this.labelInfoTableAircraft.Size = new System.Drawing.Size(320, 25);
+            this.labelInfoTableAircraft.TabIndex = 17;
+            this.labelInfoTableAircraft.Text = "Information about the selected aircraft:";
             // 
             // labelAicraft
             // 
@@ -671,6 +673,8 @@
             this.iconPictureBoxPinMap.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBoxPinMap.TabIndex = 26;
             this.iconPictureBoxPinMap.TabStop = false;
+            this.iconPictureBoxPinMap.MouseEnter += new System.EventHandler(this.iconPictureBoxPinMap_MouseEnter);
+            this.iconPictureBoxPinMap.MouseLeave += new System.EventHandler(this.iconPictureBoxPinMap_MouseLeave);
             // 
             // iconPictureBox7
             // 
@@ -685,6 +689,8 @@
             this.iconPictureBox7.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBox7.TabIndex = 27;
             this.iconPictureBox7.TabStop = false;
+            this.iconPictureBox7.MouseEnter += new System.EventHandler(this.iconPictureBox7_MouseEnter);
+            this.iconPictureBox7.MouseLeave += new System.EventHandler(this.iconPictureBox7_MouseLeave);
             // 
             // labelLatAir
             // 
@@ -771,12 +777,33 @@
             this.labelExportFileKML.TabIndex = 36;
             this.labelExportFileKML.Text = "Export KML file!!";
             // 
+            // labelInfoPinGreenDot
+            // 
+            this.labelInfoPinGreenDot.AutoSize = true;
+            this.labelInfoPinGreenDot.Location = new System.Drawing.Point(590, 85);
+            this.labelInfoPinGreenDot.Name = "labelInfoPinGreenDot";
+            this.labelInfoPinGreenDot.Size = new System.Drawing.Size(354, 25);
+            this.labelInfoPinGreenDot.TabIndex = 37;
+            this.labelInfoPinGreenDot.Text = "Latitude and longitude of the Green Marker";
+            // 
+            // labelAircraftInfo
+            // 
+            this.labelAircraftInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelAircraftInfo.AutoSize = true;
+            this.labelAircraftInfo.Location = new System.Drawing.Point(590, 831);
+            this.labelAircraftInfo.Name = "labelAircraftInfo";
+            this.labelAircraftInfo.Size = new System.Drawing.Size(306, 25);
+            this.labelAircraftInfo.TabIndex = 38;
+            this.labelAircraftInfo.Text = "Latitude and Longitude of the aircraft";
+            // 
             // MENU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1566, 865);
+            this.Controls.Add(this.labelAircraftInfo);
+            this.Controls.Add(this.labelInfoPinGreenDot);
             this.Controls.Add(this.labelExportFileKML);
             this.Controls.Add(this.iconBtnKML);
             this.Controls.Add(this.labelStopPlay);
@@ -792,7 +819,7 @@
             this.Controls.Add(this.btnClearAicraft);
             this.Controls.Add(this.textBoxAircraft);
             this.Controls.Add(this.labelAicraft);
-            this.Controls.Add(this.labelInfoAircraft);
+            this.Controls.Add(this.labelInfoTableAircraft);
             this.Controls.Add(this.dataGridViewInfoAircraft);
             this.Controls.Add(this.textBoxLATGreenDot);
             this.Controls.Add(this.textBoxLongGreenDot);
@@ -851,7 +878,7 @@
         private TextBox textBoxLongGreenDot;
         private TextBox textBoxLATGreenDot;
         private DataGridView dataGridViewInfoAircraft;
-        private Label labelInfoAircraft;
+        private Label labelInfoTableAircraft;
         private Label labelAicraft;
         private TextBox textBoxAircraft;
         private Button btnClearAicraft;
@@ -870,5 +897,7 @@
         private Label labelStopPlay;
         private FontAwesome.Sharp.IconButton iconBtnKML;
         private Label labelExportFileKML;
+        private Label labelInfoPinGreenDot;
+        private Label labelAircraftInfo;
     }
 }

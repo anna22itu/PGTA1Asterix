@@ -54,9 +54,13 @@ namespace Interfaz
             gMapControl1.Hide();
             pictureBoxMapaDifuminado.Show();
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+
             labelAsterixReLoadMap.Hide();
             labelStopPlay.Hide();
             labelExportFileKML.Hide();
+            labelInfoPinGreenDot.Hide();
+            labelAircraftInfo.Hide();
+
         }
 
 
@@ -495,6 +499,26 @@ namespace Interfaz
         private void iconBtnKML_MouseLeave(object sender, EventArgs e)
         {
             labelExportFileKML.Hide();
+        }
+
+        private void iconPictureBox7_MouseEnter(object sender, EventArgs e)
+        {
+            labelInfoPinGreenDot.Show();
+        }
+
+        private void iconPictureBox7_MouseLeave(object sender, EventArgs e)
+        {
+            labelInfoPinGreenDot.Hide();
+        }
+
+        private void iconPictureBoxPinMap_MouseEnter(object sender, EventArgs e)
+        {
+            labelAircraftInfo.Show();
+        }
+
+        private void iconPictureBoxPinMap_MouseLeave(object sender, EventArgs e)
+        {
+            labelAircraftInfo.Hide();   
         }
     }
 }
