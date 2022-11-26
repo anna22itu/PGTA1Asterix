@@ -96,6 +96,11 @@
             this.iconPictureBox7 = new FontAwesome.Sharp.IconPictureBox();
             this.labelLatAir = new System.Windows.Forms.Label();
             this.labelLongAir = new System.Windows.Forms.Label();
+            this.iconBtnReLoadMap = new FontAwesome.Sharp.IconButton();
+            this.labelAsterixReLoadMap = new System.Windows.Forms.Label();
+            this.labelStopPlay = new System.Windows.Forms.Label();
+            this.iconBtnKML = new FontAwesome.Sharp.IconButton();
+            this.labelExportFileKML = new System.Windows.Forms.Label();
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -512,34 +517,38 @@
             // 
             // BtnPlay
             // 
-            this.BtnPlay.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.BtnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnPlay.IconChar = FontAwesome.Sharp.IconChar.Play;
             this.BtnPlay.IconColor = System.Drawing.Color.Black;
             this.BtnPlay.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.BtnPlay.IconSize = 40;
+            this.BtnPlay.IconSize = 35;
             this.BtnPlay.Location = new System.Drawing.Point(1200, 777);
             this.BtnPlay.Name = "BtnPlay";
             this.BtnPlay.Padding = new System.Windows.Forms.Padding(1, 2, 0, 0);
-            this.BtnPlay.Size = new System.Drawing.Size(46, 45);
+            this.BtnPlay.Size = new System.Drawing.Size(45, 45);
             this.BtnPlay.TabIndex = 10;
             this.BtnPlay.UseVisualStyleBackColor = true;
             this.BtnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
+            this.BtnPlay.MouseEnter += new System.EventHandler(this.BtnPlay_MouseEnter);
+            this.BtnPlay.MouseLeave += new System.EventHandler(this.BtnPlay_MouseLeave);
             // 
             // BtnParar
             // 
-            this.BtnParar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.BtnParar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnParar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnParar.IconChar = FontAwesome.Sharp.IconChar.Pause;
             this.BtnParar.IconColor = System.Drawing.Color.Black;
             this.BtnParar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.BtnParar.IconSize = 40;
+            this.BtnParar.IconSize = 35;
             this.BtnParar.Location = new System.Drawing.Point(1200, 777);
             this.BtnParar.Name = "BtnParar";
-            this.BtnParar.Size = new System.Drawing.Size(46, 45);
+            this.BtnParar.Size = new System.Drawing.Size(45, 45);
             this.BtnParar.TabIndex = 11;
             this.BtnParar.UseVisualStyleBackColor = true;
             this.BtnParar.Click += new System.EventHandler(this.BtnParar_Click);
+            this.BtnParar.MouseEnter += new System.EventHandler(this.BtnParar_MouseEnter);
+            this.BtnParar.MouseLeave += new System.EventHandler(this.BtnParar_MouseLeave);
             // 
             // labelLatGreenDot
             // 
@@ -642,7 +651,7 @@
             // textBoxLongAircraft
             // 
             this.textBoxLongAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxLongAircraft.Location = new System.Drawing.Point(911, 791);
+            this.textBoxLongAircraft.Location = new System.Drawing.Point(911, 785);
             this.textBoxLongAircraft.Name = "textBoxLongAircraft";
             this.textBoxLongAircraft.Size = new System.Drawing.Size(150, 31);
             this.textBoxLongAircraft.TabIndex = 25;
@@ -697,12 +706,82 @@
             this.labelLongAir.TabIndex = 29;
             this.labelLongAir.Text = "Long";
             // 
+            // iconBtnReLoadMap
+            // 
+            this.iconBtnReLoadMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconBtnReLoadMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnReLoadMap.IconChar = FontAwesome.Sharp.IconChar.Rotate;
+            this.iconBtnReLoadMap.IconColor = System.Drawing.Color.Black;
+            this.iconBtnReLoadMap.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnReLoadMap.IconSize = 45;
+            this.iconBtnReLoadMap.Location = new System.Drawing.Point(1260, 778);
+            this.iconBtnReLoadMap.Name = "iconBtnReLoadMap";
+            this.iconBtnReLoadMap.Size = new System.Drawing.Size(45, 45);
+            this.iconBtnReLoadMap.TabIndex = 30;
+            this.iconBtnReLoadMap.UseVisualStyleBackColor = true;
+            this.iconBtnReLoadMap.Click += new System.EventHandler(this.iconBtnReLoadMap_Click);
+            this.iconBtnReLoadMap.MouseEnter += new System.EventHandler(this.iconBtnReLoadMap_MouseEnter);
+            this.iconBtnReLoadMap.MouseLeave += new System.EventHandler(this.iconBtnReLoadMap_MouseLeave);
+            // 
+            // labelAsterixReLoadMap
+            // 
+            this.labelAsterixReLoadMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelAsterixReLoadMap.AutoSize = true;
+            this.labelAsterixReLoadMap.Location = new System.Drawing.Point(1155, 826);
+            this.labelAsterixReLoadMap.Name = "labelAsterixReLoadMap";
+            this.labelAsterixReLoadMap.Size = new System.Drawing.Size(272, 25);
+            this.labelAsterixReLoadMap.TabIndex = 33;
+            this.labelAsterixReLoadMap.Text = "Reload the map and resimulate :)";
+            // 
+            // labelStopPlay
+            // 
+            this.labelStopPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelStopPlay.AutoSize = true;
+            this.labelStopPlay.Location = new System.Drawing.Point(1127, 826);
+            this.labelStopPlay.Name = "labelStopPlay";
+            this.labelStopPlay.Size = new System.Drawing.Size(235, 25);
+            this.labelStopPlay.TabIndex = 34;
+            this.labelStopPlay.Text = "Stop and Play the simulator!";
+            // 
+            // iconBtnKML
+            // 
+            this.iconBtnKML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconBtnKML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnKML.IconChar = FontAwesome.Sharp.IconChar.FileCode;
+            this.iconBtnKML.IconColor = System.Drawing.Color.Black;
+            this.iconBtnKML.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnKML.IconSize = 45;
+            this.iconBtnKML.Location = new System.Drawing.Point(1140, 779);
+            this.iconBtnKML.Name = "iconBtnKML";
+            this.iconBtnKML.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
+            this.iconBtnKML.Size = new System.Drawing.Size(45, 45);
+            this.iconBtnKML.TabIndex = 35;
+            this.iconBtnKML.UseVisualStyleBackColor = true;
+            this.iconBtnKML.Click += new System.EventHandler(this.iconBtnKML_Click);
+            this.iconBtnKML.MouseEnter += new System.EventHandler(this.iconBtnKML_MouseEnter);
+            this.iconBtnKML.MouseLeave += new System.EventHandler(this.iconBtnKML_MouseLeave);
+            // 
+            // labelExportFileKML
+            // 
+            this.labelExportFileKML.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelExportFileKML.AutoSize = true;
+            this.labelExportFileKML.Location = new System.Drawing.Point(1101, 825);
+            this.labelExportFileKML.Name = "labelExportFileKML";
+            this.labelExportFileKML.Size = new System.Drawing.Size(140, 25);
+            this.labelExportFileKML.TabIndex = 36;
+            this.labelExportFileKML.Text = "Export KML file!!";
+            // 
             // MENU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1566, 865);
+            this.Controls.Add(this.labelExportFileKML);
+            this.Controls.Add(this.iconBtnKML);
+            this.Controls.Add(this.labelStopPlay);
+            this.Controls.Add(this.labelAsterixReLoadMap);
+            this.Controls.Add(this.iconBtnReLoadMap);
             this.Controls.Add(this.labelLongAir);
             this.Controls.Add(this.labelLatAir);
             this.Controls.Add(this.iconPictureBox7);
@@ -786,5 +865,10 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox7;
         private Label labelLatAir;
         private Label labelLongAir;
+        private FontAwesome.Sharp.IconButton iconBtnReLoadMap;
+        private Label labelAsterixReLoadMap;
+        private Label labelStopPlay;
+        private FontAwesome.Sharp.IconButton iconBtnKML;
+        private Label labelExportFileKML;
     }
 }

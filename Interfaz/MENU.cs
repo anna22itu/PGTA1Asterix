@@ -14,7 +14,9 @@ using System.Windows.Media.Effects;
 using System.Media;
 using System.Drawing;
 using static Guna.UI2.WinForms.Suite.Descriptions;
-
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Xml;
+using System.Text;
 
 namespace Interfaz
 {
@@ -22,10 +24,18 @@ namespace Interfaz
     {
         public bool result = true;
         public bool result2 = false;
+
+        public bool resLoadMap = true;
+
         GMarkerGoogle marker;
         GMarkerGoogle markerAircraft;
         GMapOverlay overlay;
         GMapOverlay overlay2;
+
+        GMarkerGoogle marker3;
+        GMarkerGoogle markerAircraft3;
+        GMapOverlay overlay3;
+        GMapOverlay overlayAir3;
 
         double LatInicial = 41.27575;
         double LongInicial = 1.98721;
@@ -33,6 +43,8 @@ namespace Interfaz
 
         Bitmap Bmpaircraft = (Bitmap)Image.FromFile(@"..\..\aircraft.png");
         Bitmap BmpAircraftR;
+
+        String targetID;
 
 
         public MENU()
@@ -42,9 +54,12 @@ namespace Interfaz
             gMapControl1.Hide();
             pictureBoxMapaDifuminado.Show();
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            labelAsterixReLoadMap.Hide();
+            labelStopPlay.Hide();
+            labelExportFileKML.Hide();
         }
 
-    
+
 
         // LOAD & EXPORT FILE
         private void BtnLoadFile_Click(object sender, EventArgs e)
@@ -205,7 +220,7 @@ namespace Interfaz
                 gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
 
                 // MarcadorGAircraft
-                this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width /10, Bmpaircraft.Height /10));
+                this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
                 overlay2 = new GMapOverlay("Marker");
                 markerAircraft = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
                 overlay2.Markers.Add(markerAircraft); // lo agregamos al mapa
@@ -221,14 +236,10 @@ namespace Interfaz
                 MessageBox.Show("The data has not been loaded correctly");
             }
 
-
             // Data de información
             dtInf = new DataTable();
             dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewInfoAircraft.Font, FontStyle.Bold);
             dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            //dataGridViewInfoAircraft.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            
 
             dtInf.Columns.Add("Field");
             dtInf.Columns.Add("Value");
@@ -239,15 +250,27 @@ namespace Interfaz
             dtInf.Rows.Add("Track Nº");
             dtInf.Rows.Add("Ground Speed");
             dtInf.Rows.Add("Packets");
-
             dataGridViewInfoAircraft.DataSource = dtInf;
 
+            dataGridViewInfoAircraft.Rows[0].Cells[1].Value = dataLoaded;
+            dataGridViewInfoAircraft.Rows[1].Cells[1].Value = dataLoaded;
+            dataGridViewInfoAircraft.Rows[2].Cells[1].Value = dataLoaded;
+            dataGridViewInfoAircraft.Rows[3].Cells[1].Value = dataLoaded;
+            dataGridViewInfoAircraft.Rows[4].Cells[1].Value = dataLoaded;
+            dataGridViewInfoAircraft.Rows[5].Cells[1].Value = dataLoaded;
+
+            textBoxAircraft.Text = targetID;
+
+            resLoadMap = false;
         }
 
-   
+
         private void btnClearAicraft_Click(object sender, EventArgs e)
         {
-            // Cuando selecionamos se borra toda la información del avión y cuando seleccionemos otro avión se volverá a llenar
+            for(int i=0; i< dataGridViewInfoAircraft.RowCount; i++)
+            {
+                dataGridViewInfoAircraft.Rows[i].Cells[1].Value = "";
+            }
         }
 
         private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
@@ -260,19 +283,20 @@ namespace Interfaz
             textBoxLongGreenDot.Text = lng.ToString();
 
             marker.Position = new PointLatLng(lat, lng);
+
+            resLoadMap = false;
         }
 
         private void gMapControl1_Load(object sender, EventArgs e)
         {
-            // Caracteristicas del mapa
             gMapControl1.Show();
             pictureBoxMapaDifuminado.Hide();
             gMapControl1.DragButton = MouseButtons.Left;
             gMapControl1.CanDragMap = true;
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
             gMapControl1.Position = new PointLatLng(LatInicial, LongInicial);
-            gMapControl1.MinZoom = 1;
-            gMapControl1.MaxZoom = 30;
+            gMapControl1.MinZoom = 3;
+            gMapControl1.MaxZoom = 22;
             gMapControl1.Zoom = 15;
             gMapControl1.AutoScroll = true;
         }
@@ -349,6 +373,128 @@ namespace Interfaz
             f.Show();
         }
 
-      
+
+
+        private void iconBtnReLoadMap_Click(object sender, EventArgs e)
+        {
+            String param = "...";
+            try
+            {
+                if (resLoadMap == true) {
+                    param="";
+                }
+                else
+                {
+                    gMapControl1_Load(sender, e);
+
+                    gMapControl1.Overlays.Remove(overlay);
+                    gMapControl1.Overlays.Remove(overlay2);
+
+                    // Avion
+                    try
+                    {
+                        // MarcadorGreenDot
+                        overlay3 = new GMapOverlay("Marker");
+                        marker3 = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), GMarkerGoogleType.green);
+                        overlay3.Markers.Add(marker3); // lo agregamos al mapa
+                        gMapControl1.Overlays.Add(overlay3); // lo agregamos a nuestro mapa
+
+                        // MarcadorGAircraft
+                        this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
+                        overlayAir3 = new GMapOverlay("Marker");
+                        markerAircraft3 = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
+                        overlayAir3.Markers.Add(markerAircraft3); // lo agregamos al mapa
+                        gMapControl1.Overlays.Add(overlayAir3); // lo agregamos a nuestro mapa
+
+                    }
+                    catch (NullReferenceException)
+                    {
+                        MessageBox.Show("The data has not been loaded correctly");
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("The data has not been loaded correctly");
+                    }
+                }
+                
+
+            }
+            catch (Exception) when (param == "")
+            {
+                MessageBox.Show("You still have the map reset");
+            }
+
+            resLoadMap = true;
+
+        }
+
+        private void iconBtnReLoadMap_MouseEnter(object sender, EventArgs e)
+        {
+            labelAsterixReLoadMap.Show();
+        }
+
+        private void iconBtnReLoadMap_MouseLeave(object sender, EventArgs e)
+        {
+            labelAsterixReLoadMap.Hide();
+        }
+
+        private void BtnParar_MouseEnter(object sender, EventArgs e)
+        {
+            labelStopPlay.Show();
+        }
+
+        private void BtnParar_MouseLeave(object sender, EventArgs e)
+        {
+            labelStopPlay.Hide();
+        }
+
+        private void BtnPlay_MouseEnter(object sender, EventArgs e)
+        {
+            labelStopPlay.Show();
+        }
+
+        private void BtnPlay_MouseLeave(object sender, EventArgs e)
+        {
+            labelStopPlay.Hide();
+        }
+
+
+        private void iconBtnKML_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog saveFileKML = new SaveFileDialog();
+                saveFileKML.InitialDirectory = @"..\..\";
+
+                string lat = LatInicial.ToString();
+                string lon = LongInicial.ToString();
+                string ruta = "Simulator.kml";
+                string nombre = "XXX"; // TargetID
+                string file = saveFileKML.FileName;
+
+                XmlTextWriter w = new XmlTextWriter(file, Encoding.UTF8);
+
+                w.WriteStartDocument();
+                w.WriteStartElement("KML file");
+
+                MessageBox.Show("The KML file has been successfully exported!! (You can find it at Interfaz/bin/...)");
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("The KML file could not be exported successfully, please try again.");
+
+            }
+            
+        }
+
+        private void iconBtnKML_MouseEnter(object sender, EventArgs e)
+        {
+            labelExportFileKML.Show();
+        }
+
+        private void iconBtnKML_MouseLeave(object sender, EventArgs e)
+        {
+            labelExportFileKML.Hide();
+        }
     }
 }
