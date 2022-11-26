@@ -183,6 +183,7 @@
             // 
             // BtnExit
             // 
+            this.BtnExit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnExit.Location = new System.Drawing.Point(80, 797);
             this.BtnExit.Name = "BtnExit";
@@ -220,6 +221,7 @@
             // 
             // iconPictureBox5
             // 
+            this.iconPictureBox5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.iconPictureBox5.BackColor = System.Drawing.Color.CornflowerBlue;
             this.iconPictureBox5.ForeColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox5.IconChar = FontAwesome.Sharp.IconChar.ArrowUpFromBracket;
@@ -453,6 +455,9 @@
             // 
             // gMapControl1
             // 
+            this.gMapControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gMapControl1.AutoSize = true;
             this.gMapControl1.Bearing = 0F;
             this.gMapControl1.CanDragMap = true;
@@ -481,6 +486,7 @@
             // 
             // BtnPlay
             // 
+            this.BtnPlay.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnPlay.IconChar = FontAwesome.Sharp.IconChar.Play;
             this.BtnPlay.IconColor = System.Drawing.Color.Black;
@@ -496,6 +502,7 @@
             // 
             // BtnParar
             // 
+            this.BtnParar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnParar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnParar.IconChar = FontAwesome.Sharp.IconChar.Pause;
             this.BtnParar.IconColor = System.Drawing.Color.Black;
@@ -587,10 +594,13 @@
             // 
             // pictureBoxMapaDifuminado
             // 
+            this.pictureBoxMapaDifuminado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxMapaDifuminado.Image = global::AsterixDecoder.Properties.Resources.imageMAPA;
             this.pictureBoxMapaDifuminado.Location = new System.Drawing.Point(590, 175);
             this.pictureBoxMapaDifuminado.Name = "pictureBoxMapaDifuminado";
-            this.pictureBoxMapaDifuminado.Size = new System.Drawing.Size(930, 560);
+            this.pictureBoxMapaDifuminado.Size = new System.Drawing.Size(925, 556);
             this.pictureBoxMapaDifuminado.TabIndex = 21;
             this.pictureBoxMapaDifuminado.TabStop = false;
             // 

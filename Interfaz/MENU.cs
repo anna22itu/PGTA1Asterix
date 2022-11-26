@@ -1,3 +1,5 @@
+
+using System;
 using System.IO;
 using Library;
 using Asterix_Decoder;
@@ -9,6 +11,8 @@ using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using System.Data;
 using System.Windows.Media.Effects;
+using System.Media;
+using System.Drawing;
 
 namespace Interfaz
 {
@@ -170,6 +174,7 @@ namespace Interfaz
 
         private void BtnMapView_Click(object sender, EventArgs e)
         {
+            // Caracteristicas del mapa
             gMapControl1.Show();
             pictureBoxMapaDifuminado.Hide();
             gMapControl1.DragButton = MouseButtons.Left;
@@ -187,6 +192,33 @@ namespace Interfaz
             overlay.Markers.Add(marker); // lo agregamos al mapa
             gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
 
+            // Avion
+            try
+            {
+                PictureBox p1 = new PictureBox();
+
+                p1.Width = 20;
+                p1.Height = 20;
+                p1.ClientSize = new Size(20, 20);
+                p1.Location = new Point(Convert.ToInt32(LatInicial), Convert.ToInt32(LongInicial));
+                p1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                Bitmap image1 = new Bitmap("aircraft.png");
+                p1.Image = (Image)image1;
+                gMapControl1.Controls.Add(p1);
+                
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("The data has not been loaded correctly");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The data has not been loaded correctly");
+            }
+
+
+            // Data de información
             dtInf = new DataTable();
             dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewInfoAircraft.Font, FontStyle.Bold);
             dtInf.Columns.Add("    Field");
