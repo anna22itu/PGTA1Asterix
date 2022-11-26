@@ -22,7 +22,7 @@
 
 
 
-        private void InitializeComponent()
+        private void InitializeComponent(IProgress<int> loadingEnded)
         {
             this.components = new System.ComponentModel.Container();
             this.guna2PanelDT = new Guna.UI2.WinForms.Guna2Panel();
@@ -225,6 +225,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TableData";
             this.Load += new System.EventHandler(this.TableData_Load);
+            this.ShowData(loadingEnded);
             this.guna2PanelDT.ResumeLayout(false);
             this.guna2PanelDT.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBoxSearch)).EndInit();
