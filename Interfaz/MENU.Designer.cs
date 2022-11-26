@@ -80,16 +80,22 @@
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             this.BtnPlay = new FontAwesome.Sharp.IconButton();
             this.BtnParar = new FontAwesome.Sharp.IconButton();
-            this.labelLat = new System.Windows.Forms.Label();
-            this.labelLong = new System.Windows.Forms.Label();
-            this.textBoxLong = new System.Windows.Forms.TextBox();
-            this.textBoxLAT = new System.Windows.Forms.TextBox();
+            this.labelLatGreenDot = new System.Windows.Forms.Label();
+            this.labelLongGreenDot = new System.Windows.Forms.Label();
+            this.textBoxLongGreenDot = new System.Windows.Forms.TextBox();
+            this.textBoxLATGreenDot = new System.Windows.Forms.TextBox();
             this.dataGridViewInfoAircraft = new System.Windows.Forms.DataGridView();
             this.labelInfoAircraft = new System.Windows.Forms.Label();
             this.labelAicraft = new System.Windows.Forms.Label();
             this.textBoxAircraft = new System.Windows.Forms.TextBox();
             this.btnClearAicraft = new System.Windows.Forms.Button();
             this.pictureBoxMapaDifuminado = new System.Windows.Forms.PictureBox();
+            this.textBoxLATAircraft = new System.Windows.Forms.TextBox();
+            this.textBoxLongAircraft = new System.Windows.Forms.TextBox();
+            this.iconPictureBoxPinMap = new FontAwesome.Sharp.IconPictureBox();
+            this.iconPictureBox7 = new FontAwesome.Sharp.IconPictureBox();
+            this.labelLatAir = new System.Windows.Forms.Label();
+            this.labelLongAir = new System.Windows.Forms.Label();
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -104,6 +110,8 @@
             this.panelBarraArriba.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapaDifuminado)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBoxPinMap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnLoadFile
@@ -284,7 +292,7 @@
             // 
             this.iconPictureBox1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.iconPictureBox1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.MapMarkerAlt;
+            this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.MapLocationDot;
             this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconPictureBox1.IconSize = 46;
@@ -435,6 +443,7 @@
             // 
             // labelHora
             // 
+            this.labelHora.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelHora.AutoSize = true;
             this.labelHora.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelHora.Location = new System.Drawing.Point(1386, 113);
@@ -509,7 +518,7 @@
             this.BtnPlay.IconColor = System.Drawing.Color.Black;
             this.BtnPlay.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnPlay.IconSize = 40;
-            this.BtnPlay.Location = new System.Drawing.Point(1016, 777);
+            this.BtnPlay.Location = new System.Drawing.Point(1200, 777);
             this.BtnPlay.Name = "BtnPlay";
             this.BtnPlay.Padding = new System.Windows.Forms.Padding(1, 2, 0, 0);
             this.BtnPlay.Size = new System.Drawing.Size(46, 45);
@@ -525,44 +534,44 @@
             this.BtnParar.IconColor = System.Drawing.Color.Black;
             this.BtnParar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnParar.IconSize = 40;
-            this.BtnParar.Location = new System.Drawing.Point(1016, 777);
+            this.BtnParar.Location = new System.Drawing.Point(1200, 777);
             this.BtnParar.Name = "BtnParar";
             this.BtnParar.Size = new System.Drawing.Size(46, 45);
             this.BtnParar.TabIndex = 11;
             this.BtnParar.UseVisualStyleBackColor = true;
             this.BtnParar.Click += new System.EventHandler(this.BtnParar_Click);
             // 
-            // labelLat
+            // labelLatGreenDot
             // 
-            this.labelLat.AutoSize = true;
-            this.labelLat.Location = new System.Drawing.Point(706, 127);
-            this.labelLat.Name = "labelLat";
-            this.labelLat.Size = new System.Drawing.Size(89, 25);
-            this.labelLat.TabIndex = 12;
-            this.labelLat.Text = "LATITUDE";
+            this.labelLatGreenDot.AutoSize = true;
+            this.labelLatGreenDot.Location = new System.Drawing.Point(641, 129);
+            this.labelLatGreenDot.Name = "labelLatGreenDot";
+            this.labelLatGreenDot.Size = new System.Drawing.Size(35, 25);
+            this.labelLatGreenDot.TabIndex = 12;
+            this.labelLatGreenDot.Text = "Lat";
             // 
-            // labelLong
+            // labelLongGreenDot
             // 
-            this.labelLong.AutoSize = true;
-            this.labelLong.Location = new System.Drawing.Point(993, 127);
-            this.labelLong.Name = "labelLong";
-            this.labelLong.Size = new System.Drawing.Size(106, 25);
-            this.labelLong.TabIndex = 13;
-            this.labelLong.Text = "LONGITUDE";
+            this.labelLongGreenDot.AutoSize = true;
+            this.labelLongGreenDot.Location = new System.Drawing.Point(853, 129);
+            this.labelLongGreenDot.Name = "labelLongGreenDot";
+            this.labelLongGreenDot.Size = new System.Drawing.Size(52, 25);
+            this.labelLongGreenDot.TabIndex = 13;
+            this.labelLongGreenDot.Text = "Long";
             // 
-            // textBoxLong
+            // textBoxLongGreenDot
             // 
-            this.textBoxLong.Location = new System.Drawing.Point(1106, 123);
-            this.textBoxLong.Name = "textBoxLong";
-            this.textBoxLong.Size = new System.Drawing.Size(150, 31);
-            this.textBoxLong.TabIndex = 14;
+            this.textBoxLongGreenDot.Location = new System.Drawing.Point(911, 129);
+            this.textBoxLongGreenDot.Name = "textBoxLongGreenDot";
+            this.textBoxLongGreenDot.Size = new System.Drawing.Size(150, 31);
+            this.textBoxLongGreenDot.TabIndex = 14;
             // 
-            // textBoxLAT
+            // textBoxLATGreenDot
             // 
-            this.textBoxLAT.Location = new System.Drawing.Point(801, 120);
-            this.textBoxLAT.Name = "textBoxLAT";
-            this.textBoxLAT.Size = new System.Drawing.Size(150, 31);
-            this.textBoxLAT.TabIndex = 15;
+            this.textBoxLATGreenDot.Location = new System.Drawing.Point(682, 129);
+            this.textBoxLATGreenDot.Name = "textBoxLATGreenDot";
+            this.textBoxLATGreenDot.Size = new System.Drawing.Size(150, 31);
+            this.textBoxLATGreenDot.TabIndex = 15;
             // 
             // dataGridViewInfoAircraft
             // 
@@ -617,9 +626,76 @@
             this.pictureBoxMapaDifuminado.Image = global::AsterixDecoder.Properties.Resources.imageMAPA;
             this.pictureBoxMapaDifuminado.Location = new System.Drawing.Point(590, 175);
             this.pictureBoxMapaDifuminado.Name = "pictureBoxMapaDifuminado";
-            this.pictureBoxMapaDifuminado.Size = new System.Drawing.Size(1329, 933);
+            this.pictureBoxMapaDifuminado.Size = new System.Drawing.Size(930, 560);
+            this.pictureBoxMapaDifuminado.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxMapaDifuminado.TabIndex = 21;
             this.pictureBoxMapaDifuminado.TabStop = false;
+            // 
+            // textBoxLATAircraft
+            // 
+            this.textBoxLATAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxLATAircraft.Location = new System.Drawing.Point(682, 788);
+            this.textBoxLATAircraft.Name = "textBoxLATAircraft";
+            this.textBoxLATAircraft.Size = new System.Drawing.Size(150, 31);
+            this.textBoxLATAircraft.TabIndex = 24;
+            // 
+            // textBoxLongAircraft
+            // 
+            this.textBoxLongAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxLongAircraft.Location = new System.Drawing.Point(911, 791);
+            this.textBoxLongAircraft.Name = "textBoxLongAircraft";
+            this.textBoxLongAircraft.Size = new System.Drawing.Size(150, 31);
+            this.textBoxLongAircraft.TabIndex = 25;
+            // 
+            // iconPictureBoxPinMap
+            // 
+            this.iconPictureBoxPinMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.iconPictureBoxPinMap.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.iconPictureBoxPinMap.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.iconPictureBoxPinMap.IconChar = FontAwesome.Sharp.IconChar.PlaneUp;
+            this.iconPictureBoxPinMap.IconColor = System.Drawing.SystemColors.ControlText;
+            this.iconPictureBoxPinMap.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBoxPinMap.IconSize = 45;
+            this.iconPictureBoxPinMap.Location = new System.Drawing.Point(590, 777);
+            this.iconPictureBoxPinMap.Name = "iconPictureBoxPinMap";
+            this.iconPictureBoxPinMap.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.iconPictureBoxPinMap.Size = new System.Drawing.Size(45, 45);
+            this.iconPictureBoxPinMap.TabIndex = 26;
+            this.iconPictureBoxPinMap.TabStop = false;
+            // 
+            // iconPictureBox7
+            // 
+            this.iconPictureBox7.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.iconPictureBox7.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.iconPictureBox7.IconChar = FontAwesome.Sharp.IconChar.MapPin;
+            this.iconPictureBox7.IconColor = System.Drawing.SystemColors.ControlText;
+            this.iconPictureBox7.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox7.IconSize = 45;
+            this.iconPictureBox7.Location = new System.Drawing.Point(590, 113);
+            this.iconPictureBox7.Name = "iconPictureBox7";
+            this.iconPictureBox7.Size = new System.Drawing.Size(45, 45);
+            this.iconPictureBox7.TabIndex = 27;
+            this.iconPictureBox7.TabStop = false;
+            // 
+            // labelLatAir
+            // 
+            this.labelLatAir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelLatAir.AutoSize = true;
+            this.labelLatAir.Location = new System.Drawing.Point(641, 791);
+            this.labelLatAir.Name = "labelLatAir";
+            this.labelLatAir.Size = new System.Drawing.Size(35, 25);
+            this.labelLatAir.TabIndex = 28;
+            this.labelLatAir.Text = "Lat";
+            // 
+            // labelLongAir
+            // 
+            this.labelLongAir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelLongAir.AutoSize = true;
+            this.labelLongAir.Location = new System.Drawing.Point(853, 791);
+            this.labelLongAir.Name = "labelLongAir";
+            this.labelLongAir.Size = new System.Drawing.Size(52, 25);
+            this.labelLongAir.TabIndex = 29;
+            this.labelLongAir.Text = "Long";
             // 
             // MENU
             // 
@@ -627,16 +703,22 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1566, 865);
+            this.Controls.Add(this.labelLongAir);
+            this.Controls.Add(this.labelLatAir);
+            this.Controls.Add(this.iconPictureBox7);
+            this.Controls.Add(this.iconPictureBoxPinMap);
+            this.Controls.Add(this.textBoxLongAircraft);
+            this.Controls.Add(this.textBoxLATAircraft);
             this.Controls.Add(this.pictureBoxMapaDifuminado);
             this.Controls.Add(this.btnClearAicraft);
             this.Controls.Add(this.textBoxAircraft);
             this.Controls.Add(this.labelAicraft);
             this.Controls.Add(this.labelInfoAircraft);
             this.Controls.Add(this.dataGridViewInfoAircraft);
-            this.Controls.Add(this.textBoxLAT);
-            this.Controls.Add(this.textBoxLong);
-            this.Controls.Add(this.labelLong);
-            this.Controls.Add(this.labelLat);
+            this.Controls.Add(this.textBoxLATGreenDot);
+            this.Controls.Add(this.textBoxLongGreenDot);
+            this.Controls.Add(this.labelLongGreenDot);
+            this.Controls.Add(this.labelLatGreenDot);
             this.Controls.Add(this.BtnParar);
             this.Controls.Add(this.BtnPlay);
             this.Controls.Add(this.gMapControl1);
@@ -663,6 +745,8 @@
             this.panelBarraArriba.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapaDifuminado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBoxPinMap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -683,10 +767,10 @@
         private GMap.NET.WindowsForms.GMapControl gMapControl1;
         private FontAwesome.Sharp.IconButton BtnPlay;
         private FontAwesome.Sharp.IconButton BtnParar;
-        private Label labelLat;
-        private Label labelLong;
-        private TextBox textBoxLong;
-        private TextBox textBoxLAT;
+        private Label labelLatGreenDot;
+        private Label labelLongGreenDot;
+        private TextBox textBoxLongGreenDot;
+        private TextBox textBoxLATGreenDot;
         private DataGridView dataGridViewInfoAircraft;
         private Label labelInfoAircraft;
         private Label labelAicraft;
@@ -696,5 +780,11 @@
         public FontAwesome.Sharp.IconPictureBox iconPictureBox2;
         public PictureBox pictureBox2;
         public PictureBox pictureBox3;
+        private TextBox textBoxLATAircraft;
+        private TextBox textBoxLongAircraft;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBoxPinMap;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox7;
+        private Label labelLatAir;
+        private Label labelLongAir;
     }
 }

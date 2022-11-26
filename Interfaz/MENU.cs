@@ -26,9 +26,11 @@ namespace Interfaz
         GMarkerGoogle markerAircraft;
         GMapOverlay overlay;
         GMapOverlay overlay2;
+
         double LatInicial = 41.27575;
         double LongInicial = 1.98721;
         DataTable dtInf;
+
         Bitmap Bmpaircraft = (Bitmap)Image.FromFile(@"..\..\aircraft.png");
         Bitmap BmpAircraftR;
 
@@ -36,11 +38,64 @@ namespace Interfaz
         public MENU()
         {
             InitializeComponent();
-            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             BtnParar.Hide();
             gMapControl1.Hide();
             pictureBoxMapaDifuminado.Show();
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
+
+    
+
+        // LOAD & EXPORT FILE
+        private void BtnLoadFile_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                fileimported = true;
+                string filename = openFileDialog1.FileName;
+                byte[] fileBytes = File.ReadAllBytes(filename);
+                string bitString = BitConverter.ToString(fileBytes);
+                var loadingended = new Progress<int>(stoploadingRead);
+                var loadingDTended = new Progress<int>(stoploadingDataTable);
+                var loadingDTstarted = new Progress<int>(loadingDataTable);
+
+                loadingRead();
+                Thread thread = new Thread(() =>
+                {
+                    Read.main(bitString, loadingended);
+                    MessageBox.Show("The file has been loaded successfully.");
+                    createDataTable(0, dataLoaded, loadingDTstarted, loadingDTended);
+                    dataLoaded = true;
+                });
+                thread.Start();
+                labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
+
+            }
+
+            else
+            {
+                MessageBox.Show("ERROR: The file has not been loaded successfully.");
+                //caldrà printar en un dialogbox que no s'ha importat bé el fitxer (tb si dona error o lo q sigui)
+            }
+        }
+
+
+        private void BtnExportFile_Click(object sender, EventArgs e)
+        {
+            bool result = Data.export();
+
+            if (result == true)
+            {
+                MessageBox.Show("The file has been exported correctly./n You can find it in Interface/bin/Debug/net6.0-windows/ as an excel file");
+            }
+            else
+            {
+                MessageBox.Show("ERROR: The file has not been exported correctly.");
+            }
+        }
+
+
+        // TABLA
         private void loadingRead()
         {
             iconPictureBox2.Hide();
@@ -73,84 +128,7 @@ namespace Interfaz
             
         }
         bool fileimported = false;
-        private void BtnLoadFile_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                fileimported = true;
-                string filename = openFileDialog1.FileName;
-                byte[] fileBytes = File.ReadAllBytes(filename);
-                string bitString = BitConverter.ToString(fileBytes);
-                var loadingended = new Progress<int>(stoploadingRead);
-                var loadingDTended = new Progress<int>(stoploadingDataTable);
-                var loadingDTstarted = new Progress<int>(loadingDataTable);
 
-                loadingRead();
-                Thread thread = new Thread(() => 
-                {
-                    Read.main(bitString, loadingended);
-                    MessageBox.Show("The file has been loaded successfully.");
-                    createDataTable(0, dataLoaded, loadingDTstarted, loadingDTended);
-                    dataLoaded = true;
-                });
-                thread.Start();
-                labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
-                
-            }
-
-            else
-            {
-                MessageBox.Show("ERROR: The file has not been loaded successfully.");
-                //caldrà printar en un dialogbox que no s'ha importat bé el fitxer (tb si dona error o lo q sigui)
-            }
-        }
-
-        private void Hora_Tick(object sender, EventArgs e)
-        {
-            labelHora.Text = DateTime.Now.ToLongTimeString();
-        }
-
-        private void iconBtnCross_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void iconBtnMaximize_Click(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                this.WindowState = FormWindowState.Maximized;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Normal;
-            }
-        }
-
-        private void iconBtnMinus_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
-
-        private void BtnExit_Click(object sender, EventArgs e)
-        {
-            Form f = new SeguridadClose();
-            f.Show();
-        }
-
-        private void BtnExportFile_Click(object sender, EventArgs e)
-        {
-            bool result = Data.export();
-
-            if (result == true)
-            {
-                MessageBox.Show("The file has been exported correctly./n You can find it in Interface/bin/Debug/net6.0-windows/ as an excel file");
-            }
-            else
-            {
-                MessageBox.Show("ERROR: The file has not been exported correctly.");
-            }
-        }
 
         public static bool dataLoaded = false;
         
@@ -199,27 +177,8 @@ namespace Interfaz
             }*/
         }
 
-        private void iconBtnMenuBars_Click(object sender, EventArgs e)
-        {
-
-            if (result== true)
-            {
-                panelMENU.Hide();
-                result = false;
-            }
-            else
-            {
-                panelMENU.Show();
-                result = true;
-            }
-        }
-
-        private void BtnAboutUs_Click(object sender, EventArgs e)
-        {
-            Form f = new AboutUs();
-            f.Show();
-        }
-
+    
+        // SIMULATOR (MAP)
         private void BtnPlay_Click(object sender, EventArgs e)
         {
             BtnParar.Show();
@@ -297,8 +256,8 @@ namespace Interfaz
             double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
             double lng = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
 
-            textBoxLAT.Text = lat.ToString();
-            textBoxLong.Text = lng.ToString();
+            textBoxLATGreenDot.Text = lat.ToString();
+            textBoxLongGreenDot.Text = lng.ToString();
 
             marker.Position = new PointLatLng(lat, lng);
         }
@@ -316,10 +275,80 @@ namespace Interfaz
             gMapControl1.MaxZoom = 30;
             gMapControl1.Zoom = 15;
             gMapControl1.AutoScroll = true;
-
-            
-
-
         }
+
+        /**
+        private PointLatLng Cartesian2Geocentric(double x, double y, String TargetID) {
+
+        }*/
+
+   
+     
+
+
+
+
+
+
+
+
+        // ABOUT US
+        private void BtnAboutUs_Click(object sender, EventArgs e)
+        {
+            Form f = new AboutUs();
+            f.Show();
+        }
+
+
+        // EXTRAS
+
+        private void iconBtnMenuBars_Click(object sender, EventArgs e)
+        {
+
+            if (result == true)
+            {
+                panelMENU.Hide();
+                result = false;
+            }
+            else
+            {
+                panelMENU.Show();
+                result = true;
+            }
+        }
+        private void Hora_Tick(object sender, EventArgs e)
+        {
+            labelHora.Text = DateTime.Now.ToLongTimeString();
+        }
+
+        private void iconBtnCross_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void iconBtnMaximize_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void iconBtnMinus_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void BtnExit_Click(object sender, EventArgs e)
+        {
+            Form f = new SeguridadClose();
+            f.Show();
+        }
+
+      
     }
 }
