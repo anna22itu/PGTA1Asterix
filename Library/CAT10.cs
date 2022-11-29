@@ -329,7 +329,7 @@ namespace Library
             Data.add("Mode3/A V", V);
             Data.add("Mode3/A G", G);
             Data.add("Mode3/A L", L);
-            Data.add("Mode3/A ABCD", ABCD);
+            Data.add("Mode-3/A Code", ABCD);
         }
 
         // Data Item I010/090: Flight Level in Binary Representation

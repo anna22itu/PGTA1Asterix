@@ -502,7 +502,7 @@ namespace Library
 
             int ABCD = Convert.ToInt32(A + B + C + D);
 
-            Data.add("Mode3/A ABCD", ABCD);
+            Data.add("Mode-3/A Code", ABCD);
         }
 
         // Data Item I021/071: Time of Applicability for Position
@@ -585,7 +585,7 @@ namespace Library
             TimeSpan time = TimeSpan.FromSeconds(TimeAsterixTransmission);
             string str = time.ToString(@"hh\:mm\:ss");
 
-            Data.add("Time of Asterix Transmission", str);
+            Data.add("Time of Day", str);
         }
 
         // Data Item I021/080: Target Address
@@ -763,9 +763,14 @@ namespace Library
             }
             
             double AirSpeed = Functions.BCD(octeto1.Substring(2, 7) + octeto2, LSB);
+            string AS = AirSpeed.ToString();
+            if (IM == 1)
+            {
+                AS = "M" + AS;
+            }
 
             Data.add("IM", IM);
-            Data.add("Air Speed", AirSpeed);
+            Data.add("Air Speed", AS);
         }
 
         // Data Item I021/151: True Airspeed 

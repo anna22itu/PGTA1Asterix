@@ -60,14 +60,15 @@ namespace Interfaz
             labelExportFileKML.Hide();
             labelInfoPinGreenDot.Hide();
             labelAircraftInfo.Hide();
-
         }
 
 
 
         // LOAD & EXPORT FILE
+        bool fileimported = false;
         private void BtnLoadFile_Click(object sender, EventArgs e)
         {
+            dt = new TableData();
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 fileimported = true;
@@ -75,18 +76,18 @@ namespace Interfaz
                 byte[] fileBytes = File.ReadAllBytes(filename);
                 string bitString = BitConverter.ToString(fileBytes);
                 var loadingended = new Progress<int>(stoploadingRead);
-                var loadingDTended = new Progress<int>(stoploadingDataTable);
                 var loadingDTstarted = new Progress<int>(loadingDataTable);
-
+                var loadingDTended = new Progress<int>(stoploadingDataTable);
                 loadingRead();
                 Thread thread = new Thread(() =>
                 {
                     Read.main(bitString, loadingended);
                     MessageBox.Show("The file has been loaded successfully.");
-                    createDataTable(0, dataLoaded, loadingDTstarted, loadingDTended);
+                    dt.LoadData(loadingDTstarted, loadingDTended);
                     dataLoaded = true;
                 });
                 thread.Start();
+                
                 labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
 
             }
@@ -115,6 +116,9 @@ namespace Interfaz
 
 
         // TABLA
+        static bool dataLoaded = false;
+        TableData dt = new TableData();
+           
         private void loadingRead()
         {
             iconPictureBox2.Hide();
@@ -125,46 +129,19 @@ namespace Interfaz
             pictureBox2.Hide();
             iconPictureBox2.Show();
         }
-        private void createDataTable(int cas, bool dataLoaded, IProgress<int> loadingDTstarted, IProgress<int> loadingDTended) //case 0 create dataframe case 1 show it
-        {
-            Form dt = new Form();
 
-            switch (cas)
-            {
-                case 0:
-
-                    dt = new TableData(dataLoaded, loadingDTstarted, loadingDTended); //if (dataLoaded == true) ja hi havien coses, cal borrar
-
-                    break;
-
-                case 1:
-
-                    dt.Show(); //ESTO NO VA
-
-                    break;
-            }
-            
-            
-        }
-        bool fileimported = false;
-
-
-        public static bool dataLoaded = false;
-        
         private void loadingDataTable(int i)
         {
-            //iconPictureBox6.Hide();
-            //pictureBox3.Show();
+            iconPictureBox6.Hide();
+            pictureBox3.Show();
         }
         private void stoploadingDataTable(int i)
         {
-            //pictureBox3.Hide();
-            //iconPictureBox6.Show();
+            pictureBox3.Hide();
+            iconPictureBox6.Show();
         }
-        public static Form globalForm = new Form();
         private void BtnDataView_Click(object sender, EventArgs e)
         {
-            //bool r = MENU.BtnLoadFile_Click();
             if (dataLoaded == false)
             {
                 if(fileimported == true)
@@ -179,21 +156,9 @@ namespace Interfaz
             }
             else
             {
-                var loadingDTended = new Progress<int>(stoploadingDataTable);
-                var loadingDTstarted = new Progress<int>(loadingDataTable);
-                createDataTable(1, dataLoaded, loadingDTstarted, loadingDTended);
+                dt.Show();
             }
 
-            /**
-            if (r == true)
-            {
-                MessageBox.Show("The data table is being loaded. This could take a few minutes.");
-
-                f.Show();
-            }
-            else {
-                MessageBox.Show("The data table is not available, load the file first please");
-            }*/
         }
 
     
@@ -519,6 +484,11 @@ namespace Interfaz
         private void iconPictureBoxPinMap_MouseLeave(object sender, EventArgs e)
         {
             labelAircraftInfo.Hide();   
+        }
+
+        private void MENU_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

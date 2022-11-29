@@ -103,6 +103,16 @@ namespace AsterixDecoder.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cross_icon {
+            get {
+                object obj = ResourceManager.GetObject("cross-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap imageMAPA {
             get {
                 object obj = ResourceManager.GetObject("imageMAPA", resourceCulture);
@@ -116,6 +126,16 @@ namespace AsterixDecoder.Properties {
         internal static System.Drawing.Bitmap loadinggif {
             get {
                 object obj = ResourceManager.GetObject("loadinggif", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tick_green_icon {
+            get {
+                object obj = ResourceManager.GetObject("tick-green-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
