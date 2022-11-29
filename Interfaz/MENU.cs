@@ -46,6 +46,11 @@ namespace Interfaz
 
         String targetID;
 
+        double LatLEBL = 41.29839;
+        double LongLEBL = 2.08331;
+
+        bool loadMap = false;
+
 
         public MENU()
         {
@@ -60,6 +65,7 @@ namespace Interfaz
             labelExportFileKML.Hide();
             labelInfoPinGreenDot.Hide();
             labelAircraftInfo.Hide();
+            labelZoomLEBL.Hide();
         }
 
 
@@ -82,12 +88,12 @@ namespace Interfaz
                 Thread thread = new Thread(() =>
                 {
                     Read.main(bitString, loadingended);
-                    MessageBox.Show("The file has been loaded successfully.");
+                    System.Windows.MessageBox.Show("The file has been loaded successfully.");
                     dt.LoadData(loadingDTstarted, loadingDTended);
                     dataLoaded = true;
                 });
                 thread.Start();
-                
+
                 labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
 
             }
@@ -118,7 +124,7 @@ namespace Interfaz
         // TABLA
         static bool dataLoaded = false;
         TableData dt = new TableData();
-           
+
         private void loadingRead()
         {
             iconPictureBox2.Hide();
@@ -144,7 +150,7 @@ namespace Interfaz
         {
             if (dataLoaded == false)
             {
-                if(fileimported == true)
+                if (fileimported == true)
                 {
                     MessageBox.Show("The data table is being loaded. This could take a few minutes.", "Please wait.");
                 }
@@ -160,7 +166,7 @@ namespace Interfaz
 
         }
 
-    
+
         // SIMULATOR (MAP)
         private void BtnPlay_Click(object sender, EventArgs e)
         {
@@ -235,7 +241,7 @@ namespace Interfaz
 
         private void btnClearAicraft_Click(object sender, EventArgs e)
         {
-            for(int i=0; i< dataGridViewInfoAircraft.RowCount; i++)
+            for (int i = 0; i < dataGridViewInfoAircraft.RowCount; i++)
             {
                 dataGridViewInfoAircraft.Rows[i].Cells[1].Value = "";
             }
@@ -267,6 +273,9 @@ namespace Interfaz
             gMapControl1.MaxZoom = 22;
             gMapControl1.Zoom = 15;
             gMapControl1.AutoScroll = true;
+
+            this.loadMap = true;
+
         }
 
         /**
@@ -274,8 +283,8 @@ namespace Interfaz
 
         }*/
 
-   
-     
+
+
 
 
 
@@ -348,8 +357,9 @@ namespace Interfaz
             String param = "...";
             try
             {
-                if (resLoadMap == true) {
-                    param="";
+                if (resLoadMap == true)
+                {
+                    param = "";
                 }
                 else
                 {
@@ -384,7 +394,7 @@ namespace Interfaz
                         MessageBox.Show("The data has not been loaded correctly");
                     }
                 }
-                
+
 
             }
             catch (Exception) when (param == "")
@@ -429,30 +439,25 @@ namespace Interfaz
 
         private void iconBtnKML_Click(object sender, EventArgs e)
         {
-            try
+            if (textBoxAircraft.Text == "")
             {
-                SaveFileDialog saveFileKML = new SaveFileDialog();
-                saveFileKML.InitialDirectory = @"..\..\";
-
-                string lat = LatInicial.ToString();
-                string lon = LongInicial.ToString();
-                string ruta = "Simulator.kml";
-                string nombre = "XXX"; // TargetID
-                string file = saveFileKML.FileName;
-
-                XmlTextWriter w = new XmlTextWriter(file, Encoding.UTF8);
-
-                w.WriteStartDocument();
-                w.WriteStartElement("KML file");
-
-                MessageBox.Show("The KML file has been successfully exported!! (You can find it at Interfaz/bin/...)");
+                MessageBox.Show("First select a plane, please");
             }
-            catch (Exception exp)
+            else 
             {
-                MessageBox.Show("The KML file could not be exported successfully, please try again.");
+                try
+                {
+                    KML_Load(sender, e);
 
+                    //MessageBox.Show("The KML file has been successfully exported!! (You can find it at Interfaz/bin/...)");
+
+                    KML KML = new KML();
+                }
+                catch (Exception)
+                {
+                    //MessageBox.Show("The KML file could not be exported successfully, please try again.");
+                }
             }
-            
         }
 
         private void iconBtnKML_MouseEnter(object sender, EventArgs e)
@@ -482,12 +487,116 @@ namespace Interfaz
 
         private void iconPictureBoxPinMap_MouseLeave(object sender, EventArgs e)
         {
-            labelAircraftInfo.Hide();   
+            labelAircraftInfo.Hide();
         }
 
-        private void MENU_Load(object sender, EventArgs e)
+        private void KML_Load(object sender, System.EventArgs e)
         {
 
+            // Guardamos la información del avión especificado y le decimos el directorio al que queremos que se guarde
+            SaveFileDialog saveFileKML = new SaveFileDialog();
+            saveFileKML.InitialDirectory = @"..\..\";
+
+            //Le daremos un nombre al archivo y tambien le expecificamos en que directorio se creara
+            string nombrefile = targetID + ".kml";
+
+
+            //Definimos el archivo XML
+            XmlTextWriter writer = new XmlTextWriter(nombrefile, Encoding.UTF8);
+
+            // Empezamos a escribir
+            writer.WriteStartDocument();
+            writer.WriteStartElement("kml");
+            writer.WriteAttributeString("xmlns", "http://earth.google.com/kml/2.0");
+            writer.WriteStartElement("Folder");
+            writer.WriteStartElement("description");
+
+            //Descripcion del Conjunto de Datos,puede ser texto o HTML
+            writer.WriteEndElement();
+            writer.WriteElementString("name", "Paises");
+            writer.WriteElementString("visibility", "0");
+            writer.WriteElementString("open", "1");
+            writer.WriteStartElement("Folder");
+
+            /**
+            //Obtenemos los datos donde estan las coordenadas
+            DataSet ds = dsDatos();
+            //Recorremos el DataSet
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                //Obtenemos los valores de Latitud y Longitud
+                string slong = ds.Tables[0].Rows[i]["Longitud"].ToString();
+                string slat = ds.Tables[0].Rows[i]["Latitud"].ToString();
+                writer.WriteStartElement("Placemark");
+                writer.WriteStartElement("description");
+                writer.WriteCData("Aqui puede ir cualquier tipo de texto descriptivo de acuerdo al registro correspondiente");
+                writer.WriteEndElement();
+                //Asignamos el nombre del registro o coordenada obteniendo el valor del campo Nombre
+                writer.WriteElementString("name", ds.Tables[0].Rows[i]["Nombre"].ToString());
+                writer.WriteElementString("visibility", "1");
+                writer.WriteStartElement("Style");
+                writer.WriteStartElement("IconStyle");
+                writer.WriteStartElement("Icon");
+                //Ruta del icono para ver las coordenadas
+                //Debe ser pequeña de 32x32.
+                writer.WriteElementString("href", "www.TuDominio.com/directorio/tuicono.ico");
+                writer.WriteElementString("w", "32");
+                writer.WriteElementString("h", "32");
+                writer.WriteElementString("x", "64");
+                writer.WriteElementString("y", "96");
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+                writer.WriteStartElement("LookAt");
+                writer.WriteElementString("longitude", slong);
+                writer.WriteElementString("latitude", slat);
+                writer.WriteElementString("range", "3000");
+                writer.WriteElementString("tilt", "60");
+                writer.WriteElementString("heading", "0");
+                writer.WriteEndElement();
+                writer.WriteStartElement("Point");
+                writer.WriteElementString("extrude", "1");
+                writer.WriteElementString("altitudeMode", "relativeToGround");
+                writer.WriteElementString("coordinates", slong + "," + slat + ",50");
+                writer.WriteEndElement();
+                writer.WriteEndElement();
+            }
+            */
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
+
+            MessageBox.Show("The KML file has been successfully exported!! (You can find it at Interfaz/bin/...)");
+        }
+
+        private void iconButton1_MouseLeave(object sender, EventArgs e)
+        {
+            labelZoomLEBL.Hide();
+        }
+
+        private void iconButton1_MouseEnter(object sender, EventArgs e)
+        {
+            labelZoomLEBL.Show();
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            if (this.loadMap)
+            {
+                gMapControl1.CanDragMap = true;
+                gMapControl1.MapProvider = GMapProviders.GoogleMap;
+                gMapControl1.Position = new PointLatLng(LatLEBL, LongLEBL);
+                gMapControl1.MinZoom = 3;
+                gMapControl1.MaxZoom = 22;
+                gMapControl1.Zoom = 14;
+                gMapControl1.AutoScroll = true;
+            }
+            else 
+            {
+                MessageBox.Show("First load the map --> on the LOAD MAP button");
+            }
         }
     }
 }
