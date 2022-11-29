@@ -28,25 +28,19 @@
             this.guna2PanelDT = new Guna.UI2.WinForms.Guna2Panel();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.iconBtnFlecha = new FontAwesome.Sharp.IconButton();
-            this.btnFiltrar = new System.Windows.Forms.Button();
-            this.textBoxSearch = new System.Windows.Forms.TextBox();
-            this.iconPictureBoxSearch = new FontAwesome.Sharp.IconPictureBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.iconPictureBoxSearch = new FontAwesome.Sharp.IconPictureBox();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.iconBtnDTMax = new FontAwesome.Sharp.IconButton();
             this.iconBtnDTClose = new FontAwesome.Sharp.IconButton();
             this.dataGridDT = new System.Windows.Forms.DataGridView();
-            this.panelFilter = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.guna2PanelDT.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBoxSearch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDT)).BeginInit();
-            this.panelFilter.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2PanelDT
@@ -54,13 +48,11 @@
             this.guna2PanelDT.BackColor = System.Drawing.Color.CornflowerBlue;
             this.guna2PanelDT.Controls.Add(this.checkBox4);
             this.guna2PanelDT.Controls.Add(this.checkBox3);
-            this.guna2PanelDT.Controls.Add(this.checkBox2);
-            this.guna2PanelDT.Controls.Add(this.checkBox1);
-            this.guna2PanelDT.Controls.Add(this.iconBtnFlecha);
-            this.guna2PanelDT.Controls.Add(this.btnFiltrar);
-            this.guna2PanelDT.Controls.Add(this.textBoxSearch);
-            this.guna2PanelDT.Controls.Add(this.iconPictureBoxSearch);
             this.guna2PanelDT.Controls.Add(this.btnSearch);
+            this.guna2PanelDT.Controls.Add(this.checkBox2);
+            this.guna2PanelDT.Controls.Add(this.textBoxSearch);
+            this.guna2PanelDT.Controls.Add(this.checkBox1);
+            this.guna2PanelDT.Controls.Add(this.iconPictureBoxSearch);
             this.guna2PanelDT.Controls.Add(this.iconButton1);
             this.guna2PanelDT.Controls.Add(this.iconBtnDTMax);
             this.guna2PanelDT.Controls.Add(this.iconBtnDTClose);
@@ -74,9 +66,9 @@
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(303, 36);
+            this.checkBox4.Location = new System.Drawing.Point(642, 36);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(127, 19);
+            this.checkBox4.Size = new System.Drawing.Size(191, 29);
             this.checkBox4.TabIndex = 17;
             this.checkBox4.Text = "Show Extra Reports";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -85,70 +77,53 @@
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(303, 12);
+            this.checkBox3.Location = new System.Drawing.Point(642, 12);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(161, 19);
+            this.checkBox3.Size = new System.Drawing.Size(243, 29);
             this.checkBox3.TabIndex = 16;
             this.checkBox3.Text = "Show Only Target Reports";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(240, 12);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(100, 45);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(104, 12);
+            this.checkBox2.Location = new System.Drawing.Point(441, 12);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(130, 19);
+            this.checkBox2.Size = new System.Drawing.Size(195, 29);
             this.checkBox2.TabIndex = 15;
             this.checkBox2.Text = "Show Relevant Data";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(91, 19);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(143, 31);
+            this.textBoxSearch.TabIndex = 2;
+            this.textBoxSearch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxSearch_MouseClick);
+            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(104, 36);
+            this.checkBox1.Location = new System.Drawing.Point(441, 36);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(99, 19);
+            this.checkBox1.Size = new System.Drawing.Size(149, 29);
             this.checkBox1.TabIndex = 14;
             this.checkBox1.Text = "Show All Data";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // iconBtnFlecha
-            // 
-            this.iconBtnFlecha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnFlecha.IconChar = FontAwesome.Sharp.IconChar.ChevronDown;
-            this.iconBtnFlecha.IconColor = System.Drawing.Color.Black;
-            this.iconBtnFlecha.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnFlecha.IconSize = 25;
-            this.iconBtnFlecha.Location = new System.Drawing.Point(749, 12);
-            this.iconBtnFlecha.Name = "iconBtnFlecha";
-            this.iconBtnFlecha.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.iconBtnFlecha.Size = new System.Drawing.Size(45, 45);
-            this.iconBtnFlecha.TabIndex = 13;
-            this.iconBtnFlecha.UseVisualStyleBackColor = true;
-            this.iconBtnFlecha.MouseEnter += new System.EventHandler(this.iconBtnFlecha_MouseEnter);
-            this.iconBtnFlecha.MouseLeave += new System.EventHandler(this.iconBtnFlecha_MouseLeave);
-            // 
-            // btnFiltrar
-            // 
-            this.btnFiltrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFiltrar.Location = new System.Drawing.Point(683, 12);
-            this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(60, 45);
-            this.btnFiltrar.TabIndex = 12;
-            this.btnFiltrar.Text = "Filter";
-            this.btnFiltrar.UseVisualStyleBackColor = true;
-            // 
-            // textBoxSearch
-            // 
-            this.textBoxSearch.Location = new System.Drawing.Point(809, 10);
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(143, 23);
-            this.textBoxSearch.TabIndex = 2;
-            this.textBoxSearch.MouseEnter += new System.EventHandler(this.textBoxSearch_MouseEnter);
-            this.textBoxSearch.MouseLeave += new System.EventHandler(this.textBoxSearch_MouseLeave);
             // 
             // iconPictureBoxSearch
             // 
@@ -164,15 +139,6 @@
             this.iconPictureBoxSearch.TabIndex = 2;
             this.iconPictureBoxSearch.TabStop = false;
             this.iconPictureBoxSearch.Click += new System.EventHandler(this.iconPictureBoxSearch_Click);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(899, 12);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(100, 45);
-            this.btnSearch.TabIndex = 1;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
             // 
             // iconButton1
             // 
@@ -235,36 +201,6 @@
             this.dataGridDT.Size = new System.Drawing.Size(1090, 585);
             this.dataGridDT.TabIndex = 1;
             // 
-            // panelFilter
-            // 
-            this.panelFilter.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.panelFilter.Controls.Add(this.button2);
-            this.panelFilter.Controls.Add(this.button1);
-            this.panelFilter.Location = new System.Drawing.Point(683, 71);
-            this.panelFilter.Name = "panelFilter";
-            this.panelFilter.Size = new System.Drawing.Size(213, 101);
-            this.panelFilter.TabIndex = 14;
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button2.Location = new System.Drawing.Point(0, 34);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(213, 39);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(213, 34);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // guna2DragControl1
             // 
             this.guna2DragControl1.DockIndicatorTransparencyValue = 0.6D;
@@ -275,7 +211,6 @@
             // 
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1140, 700);
-            this.Controls.Add(this.panelFilter);
             this.Controls.Add(this.dataGridDT);
             this.Controls.Add(this.guna2PanelDT);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -285,7 +220,6 @@
             this.guna2PanelDT.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBoxSearch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDT)).EndInit();
-            this.panelFilter.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -298,11 +232,6 @@
         private DataGridView dataGridDT;
         private FontAwesome.Sharp.IconPictureBox iconPictureBoxSearch;
         private TextBox textBoxSearch;
-        private Button btnFiltrar;
-        private FontAwesome.Sharp.IconButton iconBtnFlecha;
-        private Panel panelFilter;
-        private Button button2;
-        private Button button1;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
         private CheckBox checkBox4;
         private CheckBox checkBox3;

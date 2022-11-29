@@ -152,7 +152,6 @@ namespace Interfaz
                 {
                     MessageBox.Show("No file has been imported yet.", "Please open a file.");
                 }
-                
             }
             else
             {

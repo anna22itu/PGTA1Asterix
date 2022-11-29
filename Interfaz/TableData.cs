@@ -16,11 +16,14 @@ namespace Asterix_Decoder
 {
     public partial class TableData : Form
     {
+        String search;
+
         public TableData()
         {
             InitializeComponent();
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             checkBox2.Checked = true;
+            textBoxSearch.Text = "Enter a DataItem";
 
 
         }
@@ -37,7 +40,6 @@ namespace Asterix_Decoder
 
             textBoxSearch.Visible = false;
             btnSearch.Visible = false;
-            panelFilter.Visible = false;
         }
 
 
@@ -251,33 +253,55 @@ namespace Asterix_Decoder
         {
             textBoxSearch.Visible = true;
             btnSearch.Visible = true;
-            textBoxSearch.Text = "Enter a DataItem";
         }
 
-        private void iconBtnFlecha_MouseEnter(object sender, EventArgs e)
-        {
-            panelFilter.Visible = true;
-        }
-
-        private void iconBtnFlecha_MouseLeave(object sender, EventArgs e)
-        {
-            panelFilter.Visible = false;
-        }
-
-        private void textBoxSearch_MouseEnter(object sender, EventArgs e)
-        {
-            textBoxSearch.Text = string.Empty;
-        }
-
-        private void textBoxSearch_MouseLeave(object sender, EventArgs e)
-        {
-            textBoxSearch.Text = "Enter a DataItem";
-        }
 
         private void guna2PanelDT_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            search = textBoxSearch.Text;
+            try
+            {
+                if (this.search == "")
+                {
+                    MessageBox.Show("You must enter a name of a header column");
+                }
+                else 
+                {
+                    foreach (DataGridViewColumn column in dataGridDT.Columns)
+                    {
+                        if (column.HeaderText.Equals(this.search))
+                        {
+                            for (int i = 0; i < dataGridDT.Columns.Count; i++)
+                            {
+                                dataGridDT.Columns[i].Visible = false;
+                            }
+                            found = true;
+                            dataGridDT.Columns[this.search].Visible = true;
+                        }
+                    }
+
+                    if (found == false)
+                    {
+                        MessageBox.Show("There is no column with that name, please make sure that the name entered is the same as the one in the table header.");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There is no column with that name, please make sure that the name entered is the same as the one in the table header.");
+            }
+        }
+
+
+        private void textBoxSearch_MouseClick(object sender, MouseEventArgs e)
+        {
+            textBoxSearch.Text = "";
+        }
     }
 }
