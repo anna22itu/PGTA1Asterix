@@ -55,6 +55,14 @@ namespace Interfaz
 
         bool loadMap = false;
 
+        MarkerClick AircraftSelected;
+        String IDSelected;
+        String CallsignSelected;
+        String ICAOSelected;
+        String FLSelected;
+        String TrackNumSelected;
+        String GroundSeppedSElected;
+        String PacketsSelected;
 
         public MENU()
         {
@@ -205,6 +213,7 @@ namespace Interfaz
             }
             
         }
+
         //ReadTargets s'ahuria de fer com un thread que quan es doni a apausa es pausi, i quan es doni al play, si ja shavia començat a llegir, faci resume.
         private void ReadTargets() //aqui anirem llegint al ritme del timer del primer temps, segon a segon, 
         {
@@ -259,6 +268,7 @@ namespace Interfaz
                     }
 
                 }
+
                 //CAL AFEGIR LA CAT21 I QUE SI LA DISTANCIA ENTRE EL VELL I EL NOU ES MOLTA, BORREM EL VELL I QUE APAREIXI EL NOU NOMES
                 if (cat != 0)
                 {
@@ -290,7 +300,6 @@ namespace Interfaz
                             targetList[targetNames.IndexOf(ID)].setLong(longitude);
                             targetList[targetNames.IndexOf(ID)].setHeight(z);
                             markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
-                            refreshPlot();
                         }
                         else //si no existeix, creem un i l'afegim
                         {
@@ -302,7 +311,6 @@ namespace Interfaz
                             markersList.Add(markerTarget);
                             targets.Markers.Add(markerTarget);
                             gMapControl1.Overlays.Add(targets);
-                            refreshPlot();
                         }
                     }
                 }
@@ -311,10 +319,8 @@ namespace Interfaz
             
 
         }
-        private void refreshPlot()
-        {
-            //gMapControl1.Invoke(Refresh);
-        }
+
+
         private void BtnMapView_Click(object sender, EventArgs e)
         {
             if (dataRead)
@@ -329,30 +335,30 @@ namespace Interfaz
             
 
             // Avion
-            //try
-            //{
-            //    // MarcadorGreenDot
-            //    overlay = new GMapOverlay("Marker");
-            //    marker = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), GMarkerGoogleType.green);
-            //    overlay.Markers.Add(marker); // lo agregamos al mapa
-            //    gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
+            try
+            {
+                // MarcadorGreenDot
+                overlay = new GMapOverlay("Marker");
+                marker = new GMarkerGoogle(new PointLatLng(LatLEBL, LongLEBL), GMarkerGoogleType.green);
+                overlay.Markers.Add(marker); // lo agregamos al mapa
+                gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
 
-            //    // MarcadorGAircraft
-            //    this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
-            //    overlay2 = new GMapOverlay("Marker");
-            //    markerAircraft = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
-            //    overlay2.Markers.Add(markerAircraft); // lo agregamos al mapa
-            //    gMapControl1.Overlays.Add(overlay2); // lo agregamos a nuestro mapa
+                // MarcadorGAircraft
+                //this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
+                //overlay2 = new GMapOverlay("Marker");
+                //markerAircraft = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
+                //overlay2.Markers.Add(markerAircraft); // lo agregamos al mapa
+                //gMapControl1.Overlays.Add(overlay2); // lo agregamos a nuestro mapa
 
-            //}
-            //catch (NullReferenceException)
-            //{
-            //    MessageBox.Show("The data has not been loaded correctly");
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("The data has not been loaded correctly");
-            //}
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("The data has not been loaded correctly");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The data has not been loaded correctly");
+            }
 
 
         }
@@ -374,20 +380,29 @@ namespace Interfaz
             dtInf.Rows.Add("Packets");
             dataGridViewInfoAircraft.DataSource = dtInf;
 
-            
 
             resLoadMap = false;
         }
         public void loadAircraftInfoData()
         {
-            dataGridViewInfoAircraft.Rows[0].Cells[1].Value = dataLoaded;
-            dataGridViewInfoAircraft.Rows[1].Cells[1].Value = dataLoaded;
-            dataGridViewInfoAircraft.Rows[2].Cells[1].Value = dataLoaded;
-            dataGridViewInfoAircraft.Rows[3].Cells[1].Value = dataLoaded;
-            dataGridViewInfoAircraft.Rows[4].Cells[1].Value = dataLoaded;
-            dataGridViewInfoAircraft.Rows[5].Cells[1].Value = dataLoaded;
 
-            textBoxAircraft.Text = targetID;
+            if (targetList != null)
+            {
+                //textBoxAircraft.Text = targetList.GetHashCode;
+
+                dataGridViewInfoAircraft.Rows[0].Cells[1].Value = dataLoaded;  // Callsing
+                dataGridViewInfoAircraft.Rows[1].Cells[1].Value = dataLoaded;  // ICAO
+                dataGridViewInfoAircraft.Rows[2].Cells[1].Value = dataLoaded;  // FL
+                dataGridViewInfoAircraft.Rows[3].Cells[1].Value = dataLoaded;  // Track Nº
+                dataGridViewInfoAircraft.Rows[4].Cells[1].Value = dataLoaded;  // Ground Speed
+                dataGridViewInfoAircraft.Rows[5].Cells[1].Value = dataLoaded;  // Packets
+
+               
+            }
+            else 
+            {
+                MessageBox.Show("Please selected an aicraft");
+            };
         }
 
 
@@ -399,18 +414,32 @@ namespace Interfaz
             }
         }
 
-        private void gMapControl1_MouseClick(object sender, MouseEventArgs e) //caldra veure que fa
+        private void gMapControl1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             // para obtener los datos de la lat y long donde el user ha presionado
-            //double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
-            //double lng = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
+            double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
+            double lng = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
 
-            //textBoxLATGreenDot.Text = lat.ToString();
-            //textBoxLongGreenDot.Text = lng.ToString();
+            textBoxLATGreenDot.Text = lat.ToString();
+            textBoxLongGreenDot.Text = lng.ToString();
 
-            //marker.Position = new PointLatLng(lat, lng);
+            marker.Position = new PointLatLng(lat, lng);
 
-            //resLoadMap = false;
+            resLoadMap = false;
+        }
+
+
+        private void gMapControl1_MouseClick(object sender, MouseEventArgs e) //caldra veure que fa
+        {
+            // Datos del avion seleccionado los asginamos al avion seleccionado
+            /**
+            for (int i=0;i<markersList.Count;i++)
+            {
+                if (markersList[i].Mo)
+                {
+                    markersList[i].OnMarkerClick
+                }
+            }*/
         }
 
         private void gMapControl1_Load(object sender, EventArgs e)
@@ -423,10 +452,11 @@ namespace Interfaz
             gMapControl1.PolygonsEnabled = true;
             gMapControl1.CanDragMap = true;
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
-            gMapControl1.Position = new PointLatLng(LatInicial, LongInicial);
+            gMapControl1.Position = new PointLatLng(LatLEBL, LongLEBL);
             gMapControl1.MinZoom = 3;
             gMapControl1.MaxZoom = 22;
-            gMapControl1.Zoom = 15;
+            gMapControl1.Zoom = 14;
+            gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             gMapControl1.AutoScroll = true;
 
             this.loadMap = true;
@@ -508,7 +538,6 @@ namespace Interfaz
                     gMapControl1_Load(sender, e);
 
                     gMapControl1.Overlays.Remove(overlay);
-                    gMapControl1.Overlays.Remove(overlay2);
 
                     // Avion
                     try
@@ -739,6 +768,20 @@ namespace Interfaz
             {
                 MessageBox.Show("First load the map --> on the LOAD MAP button");
             }
+        }
+
+        private void gMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
+        {
+
+            foreach (GMapMarker obj in markersList)
+            {
+                if (obj.Tag.Equals(item.Tag))
+                {
+                    Console.WriteLine("good");
+                    MessageBox.Show("good");
+                }
+
+            }           
         }
     }
 }
