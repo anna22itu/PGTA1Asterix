@@ -37,6 +37,10 @@ namespace Interfaz
         GMapOverlay overlay3;
         GMapOverlay overlayAir3;
 
+        GMapControl gmap = new GMapControl();
+
+        GMapOverlay targets = new GMapOverlay("targets");
+
         double LatInicial = 41.27575;
         double LongInicial = 1.98721;
         DataTable dtInf;
@@ -72,6 +76,7 @@ namespace Interfaz
 
         // LOAD & EXPORT FILE
         bool fileimported = false;
+        bool dataRead = false;
         private void BtnLoadFile_Click(object sender, EventArgs e)
         {
             dt = new TableData();
@@ -85,14 +90,15 @@ namespace Interfaz
                 var loadingDTstarted = new Progress<int>(loadingDataTable);
                 var loadingDTended = new Progress<int>(stoploadingDataTable);
                 loadingRead();
-                Thread thread = new Thread(() =>
+                Thread readThread = new Thread(() =>
                 {
                     Read.main(bitString, loadingended);
+                    dataRead = true;
                     System.Windows.MessageBox.Show("The file has been loaded successfully.");
                     dt.LoadData(loadingDTstarted, loadingDTended);
                     dataLoaded = true;
                 });
-                thread.Start();
+                readThread.Start();
 
                 labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
 
@@ -168,48 +174,190 @@ namespace Interfaz
 
 
         // SIMULATOR (MAP)
+
+        List<Aircraft> targetList = new List<Aircraft>();
+        List<string> targetNames = new List<string>();
+        List<GMarkerGoogle> markersList = new List<GMarkerGoogle>();
+        int currentItem = 0; //the last item read when pause pressed, to continue from here
+
+
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            BtnParar.Show();
-            BtnPlay.Hide();
+            if (loadMap) //que nomes funcionin si el mapa esta loaded
+            {
+                BtnParar.Show();
+                BtnPlay.Hide();
+                ReadTargets();
+            }
+            else
+            {
+                MessageBox.Show("No file has been imported yet.", "Please open a file.");
+            }
+            
         }
 
         private void BtnParar_Click(object sender, EventArgs e)
         {
-            BtnParar.Hide();
-            BtnPlay.Show();
+            if (loadMap)
+            {
+                //BtnParar.Hide();
+                //BtnPlay.Show();
+            }
+            
         }
+        //ReadTargets s'ahuria de fer com un thread que quan es doni a apausa es pausi, i quan es doni al play, si ja shavia començat a llegir, faci resume.
+        private void ReadTargets() //aqui anirem llegint al ritme del timer del primer temps, segon a segon, 
+        {
+            int testLen = 1000; //per que funcioni caldra que i < Data.TotalItems.Count
 
+            Thread readTargetThread = new Thread(() =>
+            {
+                for (int i = 0; i < testLen; i++)
+                {
+                    object[] item = Data.TotalItems[i];
+                    plotTarget(item);
+                    Thread.Sleep(50);
+                }
+                MessageBox.Show("All aircraft Shown");
+            });
+            readTargetThread.Start();
+        }
+        private void plotTarget(object[] item)
+        {
+            Thread plotTargetThread = new Thread(() =>
+            {
+                double longitude = double.NaN;
+                double latitude = double.NaN;
+                double z = 0;
+                string ID = null;
+                int cat = 0;
+
+                if (item[Data.columns["Geometric Height"]] != null)
+                {
+                    z = Convert.ToDouble(item[Data.columns["Geometric Height"]]);
+                }
+                else if (item[Data.columns["Height"]] != null)
+                {
+                    z = Convert.ToDouble(item[Data.columns["Height"]]);
+                }
+
+                if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null) //té nomes cartesianes
+                {
+                    if (item[Data.columns["MessageType"]].ToString() == "Target Report")
+                    {
+                        cat = 10;
+                        double latRadar = LatLEBL;
+                        double longRadar = LongLEBL;
+                        GeoUtils g = new GeoUtils();
+                        CoordinatesWGS84 radarWGS84 = new CoordinatesWGS84(Functions.degtorad(latRadar), Functions.degtorad(longRadar));
+                        CoordinatesXYZ cartesian = new CoordinatesXYZ(Convert.ToDouble(item[Data.columns["X Cartesian"]]), Convert.ToDouble(item[Data.columns["Y Cartesian"]]), z);
+                        CoordinatesXYZ geocentric = g.change_radar_cartesian2geocentric(radarWGS84, cartesian);
+                        CoordinatesWGS84 geodesic = g.change_geocentric2geodesic(geocentric);
+                        latitude = Functions.radtodeg(geodesic.Lat);
+                        longitude = Functions.radtodeg(geodesic.Lon);
+                        z = geodesic.Height;
+                    }
+
+                }
+                //CAL AFEGIR LA CAT21 I QUE SI LA DISTANCIA ENTRE EL VELL I EL NOU ES MOLTA, BORREM EL VELL I QUE APAREIXI EL NOU NOMES
+                if (cat != 0)
+                {
+                    if (cat == 10)
+                    {
+                        if (item[Data.columns["Target Identification"]] != null) //es mlat
+                        {
+                            ID = item[Data.columns["Target Identification"]].ToString();
+                        }
+                        else
+                        {
+                            ID = item[Data.columns["Track Number"]].ToString();
+                        }
+                    }
+
+                    else
+                    {
+                        if (item[Data.columns["Target Identification"]] != null) //es mlat
+                        {
+                            ID = item[Data.columns["Target Identification"]].ToString();
+                        }
+                    }
+
+                    if (longitude != double.NaN && latitude != double.NaN && ID != null) //podem carregar dades
+                    {
+                        if (targetNames.Contains(ID)) //comprobem si aquest target ja existeix
+                        {
+                            targetList[targetNames.IndexOf(ID)].setLat(latitude);
+                            targetList[targetNames.IndexOf(ID)].setLong(longitude);
+                            targetList[targetNames.IndexOf(ID)].setHeight(z);
+                            markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
+                            refreshPlot();
+                        }
+                        else //si no existeix, creem un i l'afegim
+                        {
+                            Aircraft a = new Aircraft(ID, longitude, latitude, z);
+                            targetList.Add(a);
+                            targetNames.Add(ID);
+
+                            GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
+                            markersList.Add(markerTarget);
+                            targets.Markers.Add(markerTarget);
+                            gMapControl1.Overlays.Add(targets);
+                            refreshPlot();
+                        }
+                    }
+                }
+            });
+            plotTargetThread.Start();
+            
+
+        }
+        private void refreshPlot()
+        {
+            //gMapControl1.Invoke(Refresh);
+        }
         private void BtnMapView_Click(object sender, EventArgs e)
         {
-            gMapControl1_Load(sender, e);
+            if (dataRead)
+            {
+                gMapControl1_Load(sender, e);
+                loadAircraftInfoTable(); //desde loadAircraftInfoData es podra show la data de l'avio quan es faci click sobre l'avio o es busqui el seu id
+            }
+            else
+            {
+                MessageBox.Show("Please, first import a file.", "File not loaded.");
+            }
+            
 
             // Avion
-            try
-            {
-                // MarcadorGreenDot
-                overlay = new GMapOverlay("Marker");
-                marker = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), GMarkerGoogleType.green);
-                overlay.Markers.Add(marker); // lo agregamos al mapa
-                gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
+            //try
+            //{
+            //    // MarcadorGreenDot
+            //    overlay = new GMapOverlay("Marker");
+            //    marker = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), GMarkerGoogleType.green);
+            //    overlay.Markers.Add(marker); // lo agregamos al mapa
+            //    gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
 
-                // MarcadorGAircraft
-                this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
-                overlay2 = new GMapOverlay("Marker");
-                markerAircraft = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
-                overlay2.Markers.Add(markerAircraft); // lo agregamos al mapa
-                gMapControl1.Overlays.Add(overlay2); // lo agregamos a nuestro mapa
+            //    // MarcadorGAircraft
+            //    this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
+            //    overlay2 = new GMapOverlay("Marker");
+            //    markerAircraft = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
+            //    overlay2.Markers.Add(markerAircraft); // lo agregamos al mapa
+            //    gMapControl1.Overlays.Add(overlay2); // lo agregamos a nuestro mapa
 
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("The data has not been loaded correctly");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("The data has not been loaded correctly");
-            }
+            //}
+            //catch (NullReferenceException)
+            //{
+            //    MessageBox.Show("The data has not been loaded correctly");
+            //}
+            //catch (Exception)
+            //{
+            //    MessageBox.Show("The data has not been loaded correctly");
+            //}
 
+
+        }
+        private void loadAircraftInfoTable()
+        {
             // Data de información
             dtInf = new DataTable();
             dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewInfoAircraft.Font, FontStyle.Bold);
@@ -226,6 +374,12 @@ namespace Interfaz
             dtInf.Rows.Add("Packets");
             dataGridViewInfoAircraft.DataSource = dtInf;
 
+            
+
+            resLoadMap = false;
+        }
+        public void loadAircraftInfoData()
+        {
             dataGridViewInfoAircraft.Rows[0].Cells[1].Value = dataLoaded;
             dataGridViewInfoAircraft.Rows[1].Cells[1].Value = dataLoaded;
             dataGridViewInfoAircraft.Rows[2].Cells[1].Value = dataLoaded;
@@ -234,8 +388,6 @@ namespace Interfaz
             dataGridViewInfoAircraft.Rows[5].Cells[1].Value = dataLoaded;
 
             textBoxAircraft.Text = targetID;
-
-            resLoadMap = false;
         }
 
 
@@ -247,25 +399,28 @@ namespace Interfaz
             }
         }
 
-        private void gMapControl1_MouseClick(object sender, MouseEventArgs e)
+        private void gMapControl1_MouseClick(object sender, MouseEventArgs e) //caldra veure que fa
         {
             // para obtener los datos de la lat y long donde el user ha presionado
-            double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
-            double lng = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
+            //double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
+            //double lng = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
 
-            textBoxLATGreenDot.Text = lat.ToString();
-            textBoxLongGreenDot.Text = lng.ToString();
+            //textBoxLATGreenDot.Text = lat.ToString();
+            //textBoxLongGreenDot.Text = lng.ToString();
 
-            marker.Position = new PointLatLng(lat, lng);
+            //marker.Position = new PointLatLng(lat, lng);
 
-            resLoadMap = false;
+            //resLoadMap = false;
         }
 
         private void gMapControl1_Load(object sender, EventArgs e)
         {
+            
             gMapControl1.Show();
             pictureBoxMapaDifuminado.Hide();
             gMapControl1.DragButton = MouseButtons.Left;
+            gMapControl1.MarkersEnabled = true;
+            gMapControl1.PolygonsEnabled = true;
             gMapControl1.CanDragMap = true;
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
             gMapControl1.Position = new PointLatLng(LatInicial, LongInicial);
@@ -277,20 +432,6 @@ namespace Interfaz
             this.loadMap = true;
 
         }
-
-        /**
-        private PointLatLng Cartesian2Geocentric(double x, double y, String TargetID) {
-
-        }*/
-
-
-
-
-
-
-
-
-
 
 
         // ABOUT US
@@ -350,8 +491,9 @@ namespace Interfaz
             f.Show();
         }
 
+       
 
-
+        
         private void iconBtnReLoadMap_Click(object sender, EventArgs e)
         {
             String param = "...";

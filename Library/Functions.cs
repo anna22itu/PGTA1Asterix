@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    internal class Functions
+    public class Functions
     {
         public static int strtoint(char str) //Es necesita per solucionar una incompatibilitat
         {
@@ -154,6 +154,17 @@ namespace Library
         {
             string hex = Convert.ToInt32(bin, 2).ToString("X");
             return hex;
+        }
+
+        public static double radtodeg(double inrad)
+        {
+            double deg = inrad * (180 / Math.PI);
+            return deg;
+        }
+        public static double degtorad(double indeg)
+        {
+            double rad = indeg * (Math.PI / 180);
+            return rad;
         }
 
 
