@@ -103,8 +103,8 @@ namespace Asterix_Decoder
 
             if (dataGridDT.Columns.Contains("MessageType")==false) //bloquejem els filtres de messagetype
             {
-                checkBox3.Enabled = false;
-                checkBox4.Enabled = false;
+                //checkBox3.Enabled = false;
+                //checkBox4.Enabled = false;
             }
 
             loadingEnded.Report(1);
@@ -149,6 +149,7 @@ namespace Asterix_Decoder
             
         }
         
+        /**
         private void checkBox3_CheckedChanged(object sender, EventArgs e) //Only Target Reports
         {
 
@@ -178,7 +179,8 @@ namespace Asterix_Decoder
                 }
             }
         }
-
+        */
+        /**
         private void checkBox4_CheckedChanged(object sender, EventArgs e) //Show Extra Reports
         {
             
@@ -201,14 +203,14 @@ namespace Asterix_Decoder
             }
             else
             {
-                checkBox3.Enabled = true;
+                //checkBox3.Enabled = true;
                 while (rowsOcultadas.Count != 0)
                 {
                     dataGridDT.Rows[rowsOcultadas[0]].Visible = true;
                     rowsOcultadas.Remove(rowsOcultadas[0]);
                 }
             }
-        }
+        }*/
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e) //Show All Data
         {
@@ -302,5 +304,6 @@ namespace Asterix_Decoder
         {
             textBoxSearch.Text = "";
         }
+
     }
 }

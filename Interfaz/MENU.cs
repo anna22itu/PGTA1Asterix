@@ -46,8 +46,12 @@ namespace Interfaz
         double LongInicial = 1.98721;
         DataTable dtInf;
 
-        Bitmap Bmpaircraft = (Bitmap)Image.FromFile(@"..\..\aircraft.png");
-        Bitmap BmpAircraftR;
+        Bitmap BmpaircraftSMR = (Bitmap)Image.FromFile(@"..\..\aircraftSMR.png");
+        Bitmap BmpAircraftR_SMR;
+        Bitmap BmpaircraftMLAT = (Bitmap)Image.FromFile(@"..\..\aircraftMLAT.png");
+        Bitmap BmpAircraftR_MLAT;
+        Bitmap BmpaircraftADSB = (Bitmap)Image.FromFile(@"..\..\aircraftADSB.png");
+        Bitmap BmpAircraftR_ADSB;
 
         String targetID;
 
@@ -653,11 +657,11 @@ namespace Interfaz
                         gMapControl1.Overlays.Add(overlay3); // lo agregamos a nuestro mapa
 
                         // MarcadorGAircraft
-                        this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
-                        overlayAir3 = new GMapOverlay("Marker");
-                        markerAircraft3 = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
-                        overlayAir3.Markers.Add(markerAircraft3); // lo agregamos al mapa
-                        gMapControl1.Overlays.Add(overlayAir3); // lo agregamos a nuestro mapa
+                        //this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
+                        //overlayAir3 = new GMapOverlay("Marker");
+                        //markerAircraft3 = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
+                        //overlayAir3.Markers.Add(markerAircraft3); // lo agregamos al mapa
+                        //gMapControl1.Overlays.Add(overlayAir3); // lo agregamos a nuestro mapa
 
                     }
                     catch (NullReferenceException)

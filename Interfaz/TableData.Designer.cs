@@ -26,8 +26,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.guna2PanelDT = new Guna.UI2.WinForms.Guna2Panel();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
@@ -46,8 +46,8 @@
             // guna2PanelDT
             // 
             this.guna2PanelDT.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.guna2PanelDT.Controls.Add(this.checkBox4);
-            this.guna2PanelDT.Controls.Add(this.checkBox3);
+            this.guna2PanelDT.Controls.Add(this.checkBox6);
+            this.guna2PanelDT.Controls.Add(this.checkBox5);
             this.guna2PanelDT.Controls.Add(this.btnSearch);
             this.guna2PanelDT.Controls.Add(this.checkBox2);
             this.guna2PanelDT.Controls.Add(this.textBoxSearch);
@@ -59,31 +59,29 @@
             this.guna2PanelDT.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2PanelDT.Location = new System.Drawing.Point(0, 0);
             this.guna2PanelDT.Name = "guna2PanelDT";
-            this.guna2PanelDT.Size = new System.Drawing.Size(1140, 65);
+            this.guna2PanelDT.Size = new System.Drawing.Size(1289, 65);
             this.guna2PanelDT.TabIndex = 0;
             this.guna2PanelDT.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2PanelDT_Paint);
             // 
-            // checkBox4
+            // checkBox6
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(642, 36);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(191, 29);
-            this.checkBox4.TabIndex = 17;
-            this.checkBox4.Text = "Show Extra Reports";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Location = new System.Drawing.Point(669, 33);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(243, 29);
+            this.checkBox6.TabIndex = 19;
+            this.checkBox6.Text = "Show Only Target Reports";
+            this.checkBox6.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // checkBox5
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(642, 12);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(243, 29);
-            this.checkBox3.TabIndex = 16;
-            this.checkBox3.Text = "Show Only Target Reports";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(669, 10);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(109, 29);
+            this.checkBox5.TabIndex = 18;
+            this.checkBox5.Text = "Target ID";
+            this.checkBox5.UseVisualStyleBackColor = true;
             // 
             // btnSearch
             // 
@@ -98,7 +96,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(441, 12);
+            this.checkBox2.Location = new System.Drawing.Point(441, 10);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(195, 29);
             this.checkBox2.TabIndex = 15;
@@ -117,7 +115,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(441, 36);
+            this.checkBox1.Location = new System.Drawing.Point(441, 33);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(149, 29);
             this.checkBox1.TabIndex = 14;
@@ -148,7 +146,7 @@
             this.iconButton1.IconColor = System.Drawing.Color.Black;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton1.IconSize = 30;
-            this.iconButton1.Location = new System.Drawing.Point(1005, 0);
+            this.iconButton1.Location = new System.Drawing.Point(1154, 0);
             this.iconButton1.Name = "iconButton1";
             this.iconButton1.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.iconButton1.Size = new System.Drawing.Size(45, 65);
@@ -164,7 +162,7 @@
             this.iconBtnDTMax.IconColor = System.Drawing.Color.Black;
             this.iconBtnDTMax.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnDTMax.IconSize = 30;
-            this.iconBtnDTMax.Location = new System.Drawing.Point(1050, 0);
+            this.iconBtnDTMax.Location = new System.Drawing.Point(1199, 0);
             this.iconBtnDTMax.Name = "iconBtnDTMax";
             this.iconBtnDTMax.Padding = new System.Windows.Forms.Padding(0, 2, 2, 0);
             this.iconBtnDTMax.Size = new System.Drawing.Size(45, 65);
@@ -180,7 +178,7 @@
             this.iconBtnDTClose.IconColor = System.Drawing.Color.Black;
             this.iconBtnDTClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnDTClose.IconSize = 25;
-            this.iconBtnDTClose.Location = new System.Drawing.Point(1095, 0);
+            this.iconBtnDTClose.Location = new System.Drawing.Point(1244, 0);
             this.iconBtnDTClose.Name = "iconBtnDTClose";
             this.iconBtnDTClose.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.iconBtnDTClose.Size = new System.Drawing.Size(45, 65);
@@ -198,7 +196,7 @@
             this.dataGridDT.Name = "dataGridDT";
             this.dataGridDT.RowHeadersWidth = 62;
             this.dataGridDT.RowTemplate.Height = 33;
-            this.dataGridDT.Size = new System.Drawing.Size(1090, 585);
+            this.dataGridDT.Size = new System.Drawing.Size(1239, 585);
             this.dataGridDT.TabIndex = 1;
             // 
             // guna2DragControl1
@@ -210,7 +208,7 @@
             // TableData
             // 
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1140, 700);
+            this.ClientSize = new System.Drawing.Size(1289, 700);
             this.Controls.Add(this.dataGridDT);
             this.Controls.Add(this.guna2PanelDT);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -233,9 +231,9 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBoxSearch;
         private TextBox textBoxSearch;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
-        private CheckBox checkBox4;
-        private CheckBox checkBox3;
         private CheckBox checkBox2;
         private CheckBox checkBox1;
+        private CheckBox checkBox5;
+        private CheckBox checkBox6;
     }
 }
