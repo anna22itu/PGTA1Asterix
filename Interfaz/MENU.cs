@@ -54,14 +54,15 @@ namespace Interfaz
 
         bool loadMap = false;
 
-        MarkerClick AircraftSelected;
+        bool Selected = false;
         String IDSelected;
-        String CallsignSelected;
-        String ICAOSelected;
-        String FLSelected;
-        String TrackNumSelected;
-        String GroundSeppedSElected;
-        String PacketsSelected;
+        Aircraft aircraftSelected;
+        //String CallsignSelected;
+        //String ICAOSelected;
+        //String FLSelected;
+        //String TrackNumSelected;
+        //String GroundSeppedSElected;
+        //String PacketsSelected;
 
         public MENU()
         {
@@ -77,6 +78,7 @@ namespace Interfaz
             labelInfoPinGreenDot.Hide();
             labelAircraftInfo.Hide();
             labelZoomLEBL.Hide();
+            labelHora.Hide();
         }
 
 
@@ -190,6 +192,8 @@ namespace Interfaz
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("This could take a few minutes. Please wait until you are told that all aircrafts have been loaded. Thanks for waiting :)");
+
             if (loadMap && readGoing==false) //que nomes funcionin si el mapa esta loaded
             {
                 BtnParar.Show();
@@ -226,6 +230,7 @@ namespace Interfaz
         {
             int testLen = 100; //per que funcioni caldra que i < Data.TotalItems.Count
             setTimer(Data.TotalItems[0][Data.columns["Time of Day"]].ToString());
+            labelHora.Show();
 
             readTargetThread = new Thread(() =>
             {
@@ -345,7 +350,7 @@ namespace Interfaz
             if (dataRead && loadMap==false)
             {
                 gMapControl1_Load(sender, e);
-                loadAircraftInfoTable(); //desde loadAircraftInfoData es podra show la data de l'avio quan es faci click sobre l'avio o es busqui el seu id
+                //loadAircraftInfoTable(); //desde loadAircraftInfoData es podra show la data de l'avio quan es faci click sobre l'avio o es busqui el seu id
             }
             else
             {
@@ -381,49 +386,7 @@ namespace Interfaz
 
 
         }
-        private void loadAircraftInfoTable()
-        {
-            // Data de información
-            dtInf = new DataTable();
-            dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewInfoAircraft.Font, FontStyle.Bold);
-            dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            dtInf.Columns.Add("Field");
-            dtInf.Columns.Add("Value");
-
-            dtInf.Rows.Add("Callsing");
-            dtInf.Rows.Add("ICAO");
-            dtInf.Rows.Add("FL");
-            dtInf.Rows.Add("Track Nº");
-            dtInf.Rows.Add("Ground Speed");
-            dtInf.Rows.Add("Packets");
-            dataGridViewInfoAircraft.DataSource = dtInf;
-
-
-            resLoadMap = false;
-        }
-        public void loadAircraftInfoData()
-        {
-
-            if (targetList != null)
-            {
-                //textBoxAircraft.Text = targetList.GetHashCode;
-
-                dataGridViewInfoAircraft.Rows[0].Cells[1].Value = dataLoaded;  // Callsing
-                dataGridViewInfoAircraft.Rows[1].Cells[1].Value = dataLoaded;  // ICAO
-                dataGridViewInfoAircraft.Rows[2].Cells[1].Value = dataLoaded;  // FL
-                dataGridViewInfoAircraft.Rows[3].Cells[1].Value = dataLoaded;  // Track Nº
-                dataGridViewInfoAircraft.Rows[4].Cells[1].Value = dataLoaded;  // Ground Speed
-                dataGridViewInfoAircraft.Rows[5].Cells[1].Value = dataLoaded;  // Packets
-
-               
-            }
-            else 
-            {
-                MessageBox.Show("Please selected an aicraft");
-            };
-        }
-
+  
 
         private void btnClearAicraft_Click(object sender, EventArgs e)
         {
@@ -448,18 +411,6 @@ namespace Interfaz
         }
 
 
-        private void gMapControl1_MouseClick(object sender, MouseEventArgs e) //caldra veure que fa
-        {
-            // Datos del avion seleccionado los asginamos al avion seleccionado
-            /**
-            for (int i=0;i<markersList.Count;i++)
-            {
-                if (markersList[i].Mo)
-                {
-                    markersList[i].OnMarkerClick
-                }
-            }*/
-        }
 
         private void gMapControl1_Load(object sender, EventArgs e)
         {
@@ -475,8 +426,8 @@ namespace Interfaz
             gMapControl1.MinZoom = 3;
             gMapControl1.MaxZoom = 22;
             gMapControl1.Zoom = 14;
-            gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             gMapControl1.AutoScroll = true;
+            gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
 
             loadMap = true;
 
@@ -509,13 +460,13 @@ namespace Interfaz
         }
         private void setTimer(string initialtime)
         {
-            Hora.Enabled = true;
+            //Hora.Enabled = true;
             Hora.Tick += new System.EventHandler(this.Hora_Tick);
             labelHora.Text = initialtime;
         }
         private void Hora_Tick(object sender, EventArgs e)
         {
-            //labelHora.Text = DateTime.Now.ToLongTimeString();
+            labelHora.Text = DateTime.Now.ToLongTimeString();
         }
 
         private void iconBtnCross_Click(object sender, EventArgs e)
@@ -788,6 +739,7 @@ namespace Interfaz
                 gMapControl1.MaxZoom = 22;
                 gMapControl1.Zoom = 14;
                 gMapControl1.AutoScroll = true;
+                gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             }
             else 
             {
@@ -797,16 +749,68 @@ namespace Interfaz
 
         private void gMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
+            MessageBox.Show("You have selected the "+ item.Overlay.Id + " aircraft.");
 
-            //foreach (GMapMarker obj in markersList)
-            //{
-            //    if (obj.Tag.Equals(item.Tag))
-            //    {
-            //        Console.WriteLine("good");
-            //        MessageBox.Show("good");
-            //    }
 
-            //}           
+            bool Selected = true;
+
+            loadAircraftInfoTable(item);
+        }
+
+        private void loadAircraftInfoTable(GMapMarker item)
+        {
+            // Data de información
+            dtInf = new DataTable();
+            dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewInfoAircraft.Font, FontStyle.Bold);
+            dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dtInf.Columns.Add("Field");
+            dtInf.Columns.Add("Value");
+
+            dtInf.Rows.Add("Callsing");
+            dtInf.Rows.Add("ICAO");
+            dtInf.Rows.Add("FL");
+            dtInf.Rows.Add("Track Nº");
+            dtInf.Rows.Add("Ground Speed");
+            dtInf.Rows.Add("Packets");
+            dataGridViewInfoAircraft.DataSource = dtInf;
+
+            
+            try
+            {
+                for ( int i = 0; i<targetNames.Count; i++ )
+                {
+                    if (item.Overlay.Id.Equals(targetNames[i]))
+                    {
+                        IDSelected = targetNames[i];
+                    }
+                }
+
+                foreach (Aircraft a in targetList)
+                {
+                    if(a.getID().Equals(IDSelected))
+                    {
+                        aircraftSelected= a;
+                    }
+                }
+
+                dataGridViewInfoAircraft.Rows[0].Cells[1].Value = IDSelected;  // Callsing
+                //dataGridViewInfoAircraft.Rows[1].Cells[1].Value = dataLoaded;  // ICAO
+                //dataGridViewInfoAircraft.Rows[2].Cells[1].Value = dataLoaded;  // FL
+                //dataGridViewInfoAircraft.Rows[3].Cells[1].Value = dataLoaded;  // Track Nº
+                //dataGridViewInfoAircraft.Rows[4].Cells[1].Value = dataLoaded;  // Ground Speed
+                //dataGridViewInfoAircraft.Rows[5].Cells[1].Value = dataLoaded;  // Packets
+
+                textBoxLATAircraft.Text = aircraftSelected.getLat().ToString();
+                textBoxLongAircraft.Text = aircraftSelected.getLong().ToString();
+
+            }
+            catch
+            {
+                MessageBox.Show("Please selected an aircraft");
+            }
+
+            resLoadMap = false;
         }
     }
 }
