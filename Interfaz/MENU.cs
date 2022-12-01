@@ -18,6 +18,7 @@ using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Xml;
 using System.Text;
 using Apache.Arrow.Types;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace Interfaz
 {
@@ -45,13 +46,6 @@ namespace Interfaz
         double LatInicial = 41.27575;
         double LongInicial = 1.98721;
         DataTable dtInf;
-
-        Bitmap BmpaircraftSMR = (Bitmap)Image.FromFile(@"..\..\aircraftSMR.png");
-        Bitmap BmpAircraftR_SMR;
-        Bitmap BmpaircraftMLAT = (Bitmap)Image.FromFile(@"..\..\aircraftMLAT.png");
-        Bitmap BmpAircraftR_MLAT;
-        Bitmap BmpaircraftADSB = (Bitmap)Image.FromFile(@"..\..\aircraftADSB.png");
-        Bitmap BmpAircraftR_ADSB;
 
         String targetID;
 
@@ -192,15 +186,22 @@ namespace Interfaz
         List<string> targetNames = new List<string>();
         List<GMarkerGoogle> markersList = new List<GMarkerGoogle>();
         int currentItem = 0; //the last item read when pause pressed, to continue from here
-
+        bool readGoing = false;
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            if (loadMap) //que nomes funcionin si el mapa esta loaded
+            if (loadMap && readGoing==false) //que nomes funcionin si el mapa esta loaded
             {
                 BtnParar.Show();
                 BtnPlay.Hide();
-                readTargetsThread.Start();
+                ReadTargets();
+                
+            }
+            else if(loadMap && readGoing)
+            {
+                BtnParar.Show();
+                BtnPlay.Hide();
+                readTargetThread.Resume();
             }
             else
             {
@@ -213,219 +214,129 @@ namespace Interfaz
         {
             if (loadMap)
             {
-                //BtnParar.Hide();
-                //BtnPlay.Show();
+                BtnParar.Hide();
+                BtnPlay.Show();
+                readTargetThread.Suspend(); //parem el timer i es parara el thread
             }
             
         }
 
-        //ReadTargets s'ahuria de fer com un thread que quan es doni a apausa es pausi, i quan es doni al play, si ja shavia començat a llegir, faci resume.
-        
-
-        private static Thread readTargetsThread = new Thread(() =>
-        {
-            int testLen = 100; //per que funcioni caldra que i < Data.TotalItems.Count
-            for (int i = 0; i < testLen; i++)
-            {
-                object[] item = Data.TotalItems[i];
-                plotTargetThread2(item);
-                Thread.Sleep(100);
-            }
-            MessageBox.Show("All aircraft Shown");
-
-        });
-
-        private static Thread plotTargetThread2(object[] item)
-        {
-            var t = new Thread(() => {
-                double longitude = double.NaN;
-                double latitude = double.NaN;
-                double z = 0;
-                string ID = null;
-                int cat = 0;
-
-                if (item[Data.columns["Geometric Height"]] != null)
-                {
-                    z = Convert.ToDouble(item[Data.columns["Geometric Height"]]);
-                }
-                else if (item[Data.columns["Height"]] != null)
-                {
-                    z = Convert.ToDouble(item[Data.columns["Height"]]);
-                }
-
-                if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null) //té nomes cartesianes
-                {
-                    if (item[Data.columns["MessageType"]].ToString() == "Target Report")
-                    {
-                        cat = 10;
-                        double latRadar = LatLEBL;
-                        double longRadar = LongLEBL;
-                        GeoUtils g = new GeoUtils();
-                        CoordinatesWGS84 radarWGS84 = new CoordinatesWGS84(Functions.degtorad(latRadar), Functions.degtorad(longRadar));
-                        CoordinatesXYZ cartesian = new CoordinatesXYZ(Convert.ToDouble(item[Data.columns["X Cartesian"]]), Convert.ToDouble(item[Data.columns["Y Cartesian"]]), z);
-                        CoordinatesXYZ geocentric = g.change_radar_cartesian2geocentric(radarWGS84, cartesian);
-                        CoordinatesWGS84 geodesic = g.change_geocentric2geodesic(geocentric);
-                        latitude = Functions.radtodeg(geodesic.Lat);
-                        longitude = Functions.radtodeg(geodesic.Lon);
-                        z = geodesic.Height;
-                    }
-
-                }
-
-                //CAL AFEGIR LA CAT21 I QUE SI LA DISTANCIA ENTRE EL VELL I EL NOU ES MOLTA, BORREM EL VELL I QUE APAREIXI EL NOU NOMES
-                if (cat != 0)
-                {
-                    if (cat == 10)
-                    {
-                        if (item[Data.columns["Target Identification"]] != null) //es mlat
-                        {
-                            ID = item[Data.columns["Target Identification"]].ToString();
-                        }
-                        else
-                        {
-                            ID = item[Data.columns["Track Number"]].ToString();
-                        }
-                    }
-
-                    else
-                    {
-                        if (item[Data.columns["Target Identification"]] != null) //es mlat
-                        {
-                            ID = item[Data.columns["Target Identification"]].ToString();
-                        }
-                    }
-
-                    if (longitude != double.NaN && latitude != double.NaN && ID != null) //podem carregar dades
-                    {
-                        if (targetNames.Contains(ID)) //comprobem si aquest target ja existeix
-                        {
-                            targetList[targetNames.IndexOf(ID)].setLat(latitude);
-                            targetList[targetNames.IndexOf(ID)].setLong(longitude);
-                            targetList[targetNames.IndexOf(ID)].setHeight(z);
-                            markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
-                        }
-                        else //si no existeix, creem un i l'afegim
-                        {
-                            Aircraft a = new Aircraft(ID, longitude, latitude, z);
-                            targetList.Add(a);
-                            targetNames.Add(ID);
-
-                            GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
-                            markersList.Add(markerTarget);
-                            targets.Markers.Add(markerTarget);
-                            gMapControl1.Overlays.Add(targets);
-                        }
-                    }
-                }
-            });
-            t.Start();
-            return t;
-        }
-
-
+        Thread readTargetThread;
         private void ReadTargets() //aqui anirem llegint al ritme del timer del primer temps, segon a segon, 
         {
             int testLen = 100; //per que funcioni caldra que i < Data.TotalItems.Count
+            setTimer(Data.TotalItems[0][Data.columns["Time of Day"]].ToString());
 
-            Thread readTargetThread = new Thread(() =>
+            readTargetThread = new Thread(() =>
             {
+                readGoing = true;
                 for (int i = 0; i < testLen; i++)
                 {
                     object[] item = Data.TotalItems[i];
-                    plotTargetThread2(item);
-                    Thread.Sleep(100);
+                    Thread t = new Thread(() => plotTarget(item));
+                    t.Start();
+                    Thread.Sleep(1000);
                 }
                 MessageBox.Show("All aircraft Shown");
+                readGoing = false;
             });
             readTargetThread.Start();
         }
         private void plotTarget(object[] item)
         {
-            Thread plotTargetThread = new Thread(() =>
+            double longitude = double.NaN;
+            double latitude = double.NaN;
+            double z = 0;
+            string ID = null;
+            string type = null;
+            int cat = 0;
+
+            if (item[Data.columns["Geometric Height"]] != null)
             {
-                double longitude = double.NaN;
-                double latitude = double.NaN;
-                double z = 0;
-                string ID = null;
-                int cat = 0;
+                z = Convert.ToDouble(item[Data.columns["Geometric Height"]]);
+            }
+            else if (item[Data.columns["Height"]] != null)
+            {
+                z = Convert.ToDouble(item[Data.columns["Height"]]);
+            }
 
-                if (item[Data.columns["Geometric Height"]] != null)
+            if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null) //té nomes cartesianes
+            {
+                if (item[Data.columns["MessageType"]].ToString() == "Target Report")
                 {
-                    z = Convert.ToDouble(item[Data.columns["Geometric Height"]]);
-                }
-                else if (item[Data.columns["Height"]] != null)
-                {
-                    z = Convert.ToDouble(item[Data.columns["Height"]]);
-                }
-
-                if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null) //té nomes cartesianes
-                {
-                    if (item[Data.columns["MessageType"]].ToString() == "Target Report")
+                    cat = 10;
+                    double latRadar;
+                    double longRadar;
+                    if (item[Data.columns["Target Identification"]] != null)
                     {
-                        cat = 10;
-                        double latRadar = LatLEBL;
-                        double longRadar = LongLEBL;
-                        GeoUtils g = new GeoUtils();
-                        CoordinatesWGS84 radarWGS84 = new CoordinatesWGS84(Functions.degtorad(latRadar), Functions.degtorad(longRadar));
-                        CoordinatesXYZ cartesian = new CoordinatesXYZ(Convert.ToDouble(item[Data.columns["X Cartesian"]]), Convert.ToDouble(item[Data.columns["Y Cartesian"]]), z);
-                        CoordinatesXYZ geocentric = g.change_radar_cartesian2geocentric(radarWGS84, cartesian);
-                        CoordinatesWGS84 geodesic = g.change_geocentric2geodesic(geocentric);
-                        latitude = Functions.radtodeg(geodesic.Lat);
-                        longitude = Functions.radtodeg(geodesic.Lon);
-                        z = geodesic.Height;
+                        type = "MLAT";
+                        latRadar = 41.297;
+                        longRadar = 2.07845;
                     }
-
-                }
-
-                //CAL AFEGIR LA CAT21 I QUE SI LA DISTANCIA ENTRE EL VELL I EL NOU ES MOLTA, BORREM EL VELL I QUE APAREIXI EL NOU NOMES
-                if (cat != 0)
-                {
-                    if (cat == 10)
-                    {
-                        if (item[Data.columns["Target Identification"]] != null) //es mlat
-                        {
-                            ID = item[Data.columns["Target Identification"]].ToString();
-                        }
-                        else
-                        {
-                            ID = item[Data.columns["Track Number"]].ToString();
-                        }
-                    }
-
+                        
                     else
                     {
-                        if (item[Data.columns["Target Identification"]] != null) //es mlat
-                        {
-                            ID = item[Data.columns["Target Identification"]].ToString();
-                        }
+                        type = "SMR";
+                        latRadar = 41.2956;
+                        longRadar = 2.095;
                     }
 
-                    if (longitude != double.NaN && latitude != double.NaN && ID != null) //podem carregar dades
-                    {
-                        if (targetNames.Contains(ID)) //comprobem si aquest target ja existeix
-                        {
-                            targetList[targetNames.IndexOf(ID)].setLat(latitude);
-                            targetList[targetNames.IndexOf(ID)].setLong(longitude);
-                            targetList[targetNames.IndexOf(ID)].setHeight(z);
-                            markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
-                        }
-                        else //si no existeix, creem un i l'afegim
-                        {
-                            Aircraft a = new Aircraft(ID, longitude, latitude, z);
-                            targetList.Add(a);
-                            targetNames.Add(ID);
+                    GeoUtils g = new GeoUtils();
+                    CoordinatesWGS84 radarWGS84 = new CoordinatesWGS84(Functions.degtorad(latRadar), Functions.degtorad(longRadar));
+                    CoordinatesXYZ cartesian = new CoordinatesXYZ(Convert.ToDouble(item[Data.columns["X Cartesian"]]), Convert.ToDouble(item[Data.columns["Y Cartesian"]]), z);
+                    CoordinatesXYZ geocentric = g.change_radar_cartesian2geocentric(radarWGS84, cartesian);
+                    CoordinatesWGS84 geodesic = g.change_geocentric2geodesic(geocentric);
+                    latitude = Functions.radtodeg(geodesic.Lat);
+                    longitude = Functions.radtodeg(geodesic.Lon);
+                    z = geodesic.Height;
+                }
 
-                            GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
-                            markersList.Add(markerTarget);
-                            targets.Markers.Add(markerTarget);
-                            gMapControl1.Overlays.Add(targets);
-                        }
+            }
+            else
+            {
+                cat = 21;
+                type = "ADSB";
+
+                latitude = Convert.ToDouble(item[Data.columns["Latitude WGS84"]]);
+                longitude = Convert.ToDouble(item[Data.columns["Longitude WGS84"]]);
+            }
+
+            //CAL AFEGIR LA CAT21 I QUE SI LA DISTANCIA ENTRE EL VELL I EL NOU ES MOLTA, BORREM EL VELL I QUE APAREIXI EL NOU NOMES
+            if (cat != 0)
+            {
+                if (item[Data.columns["Target Identification"]] != null)
+                {
+
+                    ID = item[Data.columns["Target Identification"]].ToString();
+                }
+                else
+                {
+                    ID = item[Data.columns["Track Number"]].ToString();
+                }
+                
+
+                if (longitude != double.NaN && latitude != double.NaN && ID != null && type!=null) //podem carregar dades
+                {
+                    if (targetNames.Contains(ID)) //comprobem si aquest target ja existeix
+                    {
+                        targetList[targetNames.IndexOf(ID)].setLat(latitude);
+                        targetList[targetNames.IndexOf(ID)].setLong(longitude);
+                        targetList[targetNames.IndexOf(ID)].setHeight(z);
+                        markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
+                    }
+                    else //si no existeix, creem un i l'afegim
+                    {
+                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type);
+                        targetList.Add(a);
+                        targetNames.Add(ID);
+
+                        GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
+                        markersList.Add(markerTarget);
+                        targets.Markers.Add(markerTarget);
+                        gMapControl1.Overlays.Add(targets);
                     }
                 }
-            });
-            plotTargetThread.Start();
-            
-
+            }
         }
 
 
@@ -596,9 +507,15 @@ namespace Interfaz
                 result = true;
             }
         }
+        private void setTimer(string initialtime)
+        {
+            Hora.Enabled = true;
+            Hora.Tick += new System.EventHandler(this.Hora_Tick);
+            labelHora.Text = initialtime;
+        }
         private void Hora_Tick(object sender, EventArgs e)
         {
-            labelHora.Text = DateTime.Now.ToLongTimeString();
+            //labelHora.Text = DateTime.Now.ToLongTimeString();
         }
 
         private void iconBtnCross_Click(object sender, EventArgs e)

@@ -11,20 +11,21 @@ namespace Library
     {
         //Atributos
         string ID;
+        string type;
         double currentlong;
         double currentlat;
         double height;
         Bitmap bmp;
-
-        static Bitmap Bmpaircraft = (Bitmap)Image.FromFile(@"..\..\aircraft.png");
-
-        public Aircraft(string ID, double longitude, double latitude, double height)
+        static string path = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName.ToString();
+        public static IDictionary<string, Bitmap> Bmpaircrafts = new Dictionary<string, Bitmap>() { {"SMR", (Bitmap)Image.FromFile(path[..(path.Length - 24)] + "Resources\\aircraft.png") }, { "MLAT", (Bitmap)Image.FromFile(path[..(path.Length - 24)] + "Resources\\aircraft.png") }, { "ADSB", (Bitmap)Image.FromFile(path[..(path.Length - 24)] + "Resources\\aircraft.png") } };
+        public Aircraft(string ID, double longitude, double latitude, double height, string t)
         {
             this.ID = ID;
             this.currentlong = longitude;
             this.currentlat = latitude;
             this.height = height;
-            this.bmp = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 20, Bmpaircraft.Height / 20)); //Caldra ferho amb el target length i tots els parametres si es pot
+            this.type = t;
+            this.bmp = new Bitmap(Bmpaircrafts[t], new Size(Bmpaircrafts[t].Width / 20, Bmpaircrafts[t].Height / 20)); //Caldra ferho amb el target length i tots els parametres si es pot
 
         }
         public void setLat(double lat)
@@ -38,6 +39,10 @@ namespace Library
         public void setHeight(double h)
         {
             height = h;
+        }
+        public string getType()
+        { 
+            return type;
         }
         public double getLat()
         {
