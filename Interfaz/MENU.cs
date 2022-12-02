@@ -218,7 +218,6 @@ namespace Interfaz
         List<Aircraft> targetList = new List<Aircraft>();
         List<string> targetNames = new List<string>();
         List<GMarkerGoogle> markersList = new List<GMarkerGoogle>();
-        int currentItem = 0; //the last item read when pause pressed, to continue from here
         bool readGoing = false;
 
         private void BtnPlay_Click(object sender, EventArgs e)
@@ -301,6 +300,7 @@ namespace Interfaz
             double longitude = double.NaN;
             double latitude = double.NaN;
             double z = 0;
+            double groundSpeed = double.NaN;
             string ID = null;
             string type = null;
             int cat = 0;
@@ -313,6 +313,11 @@ namespace Interfaz
             {
                 z = Convert.ToDouble(item[Data.columns["Height"]]);
             }
+            if (item[Data.columns["Ground Speed"]] != null)
+            {
+                groundSpeed = Convert.ToDouble(item[Data.columns["Ground Speed"]]);
+            }
+
 
             if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null) //té nomes cartesianes
             {
@@ -370,25 +375,26 @@ namespace Interfaz
                 }
                 
 
-                if (longitude != double.NaN && latitude != double.NaN && ID != null && type!=null) //podem carregar dades
+                if (longitude != double.NaN && latitude != double.NaN && ID != null && type!=null && groundSpeed!=double.NaN) //podem carregar dades
                 {
                     if (targetNames.Contains(ID)) //comprobem si aquest target ja existeix
                     {
                         targetList[targetNames.IndexOf(ID)].setLat(latitude);
                         targetList[targetNames.IndexOf(ID)].setLong(longitude);
                         targetList[targetNames.IndexOf(ID)].setHeight(z);
+                        targetList[targetNames.IndexOf(ID)].setGroundSpeed(groundSpeed);
                         markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
                     }
                     else //si no existeix, creem un i l'afegim
                     {
-                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type);
+                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed);
                         GMapOverlay targets = new GMapOverlay(ID);
                         GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
 
                         targetList.Add(a);
                         targetNames.Add(ID);
-
                         markersList.Add(markerTarget);
+
                         targets.Markers.Add(markerTarget);
                         gMapControl1.Overlays.Add(targets);
                     }

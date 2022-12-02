@@ -75,7 +75,7 @@ namespace Asterix_Decoder
                     i++;
                 }
             }
-            for(int s=0; s < 1000; s++)
+            for(int s=0; s < 1000; s++) //1000 -> Data.TotalItems.Length
             {
                 object[] item = Data.TotalItems[s]; //El SMR per exemple te 50k files
 
@@ -117,6 +117,14 @@ namespace Asterix_Decoder
         CheckBox lastChecked;
         List<int> rowsOcultadas = new List<int>();
         private void chk_Click(object sender, EventArgs e) //so that only one checkbox can be used
+        {
+            CheckBox activeCheckBox = sender as CheckBox;
+            if (activeCheckBox != lastChecked && lastChecked != null) lastChecked.Checked = false;
+            lastChecked = activeCheckBox.Checked ? activeCheckBox : null;
+
+
+        }
+        private void chk_ClickFilter(object sender, EventArgs e) //so that only one checkbox can be used
         {
             CheckBox activeCheckBox = sender as CheckBox;
             if (activeCheckBox != lastChecked && lastChecked != null) lastChecked.Checked = false;
@@ -205,10 +213,14 @@ namespace Asterix_Decoder
             try
             {
 
-                if (TargetIDChecked)
+                if (isChecked(checkBox5))
                 {
                     typeValue = "Target Identification";
                 }
+                //if (TargetIDChecked)
+                //{
+                    
+                //}
                 else if (TrackNumberChecked)
                 {
                     typeValue = "Track Number";
@@ -280,26 +292,52 @@ namespace Asterix_Decoder
 
         private void checkBox5_Click(object sender, EventArgs e)
         {
+            checkBox3.Enabled = true;
+            checkBox4.Enabled = true;
+            checkBox5.Enabled = false;
+            checkBox6.Enabled = true;
+            chk_ClickFilter(sender, e);
             // TargetID
+            
             TargetIDChecked = true;
         }
 
         private void checkBox6_Click(object sender, EventArgs e)
         {
+            chk_ClickFilter(sender, e);
+            checkBox3.Enabled = true;
+            checkBox4.Enabled = true;
+            checkBox5.Enabled = true;
+            checkBox6.Enabled = false;
             // Track Number
             TrackNumberChecked = true;
         }
 
         private void checkBox3_Click(object sender, EventArgs e)
         {
+            chk_ClickFilter(sender, e);
+            checkBox3.Enabled = false;
+            checkBox4.Enabled = true;
+            checkBox5.Enabled = true;
+            checkBox6.Enabled = true;
             // Target Address
             TargetAddressChecked = true;
         }
 
         private void checkBox4_Click(object sender, EventArgs e)
         {
+            chk_ClickFilter(sender, e);
+            checkBox3.Enabled = true;
+            checkBox4.Enabled = false;
+            checkBox5.Enabled = true;
+            checkBox6.Enabled = true;
             // Mode 3/A
             Mode3AChecked = true;
+        }
+
+        private void guna2PanelDT_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
