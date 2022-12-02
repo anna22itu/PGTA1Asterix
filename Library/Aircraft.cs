@@ -26,7 +26,7 @@ namespace Library
             this.currentlat = latitude;
             this.height = height;
             this.type = t;
-            this.bmp = new Bitmap(Bmpaircrafts[t], new Size(Bmpaircrafts[t].Width / 20, Bmpaircrafts[t].Height / 20)); //Caldra ferho amb el target length i tots els parametres si es pot
+            this.bmp = new Bitmap(Bmpaircrafts[t], new Size(Bmpaircrafts[t].Width / 25, Bmpaircrafts[t].Height / 25)); //Caldra ferho amb el target length i tots els parametres si es pot
         }
         public void setLat(double lat)
         {

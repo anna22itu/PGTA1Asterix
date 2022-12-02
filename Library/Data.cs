@@ -43,9 +43,10 @@ namespace Library
             datait = new object[193];
         }
 
-        public static bool export()
+        public static bool export(string path, IProgress<int> loadingStarted, IProgress<int> loadingEnded)
         {
-            string path = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName; // return the application.exe current folder
+            loadingStarted.Report(1);
+            //string path = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName; // return the application.exe current folder
             string name = DateTime.Now.ToString(@"ddMMyyyyhhmmtt");
             string fileName = Path.Combine(path, name+".csv");
             StreamWriter sw = new StreamWriter(fileName, false);
@@ -77,13 +78,15 @@ namespace Library
                     sw.WriteLine(data);
                 }
                 sw.Close();
+                loadingEnded.Report(1);
                 return true;
             }
             catch
             {
                 return false;
             }
-     
+
+            
         }
     }
 }

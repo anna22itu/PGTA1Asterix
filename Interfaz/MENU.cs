@@ -19,6 +19,7 @@ using System.Xml;
 using System.Text;
 using Apache.Arrow.Types;
 using System.DirectoryServices.ActiveDirectory;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Interfaz
 {
@@ -120,19 +121,49 @@ namespace Interfaz
             }
         }
 
-
+        private void loadingExport(int i)
+        {
+            iconPictureBox3.Hide();
+            pictureBox4.Show();
+        }
+        private void stoploadingExport(int i)
+        {
+            pictureBox4.Hide();
+            iconPictureBox3.Show();
+        }
         private void BtnExportFile_Click(object sender, EventArgs e)
         {
-            bool result = Data.export();
-
-            if (result == true)
+            if (fileimported == true)
             {
-                MessageBox.Show("The file has been exported correctly./n You can find it in Interface/bin/Debug/net6.0-windows/ as an excel file");
+                saveFileDialog1.FileName = "Save Here";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    var loadingExportstarted = new Progress<int>(loadingExport);
+                    var loadingExportended = new Progress<int>(stoploadingExport);
+                    Thread export = new Thread(() => { bool result = Data.export(Path.GetDirectoryName(saveFileDialog1.FileName), loadingExportstarted, loadingExportended); });
+                    export.Start();
+
+                    if (result == true)
+                    {
+                        MessageBox.Show("The file has been exported correctly./n You can find it in the selected folder as an excel file");
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR: The file has not been exported correctly.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a destination for the exported file.");
+                }
             }
             else
             {
-                MessageBox.Show("ERROR: The file has not been exported correctly.");
+                MessageBox.Show("No file has been imported yet.", "Please open a file.");
             }
+            
+
+            
         }
 
 
@@ -192,12 +223,14 @@ namespace Interfaz
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This could take a few minutes. Please wait until you are told that all aircrafts have been loaded. Thanks for waiting :)");
+            
 
             if (loadMap && readGoing==false) //que nomes funcionin si el mapa esta loaded
             {
+                MessageBox.Show("This could take a few minutes. Please wait until you are told that all aircrafts have been loaded. Thanks for waiting :)");
                 BtnParar.Show();
                 BtnPlay.Hide();
+                Thread.Sleep(1000);
                 ReadTargets();
                 
             }
@@ -205,7 +238,7 @@ namespace Interfaz
             {
                 BtnParar.Show();
                 BtnPlay.Hide();
-                readTargetThread.Resume();
+                Hora.Start();
             }
             else
             {
@@ -220,35 +253,51 @@ namespace Interfaz
             {
                 BtnParar.Hide();
                 BtnPlay.Show();
-                readTargetThread.Suspend(); //parem el timer i es parara el thread
+                Hora.Stop(); //parem el timer i es parara el thread
             }
             
         }
 
         Thread readTargetThread;
+        bool ableToLoad = true;
         private void ReadTargets() //aqui anirem llegint al ritme del timer del primer temps, segon a segon, 
         {
-            int testLen = 100; //per que funcioni caldra que i < Data.TotalItems.Count
+            int testLen = 1000; //per que funcioni caldra que i < Data.TotalItems.Count
             setTimer(Data.TotalItems[0][Data.columns["Time of Day"]].ToString());
             labelHora.Show();
 
             readTargetThread = new Thread(() =>
             {
                 readGoing = true;
+                
                 for (int i = 0; i < testLen; i++)
                 {
                     object[] item = Data.TotalItems[i];
-                    Thread t = new Thread(() => plotTarget(item));
-                    t.Start();
-                    Thread.Sleep(1000);
+                    string dataTime = item[Data.columns["Time of Day"]].ToString();
+                    bool waiting = true;
+                    while (waiting)
+                    {
+                        if ((int) TimeSpan.Parse(labelHora.Text).TotalSeconds >= (int) TimeSpan.Parse(dataTime).TotalSeconds && ableToLoad)
+                        {
+                            Thread t = new Thread(() => plotTarget(item));
+                            t.Start();
+                            waiting = false;
+                        }
+                        Thread.Sleep(20);
+
+                    }
+                    //Thread.Sleep(1000);
                 }
+                Hora.Stop();
                 MessageBox.Show("All aircraft Shown");
+                
                 readGoing = false;
             });
             readTargetThread.Start();
         }
         private void plotTarget(object[] item)
         {
+            ableToLoad = false;
             double longitude = double.NaN;
             double latitude = double.NaN;
             double z = 0;
@@ -272,7 +321,7 @@ namespace Interfaz
                     cat = 10;
                     double latRadar;
                     double longRadar;
-                    if (item[Data.columns["Target Identification"]] != null)
+                    if (item[Data.columns["Target Address"]] != null)
                     {
                         type = "MLAT";
                         latRadar = 41.297;
@@ -314,6 +363,7 @@ namespace Interfaz
 
                     ID = item[Data.columns["Target Identification"]].ToString();
                 }
+
                 else
                 {
                     ID = item[Data.columns["Track Number"]].ToString();
@@ -344,6 +394,7 @@ namespace Interfaz
                     }
                 }
             }
+            ableToLoad = true;
         }
 
 
@@ -462,18 +513,22 @@ namespace Interfaz
         }
         private void setTimer(string initialtime)
         {
-            //Hora.Enabled = true;
-            Hora.Tick += new System.EventHandler(this.Hora_Tick);
+            Hora.Enabled = true;
             labelHora.Text = initialtime;
+            Hora.Tick += new System.EventHandler(this.Hora_Tick);
+
         }
         private void Hora_Tick(object sender, EventArgs e)
         {
-            labelHora.Text = DateTime.Now.ToLongTimeString();
+            TimeSpan time = TimeSpan.FromSeconds(TimeSpan.Parse(labelHora.Text).TotalSeconds + 1);
+            string str = time.ToString(@"hh\:mm\:ss");
+            labelHora.Text = str;
         }
 
         private void iconBtnCross_Click(object sender, EventArgs e)
         {
             Application.Exit();
+            this.Close();
         }
 
         private void iconBtnMaximize_Click(object sender, EventArgs e)
@@ -818,6 +873,11 @@ namespace Interfaz
             }
 
             resLoadMap = false;
+        }
+
+        private void panelBarraArriba_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
