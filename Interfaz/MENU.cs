@@ -55,15 +55,15 @@ namespace Interfaz
 
         bool loadMap = false;
 
+        static bool dataLoaded = false;
+
         bool Selected = false;
         String IDSelected;
         Aircraft aircraftSelected;
-        //String CallsignSelected;
-        //String ICAOSelected;
-        //String FLSelected;
-        //String TrackNumSelected;
-        //String GroundSeppedSElected;
-        //String PacketsSelected;
+
+        String timescale;
+
+        TableData dt = new TableData();
 
         public MENU()
         {
@@ -168,8 +168,6 @@ namespace Interfaz
 
 
         // TABLA
-        static bool dataLoaded = false;
-        TableData dt = new TableData();
 
         private void loadingRead()
         {
@@ -301,6 +299,10 @@ namespace Interfaz
             double latitude = double.NaN;
             double z = 0;
             double groundSpeed = double.NaN;
+            string callsing = null;
+            double FL = double.NaN;
+            double trackNumber = double.NaN;
+            string packets = null;
             string ID = null;
             string type = null;
             int cat = 0;
@@ -313,52 +315,68 @@ namespace Interfaz
             {
                 z = Convert.ToDouble(item[Data.columns["Height"]]);
             }
-            if (item[Data.columns["Ground Speed"]] != null)
+            else if (item[Data.columns["Ground Speed"]] != null)
             {
                 groundSpeed = Convert.ToDouble(item[Data.columns["Ground Speed"]]);
             }
+            //else if (item[Data.columns["Callsing"]] != null)
+            //{
+            //    callsing = Convert.ToString(item[Data.columns["Callsing"]]);
+            //}
+            else if (item[Data.columns["FL"]] != null)
+            {
+                FL = Convert.ToDouble(item[Data.columns["FL"]]);
+            }
+            //else if (item[Data.columns["Track Number"]] != null)
+            //{
+            //    trackNumber = Convert.ToDouble(item[Data.columns["Track Number"]]);
+            //}
+            //else if (item[Data.columns["Packets"]] != null)
+            //{
+            //    packets = Convert.ToString(item[Data.columns["Packets"]]);
+            //}
 
 
             if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null) //té nomes cartesianes
-            {
-                if (item[Data.columns["MessageType"]].ToString() == "Target Report")
                 {
-                    cat = 10;
-                    double latRadar;
-                    double longRadar;
-                    if (item[Data.columns["Target Address"]] != null)
+                    if (item[Data.columns["MessageType"]].ToString() == "Target Report")
                     {
-                        type = "MLAT";
-                        latRadar = 41.297;
-                        longRadar = 2.07845;
-                    }
-                        
-                    else
-                    {
-                        type = "SMR";
-                        latRadar = 41.2956;
-                        longRadar = 2.095;
+                        cat = 10;
+                        double latRadar;
+                        double longRadar;
+                        if (item[Data.columns["Target Address"]] != null)
+                        {
+                            type = "MLAT";
+                            latRadar = 41.297;
+                            longRadar = 2.07845;
+                        }
+
+                        else
+                        {
+                            type = "SMR";
+                            latRadar = 41.2956;
+                            longRadar = 2.095;
+                        }
+
+                        GeoUtils g = new GeoUtils();
+                        CoordinatesWGS84 radarWGS84 = new CoordinatesWGS84(Functions.degtorad(latRadar), Functions.degtorad(longRadar));
+                        CoordinatesXYZ cartesian = new CoordinatesXYZ(Convert.ToDouble(item[Data.columns["X Cartesian"]]), Convert.ToDouble(item[Data.columns["Y Cartesian"]]), z);
+                        CoordinatesXYZ geocentric = g.change_radar_cartesian2geocentric(radarWGS84, cartesian);
+                        CoordinatesWGS84 geodesic = g.change_geocentric2geodesic(geocentric);
+                        latitude = Functions.radtodeg(geodesic.Lat);
+                        longitude = Functions.radtodeg(geodesic.Lon);
+                        z = geodesic.Height;
                     }
 
-                    GeoUtils g = new GeoUtils();
-                    CoordinatesWGS84 radarWGS84 = new CoordinatesWGS84(Functions.degtorad(latRadar), Functions.degtorad(longRadar));
-                    CoordinatesXYZ cartesian = new CoordinatesXYZ(Convert.ToDouble(item[Data.columns["X Cartesian"]]), Convert.ToDouble(item[Data.columns["Y Cartesian"]]), z);
-                    CoordinatesXYZ geocentric = g.change_radar_cartesian2geocentric(radarWGS84, cartesian);
-                    CoordinatesWGS84 geodesic = g.change_geocentric2geodesic(geocentric);
-                    latitude = Functions.radtodeg(geodesic.Lat);
-                    longitude = Functions.radtodeg(geodesic.Lon);
-                    z = geodesic.Height;
                 }
+                else
+                {
+                    cat = 21;
+                    type = "ADSB";
 
-            }
-            else
-            {
-                cat = 21;
-                type = "ADSB";
-
-                latitude = Convert.ToDouble(item[Data.columns["Latitude WGS84"]]);
-                longitude = Convert.ToDouble(item[Data.columns["Longitude WGS84"]]);
-            }
+                    latitude = Convert.ToDouble(item[Data.columns["Latitude WGS84"]]);
+                    longitude = Convert.ToDouble(item[Data.columns["Longitude WGS84"]]);
+                }
 
             //CAL AFEGIR LA CAT21 I QUE SI LA DISTANCIA ENTRE EL VELL I EL NOU ES MOLTA, BORREM EL VELL I QUE APAREIXI EL NOU NOMES
             if (cat != 0)
@@ -375,7 +393,7 @@ namespace Interfaz
                 }
                 
 
-                if (longitude != double.NaN && latitude != double.NaN && ID != null && type!=null && groundSpeed!=double.NaN) //podem carregar dades
+                if (longitude != double.NaN && latitude != double.NaN && ID != null && type!=null && groundSpeed!=double.NaN && FL!=double.NaN) //podem carregar dades
                 {
                     if (targetNames.Contains(ID)) //comprobem si aquest target ja existeix
                     {
@@ -383,11 +401,15 @@ namespace Interfaz
                         targetList[targetNames.IndexOf(ID)].setLong(longitude);
                         targetList[targetNames.IndexOf(ID)].setHeight(z);
                         targetList[targetNames.IndexOf(ID)].setGroundSpeed(groundSpeed);
+                        //targetList[targetNames.IndexOf(ID)].setCallsing(callsing);
+                        targetList[targetNames.IndexOf(ID)].setFL(FL);
+                        //targetList[targetNames.IndexOf(ID)].setPackets(packets);
+                        //targetList[targetNames.IndexOf(ID)].setTrackNumber(trackNumber);
                         markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
                     }
                     else //si no existeix, creem un i l'afegim
                     {
-                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed);
+                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed,FL);
                         GMapOverlay targets = new GMapOverlay(ID);
                         GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
 
@@ -862,12 +884,12 @@ namespace Interfaz
                     }
                 }
 
-                //dataGridViewInfoAircraft.Rows[0].Cells[1].Value = ;  // Callsing
+                //dataGridViewInfoAircraft.Rows[0].Cells[1].Value = aircraftSelected.getCallsing();  // Callsing
                 dataGridViewInfoAircraft.Rows[1].Cells[1].Value = IDSelected;  // ICAO
-                //dataGridViewInfoAircraft.Rows[2].Cells[1].Value = dataLoaded;  // FL
-                //dataGridViewInfoAircraft.Rows[3].Cells[1].Value = dataLoaded;  // Track Nº
-                //dataGridViewInfoAircraft.Rows[4].Cells[1].Value = dataLoaded;  // Ground Speed
-                //dataGridViewInfoAircraft.Rows[5].Cells[1].Value = dataLoaded;  // Packets
+                dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getFL();  // FL
+                //dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
+                dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
+                //dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getPackets();  // Packets
 
                 textBoxLATAircraft.Text = aircraftSelected.getLat().ToString();
                 textBoxLongAircraft.Text = aircraftSelected.getLong().ToString();
@@ -881,9 +903,65 @@ namespace Interfaz
             resLoadMap = false;
         }
 
-        private void panelBarraArriba_Paint(object sender, PaintEventArgs e)
+
+
+        //Checked Boxes
+
+        private void checkBoxADSB_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBoxMLAT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxSMR_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // TIME SCALE
+        private void iconBtnBackwards_Click(object sender, EventArgs e)
+        {
+            this.timescale = labelTimeScale.Text;
+
+            if (timescale == "x1")
+            {
+                this.Hora.Interval = 1250;
+                labelTimeScale.Text = "x0.5";
+            }
+            else if (timescale == "x1.25")
+            {
+                this.Hora.Interval = 1000;
+                labelTimeScale.Text = "x1";
+            }
+            else
+            {
+                MessageBox.Show("You can not move backward the timescale");
+            }
+        }
+
+     
+        private void iconBtnForward_Click(object sender, EventArgs e)
+        {
+            this.timescale = labelTimeScale.Text;
+
+            if (timescale == "x1")
+            {
+                this.Hora.Interval = 500;
+                labelTimeScale.Text = "x1.25";
+            }
+            else if (timescale == "x0.5")
+            {
+                this.Hora.Interval = 1000;
+                labelTimeScale.Text = "x1";
+            }
+            else
+            {
+                MessageBox.Show("You can not move backward the timescale");
+            }
         }
     }
 }

@@ -18,12 +18,6 @@ namespace Asterix_Decoder
 {
     public partial class TableData : Form
     {
-        //String search;
-
-        bool TargetIDChecked = false;
-        bool TrackNumberChecked = false;
-        bool TargetAddressChecked = false;
-        bool Mode3AChecked = false;
 
 
         public TableData()
@@ -37,6 +31,7 @@ namespace Asterix_Decoder
         List<string> relevantData = new List<string>() { "SIC", "SAC", "Time of Day", "MessageType", "Track Number", "Target Address", "Target Identification", "X Cartesian", "Y Cartesian", "Latitude WGS84", "Longitude WGS84", "Velocity X Cart", "Velocity Y Cart", "Ground Speed", "Track Angle", "FL", "Height", "Geometric Height", "Barometric Vertical Rate", "Selected Altitude", "Mode-3/A Code", "Emitter Category" };
         List<string> columnOrder = new List<string>() { "SIC", "SAC", "Time of Day", "MessageType", "Track Number", "Target Address", "Target Identification", "X Cartesian", "Y Cartesian", "Latitude WGS84", "Latitude WGS84 HP", "Latitude Intention", "Longitude WGS84", "Longitude WGS84 HP", "Longitude Intention", "rho", "theta", "Velocity X Cart", "Velocity Y Cart", "Ground Speed", "Air Speed", "True AirSpeed", "Acceleration X", "Acceleration Y", "Track Angle", "Track Angle Rate", "FL", "Height", "Geometric Height", "Barometric Vertical Rate", "Geometric Vertical Rate", "Selected Altitude", "Altitude Intention", "Altitude Final", "Mode-3/A Code", "Emitter Category", "Vehicle Fleet Identification", "Target Length", "Target Orientation", "Target Width", "Magnetic Heading", "Receiver ID", "Service Identification", "Turbulence", "Temperature", "Wind Direction", "Wind Speed", "Roll Angle", "Amplitude", "Time of Applicability Position", "Time of Applicability Velocity", "Time of Message Reception Position", "Time of Message Reception Position HP", "Time of Message Reception Velocity", "Time of Message Reception Velocity HP", "Point Type", "Presence rho", "Presence theta", "Standard Deviation X", "Standard Deviation Y", "BDS1", "BDS2", "BDS1_BDS", "BDS2_BDS", "BDSDATA", "ATP", "Covariance", "ICF", "MB", "ME", "MSG", "PS", "RA", "RAS", "SIM", "SS", "TCAS", "TD", "TOM", "TOT", "TOV", "TTR" };
         IDictionary<int, int> relation = new Dictionary<int, int>() { {0,124},{1,118},{2,157},{3,76},{4,170},{5,134},{6,135},{7,191},{8,192},{9,58},{10,59},{11,57},{12,64},{13,65},{14,63},{15,112},{16,149},{17,185},{18,186},{19,49},{20,4},{21,174},{22,1},{23,2},{24,168},{25,169},{26,37},{27,52},{28,45},{29,17},{30,46},{31,122},{32,5},{33,6},{34,0},{35,36},{36,184},{37,136},{38,137},{39,138},{40,69},{41,109},{42,123},{43,182},{44,148},{45,189},{46,190},{47,114},{48,8},{49,154},{50,155},{51,158},{52,159},{53,160},{54,161},{55,92},{56,94},{57,95},{58,128},{59,129},{60,18},{61,20},{62,19},{63,21},{64,22},{65,15},{66,29},{67,53},{68,72},{69,75},{70,83},{71,96},{72,98},{73,101},{74,125},{75,127},{76,144},{77,147},{78,164},{79,165},{80,166},{81,181} };
+        
         public void clearTable()
         {
             dataGridDT.Columns.Clear();
@@ -216,22 +211,19 @@ namespace Asterix_Decoder
                 if (isChecked(checkBox5))
                 {
                     typeValue = "Target Identification";
+                    //value = value + "  ";
                 }
-                //if (TargetIDChecked)
-                //{
-                    
-                //}
-                else if (TrackNumberChecked)
+                else if (isChecked(checkBox6))
                 {
                     typeValue = "Track Number";
                 }
-                else if (TargetAddressChecked)
+                else if (isChecked(checkBox3))
                 {
                     typeValue = "Target Address";
                 }
-                else if (Mode3AChecked)
+                else if (isChecked(checkBox4))
                 {
-                    typeValue = "Mode 3/A Code";
+                    typeValue = "Mode-3/A Code";
                 }
 
 
@@ -267,15 +259,6 @@ namespace Asterix_Decoder
                 MessageBox.Show("You must check a filter");
             }
 
-            checkBox3.Checked.Equals(false);
-            checkBox4.Checked.Equals(false);
-            checkBox6.Checked.Equals(false);
-            checkBox5.Checked.Equals(false);
-
-            TargetIDChecked = false;
-            TrackNumberChecked = false;
-            TargetAddressChecked = false;
-            Mode3AChecked = false;
         }
 
 
@@ -292,52 +275,44 @@ namespace Asterix_Decoder
 
         private void checkBox5_Click(object sender, EventArgs e)
         {
+            // TargetID
+            chk_ClickFilter(sender, e);
             checkBox3.Enabled = true;
             checkBox4.Enabled = true;
             checkBox5.Enabled = false;
             checkBox6.Enabled = true;
-            chk_ClickFilter(sender, e);
-            // TargetID
-            
-            TargetIDChecked = true;
         }
 
         private void checkBox6_Click(object sender, EventArgs e)
         {
+            // Track Number
             chk_ClickFilter(sender, e);
             checkBox3.Enabled = true;
             checkBox4.Enabled = true;
             checkBox5.Enabled = true;
             checkBox6.Enabled = false;
-            // Track Number
-            TrackNumberChecked = true;
         }
 
         private void checkBox3_Click(object sender, EventArgs e)
         {
+            // Target Address
             chk_ClickFilter(sender, e);
             checkBox3.Enabled = false;
             checkBox4.Enabled = true;
             checkBox5.Enabled = true;
             checkBox6.Enabled = true;
-            // Target Address
-            TargetAddressChecked = true;
         }
 
         private void checkBox4_Click(object sender, EventArgs e)
         {
+            // Mode 3/A
             chk_ClickFilter(sender, e);
             checkBox3.Enabled = true;
             checkBox4.Enabled = false;
             checkBox5.Enabled = true;
             checkBox6.Enabled = true;
-            // Mode 3/A
-            Mode3AChecked = true;
         }
 
-        private void guna2PanelDT_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+       
     }
 }

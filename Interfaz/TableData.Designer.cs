@@ -65,7 +65,6 @@
             this.guna2PanelDT.Name = "guna2PanelDT";
             this.guna2PanelDT.Size = new System.Drawing.Size(1289, 65);
             this.guna2PanelDT.TabIndex = 0;
-            this.guna2PanelDT.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2PanelDT_Paint);
             // 
             // checkBox4
             // 
