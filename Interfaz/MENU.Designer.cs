@@ -106,7 +106,6 @@
             this.labelAircraftInfo = new System.Windows.Forms.Label();
             this.iconBtnZoomLebl = new FontAwesome.Sharp.IconButton();
             this.labelZoomLEBL = new System.Windows.Forms.Label();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -486,13 +485,14 @@
             this.labelHora.Location = new System.Drawing.Point(970, 68);
             this.labelHora.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelHora.Name = "labelHora";
-            this.labelHora.Size = new System.Drawing.Size(66, 28);
+            this.labelHora.Size = new System.Drawing.Size(0, 41);
             this.labelHora.TabIndex = 8;
             this.labelHora.Text = "HORA";
             // 
             // Hora
             // 
             this.Hora.Interval = 1000;
+            this.Hora.Tick += new System.EventHandler(this.Hora_Tick);
             // 
             // openFileDialog1
             // 
@@ -624,20 +624,19 @@
             // 
             // dataGridViewInfoAircraft
             // 
+            this.dataGridViewInfoAircraft.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewInfoAircraft.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewInfoAircraft.Location = new System.Drawing.Point(182, 195);
-            this.dataGridViewInfoAircraft.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewInfoAircraft.Location = new System.Drawing.Point(260, 325);
             this.dataGridViewInfoAircraft.Name = "dataGridViewInfoAircraft";
             this.dataGridViewInfoAircraft.RowHeadersWidth = 62;
             this.dataGridViewInfoAircraft.RowTemplate.Height = 33;
-            this.dataGridViewInfoAircraft.Size = new System.Drawing.Size(210, 193);
+            this.dataGridViewInfoAircraft.Size = new System.Drawing.Size(300, 322);
             this.dataGridViewInfoAircraft.TabIndex = 16;
             // 
             // labelInfoTableAircraft
             // 
             this.labelInfoTableAircraft.AutoSize = true;
-            this.labelInfoTableAircraft.Location = new System.Drawing.Point(176, 174);
-            this.labelInfoTableAircraft.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelInfoTableAircraft.Location = new System.Drawing.Point(251, 290);
             this.labelInfoTableAircraft.Name = "labelInfoTableAircraft";
             this.labelInfoTableAircraft.Size = new System.Drawing.Size(213, 15);
             this.labelInfoTableAircraft.TabIndex = 17;
@@ -646,8 +645,7 @@
             // labelAicraft
             // 
             this.labelAicraft.AutoSize = true;
-            this.labelAicraft.Location = new System.Drawing.Point(182, 61);
-            this.labelAicraft.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelAicraft.Location = new System.Drawing.Point(260, 102);
             this.labelAicraft.Name = "labelAicraft";
             this.labelAicraft.Size = new System.Drawing.Size(93, 15);
             this.labelAicraft.TabIndex = 18;
@@ -655,16 +653,14 @@
             // 
             // textBoxAircraft
             // 
-            this.textBoxAircraft.Location = new System.Drawing.Point(176, 84);
-            this.textBoxAircraft.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxAircraft.Location = new System.Drawing.Point(251, 140);
             this.textBoxAircraft.Name = "textBoxAircraft";
             this.textBoxAircraft.Size = new System.Drawing.Size(106, 23);
             this.textBoxAircraft.TabIndex = 19;
             // 
             // btnClearAicraft
             // 
-            this.btnClearAicraft.Location = new System.Drawing.Point(182, 391);
-            this.btnClearAicraft.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClearAicraft.Location = new System.Drawing.Point(260, 652);
             this.btnClearAicraft.Name = "btnClearAicraft";
             this.btnClearAicraft.Size = new System.Drawing.Size(99, 20);
             this.btnClearAicraft.TabIndex = 20;
@@ -886,12 +882,119 @@
             this.labelZoomLEBL.TabIndex = 40;
             this.labelZoomLEBL.Text = "Click here to zoom in LEBL!!";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Cursor = System.Windows.Forms.Cursors.SizeAll;
+            this.label1.Location = new System.Drawing.Point(280, 102);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(20, 25);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "ii";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(306, 175);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 25);
+            this.label2.TabIndex = 42;
+            this.label2.Text = "SMR";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Orange;
+            this.label3.ForeColor = System.Drawing.Color.Orange;
+            this.label3.Location = new System.Drawing.Point(280, 140);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(20, 25);
+            this.label3.TabIndex = 43;
+            this.label3.Text = "ii";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(306, 102);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(57, 25);
+            this.label4.TabIndex = 44;
+            this.label4.Text = "MLAT";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(306, 140);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(57, 25);
+            this.label5.TabIndex = 45;
+            this.label5.Text = "ADSB";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Blue;
+            this.label6.ForeColor = System.Drawing.Color.Blue;
+            this.label6.Location = new System.Drawing.Point(280, 175);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(20, 25);
+            this.label6.TabIndex = 46;
+            this.label6.Text = "ii";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(293, 759);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(110, 25);
+            this.label7.TabIndex = 47;
+            this.label7.Text = "TIME SCALE:";
+            // 
+            // iconBtnForward
+            // 
+            this.iconBtnForward.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.iconBtnForward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnForward.IconChar = FontAwesome.Sharp.IconChar.Forward;
+            this.iconBtnForward.IconColor = System.Drawing.Color.Black;
+            this.iconBtnForward.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnForward.IconSize = 45;
+            this.iconBtnForward.Location = new System.Drawing.Point(367, 792);
+            this.iconBtnForward.Name = "iconBtnForward";
+            this.iconBtnForward.Size = new System.Drawing.Size(45, 45);
+            this.iconBtnForward.TabIndex = 48;
+            this.iconBtnForward.UseVisualStyleBackColor = true;
+            this.iconBtnForward.Click += new System.EventHandler(this.iconBtnForward_Click);
+            // 
+            // iconBtnBackward
+            // 
+            this.iconBtnBackward.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnBackward.IconChar = FontAwesome.Sharp.IconChar.Backward;
+            this.iconBtnBackward.IconColor = System.Drawing.Color.Black;
+            this.iconBtnBackward.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnBackward.IconSize = 45;
+            this.iconBtnBackward.Location = new System.Drawing.Point(316, 792);
+            this.iconBtnBackward.Name = "iconBtnBackward";
+            this.iconBtnBackward.Size = new System.Drawing.Size(45, 45);
+            this.iconBtnBackward.TabIndex = 49;
+            this.iconBtnBackward.UseVisualStyleBackColor = true;
+            this.iconBtnBackward.Click += new System.EventHandler(this.iconBtnBackward_Click);
+            // 
+            // labelTimeScale
+            // 
+            this.labelTimeScale.AutoSize = true;
+            this.labelTimeScale.Location = new System.Drawing.Point(404, 759);
+            this.labelTimeScale.Name = "labelTimeScale";
+            this.labelTimeScale.Size = new System.Drawing.Size(30, 25);
+            this.labelTimeScale.TabIndex = 50;
+            this.labelTimeScale.Text = "x1";
+            // 
             // MENU
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1096, 519);
+            this.ClientSize = new System.Drawing.Size(1566, 865);
             this.Controls.Add(this.labelZoomLEBL);
             this.Controls.Add(this.iconBtnZoomLebl);
             this.Controls.Add(this.labelAircraftInfo);
@@ -993,7 +1096,5 @@
         private Label labelAircraftInfo;
         private FontAwesome.Sharp.IconButton iconBtnZoomLebl;
         private Label labelZoomLEBL;
-        private SaveFileDialog saveFileDialog1;
-        public PictureBox pictureBox4;
     }
 }

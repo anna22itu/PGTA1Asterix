@@ -25,6 +25,8 @@ namespace Interfaz
 {
     public partial class MENU : Form
     {
+        String timescale; 
+
         public bool result = true;
         public bool result2 = false;
 
@@ -873,11 +875,6 @@ namespace Interfaz
             }
 
             resLoadMap = false;
-        }
-
-        private void panelBarraArriba_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
