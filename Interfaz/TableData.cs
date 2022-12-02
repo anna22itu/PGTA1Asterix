@@ -11,12 +11,20 @@ using System.Windows.Forms;
 using AsterixDecoder;
 using Library;
 using Interfaz;
+using Newtonsoft.Json.Linq;
+using System.Data.Entity.Core.Mapping;
 
 namespace Asterix_Decoder
 {
     public partial class TableData : Form
     {
-        String search;
+        //String search;
+
+        bool TargetIDChecked = false;
+        bool TrackNumberChecked = false;
+        bool TargetAddressChecked = false;
+        bool Mode3AChecked = false;
+
 
         public TableData()
         {
@@ -101,15 +109,7 @@ namespace Asterix_Decoder
                 }
             }
 
-            if (dataGridDT.Columns.Contains("MessageType")==false) //bloquejem els filtres de messagetype
-            {
-                //checkBox3.Enabled = false;
-                //checkBox4.Enabled = false;
-            }
-
             loadingEnded.Report(1);
-
-
 
         }
 
@@ -148,70 +148,7 @@ namespace Asterix_Decoder
             }
             
         }
-        
-        /**
-        private void checkBox3_CheckedChanged(object sender, EventArgs e) //Only Target Reports
-        {
-
-            if (isChecked(checkBox3))
-            {
-                checkBox4.Enabled = false;
-                if (dataGridDT.Columns.Contains("MessageType"))
-                {
-                    for (int i = 0; i < dataGridDT.Rows.Count-1; i++)
-                    {
-                        if (dataGridDT.Rows[i].Cells[columnOrder.IndexOf("MessageType")].Value.ToString() != "Target Report" && dataGridDT.Rows[i].Cells[columnOrder.IndexOf("MessageType")].Value.ToString() != "")
-                        {
-                            dataGridDT.Rows[i].Visible = false;
-                            rowsOcultadas.Add(i);
-                        }
-                    }
-                }
-                
-            }
-            else
-            {
-                checkBox4.Enabled = true;
-                while (rowsOcultadas.Count != 0)
-                {
-                    dataGridDT.Rows[rowsOcultadas[0]].Visible = true;
-                    rowsOcultadas.Remove(rowsOcultadas[0]);
-                }
-            }
-        }
-        */
-        /**
-        private void checkBox4_CheckedChanged(object sender, EventArgs e) //Show Extra Reports
-        {
-            
-            if (isChecked(checkBox4))
-            {
-                checkBox3.Enabled = false;
-                if (dataGridDT.Columns.Contains("MessageType"))
-                {
-                    for (int i = 0; i < dataGridDT.Rows.Count - 1; i++)
-                    {
-                        if (dataGridDT.Rows[i].Cells[columnOrder.IndexOf("MessageType")].Value.ToString() == "Target Report" || dataGridDT.Rows[i].Cells[columnOrder.IndexOf("MessageType")].Value.ToString() == "")
-                        {
-                            dataGridDT.Rows[i].Visible = false;
-                            rowsOcultadas.Add(i);
-                        }
-                    }
-                }
-
-
-            }
-            else
-            {
-                //checkBox3.Enabled = true;
-                while (rowsOcultadas.Count != 0)
-                {
-                    dataGridDT.Rows[rowsOcultadas[0]].Visible = true;
-                    rowsOcultadas.Remove(rowsOcultadas[0]);
-                }
-            }
-        }*/
-
+  
         private void checkBox1_CheckedChanged(object sender, EventArgs e) //Show All Data
         {
             chk_Click(sender, e);
@@ -257,53 +194,112 @@ namespace Asterix_Decoder
         }
 
 
-        private void guna2PanelDT_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
             bool found = false;
-            search = textBoxSearch.Text;
+
+            String value = textBoxSearch.Text;
+            String typeValue = "";
+                  
+
             try
             {
-                if (this.search == "")
+
+                if (TargetIDChecked)
                 {
-                    MessageBox.Show("You must enter a name of a header column");
+                    typeValue = "Target Identification";
+                }
+                else if (TrackNumberChecked)
+                {
+                    typeValue = "Track Number";
+                }
+                else if (TargetAddressChecked)
+                {
+                    typeValue = "Target Address";
+                }
+                else if (Mode3AChecked)
+                {
+                    typeValue = "Mode 3/A Code";
+                }
+
+
+                if (typeValue == "") 
+                {
+                    MessageBox.Show("You must check a filter");
                 }
                 else 
                 {
-                    foreach (DataGridViewColumn column in dataGridDT.Columns)
+                    for (int i = 0; i < dataGridDT.Rows.Count-1; i++)
                     {
-                        if (column.HeaderText.Equals(this.search))
+                        if (dataGridDT.Rows[i].Cells[typeValue].Value.ToString().Equals(value))
                         {
-                            for (int i = 0; i < dataGridDT.Columns.Count; i++)
-                            {
-                                dataGridDT.Columns[i].Visible = false;
-                            }
+                            dataGridDT.Rows[i].Visible = true;
                             found = true;
-                            dataGridDT.Columns[this.search].Visible = true;
+                        }
+                        else 
+                        {
+                            dataGridDT.Rows[i].Visible = false;
                         }
                     }
 
                     if (found == false)
                     {
-                        MessageBox.Show("There is no column with that name, please make sure that the name entered is the same as the one in the table header.");
+                        MessageBox.Show("There is no value equal to: " + value + " in the column "+ typeValue + ", please make sure that the value entered is an existing value.");
                     }
+
                 }
+
             }
             catch (Exception)
             {
-                MessageBox.Show("There is no column with that name, please make sure that the name entered is the same as the one in the table header.");
+                MessageBox.Show("You must check a filter");
             }
+
+            checkBox3.Checked.Equals(false);
+            checkBox4.Checked.Equals(false);
+            checkBox6.Checked.Equals(false);
+            checkBox5.Checked.Equals(false);
+
+            TargetIDChecked = false;
+            TrackNumberChecked = false;
+            TargetAddressChecked = false;
+            Mode3AChecked = false;
         }
 
 
         private void textBoxSearch_MouseClick(object sender, MouseEventArgs e)
         {
+            for (int i = 0; i < dataGridDT.Rows.Count - 1; i++)
+            {
+                dataGridDT.Rows[i].Visible = true;
+            }
+
             textBoxSearch.Text = "";
         }
 
+
+        private void checkBox5_Click(object sender, EventArgs e)
+        {
+            // TargetID
+            TargetIDChecked = true;
+        }
+
+        private void checkBox6_Click(object sender, EventArgs e)
+        {
+            // Track Number
+            TrackNumberChecked = true;
+        }
+
+        private void checkBox3_Click(object sender, EventArgs e)
+        {
+            // Target Address
+            TargetAddressChecked = true;
+        }
+
+        private void checkBox4_Click(object sender, EventArgs e)
+        {
+            // Mode 3/A
+            Mode3AChecked = true;
+        }
     }
 }

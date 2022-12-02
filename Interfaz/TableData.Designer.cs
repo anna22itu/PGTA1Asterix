@@ -26,6 +26,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.guna2PanelDT = new Guna.UI2.WinForms.Guna2Panel();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.checkBox5 = new System.Windows.Forms.CheckBox();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -46,6 +48,8 @@
             // guna2PanelDT
             // 
             this.guna2PanelDT.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.guna2PanelDT.Controls.Add(this.checkBox4);
+            this.guna2PanelDT.Controls.Add(this.checkBox3);
             this.guna2PanelDT.Controls.Add(this.checkBox6);
             this.guna2PanelDT.Controls.Add(this.checkBox5);
             this.guna2PanelDT.Controls.Add(this.btnSearch);
@@ -61,31 +65,54 @@
             this.guna2PanelDT.Name = "guna2PanelDT";
             this.guna2PanelDT.Size = new System.Drawing.Size(1289, 65);
             this.guna2PanelDT.TabIndex = 0;
-            this.guna2PanelDT.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2PanelDT_Paint);
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(554, 33);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(166, 29);
+            this.checkBox4.TabIndex = 21;
+            this.checkBox4.Text = "Mode 3/A Code";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.Click += new System.EventHandler(this.checkBox4_Click);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(554, 10);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(156, 29);
+            this.checkBox3.TabIndex = 20;
+            this.checkBox3.Text = "Target Address";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.Click += new System.EventHandler(this.checkBox3_Click);
             // 
             // checkBox6
             // 
             this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(669, 33);
+            this.checkBox6.Location = new System.Drawing.Point(354, 33);
             this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(243, 29);
+            this.checkBox6.Size = new System.Drawing.Size(147, 29);
             this.checkBox6.TabIndex = 19;
-            this.checkBox6.Text = "Show Only Target Reports";
+            this.checkBox6.Text = "Track Number";
             this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.Click += new System.EventHandler(this.checkBox6_Click);
             // 
             // checkBox5
             // 
             this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(669, 10);
+            this.checkBox5.Location = new System.Drawing.Point(354, 10);
             this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(109, 29);
+            this.checkBox5.Size = new System.Drawing.Size(194, 29);
             this.checkBox5.TabIndex = 18;
-            this.checkBox5.Text = "Target ID";
+            this.checkBox5.Text = "Target Identification";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.Click += new System.EventHandler(this.checkBox5_Click);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(240, 12);
+            this.btnSearch.Location = new System.Drawing.Point(1006, 10);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 45);
             this.btnSearch.TabIndex = 1;
@@ -96,7 +123,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(441, 10);
+            this.checkBox2.Location = new System.Drawing.Point(12, 10);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(195, 29);
             this.checkBox2.TabIndex = 15;
@@ -106,7 +133,7 @@
             // 
             // textBoxSearch
             // 
-            this.textBoxSearch.Location = new System.Drawing.Point(91, 19);
+            this.textBoxSearch.Location = new System.Drawing.Point(857, 17);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(143, 31);
             this.textBoxSearch.TabIndex = 2;
@@ -115,7 +142,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(441, 33);
+            this.checkBox1.Location = new System.Drawing.Point(12, 33);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(149, 29);
             this.checkBox1.TabIndex = 14;
@@ -131,7 +158,7 @@
             this.iconPictureBoxSearch.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBoxSearch.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconPictureBoxSearch.IconSize = 45;
-            this.iconPictureBoxSearch.Location = new System.Drawing.Point(31, 10);
+            this.iconPictureBoxSearch.Location = new System.Drawing.Point(806, 10);
             this.iconPictureBoxSearch.Name = "iconPictureBoxSearch";
             this.iconPictureBoxSearch.Size = new System.Drawing.Size(45, 45);
             this.iconPictureBoxSearch.TabIndex = 2;
@@ -235,5 +262,7 @@
         private CheckBox checkBox1;
         private CheckBox checkBox5;
         private CheckBox checkBox6;
+        private CheckBox checkBox4;
+        private CheckBox checkBox3;
     }
 }

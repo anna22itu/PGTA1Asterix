@@ -459,9 +459,11 @@
             this.labelHora.Name = "labelHora";
             this.labelHora.Size = new System.Drawing.Size(0, 41);
             this.labelHora.TabIndex = 8;
+            this.labelHora.Text = "HORA";
             // 
             // Hora
             // 
+            this.Hora.Tick += new System.EventHandler(this.Hora_Tick);
             this.Hora.Interval = 1000;
             // 
             // openFileDialog1

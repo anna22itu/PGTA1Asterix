@@ -41,7 +41,7 @@ namespace Interfaz
 
         GMapControl gmap = new GMapControl();
 
-        GMapOverlay targets = new GMapOverlay("targets");
+        //GMapOverlay targets = new GMapOverlay("targets");
 
         double LatInicial = 41.27575;
         double LongInicial = 1.98721;
@@ -332,10 +332,12 @@ namespace Interfaz
                     else //si no existeix, creem un i l'afegim
                     {
                         Aircraft a = new Aircraft(ID, longitude, latitude, z, type);
+                        GMapOverlay targets = new GMapOverlay(ID);
+                        GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
+
                         targetList.Add(a);
                         targetNames.Add(ID);
 
-                        GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
                         markersList.Add(markerTarget);
                         targets.Markers.Add(markerTarget);
                         gMapControl1.Overlays.Add(targets);
@@ -749,10 +751,13 @@ namespace Interfaz
 
         private void gMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
-            MessageBox.Show("You have selected the "+ item.Overlay.Id + " aircraft.");
-
-
             bool Selected = true;
+
+            if (Selected) 
+            {
+                MessageBox.Show("You have selected the " + item.Overlay.Id + " aircraft.");
+                Selected= false;
+            }
 
             loadAircraftInfoTable(item);
         }
@@ -783,6 +788,7 @@ namespace Interfaz
                     if (item.Overlay.Id.Equals(targetNames[i]))
                     {
                         IDSelected = targetNames[i];
+                        break;
                     }
                 }
 
@@ -791,11 +797,12 @@ namespace Interfaz
                     if(a.getID().Equals(IDSelected))
                     {
                         aircraftSelected= a;
+                        break;
                     }
                 }
 
-                dataGridViewInfoAircraft.Rows[0].Cells[1].Value = IDSelected;  // Callsing
-                //dataGridViewInfoAircraft.Rows[1].Cells[1].Value = dataLoaded;  // ICAO
+                //dataGridViewInfoAircraft.Rows[0].Cells[1].Value = ;  // Callsing
+                dataGridViewInfoAircraft.Rows[1].Cells[1].Value = IDSelected;  // ICAO
                 //dataGridViewInfoAircraft.Rows[2].Cells[1].Value = dataLoaded;  // FL
                 //dataGridViewInfoAircraft.Rows[3].Cells[1].Value = dataLoaded;  // Track Nº
                 //dataGridViewInfoAircraft.Rows[4].Cells[1].Value = dataLoaded;  // Ground Speed
