@@ -24,6 +24,8 @@ namespace Interfaz
 {
     public partial class MENU : Form
     {
+        String timescale; 
+
         public bool result = true;
         public bool result2 = false;
 
@@ -818,6 +820,47 @@ namespace Interfaz
             }
 
             resLoadMap = false;
+        }
+
+        private void iconBtnBackward_Click(object sender, EventArgs e)
+        {
+            this.timescale = labelTimeScale.Text;
+
+            if (timescale == "x1")
+            {
+                this.Hora.Interval = 500;
+                labelTimeScale.Text = "x0.5";
+            }
+            else if(timescale == "x1.25")
+            {
+                this.Hora.Interval = 1000;
+                labelTimeScale.Text = "x1";
+            }
+            else
+            {
+                MessageBox.Show("You can not move backward the timescale");
+            }
+
+        }
+
+        private void iconBtnForward_Click(object sender, EventArgs e)
+        {
+            this.timescale = labelTimeScale.Text;
+
+            if (timescale == "x1")
+            {
+                this.Hora.Interval = 1250;
+                labelTimeScale.Text = "x1.25";
+            }
+            else if (timescale == "x0.5")
+            {
+                this.Hora.Interval = 1000;
+                labelTimeScale.Text = "x1";
+            }
+            else
+            {
+                MessageBox.Show("You can not move backward the timescale");
+            }
         }
     }
 }
