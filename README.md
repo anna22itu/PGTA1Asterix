@@ -18,7 +18,7 @@ First, we must load the data with which we will work. By clicking on the ‘Load
 
 Once the file with all the data has been loaded, we have different options; export the file, view the data, and load the map.
 
-1. If we export the file, an excel file will be created in our Interface>bin>Debug>net6.0-windows folder, where all the data read from the loaded file will be shown in table form.
+1. If we export the file, an excel file will be created in a new folder that you can choose, where all the data read from the loaded file will be shown in table form.
 
 
 <img width="960" alt="Captura de pantalla 2022-12-02 154744" src="https://user-images.githubusercontent.com/80980228/205321326-0cba8576-ea20-4232-bc3a-6a17109776a7.png">
@@ -42,7 +42,16 @@ Second, by selecting a feature, for example, Track Number, and clicking on the m
 
 
 
+In addition, we have the simulator part, in which we have the aircraft visible on the map. Depending on the file that we select, when we click on the Play button, some aircraft or others will appear.
 
+At the top right, we have a label that tells us the time of the simulation, and it starts the first time that the data shows when we load the file and the map.
+
+On the left side, once we select a specific aircraft, the data of that aircraft will appear.
+
+Also, different buttons have been implemented, with which to interact with the map. At the bottom left, we have the time scale, which gives us three levels of simulation speed (x0.5, x1, x1.25).
+In addition, we have a Reload button in which the aircraft return to their starting position. 
+On the other hand, if we un-zoom the initial area of the map, we can return to the Barcelona airport by clicking on the LEBL button.
+Finally, we have implemented a KML.
 
 
 
