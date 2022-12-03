@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    internal class CAT21Dict
+    public class CAT21Dict
     {
         public static string[] methods = { "DataSourceIdentification", "TargetReportDescriptor", "TrackNumber", "ServiceIdentification", "TimeofApplicabilityforPosition", "PositioninWGS84coordinates", "HighResolutionPositionWGS84Coordinates", "TimeofApplicabilityforVelocity", "AirSpeed", "TrueAirSpeed", "TargetAddress", "TimeofMessageReceptionforPosition", "TimeofMessageReceptionforPositionHighPrecision", "TimeofMessageReceptionforVelocity", "TimeofMessageReceptionforVelocityHighPrecision", "GeometricHeight", "QualityIndicators", "MOPSVersion", "Mode3/ACode", "RollAngle", "FlightLevel", "MagneticHeading", "TargetStatus", "BarometricVerticalRate", "GeometricVerticalRate", "AirborneGroundVector", "TrackAngleRate", "TimeofReportTransmission", "TargetIdentification", "EmitterCategory", "MetInformation", "SelectedAltitude", "FinalStateSelectedAltitude", "TrajectoryIntent", "ServiceManagement", "AircraftOperationalStatus", "SurfaceCapabilitiesandCharacteristics", "MessageAmplitude", "ModeSMBData", "ACASResolutionAdvisoryReport", "ReceiverID", "DataAges", "Not Used", "Not Used", "Not Used", "Not Used", "Not Used", "ReservedExpansionField", "SpecialPurposeField" };
 
@@ -104,9 +104,9 @@ namespace Library
 
         public static IDictionary<string, string> TrajectoryIntent_TD = new Dictionary<string, string>() { { "00", "N/A" }, { "01", "Turn right" }, { "10", "Turn left" }, { "11", "No turn" } };
 
-        public static IDictionary<int, string> TrajectoryIntent_TRA = new Dictionary<int, string>() { { 0, "TTR not available" }, { 1, "TTR available" } };
+        public static IDictionary<int, string> TrajectoryIntent_TTR = new Dictionary<int, string>() { { 0, "TTR not available" }, { 1, "TTR available" } };
 
-        public static IDictionary<int, string> TrajectoryIntent_TOA = new Dictionary<int, string>() { { 0, "TOV available" }, { 1, "TOV not available" } };
+        public static IDictionary<int, string> TrajectoryIntent_TOV = new Dictionary<int, string>() { { 0, "TOV available" }, { 1, "TOV not available" } };
 
 
         // 146

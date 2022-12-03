@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library
 {
-    internal class CAT10Dict
+    public class CAT10Dict
     {
         public static string[] methods = { "DataSourceIdentifier", "MessageType", "TargetReportDescriptor", "TimeOfDay", "PositionWGS84Coordinates", "MeasuredPositionPolarCoordinates", "PositionCartesianCoordinates", "CalculatedTrackVelocityPolarCoordinates", "CalculatedTrackVelocityCartesianCoordinates", "TrackNumber", "TrackStatus", "Mode3ACodeOctalRepresentation", "TargetAddress", "TargetIdentification", "ModeSMBData", "VehicleFleetIdentification", "FlightLevelBinaryRepresentation", "MeasuredHeight", "TargetSizeOrientation", "SystemStatus", "PreprogrammedMessage", "StandardDeviationPosition", "Presence", "AmplitudePrimaryPlot", "CalculatedAcceleration" };
         

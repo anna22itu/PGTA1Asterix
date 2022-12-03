@@ -87,55 +87,73 @@ namespace Interfaz
         // LOAD & EXPORT FILE
         bool fileimported = false;
         bool dataRead = false;
+        bool isFirstTime = true;
         private void BtnLoadFile_Click(object sender, EventArgs e)
         {
             dt = new TableData();
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (dataLoaded || isFirstTime)
             {
-                fileimported = true;
-                string filename = openFileDialog1.FileName;
-                byte[] fileBytes = File.ReadAllBytes(filename);
-                string bitString = BitConverter.ToString(fileBytes);
-                var loadingended = new Progress<int>(stoploadingRead);
-                var loadingDTstarted = new Progress<int>(loadingDataTable);
-                var loadingDTended = new Progress<int>(stoploadingDataTable);
-                loadingRead();
-                Thread readThread = new Thread(() =>
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    Read.main(bitString, loadingended);
-                    dataRead = true;
-                    System.Windows.MessageBox.Show("The file has been loaded successfully.");
-                    dt.LoadData(loadingDTstarted, loadingDTended);
-                    dataLoaded = true;
-                });
-                readThread.Start();
+                    resetchecks();
+                    isFirstTime = false;
+                    dataLoaded = false;
+                    dataRead = false;
+                    fileimported = true;
+                    string filename = openFileDialog1.FileName;
+                    byte[] fileBytes = File.ReadAllBytes(filename);
+                    string bitString = BitConverter.ToString(fileBytes);
+                    var loadingended = new Progress<int>(stoploadingRead);
+                    var loadingDTstarted = new Progress<int>(loadingDataTable);
+                    var loadingDTended = new Progress<int>(stoploadingDataTable);
+                    loadingRead();
+                    Thread readThread = new Thread(() =>
+                    {
+                        Read.main(bitString, loadingended);
+                        dataRead = true;
+                        System.Windows.MessageBox.Show("The file has been loaded successfully.");
+                        dt.LoadData(loadingDTstarted, loadingDTended);
+                        dataLoaded = true;
+                    });
+                    readThread.Start();
 
-                labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
+                    labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
 
 
-                if (filename[(filename.LastIndexOf("\\") + 1)..] == "201002-lebl-080001_adsb.ast")
-                {
-                    checkBoxMLAT.Enabled = false;
-                    checkBoxSMR.Enabled = false;
+                    if (filename.EndsWith("adsb.ast") && filename[filename.Length - 10] != 't')
+                    {
+                        checkBoxMLAT.Enabled = false;
+                        checkBoxSMR.Enabled = false;
+                        checkBoxADSB.Checked = true;
+                    }
+                    else if (filename.EndsWith("mlat.ast"))
+                    {
+                        checkBoxADSB.Enabled = false;
+                        checkBoxSMR.Enabled = false;
+                        checkBoxMLAT.Checked = true;
+                    }
+                    else if (filename.EndsWith("smr.ast"))
+                    {
+                        checkBoxMLAT.Enabled = false;
+                        checkBoxADSB.Enabled = false;
+                        checkBoxSMR.Checked = true;
+                    }
+                    else if (filename.EndsWith("smr_mlat_adsb.ast"))
+                    {
+                        checkBoxMLAT.Enabled = true;
+                        checkBoxADSB.Enabled = true;
+                        checkBoxSMR.Enabled = true;
+                        checkBoxADSB.Checked = true;
+                        checkBoxMLAT.Checked = true;
+                        checkBoxSMR.Checked = true;
+                    }
+
+
                 }
-                else if (filename[(filename.LastIndexOf("\\") + 1)..] == "201002-lebl-080001_mlat.ast")
-                {
-                    checkBoxADSB.Enabled = false;
-                    checkBoxSMR.Enabled = false;
-                }
-                else if (filename[(filename.LastIndexOf("\\") + 1)..] == "201002-lebl-080001_smr.ast") 
-                {
-                    checkBoxMLAT.Enabled = false;
-                    checkBoxADSB.Enabled = false;
-                }
-                else if (filename[(filename.LastIndexOf("\\") + 1)..] == "201002-lebl-080001_smr_mlat_adsb.ast")
-                {
-                    checkBoxMLAT.Enabled = true;
-                    checkBoxADSB.Enabled = true;
-                    checkBoxSMR.Enabled = true;
-                }
-
-
+            }
+            else if (dataLoaded == false)
+            {
+                MessageBox.Show("Please wait until the current file has been completely loaded.", "File currently loading.");
             }
 
             else
@@ -143,6 +161,15 @@ namespace Interfaz
                 MessageBox.Show("ERROR: The file has not been loaded successfully.");
                 //caldrà printar en un dialogbox que no s'ha importat bé el fitxer (tb si dona error o lo q sigui)
             }
+        }
+        private void resetchecks()
+        {
+            checkBoxMLAT.Enabled = true;
+            checkBoxADSB.Enabled = true;
+            checkBoxSMR.Enabled = true;
+            checkBoxADSB.Checked = false;
+            checkBoxMLAT.Checked = false;
+            checkBoxSMR.Checked = false;
         }
 
         private void loadingExport(int i)
@@ -157,7 +184,7 @@ namespace Interfaz
         }
         private void BtnExportFile_Click(object sender, EventArgs e)
         {
-            if (fileimported == true)
+            if (dataRead == true)
             {
                 saveFileDialog1.FileName = "Save Here";
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -180,6 +207,10 @@ namespace Interfaz
                 {
                     MessageBox.Show("Please select a destination for the exported file.");
                 }
+            }
+            else if (fileimported)
+            {
+                MessageBox.Show("The file is processing. This could take a few minutes.", "Please wait.");
             }
             else
             {
@@ -455,6 +486,10 @@ namespace Interfaz
             {
                 gMapControl1_Load(sender, e);
                 //loadAircraftInfoTable(); //desde loadAircraftInfoData es podra show la data de l'avio quan es faci click sobre l'avio o es busqui el seu id
+            }
+            else if (fileimported)
+            {
+                MessageBox.Show("The file is processing. This could take a few minutes.", "Please wait.");
             }
             else
             {
@@ -985,6 +1020,11 @@ namespace Interfaz
             {
                 MessageBox.Show("You can not move forward the timescale");
             }
+        }
+
+        private void panelBarraArriba_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
