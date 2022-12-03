@@ -112,6 +112,30 @@ namespace Interfaz
 
                 labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
 
+
+                if (filename[(filename.LastIndexOf("\\") + 1)..] == "201002-lebl-080001_adsb.ast")
+                {
+                    checkBoxMLAT.Enabled = false;
+                    checkBoxSMR.Enabled = false;
+                }
+                else if (filename[(filename.LastIndexOf("\\") + 1)..] == "201002-lebl-080001_mlat.ast")
+                {
+                    checkBoxADSB.Enabled = false;
+                    checkBoxSMR.Enabled = false;
+                }
+                else if (filename[(filename.LastIndexOf("\\") + 1)..] == "201002-lebl-080001_smr.ast") 
+                {
+                    checkBoxMLAT.Enabled = false;
+                    checkBoxADSB.Enabled = false;
+                }
+                else if (filename[(filename.LastIndexOf("\\") + 1)..] == "201002-lebl-080001_smr_mlat_adsb.ast")
+                {
+                    checkBoxMLAT.Enabled = true;
+                    checkBoxADSB.Enabled = true;
+                    checkBoxSMR.Enabled = true;
+                }
+
+
             }
 
             else
@@ -220,7 +244,7 @@ namespace Interfaz
 
         private void BtnPlay_Click(object sender, EventArgs e)
         {
-            
+            gMapControl1.Zoom = 13;
 
             if (loadMap && readGoing==false) //que nomes funcionin si el mapa esta loaded
             {
@@ -416,7 +440,6 @@ namespace Interfaz
                         targetList.Add(a);
                         targetNames.Add(ID);
                         markersList.Add(markerTarget);
-
                         targets.Markers.Add(markerTarget);
                         gMapControl1.Overlays.Add(targets);
                     }
@@ -437,33 +460,33 @@ namespace Interfaz
             {
                 MessageBox.Show("Please, first import a file.", "File not loaded.");
             }
-            
+
 
             // Avion
-            //try
-            //{
-            //    // MarcadorGreenDot
-            //    overlay = new GMapOverlay("Marker");
-            //    marker = new GMarkerGoogle(new PointLatLng(LatLEBL, LongLEBL), GMarkerGoogleType.green);
-            //    overlay.Markers.Add(marker); // lo agregamos al mapa
-            //    gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
+            try
+            {
+                // MarcadorGreenDot
+                overlay = new GMapOverlay("Marker");
+                marker = new GMarkerGoogle(new PointLatLng(LatLEBL, LongLEBL), GMarkerGoogleType.green);
+                overlay.Markers.Add(marker); // lo agregamos al mapa
+                gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
 
-            //    // MarcadorGAircraft
-            //    //this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
-            //    //overlay2 = new GMapOverlay("Marker");
-            //    //markerAircraft = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
-            //    //overlay2.Markers.Add(markerAircraft); // lo agregamos al mapa
-            //    //gMapControl1.Overlays.Add(overlay2); // lo agregamos a nuestro mapa
+                //    // MarcadorGAircraft
+                //    //this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
+                //    //overlay2 = new GMapOverlay("Marker");
+                //    //markerAircraft = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
+                //    //overlay2.Markers.Add(markerAircraft); // lo agregamos al mapa
+                //    //gMapControl1.Overlays.Add(overlay2); // lo agregamos a nuestro mapa
 
-            //}
-            //catch (NullReferenceException)
-            //{
-            //    MessageBox.Show("The data has not been loaded correctly");
-            //}
-            //catch (Exception)
-            //{
-            //    MessageBox.Show("The data has not been loaded correctly");
-            //}
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("The data has not been loaded correctly");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The data has not been loaded correctly");
+            }
 
 
         }
@@ -909,7 +932,7 @@ namespace Interfaz
 
         private void checkBoxADSB_Click(object sender, EventArgs e)
         {
-
+            //markersList
         }
 
         private void checkBoxMLAT_Click(object sender, EventArgs e)
@@ -960,7 +983,7 @@ namespace Interfaz
             }
             else
             {
-                MessageBox.Show("You can not move backward the timescale");
+                MessageBox.Show("You can not move forward the timescale");
             }
         }
     }
