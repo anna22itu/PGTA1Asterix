@@ -338,7 +338,7 @@ namespace Interfaz
                         Thread.Sleep(20);
 
                     }
-                    //Thread.Sleep(1000);
+                    Thread.Sleep(1000);
                 }
                 Hora.Stop();
                 MessageBox.Show("All aircraft Shown");
@@ -963,22 +963,6 @@ namespace Interfaz
 
 
 
-        //Checked Boxes
-
-        private void checkBoxADSB_Click(object sender, EventArgs e)
-        {
-            //markersList
-        }
-
-        private void checkBoxMLAT_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBoxSMR_Click(object sender, EventArgs e)
-        {
-
-        }
 
         // TIME SCALE
         private void iconBtnBackwards_Click(object sender, EventArgs e)
@@ -1022,9 +1006,6 @@ namespace Interfaz
             }
         }
 
-        private void panelBarraArriba_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+      
     }
 }
