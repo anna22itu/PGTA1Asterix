@@ -971,14 +971,12 @@ namespace Interfaz
             dataGridViewInfoAircraft.DataSource = dtInf;
 
 
-            textBoxLATAircraft.Text = aircraftSelected.getLat().ToString();
-            textBoxLongAircraft.Text = aircraftSelected.getLong().ToString();
 
             try
             {
                 foreach (Aircraft a in targetList) 
                 {
-                    if (a.getID().Equals(item.Overlay.Id) && a.getLat().Equals(X) && a.getLong().Equals(Y) )
+                    if (a.getID().Equals(item.Overlay.Id) && a.getLat().Equals(X) && a.getLong().Equals(Y))
                     {
                         aircraftSelected = a;
                         IDSelected = a.getID();
@@ -991,10 +989,12 @@ namespace Interfaz
                 dataGridViewInfoAircraft.Rows[1].Cells[1].Value = IDSelected;  // ICAO
                 //dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getFL();  // FL
                 //dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
-                dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
-                //dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getPackets();  // Packets
+                //dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
+                                                                                                      //dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getPackets();  // Packets
 
 
+                textBoxLATAircraft.Text = aircraftSelected.getLat().ToString();
+                textBoxLongAircraft.Text = aircraftSelected.getLong().ToString();
 
             }
             catch
