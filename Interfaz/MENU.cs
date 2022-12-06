@@ -66,6 +66,12 @@ namespace Interfaz
 
         TableData dt = new TableData();
 
+        List<Aircraft> listAircraftADSB = new List<Aircraft>(); // Guardaremos aquí todos los aviones ADSB
+        List<Aircraft> listAircraftMLAT = new List<Aircraft>(); // Guardaremos aquí todos los aviones MLAT
+        List<Aircraft> listAircraftSMR = new List<Aircraft>(); // Guardaremos aquí todos los aviones SMR
+
+
+
 
         public MENU()
         {
@@ -101,7 +107,7 @@ namespace Interfaz
                     if (openFileDialog1.ShowDialog() == DialogResult.OK)
                     {
                         checksreset();
-                        
+
                         dataLoaded = false;
                         dataRead = false;
                         fileimported = true;
@@ -235,9 +241,9 @@ namespace Interfaz
             {
                 MessageBox.Show("No file has been imported yet.", "Please open a file.");
             }
-            
 
-            
+
+
         }
 
 
@@ -303,16 +309,16 @@ namespace Interfaz
             {
                 MessageBox.Show("First load the map --> on the MAP VIEW button");
             }
-            else if (loadMap && readGoing==false) //que nomes funcionin si el mapa esta loaded
+            else if (loadMap && readGoing == false) //que nomes funcionin si el mapa esta loaded
             {
                 MessageBox.Show("This could take a few minutes. Please wait until you are told that all aircrafts have been loaded. Thanks for waiting :)");
                 BtnParar.Show();
                 BtnPlay.Hide();
                 Thread.Sleep(1000);
                 ReadTargets();
-                
+
             }
-            else if(loadMap && readGoing)
+            else if (loadMap && readGoing)
             {
                 BtnParar.Show();
                 BtnPlay.Hide();
@@ -330,7 +336,7 @@ namespace Interfaz
                 Hora.Stop(); //parem el timer i es parara el thread
                 mapPaused = true;
             }
-            
+
         }
 
         Thread readTargetThread;
@@ -400,14 +406,14 @@ namespace Interfaz
                     labelHora.Hide();
                     resetLoad();
                 }
-                
+
             }
-            
+
         }
         private void resetLoad()
         {
             this.Invoke(loadFile);
-            
+
         }
         private void plotTarget(object[] item)
         {
@@ -454,7 +460,7 @@ namespace Interfaz
             //}
 
 
-            if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null && item[Data.columns["MessageType"]]!=null) //té nomes cartesianes
+            if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null && item[Data.columns["MessageType"]] != null) //té nomes cartesianes
             {
                 if (item[Data.columns["MessageType"]].ToString() == "Target Report")
                 {
@@ -508,9 +514,9 @@ namespace Interfaz
                 {
                     ID = item[Data.columns["Track Number"]].ToString();
                 }
-                
 
-                if (longitude != double.NaN && latitude != double.NaN && ID != null && type!=null && groundSpeed!=double.NaN && FL!=double.NaN) //podem carregar dades
+
+                if (longitude != double.NaN && latitude != double.NaN && ID != null && type != null && groundSpeed != double.NaN && FL != double.NaN) //podem carregar dades
                 {
                     if (targetNames.Contains(ID)) //comprobem si aquest target ja existeix
                     {
@@ -526,7 +532,7 @@ namespace Interfaz
                     }
                     else //si no existeix, creem un i l'afegim
                     {
-                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed,FL);
+                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed, FL);
                         GMapOverlay targets = new GMapOverlay(ID);
                         GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
 
@@ -544,7 +550,7 @@ namespace Interfaz
 
         private void BtnMapView_Click(object sender, EventArgs e)
         {
-            if (dataRead && loadMap==false)
+            if (dataRead && loadMap == false)
             {
                 gMapControl1_Load(sender, e);
                 //loadAircraftInfoTable(); //desde loadAircraftInfoData es podra show la data de l'avio quan es faci click sobre l'avio o es busqui el seu id
@@ -587,7 +593,7 @@ namespace Interfaz
 
 
         }
-  
+
 
         private void btnClearAicraft_Click(object sender, EventArgs e)
         {
@@ -615,7 +621,7 @@ namespace Interfaz
 
         private void gMapControl1_Load(object sender, EventArgs e)
         {
-            
+
             gMapControl1.Show();
             pictureBoxMapaDifuminado.Hide();
             gMapControl1.DragButton = MouseButtons.Left;
@@ -625,7 +631,7 @@ namespace Interfaz
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
             gMapControl1.Position = new PointLatLng(LatLEBL, LongLEBL);
             gMapControl1.MinZoom = 7;
-            gMapControl1.MaxZoom = 14;
+            gMapControl1.MaxZoom = 23;
             gMapControl1.Zoom = 14;
             gMapControl1.AutoScroll = true;
             gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
@@ -703,7 +709,7 @@ namespace Interfaz
             Form f = new SeguridadClose();
             f.Show();
         }
-        
+
         private void iconBtnReLoadMap_Click(object sender, EventArgs e)
         {
             if (dataRead == false)
@@ -714,7 +720,7 @@ namespace Interfaz
             {
                 MessageBox.Show("First load the map --> on the MAP VIEW button");
             }
-            else if (loadMap && readGoing==false)
+            else if (loadMap && readGoing == false)
             {
                 MessageBox.Show("Please, first start the map with the PLAY button.");
             }
@@ -734,7 +740,7 @@ namespace Interfaz
                     Hora.Start();
                     ReadTargets();
                 }
-                
+
             }
         }
 
@@ -775,7 +781,7 @@ namespace Interfaz
             {
                 MessageBox.Show("First select a plane, please");
             }
-            else 
+            else
             {
                 try
                 {
@@ -926,7 +932,7 @@ namespace Interfaz
                 gMapControl1.AutoScroll = true;
                 gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             }
-            else 
+            else
             {
                 MessageBox.Show("First load the map --> on the MAP VIEW button");
             }
@@ -936,16 +942,17 @@ namespace Interfaz
         {
             bool Selected = true;
 
-            if (Selected) 
+            if (Selected)
             {
                 MessageBox.Show("You have selected the " + item.Overlay.Id + " aircraft.");
-                Selected= false;
+                Selected = false;
             }
 
-            loadAircraftInfoTable(item);
+            loadAircraftInfoTable(item, e.X,e.Y);
+
         }
 
-        private void loadAircraftInfoTable(GMapMarker item)
+        private void loadAircraftInfoTable(GMapMarker item, int X, int Y)
         {
             // Data de información
             dtInf = new DataTable();
@@ -963,36 +970,31 @@ namespace Interfaz
             dtInf.Rows.Add("Packets");
             dataGridViewInfoAircraft.DataSource = dtInf;
 
-            
+
+            textBoxLATAircraft.Text = aircraftSelected.getLat().ToString();
+            textBoxLongAircraft.Text = aircraftSelected.getLong().ToString();
+
             try
             {
-                for ( int i = 0; i<targetNames.Count; i++ )
+                foreach (Aircraft a in targetList) 
                 {
-                    if (item.Overlay.Id.Equals(targetNames[i]))
+                    if (a.getID().Equals(item.Overlay.Id) && a.getLat().Equals(X) && a.getLong().Equals(Y) )
                     {
-                        IDSelected = targetNames[i];
+                        aircraftSelected = a;
+                        IDSelected = a.getID();
                         break;
                     }
                 }
 
-                foreach (Aircraft a in targetList)
-                {
-                    if(a.getID().Equals(IDSelected))
-                    {
-                        aircraftSelected= a;
-                        break;
-                    }
-                }
 
                 //dataGridViewInfoAircraft.Rows[0].Cells[1].Value = aircraftSelected.getCallsing();  // Callsing
                 dataGridViewInfoAircraft.Rows[1].Cells[1].Value = IDSelected;  // ICAO
-                dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getFL();  // FL
+                //dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getFL();  // FL
                 //dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
                 dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
                 //dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getPackets();  // Packets
 
-                textBoxLATAircraft.Text = aircraftSelected.getLat().ToString();
-                textBoxLongAircraft.Text = aircraftSelected.getLong().ToString();
+
 
             }
             catch
@@ -1027,7 +1029,7 @@ namespace Interfaz
             }
         }
 
-     
+
         private void iconBtnForward_Click(object sender, EventArgs e)
         {
             this.timescale = labelTimeScale.Text;
@@ -1048,6 +1050,185 @@ namespace Interfaz
             }
         }
 
-      
+        private void iconBtnSearchAircraft_Click(object sender, EventArgs e)
+        {
+            String IdAicraftSelected = textBoxAircraft.Text;
+
+            if (IdAicraftSelected.Equals(""))
+            {
+                MessageBox.Show("Please enter the Id of an aircraft");
+            }
+            else
+            {
+                try
+                {
+                    for (int a = 0; a < markersList.Count; a++)
+                    {
+                        if (markersList[a].Overlay.Id.Contains(IdAicraftSelected))
+                        {
+                            markersList[a].IsVisible = true;
+                        }
+                        else
+                        {
+                            markersList[a].IsVisible = false;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("There is no aircraft with this ID, please make sure it is correct");
+                }
+
+            }
+        }
+
+        private void textBoxAircraft_MouseClick(object sender, MouseEventArgs e)
+        {
+            textBoxAircraft.Text = "";
+            for (int i = 0; i < markersList.Count; i++)
+            {
+                markersList[i].IsVisible = true;
+            }
+        }
+
+        private void checkBoxADSB_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                
+                foreach (Aircraft a in targetList)
+                {
+                    if (a.getType().Equals("ADSB"))
+                    {
+                        listAircraftADSB.Add(a);
+                    }
+                }
+
+
+                if (checkBoxADSB.Checked.Equals(false))
+                {
+                    for (int i = 0; i < markersList.Count; i++)
+                    {
+                        foreach (Aircraft a in listAircraftADSB)
+                        {
+                            if (markersList[i].Overlay.Id.Equals(a.getID()))
+                            {
+                                markersList[i].IsVisible = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < markersList.Count; i++)
+                    {
+                        foreach (Aircraft a in listAircraftADSB)
+                        {
+                            if (markersList[i].Overlay.Id.Equals(a.getID()))
+                            {
+                                markersList[i].IsVisible = true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was a compilation problem, please restart the simulator and try again");
+            }
+        }
+
+        private void checkBoxMLAT_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+
+                foreach (Aircraft a in targetList)
+                {
+                    if (a.getType().Equals("MLAT"))
+                    {
+                        listAircraftMLAT.Add(a);
+                    }
+                }
+
+
+                if (checkBoxMLAT.Checked.Equals(false))
+                {
+                    for (int i = 0; i < markersList.Count; i++)
+                    {
+                        foreach (Aircraft a in listAircraftMLAT)
+                        {
+                            if (markersList[i].Overlay.Id.Equals(a.getID()))
+                            {
+                                markersList[i].IsVisible = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < markersList.Count; i++)
+                    {
+                        foreach (Aircraft a in listAircraftMLAT)
+                        {
+                            if (markersList[i].Overlay.Id.Equals(a.getID()))
+                            {
+                                markersList[i].IsVisible = true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was a compilation problem, please restart the simulator and try again");
+            }
+        }
+
+        private void checkBoxSMR_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach (Aircraft a in targetList)
+                {
+                    if (a.getType().Equals("SMR"))
+                    {
+                        listAircraftSMR.Add(a);
+                    }
+                }
+
+
+                if (checkBoxSMR.Checked.Equals(false))
+                {
+                    for (int i = 0; i < markersList.Count; i++)
+                    {
+                        foreach (Aircraft a in listAircraftSMR)
+                        {
+                            if (markersList[i].Overlay.Id.Equals(a.getID()))
+                            {
+                                markersList[i].IsVisible = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < markersList.Count; i++)
+                    {
+                        foreach (Aircraft a in listAircraftSMR)
+                        {
+                            if (markersList[i].Overlay.Id.Equals(a.getID()))
+                            {
+                                markersList[i].IsVisible = true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("There was a compilation problem, please restart the simulator and try again");
+            }
+        }
     }
 }
