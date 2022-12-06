@@ -438,7 +438,8 @@ namespace Interfaz
             {
                 z = Convert.ToDouble(item[Data.columns["Height"]]);
             }
-            else if (item[Data.columns["Ground Speed"]] != null)
+
+            if (item[Data.columns["Ground Speed"]] != null)
             {
                 groundSpeed = Convert.ToDouble(item[Data.columns["Ground Speed"]]);
             }
@@ -446,7 +447,7 @@ namespace Interfaz
             //{
             //    callsing = Convert.ToString(item[Data.columns["Callsing"]]);
             //}
-            else if (item[Data.columns["FL"]] != null)
+            if (item[Data.columns["FL"]] != null)
             {
                 FL = Convert.ToDouble(item[Data.columns["FL"]]);
             }
