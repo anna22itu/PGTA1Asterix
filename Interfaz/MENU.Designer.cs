@@ -69,6 +69,7 @@
             this.BtnMapView = new System.Windows.Forms.Button();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             this.panelBarraArriba = new System.Windows.Forms.Panel();
+            this.iconBtnShowList = new FontAwesome.Sharp.IconButton();
             this.iconBtnMinus = new FontAwesome.Sharp.IconButton();
             this.iconBtnMaximize = new FontAwesome.Sharp.IconButton();
             this.iconBtnCross = new FontAwesome.Sharp.IconButton();
@@ -115,6 +116,12 @@
             this.iconBtnSearchAircraft = new FontAwesome.Sharp.IconButton();
             this.labelSateliteView = new System.Windows.Forms.Label();
             this.iconBtnSateliteView = new FontAwesome.Sharp.IconButton();
+            this.iconBtnZoomCAT = new FontAwesome.Sharp.IconButton();
+            this.iconBtnZoomBcn = new FontAwesome.Sharp.IconButton();
+            this.labelZoomBCN = new System.Windows.Forms.Label();
+            this.label6ZoomCAT = new System.Windows.Forms.Label();
+            this.guna2PanelShowList = new Guna.UI2.WinForms.Guna2Panel();
+            this.listBoxShowList = new System.Windows.Forms.ListBox();
             this.panelMENU.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -133,6 +140,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapaDifuminado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).BeginInit();
+            this.guna2PanelShowList.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnLoadFile
@@ -193,13 +201,13 @@
             // 
             this.iconPictureBox5.BackColor = System.Drawing.Color.CornflowerBlue;
             this.iconPictureBox5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.iconPictureBox5.IconChar = FontAwesome.Sharp.IconChar.Info;
+            this.iconPictureBox5.IconChar = FontAwesome.Sharp.IconChar.CircleInfo;
             this.iconPictureBox5.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox5.IconSize = 40;
+            this.iconPictureBox5.IconSize = 46;
             this.iconPictureBox5.Location = new System.Drawing.Point(20, 490);
             this.iconPictureBox5.Name = "iconPictureBox5";
-            this.iconPictureBox5.Padding = new System.Windows.Forms.Padding(5, 6, 0, 0);
+            this.iconPictureBox5.Padding = new System.Windows.Forms.Padding(2, 5, 0, 0);
             this.iconPictureBox5.Size = new System.Drawing.Size(46, 53);
             this.iconPictureBox5.TabIndex = 28;
             this.iconPictureBox5.TabStop = false;
@@ -424,6 +432,8 @@
             // panelBarraArriba
             // 
             this.panelBarraArriba.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.panelBarraArriba.Controls.Add(this.guna2PanelShowList);
+            this.panelBarraArriba.Controls.Add(this.iconBtnShowList);
             this.panelBarraArriba.Controls.Add(this.iconBtnMinus);
             this.panelBarraArriba.Controls.Add(this.iconBtnMaximize);
             this.panelBarraArriba.Controls.Add(this.iconBtnCross);
@@ -435,6 +445,26 @@
             this.panelBarraArriba.Name = "panelBarraArriba";
             this.panelBarraArriba.Size = new System.Drawing.Size(1346, 65);
             this.panelBarraArriba.TabIndex = 7;
+            // 
+            // iconBtnShowList
+            // 
+            this.iconBtnShowList.FlatAppearance.BorderSize = 0;
+            this.iconBtnShowList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnShowList.Font = new System.Drawing.Font("Segoe UI", 7.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.iconBtnShowList.IconChar = FontAwesome.Sharp.IconChar.ListDots;
+            this.iconBtnShowList.IconColor = System.Drawing.Color.Black;
+            this.iconBtnShowList.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnShowList.IconSize = 45;
+            this.iconBtnShowList.Location = new System.Drawing.Point(926, -2);
+            this.iconBtnShowList.Name = "iconBtnShowList";
+            this.iconBtnShowList.Size = new System.Drawing.Size(91, 64);
+            this.iconBtnShowList.TabIndex = 59;
+            this.iconBtnShowList.Text = "Show List";
+            this.iconBtnShowList.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.iconBtnShowList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.iconBtnShowList.UseMnemonic = false;
+            this.iconBtnShowList.UseVisualStyleBackColor = false;
+            this.iconBtnShowList.Click += new System.EventHandler(this.iconBtnShowList_Click);
             // 
             // iconBtnMinus
             // 
@@ -594,8 +624,8 @@
             this.BtnPlay.IconChar = FontAwesome.Sharp.IconChar.Play;
             this.BtnPlay.IconColor = System.Drawing.Color.Black;
             this.BtnPlay.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.BtnPlay.IconSize = 32;
-            this.BtnPlay.Location = new System.Drawing.Point(1000, 773);
+            this.BtnPlay.IconSize = 43;
+            this.BtnPlay.Location = new System.Drawing.Point(1000, 764);
             this.BtnPlay.Name = "BtnPlay";
             this.BtnPlay.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
             this.BtnPlay.Size = new System.Drawing.Size(46, 53);
@@ -613,8 +643,8 @@
             this.BtnParar.IconChar = FontAwesome.Sharp.IconChar.Pause;
             this.BtnParar.IconColor = System.Drawing.Color.Black;
             this.BtnParar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.BtnParar.IconSize = 34;
-            this.BtnParar.Location = new System.Drawing.Point(1000, 773);
+            this.BtnParar.IconSize = 43;
+            this.BtnParar.Location = new System.Drawing.Point(1000, 764);
             this.BtnParar.Name = "BtnParar";
             this.BtnParar.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
             this.BtnParar.Size = new System.Drawing.Size(46, 53);
@@ -685,7 +715,6 @@
             // 
             // textBoxLATAircraft
             // 
-            this.textBoxLATAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxLATAircraft.Location = new System.Drawing.Point(683, 123);
             this.textBoxLATAircraft.Name = "textBoxLATAircraft";
             this.textBoxLATAircraft.Size = new System.Drawing.Size(150, 31);
@@ -693,7 +722,6 @@
             // 
             // textBoxLongAircraft
             // 
-            this.textBoxLongAircraft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxLongAircraft.Location = new System.Drawing.Point(902, 123);
             this.textBoxLongAircraft.Name = "textBoxLongAircraft";
             this.textBoxLongAircraft.Size = new System.Drawing.Size(150, 31);
@@ -717,7 +745,6 @@
             // 
             // labelLatAir
             // 
-            this.labelLatAir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelLatAir.AutoSize = true;
             this.labelLatAir.Location = new System.Drawing.Point(642, 129);
             this.labelLatAir.Name = "labelLatAir";
@@ -727,7 +754,6 @@
             // 
             // labelLongAir
             // 
-            this.labelLongAir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelLongAir.AutoSize = true;
             this.labelLongAir.Location = new System.Drawing.Point(844, 123);
             this.labelLongAir.Name = "labelLongAir";
@@ -743,8 +769,8 @@
             this.iconBtnReLoadMap.IconChar = FontAwesome.Sharp.IconChar.Rotate;
             this.iconBtnReLoadMap.IconColor = System.Drawing.Color.Black;
             this.iconBtnReLoadMap.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnReLoadMap.IconSize = 34;
-            this.iconBtnReLoadMap.Location = new System.Drawing.Point(1060, 773);
+            this.iconBtnReLoadMap.IconSize = 43;
+            this.iconBtnReLoadMap.Location = new System.Drawing.Point(1065, 764);
             this.iconBtnReLoadMap.Name = "iconBtnReLoadMap";
             this.iconBtnReLoadMap.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
             this.iconBtnReLoadMap.Size = new System.Drawing.Size(46, 53);
@@ -788,23 +814,21 @@
             // 
             this.iconBtnZoomLebl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.iconBtnZoomLebl.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.iconBtnZoomLebl.FlatAppearance.BorderSize = 0;
             this.iconBtnZoomLebl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnZoomLebl.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconBtnZoomLebl.Font = new System.Drawing.Font("Segoe UI Black", 8.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.iconBtnZoomLebl.ForeColor = System.Drawing.SystemColors.ControlText;
             this.iconBtnZoomLebl.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
             this.iconBtnZoomLebl.IconColor = System.Drawing.Color.Black;
             this.iconBtnZoomLebl.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnZoomLebl.IconSize = 34;
-            this.iconBtnZoomLebl.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.iconBtnZoomLebl.Location = new System.Drawing.Point(1304, 773);
+            this.iconBtnZoomLebl.IconSize = 40;
+            this.iconBtnZoomLebl.Location = new System.Drawing.Point(1280, 756);
             this.iconBtnZoomLebl.Name = "iconBtnZoomLebl";
-            this.iconBtnZoomLebl.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
-            this.iconBtnZoomLebl.Size = new System.Drawing.Size(110, 49);
-            this.iconBtnZoomLebl.TabIndex = 39;
+            this.iconBtnZoomLebl.Padding = new System.Windows.Forms.Padding(1, 1, 0, 0);
+            this.iconBtnZoomLebl.Size = new System.Drawing.Size(64, 68);
+            this.iconBtnZoomLebl.TabIndex = 56;
             this.iconBtnZoomLebl.Text = "LEBL";
-            this.iconBtnZoomLebl.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.iconBtnZoomLebl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconBtnZoomLebl.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.iconBtnZoomLebl.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.iconBtnZoomLebl.UseVisualStyleBackColor = false;
             this.iconBtnZoomLebl.Click += new System.EventHandler(this.iconButton1_Click);
             this.iconBtnZoomLebl.MouseEnter += new System.EventHandler(this.iconButton1_MouseEnter);
@@ -812,8 +836,9 @@
             // 
             // labelZoomLEBL
             // 
+            this.labelZoomLEBL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelZoomLEBL.AutoSize = true;
-            this.labelZoomLEBL.Location = new System.Drawing.Point(1256, 817);
+            this.labelZoomLEBL.Location = new System.Drawing.Point(1205, 827);
             this.labelZoomLEBL.Name = "labelZoomLEBL";
             this.labelZoomLEBL.Size = new System.Drawing.Size(229, 25);
             this.labelZoomLEBL.TabIndex = 40;
@@ -892,8 +917,8 @@
             this.iconBtnForward.IconChar = FontAwesome.Sharp.IconChar.Forward;
             this.iconBtnForward.IconColor = System.Drawing.Color.Black;
             this.iconBtnForward.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnForward.IconSize = 32;
-            this.iconBtnForward.Location = new System.Drawing.Point(379, 782);
+            this.iconBtnForward.IconSize = 35;
+            this.iconBtnForward.Location = new System.Drawing.Point(370, 780);
             this.iconBtnForward.Name = "iconBtnForward";
             this.iconBtnForward.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
             this.iconBtnForward.Size = new System.Drawing.Size(46, 53);
@@ -910,8 +935,8 @@
             this.iconBtnBackwards.IconChar = FontAwesome.Sharp.IconChar.Backward;
             this.iconBtnBackwards.IconColor = System.Drawing.Color.Black;
             this.iconBtnBackwards.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnBackwards.IconSize = 32;
-            this.iconBtnBackwards.Location = new System.Drawing.Point(329, 782);
+            this.iconBtnBackwards.IconSize = 35;
+            this.iconBtnBackwards.Location = new System.Drawing.Point(319, 782);
             this.iconBtnBackwards.Name = "iconBtnBackwards";
             this.iconBtnBackwards.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
             this.iconBtnBackwards.Size = new System.Drawing.Size(46, 53);
@@ -956,8 +981,9 @@
             // 
             // labelSateliteView
             // 
+            this.labelSateliteView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelSateliteView.AutoSize = true;
-            this.labelSateliteView.Location = new System.Drawing.Point(1269, 817);
+            this.labelSateliteView.Location = new System.Drawing.Point(502, 827);
             this.labelSateliteView.Name = "labelSateliteView";
             this.labelSateliteView.Size = new System.Drawing.Size(285, 25);
             this.labelSateliteView.TabIndex = 53;
@@ -967,20 +993,113 @@
             // 
             this.iconBtnSateliteView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.iconBtnSateliteView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconBtnSateliteView.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.iconBtnSateliteView.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconBtnSateliteView.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.iconBtnSateliteView.IconChar = FontAwesome.Sharp.IconChar.EarthAmericas;
             this.iconBtnSateliteView.IconColor = System.Drawing.Color.Black;
             this.iconBtnSateliteView.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconBtnSateliteView.IconSize = 37;
-            this.iconBtnSateliteView.Location = new System.Drawing.Point(1415, 764);
+            this.iconBtnSateliteView.IconSize = 44;
+            this.iconBtnSateliteView.Location = new System.Drawing.Point(590, 756);
             this.iconBtnSateliteView.Name = "iconBtnSateliteView";
-            this.iconBtnSateliteView.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
-            this.iconBtnSateliteView.Size = new System.Drawing.Size(46, 53);
+            this.iconBtnSateliteView.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
+            this.iconBtnSateliteView.Size = new System.Drawing.Size(115, 68);
             this.iconBtnSateliteView.TabIndex = 54;
+            this.iconBtnSateliteView.Text = "SATELLITE";
+            this.iconBtnSateliteView.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.iconBtnSateliteView.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.iconBtnSateliteView.UseVisualStyleBackColor = true;
             this.iconBtnSateliteView.Click += new System.EventHandler(this.iconBtnSateliteView_Click);
             this.iconBtnSateliteView.MouseEnter += new System.EventHandler(this.iconBtnSateliteView_MouseEnter);
             this.iconBtnSateliteView.MouseLeave += new System.EventHandler(this.iconBtnSateliteView_MouseLeave);
+            // 
+            // iconBtnZoomCAT
+            // 
+            this.iconBtnZoomCAT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconBtnZoomCAT.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.iconBtnZoomCAT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnZoomCAT.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconBtnZoomCAT.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.iconBtnZoomCAT.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
+            this.iconBtnZoomCAT.IconColor = System.Drawing.Color.Black;
+            this.iconBtnZoomCAT.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnZoomCAT.IconSize = 40;
+            this.iconBtnZoomCAT.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.iconBtnZoomCAT.Location = new System.Drawing.Point(1424, 756);
+            this.iconBtnZoomCAT.Name = "iconBtnZoomCAT";
+            this.iconBtnZoomCAT.Padding = new System.Windows.Forms.Padding(1, 1, 0, 0);
+            this.iconBtnZoomCAT.Size = new System.Drawing.Size(64, 68);
+            this.iconBtnZoomCAT.TabIndex = 55;
+            this.iconBtnZoomCAT.Text = "CAT";
+            this.iconBtnZoomCAT.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.iconBtnZoomCAT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.iconBtnZoomCAT.UseVisualStyleBackColor = false;
+            this.iconBtnZoomCAT.Click += new System.EventHandler(this.iconBtnZoomCAT_Click);
+            this.iconBtnZoomCAT.MouseEnter += new System.EventHandler(this.iconBtnZoomCAT_MouseEnter);
+            this.iconBtnZoomCAT.MouseLeave += new System.EventHandler(this.iconBtnZoomCAT_MouseLeave);
+            // 
+            // iconBtnZoomBcn
+            // 
+            this.iconBtnZoomBcn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconBtnZoomBcn.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.iconBtnZoomBcn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconBtnZoomBcn.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.iconBtnZoomBcn.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.iconBtnZoomBcn.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
+            this.iconBtnZoomBcn.IconColor = System.Drawing.Color.Black;
+            this.iconBtnZoomBcn.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconBtnZoomBcn.IconSize = 40;
+            this.iconBtnZoomBcn.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.iconBtnZoomBcn.Location = new System.Drawing.Point(1354, 756);
+            this.iconBtnZoomBcn.Name = "iconBtnZoomBcn";
+            this.iconBtnZoomBcn.Padding = new System.Windows.Forms.Padding(1, 1, 0, 0);
+            this.iconBtnZoomBcn.Size = new System.Drawing.Size(64, 68);
+            this.iconBtnZoomBcn.TabIndex = 56;
+            this.iconBtnZoomBcn.Text = "BCN";
+            this.iconBtnZoomBcn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.iconBtnZoomBcn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.iconBtnZoomBcn.UseVisualStyleBackColor = false;
+            this.iconBtnZoomBcn.Click += new System.EventHandler(this.iconBtnZoomBcn_Click);
+            this.iconBtnZoomBcn.MouseEnter += new System.EventHandler(this.iconButton2_MouseEnter);
+            this.iconBtnZoomBcn.MouseLeave += new System.EventHandler(this.iconButton2_MouseLeave);
+            // 
+            // labelZoomBCN
+            // 
+            this.labelZoomBCN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelZoomBCN.AutoSize = true;
+            this.labelZoomBCN.Location = new System.Drawing.Point(1271, 827);
+            this.labelZoomBCN.Name = "labelZoomBCN";
+            this.labelZoomBCN.Size = new System.Drawing.Size(228, 25);
+            this.labelZoomBCN.TabIndex = 57;
+            this.labelZoomBCN.Text = "Click here to zoom in BCN!!";
+            // 
+            // label6ZoomCAT
+            // 
+            this.label6ZoomCAT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6ZoomCAT.AutoSize = true;
+            this.label6ZoomCAT.Location = new System.Drawing.Point(1329, 827);
+            this.label6ZoomCAT.Name = "label6ZoomCAT";
+            this.label6ZoomCAT.Size = new System.Drawing.Size(225, 25);
+            this.label6ZoomCAT.TabIndex = 58;
+            this.label6ZoomCAT.Text = "Click here to zoom in CAT!!";
+            // 
+            // guna2PanelShowList
+            // 
+            this.guna2PanelShowList.BorderColor = System.Drawing.Color.CornflowerBlue;
+            this.guna2PanelShowList.Controls.Add(this.listBoxShowList);
+            this.guna2PanelShowList.Location = new System.Drawing.Point(888, 68);
+            this.guna2PanelShowList.Name = "guna2PanelShowList";
+            this.guna2PanelShowList.Size = new System.Drawing.Size(198, 577);
+            this.guna2PanelShowList.TabIndex = 59;
+            // 
+            // listBoxShowList
+            // 
+            this.listBoxShowList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxShowList.FormattingEnabled = true;
+            this.listBoxShowList.ItemHeight = 25;
+            this.listBoxShowList.Location = new System.Drawing.Point(0, 0);
+            this.listBoxShowList.Name = "listBoxShowList";
+            this.listBoxShowList.Size = new System.Drawing.Size(198, 577);
+            this.listBoxShowList.TabIndex = 59;
             // 
             // MENU
             // 
@@ -988,6 +1107,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(1566, 865);
+            this.Controls.Add(this.label6ZoomCAT);
+            this.Controls.Add(this.labelZoomBCN);
+            this.Controls.Add(this.iconBtnZoomBcn);
+            this.Controls.Add(this.iconBtnZoomCAT);
             this.Controls.Add(this.iconBtnSateliteView);
             this.Controls.Add(this.labelSateliteView);
             this.Controls.Add(this.iconBtnSearchAircraft);
@@ -1048,6 +1171,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapaDifuminado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).EndInit();
+            this.guna2PanelShowList.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1126,5 +1250,12 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox5;
         private Label labelSateliteView;
         private FontAwesome.Sharp.IconButton iconBtnSateliteView;
+        private FontAwesome.Sharp.IconButton iconBtnZoomCAT;
+        private FontAwesome.Sharp.IconButton iconBtnZoomBcn;
+        private Label labelZoomBCN;
+        private Label label6ZoomCAT;
+        private FontAwesome.Sharp.IconButton iconBtnShowList;
+        private Guna.UI2.WinForms.Guna2Panel guna2PanelShowList;
+        private ListBox listBoxShowList;
     }
 }

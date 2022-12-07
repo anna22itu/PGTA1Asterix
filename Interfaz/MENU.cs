@@ -67,7 +67,9 @@ namespace Interfaz
             labelZoomLEBL.Hide();
             labelHora.Hide();
             labelSateliteView.Hide();
-
+            labelZoomBCN.Hide();
+            label6ZoomCAT.Hide();
+            guna2PanelShowList.Visible = false;
         }
 
 
@@ -1126,6 +1128,87 @@ namespace Interfaz
                 MessageBox.Show("There was a problem with the program, restart and try again.");
             }
             
+        }
+
+        private void iconButton2_MouseEnter(object sender, EventArgs e)
+        {
+            labelZoomBCN.Show();
+        }
+
+        private void iconButton2_MouseLeave(object sender, EventArgs e)
+        {
+            labelZoomBCN.Hide();
+        }
+
+        private void iconBtnZoomBcn_Click(object sender, EventArgs e)
+        {
+            if (this.loadMap)
+            {
+                gMapControl1.CanDragMap = true;
+                gMapControl1.Position = new PointLatLng(41.403046, 2.162958);
+                gMapControl1.MinZoom = 3;
+                gMapControl1.MaxZoom = 22;
+                gMapControl1.Zoom = 13;
+                gMapControl1.AutoScroll = true;
+                gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
+            }
+            else
+            {
+                MessageBox.Show("First load the map --> on the MAP VIEW button");
+            }
+        }
+
+        private void iconBtnZoomCAT_MouseEnter(object sender, EventArgs e)
+        {
+            label6ZoomCAT.Show();
+        }
+
+        private void iconBtnZoomCAT_MouseLeave(object sender, EventArgs e)
+        {
+            label6ZoomCAT.Hide();
+        }
+
+        private void iconBtnZoomCAT_Click(object sender, EventArgs e)
+        {
+            if (this.loadMap)
+            {
+                gMapControl1.CanDragMap = true;
+                gMapControl1.Position = new PointLatLng(41.827016, 1.576821);
+                gMapControl1.MinZoom = 3;
+                gMapControl1.MaxZoom = 22;
+                gMapControl1.Zoom = 8.5;
+                gMapControl1.AutoScroll = true;
+                gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
+            }
+            else
+            {
+                MessageBox.Show("First load the map --> on the MAP VIEW button");
+            }
+        }
+
+        private void iconBtnShowList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.loadMap)
+                {
+                    guna2PanelShowList.Visible = true;
+                    listBoxShowList.Items.Add("The aircraft loaded on the map are:");
+
+                    foreach (Aircraft aircraft in targetList)
+                    {
+                        listBoxShowList.Items.Add(aircraft.getID());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please make sure the map is loaded.");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("");
+            }
         }
     }
 }
