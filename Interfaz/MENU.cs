@@ -1,25 +1,15 @@
 
-using System;
-using System.IO;
+
 using Library;
 using Asterix_Decoder;
 using AsterixDecoder;
-using System.Windows.Forms;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
 using System.Data;
-using System.Windows.Media.Effects;
-using System.Media;
-using System.Drawing;
-using static Guna.UI2.WinForms.Suite.Descriptions;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Xml;
 using System.Text;
-using Apache.Arrow.Types;
-using System.DirectoryServices.ActiveDirectory;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Interfaz
 {
@@ -29,24 +19,14 @@ namespace Interfaz
         public bool result = true;
         public bool result2 = false;
 
+        public bool mapSatelite = false;
+
         public bool resLoadMap = true;
 
         GMarkerGoogle marker;
-        GMarkerGoogle markerAircraft;
         GMapOverlay overlay;
-        GMapOverlay overlay2;
 
-        GMarkerGoogle marker3;
-        GMarkerGoogle markerAircraft3;
-        GMapOverlay overlay3;
-        GMapOverlay overlayAir3;
 
-        GMapControl gmap = new GMapControl();
-
-        //GMapOverlay targets = new GMapOverlay("targets");
-
-        double LatInicial = 41.27575;
-        double LongInicial = 1.98721;
         DataTable dtInf;
 
         String targetID;
@@ -83,11 +63,11 @@ namespace Interfaz
 
             labelAsterixReLoadMap.Hide();
             labelStopPlay.Hide();
-            labelExportFileKML.Hide();
-            labelInfoPinGreenDot.Hide();
             labelAircraftInfo.Hide();
             labelZoomLEBL.Hide();
             labelHora.Hide();
+            labelSateliteView.Hide();
+
         }
 
 
@@ -170,7 +150,6 @@ namespace Interfaz
                 else
                 {
                     MessageBox.Show("ERROR: The file has not been loaded successfully.");
-                    //caldrà printar en un dialogbox que no s'ha importat bé el fitxer (tb si dona error o lo q sigui)
                 }
             }
 
@@ -311,7 +290,7 @@ namespace Interfaz
             }
             else if (loadMap && readGoing == false) //que nomes funcionin si el mapa esta loaded
             {
-                MessageBox.Show("This could take a few minutes. Please wait until you are told that all aircrafts have been loaded. Thanks for waiting :)");
+                MessageBox.Show("This simulation could take a few minutes. Please wait until you are told thatit's over, or pause it and play it whenever you want . Thanks for waiting :)");
                 BtnParar.Show();
                 BtnPlay.Hide();
                 Thread.Sleep(1000);
@@ -391,7 +370,7 @@ namespace Interfaz
 
             if (CancelThread == false)
             {
-                MessageBox.Show("All aircraft Shown");
+                MessageBox.Show("Simulation ended");
             }
             else
             {
@@ -439,11 +418,12 @@ namespace Interfaz
                 z = Convert.ToDouble(item[Data.columns["Height"]]);
             }
 
+
             if (item[Data.columns["Ground Speed"]] != null)
             {
                 groundSpeed = Convert.ToDouble(item[Data.columns["Ground Speed"]]);
             }
-            //else if (item[Data.columns["Callsing"]] != null)
+            //if (item[Data.columns["Callsing"]] != null)
             //{
             //    callsing = Convert.ToString(item[Data.columns["Callsing"]]);
             //}
@@ -451,11 +431,11 @@ namespace Interfaz
             {
                 FL = Convert.ToDouble(item[Data.columns["FL"]]);
             }
-            //else if (item[Data.columns["Track Number"]] != null)
-            //{
-            //    trackNumber = Convert.ToDouble(item[Data.columns["Track Number"]]);
-            //}
-            //else if (item[Data.columns["Packets"]] != null)
+            if (item[Data.columns["Track Number"]] != null)
+            {
+                trackNumber = Convert.ToDouble(item[Data.columns["Track Number"]]);
+            }
+            //if (item[Data.columns["Packets"]] != null)
             //{
             //    packets = Convert.ToString(item[Data.columns["Packets"]]);
             //}
@@ -517,7 +497,7 @@ namespace Interfaz
                 }
 
 
-                if (longitude != double.NaN && latitude != double.NaN && ID != null && type != null && groundSpeed != double.NaN && FL != double.NaN) //podem carregar dades
+                if (longitude != double.NaN && latitude != double.NaN && ID != null && type != null && groundSpeed != double.NaN && FL != double.NaN && trackNumber != double.NaN) //podem carregar dades
                 {
                     if (targetNames.Contains(ID)) //comprobem si aquest target ja existeix
                     {
@@ -525,15 +505,15 @@ namespace Interfaz
                         targetList[targetNames.IndexOf(ID)].setLong(longitude);
                         targetList[targetNames.IndexOf(ID)].setHeight(z);
                         targetList[targetNames.IndexOf(ID)].setGroundSpeed(groundSpeed);
-                        //targetList[targetNames.IndexOf(ID)].setCallsing(callsing);
+                        targetList[targetNames.IndexOf(ID)].setCallsing(callsing);
                         targetList[targetNames.IndexOf(ID)].setFL(FL);
-                        //targetList[targetNames.IndexOf(ID)].setPackets(packets);
-                        //targetList[targetNames.IndexOf(ID)].setTrackNumber(trackNumber);
+                        targetList[targetNames.IndexOf(ID)].setPackets(packets);
+                        targetList[targetNames.IndexOf(ID)].setTrackNumber(trackNumber);
                         markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
                     }
                     else //si no existeix, creem un i l'afegim
                     {
-                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed, FL);
+                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed, FL,trackNumber,packets);
                         GMapOverlay targets = new GMapOverlay(ID);
                         GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
 
@@ -551,36 +531,23 @@ namespace Interfaz
 
         private void BtnMapView_Click(object sender, EventArgs e)
         {
-            if (dataRead && loadMap == false)
-            {
-                gMapControl1_Load(sender, e);
-                //loadAircraftInfoTable(); //desde loadAircraftInfoData es podra show la data de l'avio quan es faci click sobre l'avio o es busqui el seu id
-            }
-            else if (fileimported)
-            {
-                MessageBox.Show("The file is processing. This could take a few minutes.", "Please wait.");
-            }
-            else
-            {
-                MessageBox.Show("Please, first import a file.", "File not loaded.");
-            }
-
-
+       
             // Avion
             try
             {
-                // MarcadorGreenDot
-                overlay = new GMapOverlay("Marker");
-                marker = new GMarkerGoogle(new PointLatLng(LatLEBL, LongLEBL), GMarkerGoogleType.green);
-                overlay.Markers.Add(marker); // lo agregamos al mapa
-                gMapControl1.Overlays.Add(overlay); // lo agregamos a nuestro mapa
-
-                //    // MarcadorGAircraft
-                //    //this.BmpAircraftR = new Bitmap(Bmpaircraft, new Size(Bmpaircraft.Width / 10, Bmpaircraft.Height / 10));
-                //    //overlay2 = new GMapOverlay("Marker");
-                //    //markerAircraft = new GMarkerGoogle(new PointLatLng(LatInicial, LongInicial), BmpAircraftR);
-                //    //overlay2.Markers.Add(markerAircraft); // lo agregamos al mapa
-                //    //gMapControl1.Overlays.Add(overlay2); // lo agregamos a nuestro mapa
+                if (dataRead && loadMap == false)
+                {
+                    gMapControl1_Load(sender, e);
+                    //loadAircraftInfoTable(); //desde loadAircraftInfoData es podra show la data de l'avio quan es faci click sobre l'avio o es busqui el seu id
+                }
+                else if (fileimported)
+                {
+                    MessageBox.Show("The file is processing. This could take a few minutes.", "Please wait.");
+                }
+                else
+                {
+                    MessageBox.Show("Please, first import a file.", "File not loaded.");
+                }
 
             }
             catch (NullReferenceException)
@@ -604,20 +571,7 @@ namespace Interfaz
             }
         }
 
-        private void gMapControl1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            // para obtener los datos de la lat y long donde el user ha presionado
-            double lat = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lat;
-            double lng = gMapControl1.FromLocalToLatLng(e.X, e.Y).Lng;
-
-            textBoxLATGreenDot.Text = lat.ToString();
-            textBoxLongGreenDot.Text = lng.ToString();
-
-            marker.Position = new PointLatLng(lat, lng);
-
-            resLoadMap = false;
-        }
-
+ 
 
 
         private void gMapControl1_Load(object sender, EventArgs e)
@@ -651,7 +605,6 @@ namespace Interfaz
 
 
         // EXTRAS
-
         private void iconBtnMenuBars_Click(object sender, EventArgs e)
         {
 
@@ -776,139 +729,17 @@ namespace Interfaz
         }
 
 
-        private void iconBtnKML_Click(object sender, EventArgs e)
-        {
-            if (textBoxAircraft.Text == "")
-            {
-                MessageBox.Show("First select a plane, please");
-            }
-            else
-            {
-                try
-                {
-                    KML_Load(sender, e);
-
-                    //MessageBox.Show("The KML file has been successfully exported!! (You can find it at Interfaz/bin/...)");
-
-                    KML KML = new KML();
-                }
-                catch (Exception)
-                {
-                    //MessageBox.Show("The KML file could not be exported successfully, please try again.");
-                }
-            }
-        }
-
-        private void iconBtnKML_MouseEnter(object sender, EventArgs e)
-        {
-            labelExportFileKML.Show();
-        }
-
-        private void iconBtnKML_MouseLeave(object sender, EventArgs e)
-        {
-            labelExportFileKML.Hide();
-        }
 
         private void iconPictureBox7_MouseEnter(object sender, EventArgs e)
-        {
-            labelInfoPinGreenDot.Show();
-        }
-
-        private void iconPictureBox7_MouseLeave(object sender, EventArgs e)
-        {
-            labelInfoPinGreenDot.Hide();
-        }
-
-        private void iconPictureBoxPinMap_MouseEnter(object sender, EventArgs e)
         {
             labelAircraftInfo.Show();
         }
 
-        private void iconPictureBoxPinMap_MouseLeave(object sender, EventArgs e)
+        private void iconPictureBox7_MouseLeave(object sender, EventArgs e)
         {
             labelAircraftInfo.Hide();
         }
 
-        private void KML_Load(object sender, System.EventArgs e)
-        {
-
-            // Guardamos la información del avión especificado y le decimos el directorio al que queremos que se guarde
-            SaveFileDialog saveFileKML = new SaveFileDialog();
-            saveFileKML.InitialDirectory = @"..\..\";
-
-            //Le daremos un nombre al archivo y tambien le expecificamos en que directorio se creara
-            string nombrefile = targetID + ".kml";
-
-
-            //Definimos el archivo XML
-            XmlTextWriter writer = new XmlTextWriter(nombrefile, Encoding.UTF8);
-
-            // Empezamos a escribir
-            writer.WriteStartDocument();
-            writer.WriteStartElement("kml");
-            writer.WriteAttributeString("xmlns", "http://earth.google.com/kml/2.0");
-            writer.WriteStartElement("Folder");
-            writer.WriteStartElement("description");
-
-            //Descripcion del Conjunto de Datos,puede ser texto o HTML
-            writer.WriteEndElement();
-            writer.WriteElementString("name", "Paises");
-            writer.WriteElementString("visibility", "0");
-            writer.WriteElementString("open", "1");
-            writer.WriteStartElement("Folder");
-
-            /**
-            //Obtenemos los datos donde estan las coordenadas
-            DataSet ds = dsDatos();
-            //Recorremos el DataSet
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                //Obtenemos los valores de Latitud y Longitud
-                string slong = ds.Tables[0].Rows[i]["Longitud"].ToString();
-                string slat = ds.Tables[0].Rows[i]["Latitud"].ToString();
-                writer.WriteStartElement("Placemark");
-                writer.WriteStartElement("description");
-                writer.WriteCData("Aqui puede ir cualquier tipo de texto descriptivo de acuerdo al registro correspondiente");
-                writer.WriteEndElement();
-                //Asignamos el nombre del registro o coordenada obteniendo el valor del campo Nombre
-                writer.WriteElementString("name", ds.Tables[0].Rows[i]["Nombre"].ToString());
-                writer.WriteElementString("visibility", "1");
-                writer.WriteStartElement("Style");
-                writer.WriteStartElement("IconStyle");
-                writer.WriteStartElement("Icon");
-                //Ruta del icono para ver las coordenadas
-                //Debe ser pequeña de 32x32.
-                writer.WriteElementString("href", "www.TuDominio.com/directorio/tuicono.ico");
-                writer.WriteElementString("w", "32");
-                writer.WriteElementString("h", "32");
-                writer.WriteElementString("x", "64");
-                writer.WriteElementString("y", "96");
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-                writer.WriteStartElement("LookAt");
-                writer.WriteElementString("longitude", slong);
-                writer.WriteElementString("latitude", slat);
-                writer.WriteElementString("range", "3000");
-                writer.WriteElementString("tilt", "60");
-                writer.WriteElementString("heading", "0");
-                writer.WriteEndElement();
-                writer.WriteStartElement("Point");
-                writer.WriteElementString("extrude", "1");
-                writer.WriteElementString("altitudeMode", "relativeToGround");
-                writer.WriteElementString("coordinates", slong + "," + slat + ",50");
-                writer.WriteEndElement();
-                writer.WriteEndElement();
-            }
-            */
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-            writer.WriteEndElement();
-            writer.WriteEndDocument();
-            writer.Close();
-
-            MessageBox.Show("The KML file has been successfully exported!! (You can find it at Interfaz/bin/...)");
-        }
 
         private void iconButton1_MouseLeave(object sender, EventArgs e)
         {
@@ -925,7 +756,6 @@ namespace Interfaz
             if (this.loadMap)
             {
                 gMapControl1.CanDragMap = true;
-                gMapControl1.MapProvider = GMapProviders.GoogleMap;
                 gMapControl1.Position = new PointLatLng(LatLEBL, LongLEBL);
                 gMapControl1.MinZoom = 3;
                 gMapControl1.MaxZoom = 22;
@@ -977,7 +807,7 @@ namespace Interfaz
             {
                 foreach (Aircraft a in targetList) 
                 {
-                    if (a.getID().Equals(item.Overlay.Id) && a.getLat().Equals(X) && a.getLong().Equals(Y))
+                    if (a.getID().Equals(item.Overlay.Id))
                     {
                         aircraftSelected = a;
                         IDSelected = a.getID();
@@ -988,8 +818,8 @@ namespace Interfaz
 
                 //dataGridViewInfoAircraft.Rows[0].Cells[1].Value = aircraftSelected.getCallsing();  // Callsing
                 dataGridViewInfoAircraft.Rows[1].Cells[1].Value = IDSelected;  // ICAO
-                //dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getFL();  // FL
-                //dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
+                dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getFL();  // FL
+                dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
                 //dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
                                                                                                       //dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getPackets();  // Packets
 
@@ -1045,6 +875,11 @@ namespace Interfaz
                 this.Hora.Interval = 1000;
                 labelTimeScale.Text = "x1";
             }
+            else if (timescale == "x1.25")
+            {
+                this.Hora.Interval = 250;
+                labelTimeScale.Text = "x1.5";
+            }
             else
             {
                 MessageBox.Show("You can not move forward the timescale");
@@ -1068,6 +903,15 @@ namespace Interfaz
                         if (markersList[a].Overlay.Id.Contains(IdAicraftSelected))
                         {
                             markersList[a].IsVisible = true;
+
+                            foreach (Aircraft aircraft in targetList) 
+                            {
+                                if (markersList[a].Overlay.Id.Equals(aircraft.getID()))
+                                {
+                                    gMapControl1.Position = new PointLatLng(aircraft.getLat(), aircraft.getLong());
+                                    gMapControl1.Zoom = 14;
+                                }  
+                            }
                         }
                         else
                         {
@@ -1086,9 +930,17 @@ namespace Interfaz
         private void textBoxAircraft_MouseClick(object sender, MouseEventArgs e)
         {
             textBoxAircraft.Text = "";
-            for (int i = 0; i < markersList.Count; i++)
+            iconButton1_Click(sender, e);
+            if (this.loadMap)
             {
-                markersList[i].IsVisible = true;
+                for (int i = 0; i < markersList.Count; i++)
+                {
+                    markersList[i].IsVisible = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please load the map first");
             }
         }
 
@@ -1230,6 +1082,50 @@ namespace Interfaz
             {
                 MessageBox.Show("There was a compilation problem, please restart the simulator and try again");
             }
+        }
+
+        private void buttonHelp_Click(object sender, EventArgs e)
+        {
+             
+        }
+
+        private void iconBtnSateliteView_MouseEnter(object sender, EventArgs e)
+        {
+            labelSateliteView.Show();
+        }
+
+        private void iconBtnSateliteView_MouseLeave(object sender, EventArgs e)
+        {
+            labelSateliteView.Hide();
+        }
+
+        private void iconBtnSateliteView_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.loadMap && this.mapPaused)
+                {
+                    if (mapSatelite)
+                    {
+                        gMapControl1.MapProvider = GMapProviders.GoogleMap;
+                        mapSatelite = false;
+                    }
+                    else
+                    {
+                        gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;
+                        mapSatelite = true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please make sure the map is loaded and stopped.");
+                }
+            }
+            catch (Exception) 
+            {
+                MessageBox.Show("There was a problem with the program, restart and try again.");
+            }
+            
         }
     }
 }

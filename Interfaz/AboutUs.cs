@@ -17,8 +17,6 @@ namespace AsterixDecoder
             InitializeComponent();
         }
 
-     
-
         private void btnCloseAU_Click(object sender, EventArgs e)
         {
             this.Hide();
