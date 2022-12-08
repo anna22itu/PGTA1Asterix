@@ -104,10 +104,14 @@ Also, we have three additional buttons that make the simulation easier. If we un
 
 <img width="960" alt="Captura de pantalla (342)" src="https://user-images.githubusercontent.com/80980228/206447780-7a37f9a5-b549-4e17-9320-c3c063c6dd3f.png">
 
-Finally, if you click on an aircraft, on the left of the map will appear an informative table, with the main characteristics of that aircraft.
+Finally, if you click on an aircraft, on the left of the map will appear an informative table, with the main characteristics of that aircraft; the ICAO Id, the TrackNumber, the SAC, the SIC, the Flight Level and the GroundSpeed.
 
 
-In addition, we have two extra button to know a little more about us, to know who we are, and the reason for this project.
+<img width="960" alt="Captura de pantalla (344)" src="https://user-images.githubusercontent.com/80980228/206485901-4486a6be-08c1-4a55-95c8-46df439700e3.png">
 
 
+In addition, we have two extra buttons; the AboutUs button and the Info button. The AboutUs is to know a little more about us, to know who we are, and the reason for this project. The Info button sends you to this readme in which the operation of the entire simulator is explained step by step.
+
+
+<img width="961" alt="Captura de pantalla (326)" src="https://user-images.githubusercontent.com/80980228/206486706-ff95892c-fa2f-4ef6-8493-a63e10908b0f.png">
 
