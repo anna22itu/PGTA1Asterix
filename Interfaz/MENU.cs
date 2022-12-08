@@ -10,7 +10,7 @@ using GMap.NET.WindowsForms.Markers;
 using System.Data;
 using System.Xml;
 using System.Text;
-using System.Windows.Forms;
+using System.Windows.Documents;
 
 namespace Interfaz
 {
@@ -293,7 +293,7 @@ namespace Interfaz
             }
             else if (loadMap && readGoing == false) //que nomes funcionin si el mapa esta loaded
             {
-                MessageBox.Show("This simulation could take a few minutes. Please wait until you are told that it's over, or pause it and play it whenever you want . Thanks for waiting :)");
+                MessageBox.Show("This simulation could take a few minutes. Please wait until you are told thatit's over, or pause it and play it whenever you want . Thanks for waiting :)");
                 BtnParar.Show();
                 BtnPlay.Hide();
                 Thread.Sleep(1000);
@@ -331,17 +331,16 @@ namespace Interfaz
             targetNames.Clear();
             markersList.Clear();
             setTimer(Data.TotalItems[0][Data.columns["Time of Day"]].ToString());
-            
+            isFirstTime = false;
             labelHora.Show();
             CancelThread = false;
-            isFirstTime = false;
+
             readTargetThread = new Thread(reading);
             readTargetThread.SetApartmentState(System.Threading.ApartmentState.STA);
             readTargetThread.Start();
         }
         private void reading()
         {
-            this.Invoke(showloadingmap);
             readGoing = true;
             int testLen = 1000; //per que funcioni caldra que i < Data.TotalItems.Count
             for (int i = 0; i < testLen; i++)
@@ -371,7 +370,6 @@ namespace Interfaz
             }
             Hora.Stop();
             readGoing = false;
-            Invoke(hideloadingmap);
 
             if (CancelThread == false)
             {
@@ -387,7 +385,7 @@ namespace Interfaz
                 {
                     this.Invoke(showdif);
                     loadMap = false;
-                    //labelHora.Hide();
+                    labelHora.Hide();
                     resetLoad();
                 }
 
@@ -406,8 +404,10 @@ namespace Interfaz
             double latitude = double.NaN;
             double z = 0;
             double groundSpeed = double.NaN;
+            string callsing = null;
             double FL = double.NaN;
             double trackNumber = double.NaN;
+            string packets = null;
             string ID = null;
             string type = null;
             int cat = 0;
@@ -420,10 +420,16 @@ namespace Interfaz
             {
                 z = Convert.ToDouble(item[Data.columns["Height"]]);
             }
+
+
             if (item[Data.columns["Ground Speed"]] != null)
             {
                 groundSpeed = Convert.ToDouble(item[Data.columns["Ground Speed"]]);
             }
+            //if (item[Data.columns["Callsing"]] != null)
+            //{
+            //    callsing = Convert.ToString(item[Data.columns["Callsing"]]);
+            //}
             if (item[Data.columns["FL"]] != null)
             {
                 FL = Convert.ToDouble(item[Data.columns["FL"]]);
@@ -432,6 +438,10 @@ namespace Interfaz
             {
                 trackNumber = Convert.ToDouble(item[Data.columns["Track Number"]]);
             }
+            //if (item[Data.columns["Packets"]] != null)
+            //{
+            //    packets = Convert.ToString(item[Data.columns["Packets"]]);
+            //}
 
 
             if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null && item[Data.columns["MessageType"]] != null) //té nomes cartesianes
@@ -498,13 +508,15 @@ namespace Interfaz
                         targetList[targetNames.IndexOf(ID)].setLong(longitude);
                         targetList[targetNames.IndexOf(ID)].setHeight(z);
                         targetList[targetNames.IndexOf(ID)].setGroundSpeed(groundSpeed);
+                        //targetList[targetNames.IndexOf(ID)].setCallsing(callsing);
                         targetList[targetNames.IndexOf(ID)].setFL(FL);
+                        targetList[targetNames.IndexOf(ID)].setPackets(packets);
                         targetList[targetNames.IndexOf(ID)].setTrackNumber(trackNumber);
                         markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
                     }
                     else //si no existeix, creem un i l'afegim
                     {
-                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed, FL, trackNumber);
+                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed, FL,trackNumber);
                         GMapOverlay targets = new GMapOverlay(ID);
                         GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
 
@@ -519,7 +531,7 @@ namespace Interfaz
             ableToLoad = true;
         }
 
-
+        public bool mapViewClicked = false;
         private void BtnMapView_Click(object sender, EventArgs e)
         {
        
@@ -529,6 +541,7 @@ namespace Interfaz
                 if (dataRead && loadMap == false)
                 {
                     gMapControl1_Load(sender, e);
+                    mapViewClicked= true;   
                     //loadAircraftInfoTable(); //desde loadAircraftInfoData es podra show la data de l'avio quan es faci click sobre l'avio o es busqui el seu id
                 }
                 else if (fileimported)
@@ -580,7 +593,7 @@ namespace Interfaz
             gMapControl1.MaxZoom = 23;
             gMapControl1.Zoom = 14;
             gMapControl1.AutoScroll = true;
-            //gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
+            gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
 
             loadMap = true;
 
@@ -752,7 +765,7 @@ namespace Interfaz
                 gMapControl1.MaxZoom = 22;
                 gMapControl1.Zoom = 14;
                 gMapControl1.AutoScroll = true;
-                //gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
+                gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             }
             else
             {
@@ -762,8 +775,14 @@ namespace Interfaz
 
         private void gMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
+            bool Selected = true;
 
-            MessageBox.Show("You have selected the " + item.Overlay.Id.Replace(" ", "") + " aircraft.");
+            if (Selected)
+            {
+                MessageBox.Show("You have selected the " + item.Overlay.Id + " aircraft.");
+                Selected = false;
+            }
+
             loadAircraftInfoTable(item, e.X,e.Y);
 
         }
@@ -774,18 +793,16 @@ namespace Interfaz
             dtInf = new DataTable();
             dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewInfoAircraft.Font, FontStyle.Bold);
             dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewInfoAircraft.RowHeadersVisible = false;
-            dataGridViewInfoAircraft.AllowUserToAddRows = false;
 
             dtInf.Columns.Add("Field");
             dtInf.Columns.Add("Value");
 
-            //dtInf.Rows.Add("Callsing");
+            dtInf.Rows.Add("Callsing");
             dtInf.Rows.Add("ICAO");
             dtInf.Rows.Add("FL");
             dtInf.Rows.Add("Track Nº");
             dtInf.Rows.Add("Ground Speed");
-            //dtInf.Rows.Add("Packets");
+            dtInf.Rows.Add("Packets");
             dataGridViewInfoAircraft.DataSource = dtInf;
 
 
@@ -803,31 +820,12 @@ namespace Interfaz
                 }
 
 
-                dataGridViewInfoAircraft.Rows[0].Cells[1].Value = IDSelected;  // ICAO
-                if (double.IsFinite(aircraftSelected.getFL()))
-                {
-                    dataGridViewInfoAircraft.Rows[1].Cells[1].Value = aircraftSelected.getFL();  // FL
-                }
-                else
-                {
-                    dataGridViewInfoAircraft.Rows[1].Cells[1].Value = "";
-                }
-                if (double.IsFinite(aircraftSelected.getTrackNumber()))
-                {
-                    dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
-                }
-                else
-                {
-                    dataGridViewInfoAircraft.Rows[2].Cells[1].Value = "";
-                }
-                if (double.IsFinite(aircraftSelected.getGroundSpeed()))
-                {
-                    dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
-                }
-                else
-                {
-                    dataGridViewInfoAircraft.Rows[3].Cells[1].Value = "";
-                }
+                //dataGridViewInfoAircraft.Rows[0].Cells[1].Value = aircraftSelected.getCallsing();  // Callsing
+                dataGridViewInfoAircraft.Rows[1].Cells[1].Value = IDSelected;  // ICAO
+                dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getFL();  // FL
+                dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
+                //dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
+                                                                                                      //dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getPackets();  // Packets
 
 
                 textBoxLATAircraft.Text = aircraftSelected.getLat().ToString();
@@ -852,12 +850,17 @@ namespace Interfaz
 
             if (timescale == "x1")
             {
-                this.Hora.Interval = 2000;
+                this.Hora.Interval = 1250;
                 labelTimeScale.Text = "x0.5";
             }
             else if (timescale == "x1.25")
             {
                 this.Hora.Interval = 1000;
+                labelTimeScale.Text = "x1";
+            }
+            else if (timescale == "x1.5")
+            {
+                this.Hora.Interval = 500;
                 labelTimeScale.Text = "x1";
             }
             else
@@ -873,7 +876,7 @@ namespace Interfaz
 
             if (timescale == "x1")
             {
-                this.Hora.Interval = 800;
+                this.Hora.Interval = 500;
                 labelTimeScale.Text = "x1.25";
             }
             else if (timescale == "x0.5")
@@ -883,7 +886,7 @@ namespace Interfaz
             }
             else if (timescale == "x1.25")
             {
-                this.Hora.Interval = 667;
+                this.Hora.Interval = 250;
                 labelTimeScale.Text = "x1.5";
             }
             else
@@ -906,8 +909,7 @@ namespace Interfaz
                 {
                     for (int a = 0; a < markersList.Count; a++)
                     {
-                        
-                        if (markersList[a].Overlay.Id.Replace(" ", "").Equals(IdAicraftSelected))
+                        if (markersList[a].Overlay.Id.Contains(IdAicraftSelected))
                         {
                             markersList[a].IsVisible = true;
 
@@ -1155,7 +1157,7 @@ namespace Interfaz
                 gMapControl1.MaxZoom = 22;
                 gMapControl1.Zoom = 13;
                 gMapControl1.AutoScroll = true;
-                //gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
+                gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             }
             else
             {
@@ -1183,7 +1185,7 @@ namespace Interfaz
                 gMapControl1.MaxZoom = 22;
                 gMapControl1.Zoom = 8.5;
                 gMapControl1.AutoScroll = true;
-                //gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
+                gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             }
             else
             {
@@ -1191,67 +1193,46 @@ namespace Interfaz
             }
         }
 
-        bool shown = false;
-        bool firstTime = true;
-        int lastAdded;
+        public bool listShowed = false;
+
         private void iconBtnShowList_Click(object sender, EventArgs e)
         {
-            if (shown == false) 
+            try
             {
-                try
+                if (this.mapViewClicked == false || this.loadMap == false || this.mapPaused == false)
                 {
-                    if (this.loadMap)
+                    MessageBox.Show("Please make sure the map is loaded and paused.");
+
+                }
+                else if (listShowed == false && this.mapViewClicked && this.mapPaused)
+                {
+                    guna2PanelShowList.Visible = true;
+                    listBoxShowList.Items.Add("The aircraft loaded on the map are:");
+
+                    if (targetList.Count == 0)
                     {
-                        
-                        if (firstTime)
-                        {
-                            string s = "Loaded aircrafts:";
-                            listBoxShowList.Items.Add(s);
-                            listBoxShowList.Width = 200;
-                            guna2PanelShowList.Width = listBoxShowList.Width;
-                            int i = 0;
-                            foreach (string target in targetNames)
-                            {
-                                listBoxShowList.Items.Add(target);
-                                lastAdded = i;
-                                i++;
-                            }
-                            listBoxShowList.Height = 50*listBoxShowList.Items.Count;
-                            guna2PanelShowList.Height = listBoxShowList.Height;
-                            guna2PanelShowList.Visible = true;
-                            shown = true;
-                            firstTime = false;
-                        }
-                        else // We only add the remaining ones
-                        {                            
-                            for(int w=lastAdded+1; w<targetNames.Count; w++)
-                            {
-                                listBoxShowList.Items.Add(targetNames[w]);
-                                lastAdded = w;
-                            }
-                            guna2PanelShowList.Visible = true;
-                            shown = true;
-
-                        }
-
+                        MessageBox.Show("There are no aircrafts on the map, please wait for them to load and then click me again");
                     }
                     else
                     {
-                        MessageBox.Show("Please make sure the map is loaded.");
+                        foreach (Aircraft aircraft in targetList)
+                        {
+                            listBoxShowList.Items.Add(aircraft.getID());
+                        }
+                        listShowed = true;
                     }
                 }
-                catch (Exception)
+                else if (listShowed && this.mapViewClicked && this.mapPaused)
                 {
-                    MessageBox.Show("");
+                    listBoxShowList.Items.Clear();
+                    guna2PanelShowList.Visible = false;
+                    listShowed = false;
                 }
             }
-
-            else
+            catch (Exception)
             {
-                guna2PanelShowList.Visible = false;
-                shown = false;
+                MessageBox.Show("There has been an error, please reload the simulator and try again.");
             }
-            
         }
     }
 }
