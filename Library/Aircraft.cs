@@ -19,13 +19,14 @@ namespace Library
         double groundSpeed;
         double FL;
         double trackNumber;
-        string packets;
+        double SAC;
+        double SIC;
 
         Bitmap bmp;
         static string path = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName.ToString();
         public static IDictionary<string, Bitmap> Bmpaircrafts = new Dictionary<string, Bitmap>() { {"SMR", (Bitmap)Image.FromFile(path[..(path.Length - 24)] + "Resources\\aircraftSMR.png") }, { "MLAT", (Bitmap)Image.FromFile(path[..(path.Length - 24)] + "Resources\\aircraftMLAT.png") }, { "ADSB", (Bitmap)Image.FromFile(path[..(path.Length - 24)] + "Resources\\aircraftADSB.png") } };
         
-        public Aircraft(string ID, double longitude, double latitude, double height, string t, double groundSpeed,double FL,double trackNumber)
+        public Aircraft(string ID, double longitude, double latitude, double height, string t, double groundSpeed,double FL,double trackNumber,double SAC, double SIC)
         {
             this.ID = ID;
             this.currentlong = longitude;
@@ -33,9 +34,12 @@ namespace Library
             this.height = height;
             this.type = t;
             this.bmp = new Bitmap(Bmpaircrafts[t], new Size(Bmpaircrafts[t].Width / 25, Bmpaircrafts[t].Height / 25)); //Caldra ferho amb el target length i tots els parametres si es pot
-            this.groundSpeed = groundSpeed;
-            this.FL = FL;
             this.trackNumber = trackNumber;
+            this.SAC = SAC;
+            this.SIC = SIC;
+            this.FL = FL;
+            this.groundSpeed = groundSpeed;
+            
         }
         public void setLat(double lat)
         {
@@ -94,18 +98,22 @@ namespace Library
         {
             return this.trackNumber;
         }
-        public void setPackets(string p)
+        public void setSAC(double SAC)
         {
-            this.packets = p;
+            this.SAC = SAC;
         }
-        public string getPackets()
+        public double getSAC()
         {
-            return this.packets;
+            return this.SAC;
         }
-
-
-
-
+        public void setSIC(double SIC)
+        {
+            this.SIC = SIC;
+        }
+        public double getSIC()
+        {
+            return this.SIC;
+        }
     }
 
 

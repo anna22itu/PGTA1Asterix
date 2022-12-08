@@ -404,10 +404,10 @@ namespace Interfaz
             double latitude = double.NaN;
             double z = 0;
             double groundSpeed = double.NaN;
-            string callsing = null;
             double FL = double.NaN;
             double trackNumber = double.NaN;
-            string packets = null;
+            double SAC = double.NaN;
+            double SIC = double.NaN;
             string ID = null;
             string type = null;
             int cat = 0;
@@ -426,10 +426,14 @@ namespace Interfaz
             {
                 groundSpeed = Convert.ToDouble(item[Data.columns["Ground Speed"]]);
             }
-            //if (item[Data.columns["Callsing"]] != null)
-            //{
-            //    callsing = Convert.ToString(item[Data.columns["Callsing"]]);
-            //}
+            if (item[Data.columns["SAC"]] != null)
+            {
+                SAC = Convert.ToDouble(item[Data.columns["SAC"]]);
+            }
+            if (item[Data.columns["SIC"]] != null)
+            {
+                SIC = Convert.ToDouble(item[Data.columns["SIC"]]);
+            }
             if (item[Data.columns["FL"]] != null)
             {
                 FL = Convert.ToDouble(item[Data.columns["FL"]]);
@@ -438,11 +442,7 @@ namespace Interfaz
             {
                 trackNumber = Convert.ToDouble(item[Data.columns["Track Number"]]);
             }
-            //if (item[Data.columns["Packets"]] != null)
-            //{
-            //    packets = Convert.ToString(item[Data.columns["Packets"]]);
-            //}
-
+    
 
             if (item[Data.columns["Latitude WGS84"]] == null && item[Data.columns["Longitude WGS84"]] == null && item[Data.columns["MessageType"]] != null) //té nomes cartesianes
             {
@@ -500,7 +500,7 @@ namespace Interfaz
                 }
 
 
-                if (longitude != double.NaN && latitude != double.NaN && ID != null && type != null && groundSpeed != double.NaN && FL != double.NaN && trackNumber != double.NaN) //podem carregar dades
+                if (longitude != double.NaN && latitude != double.NaN && ID != null && type != null && groundSpeed != double.NaN && FL != double.NaN && trackNumber != double.NaN && SAC != double.NaN && SIC != double.NaN) //podem carregar dades
                 {
                     if (targetNames.Contains(ID)) //comprobem si aquest target ja existeix
                     {
@@ -508,15 +508,15 @@ namespace Interfaz
                         targetList[targetNames.IndexOf(ID)].setLong(longitude);
                         targetList[targetNames.IndexOf(ID)].setHeight(z);
                         targetList[targetNames.IndexOf(ID)].setGroundSpeed(groundSpeed);
-                        //targetList[targetNames.IndexOf(ID)].setCallsing(callsing);
                         targetList[targetNames.IndexOf(ID)].setFL(FL);
-                        targetList[targetNames.IndexOf(ID)].setPackets(packets);
+                        targetList[targetNames.IndexOf(ID)].setSAC(SAC);
+                        targetList[targetNames.IndexOf(ID)].setSIC(SIC); 
                         targetList[targetNames.IndexOf(ID)].setTrackNumber(trackNumber);
                         markersList[targetNames.IndexOf(ID)].Position = new PointLatLng(targetList[targetNames.IndexOf(ID)].getLat(), targetList[targetNames.IndexOf(ID)].getLong());
                     }
                     else //si no existeix, creem un i l'afegim
                     {
-                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed, FL,trackNumber);
+                        Aircraft a = new Aircraft(ID, longitude, latitude, z, type, groundSpeed, FL,trackNumber,SAC,SIC);
                         GMapOverlay targets = new GMapOverlay(ID);
                         GMarkerGoogle markerTarget = new GMarkerGoogle(new PointLatLng(a.getLat(), a.getLong()), a.getbmp());
 
@@ -797,15 +797,14 @@ namespace Interfaz
             dtInf.Columns.Add("Field");
             dtInf.Columns.Add("Value");
 
-            dtInf.Rows.Add("Callsing");
+
             dtInf.Rows.Add("ICAO");
-            dtInf.Rows.Add("FL");
             dtInf.Rows.Add("Track Nº");
+            dtInf.Rows.Add("SAC");
+            dtInf.Rows.Add("SIC");
+            dtInf.Rows.Add("FL");
             dtInf.Rows.Add("Ground Speed");
-            dtInf.Rows.Add("Packets");
             dataGridViewInfoAircraft.DataSource = dtInf;
-
-
 
             try
             {
@@ -819,14 +818,19 @@ namespace Interfaz
                     }
                 }
 
+                if (aircraftSelected.getFL().Equals(double.NaN))
+                {
+                    aircraftSelected.setFL(0);
+                }
 
-                //dataGridViewInfoAircraft.Rows[0].Cells[1].Value = aircraftSelected.getCallsing();  // Callsing
-                dataGridViewInfoAircraft.Rows[1].Cells[1].Value = IDSelected;  // ICAO
-                dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getFL();  // FL
-                dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
-                //dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
-                                                                                                      //dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getPackets();  // Packets
 
+                dataGridViewInfoAircraft.Rows[0].Cells[1].Value = IDSelected;  // ICAO
+                dataGridViewInfoAircraft.Rows[1].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
+                dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getSAC();  // SAC
+                dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getSIC();  // SIC
+                dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getFL();  // FL
+                dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
+                        
 
                 textBoxLATAircraft.Text = aircraftSelected.getLat().ToString();
                 textBoxLongAircraft.Text = aircraftSelected.getLong().ToString();
