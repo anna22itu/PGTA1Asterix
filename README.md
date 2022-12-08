@@ -1,4 +1,4 @@
-**PGTA ASTERIX DECODER PROJECT**
+**ASTERIX DECODER**
 
 First Part: Codification
 
@@ -52,7 +52,7 @@ As a result, we will get all the rows with a Track Number value equal to the one
 <img width="960" alt="Captura de pantalla (331)" src="https://user-images.githubusercontent.com/80980228/206442713-851f1593-c0b8-4ddf-9b47-f0a763c30dd2.png">
 
 
-In addition, we have the simulator part, in which we have the aircraft visible on the map.
+3. In addition, we have the simulator part, in which we have the aircraft visible on the map.
 When we click on the Map View button, the map will no longer be blurred and, we can start the simulation if we wish. Depending on the file that we select, some aircraft or others will appear, by clicking the Play button, as we can see at the following figure.
 
 
