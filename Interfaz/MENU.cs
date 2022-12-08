@@ -1099,7 +1099,14 @@ namespace Interfaz
 
         private void buttonHelp_Click(object sender, EventArgs e)
         {
-             
+            try
+            {
+                System.Diagnostics.Process.Start("https://github.com/anna22itu/PGTA1Asterix.git");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Now the information is not available, please reload the simulator and try again");
+            }
         }
 
         private void iconBtnSateliteView_MouseEnter(object sender, EventArgs e)
