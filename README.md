@@ -104,7 +104,7 @@ Also, we have three additional buttons that make the simulation easier. If we un
 
 <img width="960" alt="Captura de pantalla (342)" src="https://user-images.githubusercontent.com/80980228/206447780-7a37f9a5-b549-4e17-9320-c3c063c6dd3f.png">
 
-Finally, if you click on an aircraft, on the left of the map will appear an informative table, with the main characteristics of that aircraft; the ICAO Id, the TrackNumber, the SAC, the SIC, the Flight Level and the GroundSpeed.
+Finally, if you click on an aircraft, on the left of the map will appear an informative table, with the main characteristics of that aircraft; the ICAO Id, the TrackNumber, the SAC, the SIC, the Flight Level and the GroundSpeed. Also, above the map will appear the latitude and longitude values of the selected aircraft.
 
 
 <img width="960" alt="Captura de pantalla (344)" src="https://user-images.githubusercontent.com/80980228/206485901-4486a6be-08c1-4a55-95c8-46df439700e3.png">
