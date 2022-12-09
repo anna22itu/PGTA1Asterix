@@ -147,10 +147,10 @@
             // 
             this.BtnLoadFile.BackColor = System.Drawing.Color.CornflowerBlue;
             this.BtnLoadFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnLoadFile.Location = new System.Drawing.Point(104, 179);
-            this.BtnLoadFile.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.BtnLoadFile.Location = new System.Drawing.Point(80, 140);
+            this.BtnLoadFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnLoadFile.Name = "BtnLoadFile";
-            this.BtnLoadFile.Size = new System.Drawing.Size(156, 68);
+            this.BtnLoadFile.Size = new System.Drawing.Size(120, 53);
             this.BtnLoadFile.TabIndex = 3;
             this.BtnLoadFile.Text = "OPEN FILE";
             this.BtnLoadFile.UseVisualStyleBackColor = false;
@@ -160,10 +160,10 @@
             // 
             this.BtnExportFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnExportFile.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BtnExportFile.Location = new System.Drawing.Point(104, 269);
-            this.BtnExportFile.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.BtnExportFile.Location = new System.Drawing.Point(80, 210);
+            this.BtnExportFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.BtnExportFile.Name = "BtnExportFile";
-            this.BtnExportFile.Size = new System.Drawing.Size(156, 68);
+            this.BtnExportFile.Size = new System.Drawing.Size(120, 53);
             this.BtnExportFile.TabIndex = 4;
             this.BtnExportFile.Text = "EXPORT FILE";
             this.BtnExportFile.UseVisualStyleBackColor = true;
@@ -193,9 +193,8 @@
             this.panelMENU.Controls.Add(this.iconPictureBox2);
             this.panelMENU.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMENU.Location = new System.Drawing.Point(0, 0);
-            this.panelMENU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelMENU.Name = "panelMENU";
-            this.panelMENU.Size = new System.Drawing.Size(296, 1107);
+            this.panelMENU.Size = new System.Drawing.Size(228, 864);
             this.panelMENU.TabIndex = 6;
             // 
             // iconPictureBox5
@@ -205,22 +204,20 @@
             this.iconPictureBox5.IconChar = FontAwesome.Sharp.IconChar.CircleInfo;
             this.iconPictureBox5.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox5.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox5.IconSize = 60;
-            this.iconPictureBox5.Location = new System.Drawing.Point(26, 627);
-            this.iconPictureBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconPictureBox5.IconSize = 46;
+            this.iconPictureBox5.Location = new System.Drawing.Point(20, 490);
             this.iconPictureBox5.Name = "iconPictureBox5";
-            this.iconPictureBox5.Padding = new System.Windows.Forms.Padding(3, 6, 0, 0);
-            this.iconPictureBox5.Size = new System.Drawing.Size(60, 68);
+            this.iconPictureBox5.Padding = new System.Windows.Forms.Padding(2, 5, 0, 0);
+            this.iconPictureBox5.Size = new System.Drawing.Size(46, 53);
             this.iconPictureBox5.TabIndex = 28;
             this.iconPictureBox5.TabStop = false;
             // 
             // buttonHelp
             // 
             this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonHelp.Location = new System.Drawing.Point(104, 627);
-            this.buttonHelp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonHelp.Location = new System.Drawing.Point(80, 490);
             this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(156, 68);
+            this.buttonHelp.Size = new System.Drawing.Size(120, 53);
             this.buttonHelp.TabIndex = 27;
             this.buttonHelp.Text = "INFO";
             this.buttonHelp.UseVisualStyleBackColor = true;
@@ -230,10 +227,10 @@
             // 
             this.pictureBox5.Image = global::AsterixDecoder.Properties.Resources.loadinggif;
             this.pictureBox5.InitialImage = null;
-            this.pictureBox5.Location = new System.Drawing.Point(26, 448);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.pictureBox5.Location = new System.Drawing.Point(20, 350);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(60, 68);
+            this.pictureBox5.Size = new System.Drawing.Size(46, 53);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 26;
             this.pictureBox5.TabStop = false;
@@ -243,10 +240,10 @@
             // 
             this.pictureBox4.Image = global::AsterixDecoder.Properties.Resources.loadinggif;
             this.pictureBox4.InitialImage = null;
-            this.pictureBox4.Location = new System.Drawing.Point(26, 269);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.pictureBox4.Location = new System.Drawing.Point(20, 210);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(60, 68);
+            this.pictureBox4.Size = new System.Drawing.Size(46, 53);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 25;
             this.pictureBox4.TabStop = false;
@@ -256,10 +253,10 @@
             // 
             this.pictureBox3.Image = global::AsterixDecoder.Properties.Resources.loadinggif;
             this.pictureBox3.InitialImage = null;
-            this.pictureBox3.Location = new System.Drawing.Point(26, 358);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.pictureBox3.Location = new System.Drawing.Point(20, 280);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(60, 68);
+            this.pictureBox3.Size = new System.Drawing.Size(46, 53);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 24;
             this.pictureBox3.TabStop = false;
@@ -269,10 +266,10 @@
             // 
             this.pictureBox2.Image = global::AsterixDecoder.Properties.Resources.loadinggif;
             this.pictureBox2.InitialImage = null;
-            this.pictureBox2.Location = new System.Drawing.Point(26, 179);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.pictureBox2.Location = new System.Drawing.Point(20, 140);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(60, 68);
+            this.pictureBox2.Size = new System.Drawing.Size(46, 53);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 23;
             this.pictureBox2.TabStop = false;
@@ -285,12 +282,11 @@
             this.iconPictureBox6.IconChar = FontAwesome.Sharp.IconChar.Table;
             this.iconPictureBox6.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox6.IconSize = 60;
-            this.iconPictureBox6.Location = new System.Drawing.Point(26, 358);
-            this.iconPictureBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconPictureBox6.IconSize = 46;
+            this.iconPictureBox6.Location = new System.Drawing.Point(20, 280);
             this.iconPictureBox6.Name = "iconPictureBox6";
-            this.iconPictureBox6.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.iconPictureBox6.Size = new System.Drawing.Size(60, 68);
+            this.iconPictureBox6.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.iconPictureBox6.Size = new System.Drawing.Size(46, 53);
             this.iconPictureBox6.TabIndex = 9;
             this.iconPictureBox6.TabStop = false;
             // 
@@ -298,10 +294,9 @@
             // 
             this.BtnExit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnExit.Location = new System.Drawing.Point(109, 1020);
-            this.BtnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnExit.Location = new System.Drawing.Point(84, 796);
             this.BtnExit.Name = "BtnExit";
-            this.BtnExit.Size = new System.Drawing.Size(156, 58);
+            this.BtnExit.Size = new System.Drawing.Size(120, 45);
             this.BtnExit.TabIndex = 10;
             this.BtnExit.Text = "EXIT";
             this.BtnExit.UseVisualStyleBackColor = true;
@@ -310,10 +305,9 @@
             // BtnDataView
             // 
             this.BtnDataView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnDataView.Location = new System.Drawing.Point(104, 358);
-            this.BtnDataView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnDataView.Location = new System.Drawing.Point(80, 280);
             this.BtnDataView.Name = "BtnDataView";
-            this.BtnDataView.Size = new System.Drawing.Size(156, 68);
+            this.BtnDataView.Size = new System.Drawing.Size(120, 53);
             this.BtnDataView.TabIndex = 10;
             this.BtnDataView.Text = "DATA VIEW";
             this.BtnDataView.UseVisualStyleBackColor = true;
@@ -326,12 +320,11 @@
             this.iconPictureBox4.IconChar = FontAwesome.Sharp.IconChar.AddressBook;
             this.iconPictureBox4.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox4.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox4.IconSize = 60;
-            this.iconPictureBox4.Location = new System.Drawing.Point(26, 538);
-            this.iconPictureBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconPictureBox4.IconSize = 46;
+            this.iconPictureBox4.Location = new System.Drawing.Point(20, 420);
             this.iconPictureBox4.Name = "iconPictureBox4";
-            this.iconPictureBox4.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.iconPictureBox4.Size = new System.Drawing.Size(60, 68);
+            this.iconPictureBox4.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.iconPictureBox4.Size = new System.Drawing.Size(46, 53);
             this.iconPictureBox4.TabIndex = 14;
             this.iconPictureBox4.TabStop = false;
             // 
@@ -343,11 +336,10 @@
             this.iconPictureBoxLEBL.IconChar = FontAwesome.Sharp.IconChar.ArrowUpFromBracket;
             this.iconPictureBoxLEBL.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBoxLEBL.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBoxLEBL.IconSize = 58;
-            this.iconPictureBoxLEBL.Location = new System.Drawing.Point(31, 1020);
-            this.iconPictureBoxLEBL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconPictureBoxLEBL.IconSize = 45;
+            this.iconPictureBoxLEBL.Location = new System.Drawing.Point(24, 796);
             this.iconPictureBoxLEBL.Name = "iconPictureBoxLEBL";
-            this.iconPictureBoxLEBL.Size = new System.Drawing.Size(60, 58);
+            this.iconPictureBoxLEBL.Size = new System.Drawing.Size(46, 45);
             this.iconPictureBoxLEBL.TabIndex = 8;
             this.iconPictureBoxLEBL.TabStop = false;
             // 
@@ -356,18 +348,16 @@
             this.panelIcon.Controls.Add(this.pictureBox1);
             this.panelIcon.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelIcon.Location = new System.Drawing.Point(0, 0);
-            this.panelIcon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelIcon.Name = "panelIcon";
-            this.panelIcon.Size = new System.Drawing.Size(296, 141);
+            this.panelIcon.Size = new System.Drawing.Size(228, 110);
             this.panelIcon.TabIndex = 11;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::AsterixDecoder.Properties.Resources.AD_3;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 13);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(10, 10);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(260, 115);
+            this.pictureBox1.Size = new System.Drawing.Size(200, 90);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
@@ -375,10 +365,9 @@
             // BtnAboutUs
             // 
             this.BtnAboutUs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnAboutUs.Location = new System.Drawing.Point(104, 538);
-            this.BtnAboutUs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnAboutUs.Location = new System.Drawing.Point(80, 420);
             this.BtnAboutUs.Name = "BtnAboutUs";
-            this.BtnAboutUs.Size = new System.Drawing.Size(156, 68);
+            this.BtnAboutUs.Size = new System.Drawing.Size(120, 53);
             this.BtnAboutUs.TabIndex = 9;
             this.BtnAboutUs.Text = "ABOUT US";
             this.BtnAboutUs.UseVisualStyleBackColor = true;
@@ -391,12 +380,11 @@
             this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.MapLocationDot;
             this.iconPictureBox1.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox1.IconSize = 60;
-            this.iconPictureBox1.Location = new System.Drawing.Point(26, 448);
-            this.iconPictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconPictureBox1.IconSize = 46;
+            this.iconPictureBox1.Location = new System.Drawing.Point(20, 350);
             this.iconPictureBox1.Name = "iconPictureBox1";
-            this.iconPictureBox1.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.iconPictureBox1.Size = new System.Drawing.Size(60, 68);
+            this.iconPictureBox1.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.iconPictureBox1.Size = new System.Drawing.Size(46, 53);
             this.iconPictureBox1.TabIndex = 11;
             this.iconPictureBox1.TabStop = false;
             // 
@@ -407,22 +395,20 @@
             this.iconPictureBox3.IconChar = FontAwesome.Sharp.IconChar.FileImport;
             this.iconPictureBox3.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox3.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox3.IconSize = 60;
-            this.iconPictureBox3.Location = new System.Drawing.Point(26, 269);
-            this.iconPictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconPictureBox3.IconSize = 46;
+            this.iconPictureBox3.Location = new System.Drawing.Point(20, 210);
             this.iconPictureBox3.Name = "iconPictureBox3";
-            this.iconPictureBox3.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.iconPictureBox3.Size = new System.Drawing.Size(60, 68);
+            this.iconPictureBox3.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.iconPictureBox3.Size = new System.Drawing.Size(46, 53);
             this.iconPictureBox3.TabIndex = 13;
             this.iconPictureBox3.TabStop = false;
             // 
             // BtnMapView
             // 
             this.BtnMapView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnMapView.Location = new System.Drawing.Point(104, 448);
-            this.BtnMapView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnMapView.Location = new System.Drawing.Point(80, 350);
             this.BtnMapView.Name = "BtnMapView";
-            this.BtnMapView.Size = new System.Drawing.Size(156, 68);
+            this.BtnMapView.Size = new System.Drawing.Size(120, 53);
             this.BtnMapView.TabIndex = 8;
             this.BtnMapView.Text = "MAP VIEW";
             this.BtnMapView.UseVisualStyleBackColor = true;
@@ -435,12 +421,11 @@
             this.iconPictureBox2.IconChar = FontAwesome.Sharp.IconChar.FileAlt;
             this.iconPictureBox2.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox2.IconSize = 60;
-            this.iconPictureBox2.Location = new System.Drawing.Point(26, 179);
-            this.iconPictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconPictureBox2.IconSize = 46;
+            this.iconPictureBox2.Location = new System.Drawing.Point(20, 140);
             this.iconPictureBox2.Name = "iconPictureBox2";
-            this.iconPictureBox2.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.iconPictureBox2.Size = new System.Drawing.Size(60, 68);
+            this.iconPictureBox2.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.iconPictureBox2.Size = new System.Drawing.Size(46, 53);
             this.iconPictureBox2.TabIndex = 12;
             this.iconPictureBox2.TabStop = false;
             // 
@@ -455,10 +440,9 @@
             this.panelBarraArriba.Controls.Add(this.labelCurrentFile);
             this.panelBarraArriba.Controls.Add(this.iconBtnMenuBars);
             this.panelBarraArriba.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelBarraArriba.Location = new System.Drawing.Point(296, 0);
-            this.panelBarraArriba.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelBarraArriba.Location = new System.Drawing.Point(228, 0);
             this.panelBarraArriba.Name = "panelBarraArriba";
-            this.panelBarraArriba.Size = new System.Drawing.Size(1740, 83);
+            this.panelBarraArriba.Size = new System.Drawing.Size(1269, 65);
             this.panelBarraArriba.TabIndex = 7;
             // 
             // iconBtnMinus
@@ -469,11 +453,10 @@
             this.iconBtnMinus.IconColor = System.Drawing.Color.Black;
             this.iconBtnMinus.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMinus.IconSize = 30;
-            this.iconBtnMinus.Location = new System.Drawing.Point(1560, 0);
-            this.iconBtnMinus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnMinus.Location = new System.Drawing.Point(1131, 0);
             this.iconBtnMinus.Name = "iconBtnMinus";
-            this.iconBtnMinus.Padding = new System.Windows.Forms.Padding(0, 19, 0, 0);
-            this.iconBtnMinus.Size = new System.Drawing.Size(60, 83);
+            this.iconBtnMinus.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
+            this.iconBtnMinus.Size = new System.Drawing.Size(46, 65);
             this.iconBtnMinus.TabIndex = 11;
             this.iconBtnMinus.UseVisualStyleBackColor = true;
             this.iconBtnMinus.Click += new System.EventHandler(this.iconBtnMinus_Click);
@@ -487,11 +470,10 @@
             this.iconBtnMaximize.IconColor = System.Drawing.Color.Black;
             this.iconBtnMaximize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMaximize.IconSize = 30;
-            this.iconBtnMaximize.Location = new System.Drawing.Point(1620, 0);
-            this.iconBtnMaximize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnMaximize.Location = new System.Drawing.Point(1177, 0);
             this.iconBtnMaximize.Name = "iconBtnMaximize";
-            this.iconBtnMaximize.Padding = new System.Windows.Forms.Padding(0, 3, 1, 0);
-            this.iconBtnMaximize.Size = new System.Drawing.Size(60, 83);
+            this.iconBtnMaximize.Padding = new System.Windows.Forms.Padding(0, 2, 1, 0);
+            this.iconBtnMaximize.Size = new System.Drawing.Size(46, 65);
             this.iconBtnMaximize.TabIndex = 12;
             this.iconBtnMaximize.UseVisualStyleBackColor = true;
             this.iconBtnMaximize.Click += new System.EventHandler(this.iconBtnMaximize_Click);
@@ -507,10 +489,9 @@
             this.iconBtnShowList.IconColor = System.Drawing.Color.Black;
             this.iconBtnShowList.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnShowList.IconSize = 45;
-            this.iconBtnShowList.Location = new System.Drawing.Point(1298, 0);
-            this.iconBtnShowList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnShowList.Location = new System.Drawing.Point(929, 0);
             this.iconBtnShowList.Name = "iconBtnShowList";
-            this.iconBtnShowList.Size = new System.Drawing.Size(118, 82);
+            this.iconBtnShowList.Size = new System.Drawing.Size(91, 64);
             this.iconBtnShowList.TabIndex = 59;
             this.iconBtnShowList.Text = "Show List";
             this.iconBtnShowList.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -527,11 +508,10 @@
             this.iconBtnCross.IconColor = System.Drawing.Color.Black;
             this.iconBtnCross.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnCross.IconSize = 25;
-            this.iconBtnCross.Location = new System.Drawing.Point(1680, 0);
-            this.iconBtnCross.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnCross.Location = new System.Drawing.Point(1223, 0);
             this.iconBtnCross.Name = "iconBtnCross";
-            this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
-            this.iconBtnCross.Size = new System.Drawing.Size(60, 83);
+            this.iconBtnCross.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.iconBtnCross.Size = new System.Drawing.Size(46, 65);
             this.iconBtnCross.TabIndex = 11;
             this.iconBtnCross.UseVisualStyleBackColor = true;
             this.iconBtnCross.Click += new System.EventHandler(this.iconBtnCross_Click);
@@ -540,20 +520,18 @@
             // 
             this.labelCurrentFilenameResponse.AutoSize = true;
             this.labelCurrentFilenameResponse.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(611, 23);
-            this.labelCurrentFilenameResponse.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelCurrentFilenameResponse.Location = new System.Drawing.Point(470, 18);
             this.labelCurrentFilenameResponse.Name = "labelCurrentFilenameResponse";
-            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 37);
+            this.labelCurrentFilenameResponse.Size = new System.Drawing.Size(0, 28);
             this.labelCurrentFilenameResponse.TabIndex = 10;
             // 
             // labelCurrentFile
             // 
             this.labelCurrentFile.AutoSize = true;
             this.labelCurrentFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCurrentFile.Location = new System.Drawing.Point(239, 22);
-            this.labelCurrentFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelCurrentFile.Location = new System.Drawing.Point(184, 17);
             this.labelCurrentFile.Name = "labelCurrentFile";
-            this.labelCurrentFile.Size = new System.Drawing.Size(350, 37);
+            this.labelCurrentFile.Size = new System.Drawing.Size(256, 28);
             this.labelCurrentFile.TabIndex = 9;
             this.labelCurrentFile.Text = "THE CURRENT FILENAME IS:";
             // 
@@ -564,10 +542,9 @@
             this.iconBtnMenuBars.IconColor = System.Drawing.Color.Black;
             this.iconBtnMenuBars.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnMenuBars.IconSize = 45;
-            this.iconBtnMenuBars.Location = new System.Drawing.Point(26, 13);
-            this.iconBtnMenuBars.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnMenuBars.Location = new System.Drawing.Point(20, 10);
             this.iconBtnMenuBars.Name = "iconBtnMenuBars";
-            this.iconBtnMenuBars.Size = new System.Drawing.Size(60, 58);
+            this.iconBtnMenuBars.Size = new System.Drawing.Size(46, 45);
             this.iconBtnMenuBars.TabIndex = 8;
             this.iconBtnMenuBars.UseVisualStyleBackColor = true;
             this.iconBtnMenuBars.Click += new System.EventHandler(this.iconBtnMenuBars_Click);
@@ -578,21 +555,22 @@
             this.guna2PanelShowList.BackColor = System.Drawing.Color.CornflowerBlue;
             this.guna2PanelShowList.BorderColor = System.Drawing.Color.CornflowerBlue;
             this.guna2PanelShowList.Controls.Add(this.listBoxShowList);
-            this.guna2PanelShowList.Location = new System.Drawing.Point(1451, 86);
+            this.guna2PanelShowList.Controls.Add(this.labelHora);
+            this.guna2PanelShowList.Location = new System.Drawing.Point(1116, 67);
             this.guna2PanelShowList.Margin = new System.Windows.Forms.Padding(0);
             this.guna2PanelShowList.Name = "guna2PanelShowList";
-            this.guna2PanelShowList.Size = new System.Drawing.Size(413, 161);
+            this.guna2PanelShowList.Size = new System.Drawing.Size(318, 126);
             this.guna2PanelShowList.TabIndex = 59;
             // 
             // listBoxShowList
             // 
             this.listBoxShowList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxShowList.FormattingEnabled = true;
-            this.listBoxShowList.ItemHeight = 32;
+            this.listBoxShowList.ItemHeight = 25;
             this.listBoxShowList.Location = new System.Drawing.Point(0, 0);
             this.listBoxShowList.Margin = new System.Windows.Forms.Padding(0);
             this.listBoxShowList.Name = "listBoxShowList";
-            this.listBoxShowList.Size = new System.Drawing.Size(413, 161);
+            this.listBoxShowList.Size = new System.Drawing.Size(318, 126);
             this.listBoxShowList.TabIndex = 59;
             // 
             // labelHora
@@ -600,10 +578,9 @@
             this.labelHora.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelHora.AutoSize = true;
             this.labelHora.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelHora.Location = new System.Drawing.Point(1802, 145);
-            this.labelHora.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelHora.Location = new System.Drawing.Point(207, 46);
             this.labelHora.Name = "labelHora";
-            this.labelHora.Size = new System.Drawing.Size(131, 54);
+            this.labelHora.Size = new System.Drawing.Size(99, 41);
             this.labelHora.TabIndex = 8;
             this.labelHora.Text = "HORA";
             // 
@@ -645,8 +622,7 @@
             this.gMapControl1.GrayScaleMode = false;
             this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             this.gMapControl1.LevelsKeepInMemory = 5;
-            this.gMapControl1.Location = new System.Drawing.Point(767, 224);
-            this.gMapControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gMapControl1.Location = new System.Drawing.Point(590, 175);
             this.gMapControl1.MarkersEnabled = true;
             this.gMapControl1.MaxZoom = 2;
             this.gMapControl1.MinZoom = 2;
@@ -660,7 +636,7 @@
             this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(1209, 717);
+            this.gMapControl1.Size = new System.Drawing.Size(861, 560);
             this.gMapControl1.TabIndex = 9;
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.OnMarkerClick += new GMap.NET.WindowsForms.MarkerClick(this.gMapControl1_OnMarkerClick);
@@ -674,11 +650,10 @@
             this.BtnPlay.IconColor = System.Drawing.Color.Black;
             this.BtnPlay.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnPlay.IconSize = 43;
-            this.BtnPlay.Location = new System.Drawing.Point(1300, 978);
-            this.BtnPlay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnPlay.Location = new System.Drawing.Point(1000, 764);
             this.BtnPlay.Name = "BtnPlay";
-            this.BtnPlay.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.BtnPlay.Size = new System.Drawing.Size(60, 68);
+            this.BtnPlay.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.BtnPlay.Size = new System.Drawing.Size(46, 53);
             this.BtnPlay.TabIndex = 10;
             this.BtnPlay.UseVisualStyleBackColor = true;
             this.BtnPlay.Click += new System.EventHandler(this.BtnPlay_Click);
@@ -694,11 +669,10 @@
             this.BtnParar.IconColor = System.Drawing.Color.Black;
             this.BtnParar.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.BtnParar.IconSize = 43;
-            this.BtnParar.Location = new System.Drawing.Point(1300, 978);
-            this.BtnParar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BtnParar.Location = new System.Drawing.Point(1000, 764);
             this.BtnParar.Name = "BtnParar";
-            this.BtnParar.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.BtnParar.Size = new System.Drawing.Size(60, 68);
+            this.BtnParar.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.BtnParar.Size = new System.Drawing.Size(46, 53);
             this.BtnParar.TabIndex = 11;
             this.BtnParar.UseVisualStyleBackColor = true;
             this.BtnParar.Click += new System.EventHandler(this.BtnParar_Click);
@@ -708,50 +682,45 @@
             // dataGridViewInfoAircraft
             // 
             this.dataGridViewInfoAircraft.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewInfoAircraft.Location = new System.Drawing.Point(337, 463);
-            this.dataGridViewInfoAircraft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewInfoAircraft.Location = new System.Drawing.Point(259, 362);
             this.dataGridViewInfoAircraft.Name = "dataGridViewInfoAircraft";
             this.dataGridViewInfoAircraft.RowHeadersWidth = 62;
             this.dataGridViewInfoAircraft.RowTemplate.Height = 33;
-            this.dataGridViewInfoAircraft.Size = new System.Drawing.Size(390, 380);
+            this.dataGridViewInfoAircraft.Size = new System.Drawing.Size(300, 297);
             this.dataGridViewInfoAircraft.TabIndex = 16;
             // 
             // labelInfoTableAircraft
             // 
             this.labelInfoTableAircraft.AutoSize = true;
-            this.labelInfoTableAircraft.Location = new System.Drawing.Point(337, 426);
-            this.labelInfoTableAircraft.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelInfoTableAircraft.Location = new System.Drawing.Point(259, 333);
             this.labelInfoTableAircraft.Name = "labelInfoTableAircraft";
-            this.labelInfoTableAircraft.Size = new System.Drawing.Size(430, 32);
+            this.labelInfoTableAircraft.Size = new System.Drawing.Size(320, 25);
             this.labelInfoTableAircraft.TabIndex = 17;
             this.labelInfoTableAircraft.Text = "Information about the selected aircraft:";
             // 
             // labelAicraft
             // 
             this.labelAicraft.AutoSize = true;
-            this.labelAicraft.Location = new System.Drawing.Point(376, 305);
-            this.labelAicraft.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelAicraft.Location = new System.Drawing.Point(289, 238);
             this.labelAicraft.Name = "labelAicraft";
-            this.labelAicraft.Size = new System.Drawing.Size(335, 32);
+            this.labelAicraft.Size = new System.Drawing.Size(250, 25);
             this.labelAicraft.TabIndex = 18;
             this.labelAicraft.Text = "Introduce the ID of an aircraft:";
             // 
             // textBoxAircraft
             // 
-            this.textBoxAircraft.Location = new System.Drawing.Point(390, 347);
-            this.textBoxAircraft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxAircraft.Location = new System.Drawing.Point(300, 271);
             this.textBoxAircraft.Name = "textBoxAircraft";
-            this.textBoxAircraft.Size = new System.Drawing.Size(194, 39);
+            this.textBoxAircraft.Size = new System.Drawing.Size(150, 31);
             this.textBoxAircraft.TabIndex = 19;
             this.textBoxAircraft.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBoxAircraft_MouseClick);
             this.textBoxAircraft.TextChanged += new System.EventHandler(this.textBoxAircraft_TextChanged);
             // 
             // btnClearAicraft
             // 
-            this.btnClearAicraft.Location = new System.Drawing.Point(337, 851);
-            this.btnClearAicraft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearAicraft.Location = new System.Drawing.Point(259, 665);
             this.btnClearAicraft.Name = "btnClearAicraft";
-            this.btnClearAicraft.Size = new System.Drawing.Size(183, 42);
+            this.btnClearAicraft.Size = new System.Drawing.Size(141, 33);
             this.btnClearAicraft.TabIndex = 20;
             this.btnClearAicraft.Text = "Clear Selection";
             this.btnClearAicraft.UseVisualStyleBackColor = true;
@@ -763,28 +732,25 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxMapaDifuminado.Image = global::AsterixDecoder.Properties.Resources.imageMAPA;
-            this.pictureBoxMapaDifuminado.Location = new System.Drawing.Point(767, 224);
-            this.pictureBoxMapaDifuminado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBoxMapaDifuminado.Location = new System.Drawing.Point(590, 175);
             this.pictureBoxMapaDifuminado.Name = "pictureBoxMapaDifuminado";
-            this.pictureBoxMapaDifuminado.Size = new System.Drawing.Size(1209, 717);
+            this.pictureBoxMapaDifuminado.Size = new System.Drawing.Size(861, 560);
             this.pictureBoxMapaDifuminado.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxMapaDifuminado.TabIndex = 21;
             this.pictureBoxMapaDifuminado.TabStop = false;
             // 
             // textBoxLATAircraft
             // 
-            this.textBoxLATAircraft.Location = new System.Drawing.Point(888, 157);
-            this.textBoxLATAircraft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxLATAircraft.Location = new System.Drawing.Point(683, 123);
             this.textBoxLATAircraft.Name = "textBoxLATAircraft";
-            this.textBoxLATAircraft.Size = new System.Drawing.Size(194, 39);
+            this.textBoxLATAircraft.Size = new System.Drawing.Size(150, 31);
             this.textBoxLATAircraft.TabIndex = 24;
             // 
             // textBoxLongAircraft
             // 
-            this.textBoxLongAircraft.Location = new System.Drawing.Point(1173, 157);
-            this.textBoxLongAircraft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxLongAircraft.Location = new System.Drawing.Point(902, 123);
             this.textBoxLongAircraft.Name = "textBoxLongAircraft";
-            this.textBoxLongAircraft.Size = new System.Drawing.Size(194, 39);
+            this.textBoxLongAircraft.Size = new System.Drawing.Size(150, 31);
             this.textBoxLongAircraft.TabIndex = 25;
             // 
             // iconPictureBox7
@@ -794,11 +760,10 @@
             this.iconPictureBox7.IconChar = FontAwesome.Sharp.IconChar.MapPin;
             this.iconPictureBox7.IconColor = System.Drawing.SystemColors.ControlText;
             this.iconPictureBox7.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox7.IconSize = 58;
-            this.iconPictureBox7.Location = new System.Drawing.Point(767, 145);
-            this.iconPictureBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconPictureBox7.IconSize = 45;
+            this.iconPictureBox7.Location = new System.Drawing.Point(590, 113);
             this.iconPictureBox7.Name = "iconPictureBox7";
-            this.iconPictureBox7.Size = new System.Drawing.Size(60, 58);
+            this.iconPictureBox7.Size = new System.Drawing.Size(46, 45);
             this.iconPictureBox7.TabIndex = 27;
             this.iconPictureBox7.TabStop = false;
             this.iconPictureBox7.MouseEnter += new System.EventHandler(this.iconPictureBox7_MouseEnter);
@@ -807,20 +772,18 @@
             // labelLatAir
             // 
             this.labelLatAir.AutoSize = true;
-            this.labelLatAir.Location = new System.Drawing.Point(835, 165);
-            this.labelLatAir.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelLatAir.Location = new System.Drawing.Point(642, 129);
             this.labelLatAir.Name = "labelLatAir";
-            this.labelLatAir.Size = new System.Drawing.Size(45, 32);
+            this.labelLatAir.Size = new System.Drawing.Size(35, 25);
             this.labelLatAir.TabIndex = 28;
             this.labelLatAir.Text = "Lat";
             // 
             // labelLongAir
             // 
             this.labelLongAir.AutoSize = true;
-            this.labelLongAir.Location = new System.Drawing.Point(1097, 157);
-            this.labelLongAir.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelLongAir.Location = new System.Drawing.Point(844, 123);
             this.labelLongAir.Name = "labelLongAir";
-            this.labelLongAir.Size = new System.Drawing.Size(67, 32);
+            this.labelLongAir.Size = new System.Drawing.Size(52, 25);
             this.labelLongAir.TabIndex = 29;
             this.labelLongAir.Text = "Long";
             // 
@@ -833,11 +796,10 @@
             this.iconBtnReLoadMap.IconColor = System.Drawing.Color.Black;
             this.iconBtnReLoadMap.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnReLoadMap.IconSize = 43;
-            this.iconBtnReLoadMap.Location = new System.Drawing.Point(1384, 978);
-            this.iconBtnReLoadMap.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnReLoadMap.Location = new System.Drawing.Point(1065, 764);
             this.iconBtnReLoadMap.Name = "iconBtnReLoadMap";
-            this.iconBtnReLoadMap.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.iconBtnReLoadMap.Size = new System.Drawing.Size(60, 68);
+            this.iconBtnReLoadMap.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.iconBtnReLoadMap.Size = new System.Drawing.Size(46, 53);
             this.iconBtnReLoadMap.TabIndex = 30;
             this.iconBtnReLoadMap.UseVisualStyleBackColor = true;
             this.iconBtnReLoadMap.Click += new System.EventHandler(this.iconBtnReLoadMap_Click);
@@ -848,10 +810,9 @@
             // 
             this.labelAsterixReLoadMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelAsterixReLoadMap.AutoSize = true;
-            this.labelAsterixReLoadMap.Location = new System.Drawing.Point(1232, 1046);
-            this.labelAsterixReLoadMap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelAsterixReLoadMap.Location = new System.Drawing.Point(948, 817);
             this.labelAsterixReLoadMap.Name = "labelAsterixReLoadMap";
-            this.labelAsterixReLoadMap.Size = new System.Drawing.Size(366, 32);
+            this.labelAsterixReLoadMap.Size = new System.Drawing.Size(272, 25);
             this.labelAsterixReLoadMap.TabIndex = 33;
             this.labelAsterixReLoadMap.Text = "Reload the map and resimulate :)";
             // 
@@ -859,10 +820,9 @@
             // 
             this.labelStopPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelStopPlay.AutoSize = true;
-            this.labelStopPlay.Location = new System.Drawing.Point(1187, 1046);
-            this.labelStopPlay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStopPlay.Location = new System.Drawing.Point(913, 817);
             this.labelStopPlay.Name = "labelStopPlay";
-            this.labelStopPlay.Size = new System.Drawing.Size(314, 32);
+            this.labelStopPlay.Size = new System.Drawing.Size(235, 25);
             this.labelStopPlay.TabIndex = 34;
             this.labelStopPlay.Text = "Stop and Play the simulator!";
             // 
@@ -870,10 +830,9 @@
             // 
             this.labelAircraftInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelAircraftInfo.AutoSize = true;
-            this.labelAircraftInfo.Location = new System.Drawing.Point(767, 109);
-            this.labelAircraftInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelAircraftInfo.Location = new System.Drawing.Point(590, 85);
             this.labelAircraftInfo.Name = "labelAircraftInfo";
-            this.labelAircraftInfo.Size = new System.Drawing.Size(413, 32);
+            this.labelAircraftInfo.Size = new System.Drawing.Size(306, 25);
             this.labelAircraftInfo.TabIndex = 38;
             this.labelAircraftInfo.Text = "Latitude and Longitude of the aircraft";
             // 
@@ -888,11 +847,10 @@
             this.iconBtnZoomLebl.IconColor = System.Drawing.Color.Black;
             this.iconBtnZoomLebl.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnZoomLebl.IconSize = 40;
-            this.iconBtnZoomLebl.Location = new System.Drawing.Point(1664, 968);
-            this.iconBtnZoomLebl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnZoomLebl.Location = new System.Drawing.Point(1227, 752);
             this.iconBtnZoomLebl.Name = "iconBtnZoomLebl";
             this.iconBtnZoomLebl.Padding = new System.Windows.Forms.Padding(1, 1, 0, 0);
-            this.iconBtnZoomLebl.Size = new System.Drawing.Size(83, 87);
+            this.iconBtnZoomLebl.Size = new System.Drawing.Size(64, 68);
             this.iconBtnZoomLebl.TabIndex = 56;
             this.iconBtnZoomLebl.Text = "LEBL";
             this.iconBtnZoomLebl.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -906,20 +864,18 @@
             // 
             this.labelZoomLEBL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelZoomLEBL.AutoSize = true;
-            this.labelZoomLEBL.Location = new System.Drawing.Point(1566, 1059);
-            this.labelZoomLEBL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelZoomLEBL.Location = new System.Drawing.Point(1205, 827);
             this.labelZoomLEBL.Name = "labelZoomLEBL";
-            this.labelZoomLEBL.Size = new System.Drawing.Size(311, 32);
+            this.labelZoomLEBL.Size = new System.Drawing.Size(229, 25);
             this.labelZoomLEBL.TabIndex = 40;
             this.labelZoomLEBL.Text = "Click here to zoom in LEBL!!";
             // 
             // checkBoxADSB
             // 
             this.checkBoxADSB.AutoSize = true;
-            this.checkBoxADSB.Location = new System.Drawing.Point(377, 128);
-            this.checkBoxADSB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxADSB.Location = new System.Drawing.Point(290, 100);
             this.checkBoxADSB.Name = "checkBoxADSB";
-            this.checkBoxADSB.Size = new System.Drawing.Size(105, 36);
+            this.checkBoxADSB.Size = new System.Drawing.Size(83, 29);
             this.checkBoxADSB.TabIndex = 41;
             this.checkBoxADSB.Text = "ADSB";
             this.checkBoxADSB.UseVisualStyleBackColor = true;
@@ -928,10 +884,9 @@
             // checkBoxMLAT
             // 
             this.checkBoxMLAT.AutoSize = true;
-            this.checkBoxMLAT.Location = new System.Drawing.Point(377, 166);
-            this.checkBoxMLAT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxMLAT.Location = new System.Drawing.Point(290, 130);
             this.checkBoxMLAT.Name = "checkBoxMLAT";
-            this.checkBoxMLAT.Size = new System.Drawing.Size(106, 36);
+            this.checkBoxMLAT.Size = new System.Drawing.Size(83, 29);
             this.checkBoxMLAT.TabIndex = 42;
             this.checkBoxMLAT.Text = "MLAT";
             this.checkBoxMLAT.UseVisualStyleBackColor = true;
@@ -940,10 +895,9 @@
             // checkBoxSMR
             // 
             this.checkBoxSMR.AutoSize = true;
-            this.checkBoxSMR.Location = new System.Drawing.Point(377, 205);
-            this.checkBoxSMR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxSMR.Location = new System.Drawing.Point(290, 160);
             this.checkBoxSMR.Name = "checkBoxSMR";
-            this.checkBoxSMR.Size = new System.Drawing.Size(95, 36);
+            this.checkBoxSMR.Size = new System.Drawing.Size(75, 29);
             this.checkBoxSMR.TabIndex = 43;
             this.checkBoxSMR.Text = "SMR";
             this.checkBoxSMR.UseVisualStyleBackColor = true;
@@ -954,10 +908,9 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Orange;
             this.label1.ForeColor = System.Drawing.Color.Orange;
-            this.label1.Location = new System.Drawing.Point(482, 128);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(371, 100);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 32);
+            this.label1.Size = new System.Drawing.Size(20, 25);
             this.label1.TabIndex = 44;
             this.label1.Text = "ii";
             // 
@@ -965,10 +918,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(482, 166);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(371, 130);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 32);
+            this.label2.Size = new System.Drawing.Size(20, 25);
             this.label2.TabIndex = 45;
             this.label2.Text = "ii";
             // 
@@ -977,10 +929,9 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Blue;
             this.label3.ForeColor = System.Drawing.Color.Blue;
-            this.label3.Location = new System.Drawing.Point(482, 205);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(371, 160);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 32);
+            this.label3.Size = new System.Drawing.Size(20, 25);
             this.label3.TabIndex = 46;
             this.label3.Text = "ii";
             // 
@@ -993,11 +944,10 @@
             this.iconBtnForward.IconColor = System.Drawing.Color.Black;
             this.iconBtnForward.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnForward.IconSize = 35;
-            this.iconBtnForward.Location = new System.Drawing.Point(481, 998);
-            this.iconBtnForward.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnForward.Location = new System.Drawing.Point(370, 780);
             this.iconBtnForward.Name = "iconBtnForward";
-            this.iconBtnForward.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.iconBtnForward.Size = new System.Drawing.Size(60, 68);
+            this.iconBtnForward.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.iconBtnForward.Size = new System.Drawing.Size(46, 53);
             this.iconBtnForward.TabIndex = 47;
             this.iconBtnForward.UseVisualStyleBackColor = true;
             this.iconBtnForward.Click += new System.EventHandler(this.iconBtnForward_Click);
@@ -1012,11 +962,10 @@
             this.iconBtnBackwards.IconColor = System.Drawing.Color.Black;
             this.iconBtnBackwards.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnBackwards.IconSize = 35;
-            this.iconBtnBackwards.Location = new System.Drawing.Point(415, 1001);
-            this.iconBtnBackwards.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnBackwards.Location = new System.Drawing.Point(319, 782);
             this.iconBtnBackwards.Name = "iconBtnBackwards";
-            this.iconBtnBackwards.Padding = new System.Windows.Forms.Padding(1, 4, 0, 0);
-            this.iconBtnBackwards.Size = new System.Drawing.Size(60, 68);
+            this.iconBtnBackwards.Padding = new System.Windows.Forms.Padding(1, 3, 0, 0);
+            this.iconBtnBackwards.Size = new System.Drawing.Size(46, 53);
             this.iconBtnBackwards.TabIndex = 48;
             this.iconBtnBackwards.UseVisualStyleBackColor = false;
             this.iconBtnBackwards.Click += new System.EventHandler(this.iconBtnBackwards_Click);
@@ -1025,10 +974,9 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(391, 963);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(301, 752);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(152, 32);
+            this.label4.Size = new System.Drawing.Size(115, 25);
             this.label4.TabIndex = 49;
             this.label4.Text = "TIME SCALE: ";
             // 
@@ -1036,10 +984,9 @@
             // 
             this.labelTimeScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelTimeScale.AutoSize = true;
-            this.labelTimeScale.Location = new System.Drawing.Point(532, 963);
-            this.labelTimeScale.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTimeScale.Location = new System.Drawing.Point(409, 752);
             this.labelTimeScale.Name = "labelTimeScale";
-            this.labelTimeScale.Size = new System.Drawing.Size(38, 32);
+            this.labelTimeScale.Size = new System.Drawing.Size(30, 25);
             this.labelTimeScale.TabIndex = 50;
             this.labelTimeScale.Text = "x1";
             // 
@@ -1050,10 +997,9 @@
             this.iconBtnSearchAircraft.IconColor = System.Drawing.Color.Black;
             this.iconBtnSearchAircraft.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnSearchAircraft.IconSize = 31;
-            this.iconBtnSearchAircraft.Location = new System.Drawing.Point(593, 347);
-            this.iconBtnSearchAircraft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnSearchAircraft.Location = new System.Drawing.Point(456, 271);
             this.iconBtnSearchAircraft.Name = "iconBtnSearchAircraft";
-            this.iconBtnSearchAircraft.Size = new System.Drawing.Size(42, 41);
+            this.iconBtnSearchAircraft.Size = new System.Drawing.Size(32, 32);
             this.iconBtnSearchAircraft.TabIndex = 51;
             this.iconBtnSearchAircraft.TabStop = false;
             this.iconBtnSearchAircraft.UseVisualStyleBackColor = true;
@@ -1063,10 +1009,9 @@
             // 
             this.labelSateliteView.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSateliteView.AutoSize = true;
-            this.labelSateliteView.Location = new System.Drawing.Point(653, 1059);
-            this.labelSateliteView.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelSateliteView.Location = new System.Drawing.Point(502, 827);
             this.labelSateliteView.Name = "labelSateliteView";
-            this.labelSateliteView.Size = new System.Drawing.Size(386, 32);
+            this.labelSateliteView.Size = new System.Drawing.Size(285, 25);
             this.labelSateliteView.TabIndex = 53;
             this.labelSateliteView.Text = "Change the map to satellite vision!";
             // 
@@ -1080,11 +1025,10 @@
             this.iconBtnSateliteView.IconColor = System.Drawing.Color.Black;
             this.iconBtnSateliteView.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnSateliteView.IconSize = 44;
-            this.iconBtnSateliteView.Location = new System.Drawing.Point(767, 968);
-            this.iconBtnSateliteView.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnSateliteView.Location = new System.Drawing.Point(590, 756);
             this.iconBtnSateliteView.Name = "iconBtnSateliteView";
             this.iconBtnSateliteView.Padding = new System.Windows.Forms.Padding(1, 0, 0, 0);
-            this.iconBtnSateliteView.Size = new System.Drawing.Size(150, 87);
+            this.iconBtnSateliteView.Size = new System.Drawing.Size(115, 68);
             this.iconBtnSateliteView.TabIndex = 54;
             this.iconBtnSateliteView.Text = "SATELLITE";
             this.iconBtnSateliteView.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -1106,11 +1050,10 @@
             this.iconBtnZoomCAT.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnZoomCAT.IconSize = 40;
             this.iconBtnZoomCAT.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.iconBtnZoomCAT.Location = new System.Drawing.Point(1851, 968);
-            this.iconBtnZoomCAT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnZoomCAT.Location = new System.Drawing.Point(1387, 752);
             this.iconBtnZoomCAT.Name = "iconBtnZoomCAT";
             this.iconBtnZoomCAT.Padding = new System.Windows.Forms.Padding(1, 1, 0, 0);
-            this.iconBtnZoomCAT.Size = new System.Drawing.Size(83, 87);
+            this.iconBtnZoomCAT.Size = new System.Drawing.Size(64, 68);
             this.iconBtnZoomCAT.TabIndex = 55;
             this.iconBtnZoomCAT.Text = "CAT";
             this.iconBtnZoomCAT.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1132,11 +1075,10 @@
             this.iconBtnZoomBcn.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconBtnZoomBcn.IconSize = 40;
             this.iconBtnZoomBcn.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.iconBtnZoomBcn.Location = new System.Drawing.Point(1760, 968);
-            this.iconBtnZoomBcn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.iconBtnZoomBcn.Location = new System.Drawing.Point(1307, 752);
             this.iconBtnZoomBcn.Name = "iconBtnZoomBcn";
             this.iconBtnZoomBcn.Padding = new System.Windows.Forms.Padding(1, 1, 0, 0);
-            this.iconBtnZoomBcn.Size = new System.Drawing.Size(83, 87);
+            this.iconBtnZoomBcn.Size = new System.Drawing.Size(64, 68);
             this.iconBtnZoomBcn.TabIndex = 56;
             this.iconBtnZoomBcn.Text = "BCN";
             this.iconBtnZoomBcn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -1150,10 +1092,9 @@
             // 
             this.labelZoomBCN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.labelZoomBCN.AutoSize = true;
-            this.labelZoomBCN.Location = new System.Drawing.Point(1652, 1059);
-            this.labelZoomBCN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelZoomBCN.Location = new System.Drawing.Point(1219, 827);
             this.labelZoomBCN.Name = "labelZoomBCN";
-            this.labelZoomBCN.Size = new System.Drawing.Size(310, 32);
+            this.labelZoomBCN.Size = new System.Drawing.Size(228, 25);
             this.labelZoomBCN.TabIndex = 57;
             this.labelZoomBCN.Text = "Click here to zoom in BCN!!";
             // 
@@ -1161,20 +1102,19 @@
             // 
             this.label6ZoomCAT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label6ZoomCAT.AutoSize = true;
-            this.label6ZoomCAT.Location = new System.Drawing.Point(1728, 1059);
-            this.label6ZoomCAT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6ZoomCAT.Location = new System.Drawing.Point(1209, 827);
             this.label6ZoomCAT.Name = "label6ZoomCAT";
-            this.label6ZoomCAT.Size = new System.Drawing.Size(304, 32);
+            this.label6ZoomCAT.Size = new System.Drawing.Size(225, 25);
             this.label6ZoomCAT.TabIndex = 58;
             this.label6ZoomCAT.Text = "Click here to zoom in CAT!!";
             // 
             // MENU
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(2036, 1107);
+            this.ClientSize = new System.Drawing.Size(1497, 864);
             this.Controls.Add(this.guna2PanelShowList);
             this.Controls.Add(this.label6ZoomCAT);
             this.Controls.Add(this.labelZoomBCN);
@@ -1212,12 +1152,11 @@
             this.Controls.Add(this.BtnParar);
             this.Controls.Add(this.BtnPlay);
             this.Controls.Add(this.gMapControl1);
-            this.Controls.Add(this.labelHora);
             this.Controls.Add(this.panelBarraArriba);
             this.Controls.Add(this.panelMENU);
             this.Controls.Add(this.iconBtnZoomLebl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MENU";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MENU";
@@ -1238,6 +1177,7 @@
             this.panelBarraArriba.ResumeLayout(false);
             this.panelBarraArriba.PerformLayout();
             this.guna2PanelShowList.ResumeLayout(false);
+            this.guna2PanelShowList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInfoAircraft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapaDifuminado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox7)).EndInit();
