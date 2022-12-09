@@ -59,13 +59,13 @@ Also, due to a large amount of data, there is the possibility of filtering. We h
 
 First, show the most relevant data or show all of them, through the checkboxes on the left.
 
-Second, by selecting a feature, for example, Target Identification, and clicking on the magnifying glass, a drop-down will open where you can enter the value of the track Number.
+Second, by selecting a feature, for example, Target Identification, and clicking on the magnifying glass, a drop-down will open where you can enter the value of a Taget Identification, e.g. 'F19'.
 
 
 <img width="960" alt="Captura de pantalla (357)" src="https://user-images.githubusercontent.com/80980228/206783657-1101f9d6-7f7f-4f9a-bbeb-169c52ec3ac4.png">
 
 
-As a result, we will get all the rows with a Track Number value equal to the one entered. We see an example in the following figure.
+As a result, we will get all the rows with a Target Identification value equal to the one entered ('F19'). We see an example in the following figure.
 
 
 
