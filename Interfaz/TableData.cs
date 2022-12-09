@@ -13,6 +13,7 @@ using Library;
 using Interfaz;
 using Newtonsoft.Json.Linq;
 using System.Data.Entity.Core.Mapping;
+using System.Reflection;
 
 namespace Asterix_Decoder
 {
@@ -26,6 +27,7 @@ namespace Asterix_Decoder
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             checkBox2.Checked = true;
             textBoxSearch.Text = "Enter a DataItem";
+
         }
 
         List<string> relevantData = new List<string>() { "SIC", "SAC", "Time of Day", "MessageType", "Track Number", "Target Address", "Target Identification", "X Cartesian", "Y Cartesian", "Latitude WGS84", "Longitude WGS84", "Velocity X Cart", "Velocity Y Cart", "Ground Speed", "Track Angle", "FL", "Height", "Geometric Height", "Barometric Vertical Rate", "Selected Altitude", "Mode-3/A Code", "Emitter Category" };
@@ -47,12 +49,23 @@ namespace Asterix_Decoder
             btnSearch.Visible = false;
         }
 
-
+        int initialLine = 0;
+        int endingLine = 5000;
+        List<CheckBox> enabledboxes = new List<CheckBox>();
+        IProgress<int> loadingDTstarted = new Progress<int>();
+        IProgress<int> loadingDTended = new Progress<int>();
+        string loading = "Loading...";
         public void LoadData(IProgress<int> loadingStarted, IProgress<int> loadingEnded)
         {
+            loadingDTstarted = loadingStarted;
+            loadingDTended = loadingEnded;
 
             loadingStarted.Report(1);
+            
+            Invoke(setLabel1Text, loading);
             int[] Appear = new int[82];
+            dataGridDT.RowHeadersVisible = false;
+            dataGridDT.AllowUserToAddRows = false;
 
             foreach (string column in Data.dataitems)
             {
@@ -74,7 +87,7 @@ namespace Asterix_Decoder
                 }
             }
 
-            for(int s=0; s < Data.TotalItems.Count; s++) //1000 -> Data.TotalItems.Count
+            for(int s=initialLine; s < endingLine; s++) //1000 -> Data.TotalItems.Count
             {
                 object[] item = Data.TotalItems[s]; //El SMR per exemple te 50k files
 
@@ -100,6 +113,7 @@ namespace Asterix_Decoder
                 }
                 dataGridDT.Rows.Add(toadd);
             }
+            initialLine = endingLine;
 
 
             foreach (DataGridViewColumn col in dataGridDT.Columns)
@@ -110,10 +124,42 @@ namespace Asterix_Decoder
                 }
             }
 
+            enabledboxes.Clear();
+            if(dataGridDT.Columns.Contains("Track Number"))
+            {
+                enabledboxes.Add(checkBox6);
+            }
+            if (dataGridDT.Columns.Contains("Target Identification"))
+            {
+                enabledboxes.Add(checkBox5);
+            }
+            if (dataGridDT.Columns.Contains("Target Address"))
+            {
+                enabledboxes.Add(checkBox3);
+            }
+            if (dataGridDT.Columns.Contains("Mode-3/A Code"))
+            {
+                enabledboxes.Add(checkBox4);
+            }
+            enableDisponibles();
+            string t = "The amount of rows shown is: " + dataGridDT.Rows.Count.ToString();
+            Invoke(setLabel1Text, t );
             loadingEnded.Report(1);
 
         }
 
+        private void enableDisponibles()
+        {
+            checkBox3.Enabled = false;
+            checkBox4.Enabled = false;
+            checkBox5.Enabled = false;
+            checkBox6.Enabled = false;
+            foreach (CheckBox checkBox in enabledboxes)
+            {
+                checkBox.Enabled = true;
+            }
+        }
+        
         private void passDict(object[] item)
         {
             if (item[Data.columns[bydict[0]]] != null) item[Data.columns[bydict[0]]] = CAT21Dict.EmitterCategory_ECAT[Convert.ToInt32(item[Data.columns[bydict[0]]])];
@@ -224,11 +270,12 @@ namespace Asterix_Decoder
             btnSearch.Visible = true;
         }
 
-
+        bool found = false;
+        
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            bool found = false;
 
+            found = false;
             String value = textBoxSearch.Text;
             String typeValue = "";
                   
@@ -261,7 +308,7 @@ namespace Asterix_Decoder
                 }
                 else 
                 {
-                    for (int i = 0; i < dataGridDT.Rows.Count-1; i++)
+                    for (int i = 0; i < dataGridDT.Rows.Count - 1; i++)
                     {
                         if (dataGridDT.Rows[i].Cells[typeValue].Value.ToString().Equals(value))
                         {
@@ -281,7 +328,7 @@ namespace Asterix_Decoder
 
                     if (found == false)
                     {
-                        MessageBox.Show("There is no value equal to: " + value + " in the column "+ typeValue + ", please make sure that the value entered is an existing value.");
+                        MessageBox.Show("There is no value equal to: " + value + " in the column " + typeValue + ", please make sure that the value entered is an existing value.");
                     }
 
                 }
@@ -310,19 +357,15 @@ namespace Asterix_Decoder
         {
             // TargetID
             chk_ClickFilter(sender, e);
-            checkBox3.Enabled = true;
-            checkBox4.Enabled = true;
+            enableDisponibles();
             checkBox5.Enabled = false;
-            checkBox6.Enabled = true;
         }
 
         private void checkBox6_Click(object sender, EventArgs e)
         {
             // Track Number
             chk_ClickFilter(sender, e);
-            checkBox3.Enabled = true;
-            checkBox4.Enabled = true;
-            checkBox5.Enabled = true;
+            enableDisponibles();
             checkBox6.Enabled = false;
         }
 
@@ -330,22 +373,29 @@ namespace Asterix_Decoder
         {
             // Target Address
             chk_ClickFilter(sender, e);
+            enableDisponibles();
             checkBox3.Enabled = false;
-            checkBox4.Enabled = true;
-            checkBox5.Enabled = true;
-            checkBox6.Enabled = true;
         }
 
         private void checkBox4_Click(object sender, EventArgs e)
         {
             // Mode 3/A
             chk_ClickFilter(sender, e);
-            checkBox3.Enabled = true;
+            enableDisponibles();
             checkBox4.Enabled = false;
-            checkBox5.Enabled = true;
-            checkBox6.Enabled = true;
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            endingLine = endingLine + 5000;
+
+            LoadData(loadingDTstarted, loadingDTended);
+
+        }
+
+        private void guna2PanelDT_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
