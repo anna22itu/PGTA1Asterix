@@ -49,7 +49,7 @@ Once the file with all the data has been loaded, we have different options; expo
 
 2. Furthermore, if we want to display the data, we must click on the DataView button, which will open a new form with all the data.
 
-Also, so that it is faster to load all the rows, at the beginning only 10,000 rows are loaded, and we have created a button that loads 10,000 new lines each time.
+Also, so that it is faster to load all the rows, at the beginning only 10,000 rows are loaded, we have created a button that loads 10,000 new lines each time.
 
 
 <img width="960" alt="Captura de pantalla (355)" src="https://user-images.githubusercontent.com/80980228/206783627-c5b6f4f2-2d99-4813-8e35-f7b1c16bbe0d.png">
