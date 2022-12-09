@@ -47,10 +47,12 @@ Once the file with all the data has been loaded, we have different options; expo
 <img width="958" alt="Captura de pantalla (332)" src="https://user-images.githubusercontent.com/80980228/206442504-4cd314b2-8a54-4e10-b4c9-272905603bda.png">
 
 
-2. Furthermore, if we want to display the data, we must click on the DataView button, which will open a new form with all the data:
+2. Furthermore, if we want to display the data, we must click on the DataView button, which will open a new form with all the data.
+
+Also, so that it is faster to load all the rows, at the beginning only 10,000 rows are loaded, and we have created a button that loads 10,000 new lines each time.
 
 
-<img width="960" alt="Captura de pantalla (329)" src="https://user-images.githubusercontent.com/80980228/206442593-283f0578-02f3-4a4e-95e6-476231aa48fa.png">
+<img width="960" alt="Captura de pantalla (355)" src="https://user-images.githubusercontent.com/80980228/206783627-c5b6f4f2-2d99-4813-8e35-f7b1c16bbe0d.png">
 
 
 Also, due to a large amount of data, there is the possibility of filtering. We have two different ways.
@@ -60,13 +62,15 @@ First, show the most relevant data or show all of them, through the checkboxes o
 Second, by selecting a feature, for example, Target Identification, and clicking on the magnifying glass, a drop-down will open where you can enter the value of the track Number.
 
 
-<img width="960" alt="Captura de pantalla (330)" src="https://user-images.githubusercontent.com/80980228/206442682-01490501-6a65-469f-8cb2-9a642d3b87fc.png">
+<img width="960" alt="Captura de pantalla (357)" src="https://user-images.githubusercontent.com/80980228/206783657-1101f9d6-7f7f-4f9a-bbeb-169c52ec3ac4.png">
 
 
 As a result, we will get all the rows with a Track Number value equal to the one entered. We see an example in the following figure.
 
 
-<img width="960" alt="Captura de pantalla (331)" src="https://user-images.githubusercontent.com/80980228/206442713-851f1593-c0b8-4ddf-9b47-f0a763c30dd2.png">
+
+<img width="960" alt="Captura de pantalla (356)" src="https://user-images.githubusercontent.com/80980228/206783676-23caa031-97b3-4f47-864e-275568a19108.png">
+
 
 
 3. In addition, we have the simulator part, in which we have the aircraft visible on the map.
