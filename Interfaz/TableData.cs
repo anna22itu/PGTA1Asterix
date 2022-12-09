@@ -50,7 +50,7 @@ namespace Asterix_Decoder
         }
 
         int initialLine = 0;
-        int endingLine = 5000;
+        int endingLine = 10000;
         List<CheckBox> enabledboxes = new List<CheckBox>();
         IProgress<int> loadingDTstarted = new Progress<int>();
         IProgress<int> loadingDTended = new Progress<int>();
@@ -206,7 +206,6 @@ namespace Asterix_Decoder
             if (checkbox.CheckState == CheckState.Checked) return true;
             else return false;
         }
-
         private void checkBox2_CheckedChanged(object sender, EventArgs e) //Show Relevant Data
         {
             chk_Click(sender, e);
@@ -308,7 +307,7 @@ namespace Asterix_Decoder
                 }
                 else 
                 {
-                    for (int i = 0; i < dataGridDT.Rows.Count - 1; i++)
+                    for (int i = 0; i < dataGridDT.Rows.Count; i++)
                     {
                         if (dataGridDT.Rows[i].Cells[typeValue].Value.ToString().Equals(value))
                         {
@@ -387,9 +386,13 @@ namespace Asterix_Decoder
 
         private void button1_Click(object sender, EventArgs e)
         {
-            endingLine = endingLine + 5000;
+            endingLine = endingLine + 10000;
 
             LoadData(loadingDTstarted, loadingDTended);
+
+            object s = checkBox2 as object;
+            checkBox2.Checked = true;
+            checkBox2_CheckedChanged(s, e);
 
         }
 

@@ -11,6 +11,8 @@ using System.Data;
 using System.Xml;
 using System.Text;
 using System.Windows.Documents;
+using System.Diagnostics;
+using System.Security.Policy;
 
 namespace Interfaz
 {
@@ -1172,7 +1174,8 @@ namespace Interfaz
             {
                 if(MessageBox.Show("Do you want to open an external link directed to our github page?", "Opening external link", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    System.Diagnostics.Process.Start("https://github.com/anna22itu/PGTA1Asterix.git");
+                    //System.Diagnostics.Process.Start("https://github.com/anna22itu/PGTA1Asterix.git");
+                    Process.Start("explorer", "https://github.com/anna22itu/PGTA1Asterix.git");
                 }
                 
             }
