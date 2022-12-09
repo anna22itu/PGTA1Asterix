@@ -1,8 +1,25 @@
-**ASTERIX DECODER**
+# ASTERIX DECODER
 
-First Part: Codification
+### First Part: Codification
 
-Second Part: Simulator
+This branch is formed by 10 classes, which can be summarized in 7 topics.
+
+1.	Read: in this class, the raw data is imported, and all the needed decoding methods are called.
+
+2.	CAT10 & CAT21: in these two classes, the data items are decoded. The method is based in a “cases” structure, where a main function calls the needed method for every data item.
+
+3.	Cat10Dict & Cat21Dict: as before every class is used for each category, and here there are many dictionaries defined in order to relate decoded values with the meaning information.
+
+4.	Aircraft: this class is the constructor for every target decoded, where all the needed information for the Map View (such as: longitude, latitude, height, ID…) is loaded.
+
+5.	Data: this class is called in order to store the already decoded data. The information is saved in a list of object arrays (each array being a data block, and each object being a data item).
+
+6.	Functions: some needed functions such as converting from hexadecimal to binary, obtaining the Fspec of the data blocks, converting from binary to string…
+
+7.	GeoUtils & GeneralMatrix: these both classes are given ones, used to transform the coordinates from cartesian to WGS-84, etc.
+
+
+### Second Part: Simulator
 
 The simulator contains a bar lateral main menu with which all the possible functions will be carried out, with its different buttons.
 
