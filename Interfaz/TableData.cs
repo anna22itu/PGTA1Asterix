@@ -74,7 +74,7 @@ namespace Asterix_Decoder
                 }
             }
 
-            for(int s=0; s < 1000; s++) //1000 -> Data.TotalItems.Length
+            for(int s=0; s < Data.TotalItems.Count; s++) //1000 -> Data.TotalItems.Count
             {
                 object[] item = Data.TotalItems[s]; //El SMR per exemple te 50k files
 

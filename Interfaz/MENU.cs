@@ -80,94 +80,106 @@ namespace Interfaz
         bool dataRead = false;
         bool isFirstTime = true;
         bool calledFromLoad = false;
+        bool processGoing = false;
         private void loadFile()
         {
-            if (readGoing == false)
+            if(processGoing == false)
             {
-                dt = new TableData();
-                if (dataLoaded || isFirstTime)
+                if (readGoing == false)
                 {
-                    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    dt = new TableData();
+                    if (dataLoaded || isFirstTime)
                     {
-                        checksreset();
-
-                        dataLoaded = false;
-                        dataRead = false;
-                        fileimported = true;
-                        string filename = openFileDialog1.FileName;
-                        byte[] fileBytes = File.ReadAllBytes(filename);
-                        string bitString = BitConverter.ToString(fileBytes);
-                        var loadingended = new Progress<int>(stoploadingRead);
-                        var loadingDTstarted = new Progress<int>(loadingDataTable);
-                        var loadingDTended = new Progress<int>(stoploadingDataTable);
-                        loadingRead();
-                        Thread readThread = new Thread(() =>
+                        if (openFileDialog1.ShowDialog() == DialogResult.OK)
                         {
-                            Read.main(bitString, loadingended);
-                            dataRead = true;
-                            System.Windows.MessageBox.Show("The file has been loaded successfully.");
-                            dt.LoadData(loadingDTstarted, loadingDTended);
-                            dataLoaded = true;
-                        });
-                        readThread.Start();
+                            processGoing = true;
+                            checksreset();
 
-                        labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
+                            dataLoaded = false;
+                            dataRead = false;
+                            fileimported = true;
+                            string filename = openFileDialog1.FileName;
+                            byte[] fileBytes = File.ReadAllBytes(filename);
+                            string bitString = BitConverter.ToString(fileBytes);
+                            var loadingended = new Progress<int>(stoploadingRead);
+                            var loadingDTstarted = new Progress<int>(loadingDataTable);
+                            var loadingDTended = new Progress<int>(stoploadingDataTable);
+                            loadingRead();
+                            Thread readThread = new Thread(() =>
+                            {
+                                Read.main(bitString, loadingended);
+                                dataRead = true;
+                                System.Windows.MessageBox.Show("The file has been loaded successfully.");
+                                dt.LoadData(loadingDTstarted, loadingDTended);
+                                dataLoaded = true;
+                            });
+                            readThread.Start();
+
+                            labelCurrentFilenameResponse.Text = filename[(filename.LastIndexOf("\\") + 1)..];
 
 
-                        if (filename.EndsWith("adsb.ast") && filename[filename.Length - 10] != 't')
-                        {
-                            checkBoxMLAT.Enabled = false;
-                            checkBoxSMR.Enabled = false;
-                            checkBoxADSB.Checked = true;
+                            if (filename.EndsWith("adsb.ast") && filename[filename.Length - 10] != 't')
+                            {
+                                checkBoxMLAT.Enabled = false;
+                                checkBoxSMR.Enabled = false;
+                                checkBoxADSB.Checked = true;
+                            }
+                            else if (filename.EndsWith("mlat.ast"))
+                            {
+                                checkBoxADSB.Enabled = false;
+                                checkBoxSMR.Enabled = false;
+                                checkBoxMLAT.Checked = true;
+                            }
+                            else if (filename.EndsWith("smr.ast"))
+                            {
+                                checkBoxMLAT.Enabled = false;
+                                checkBoxADSB.Enabled = false;
+                                checkBoxSMR.Checked = true;
+                            }
+                            else if (filename.EndsWith("smr_mlat_adsb.ast"))
+                            {
+                                checkBoxMLAT.Enabled = true;
+                                checkBoxADSB.Enabled = true;
+                                checkBoxSMR.Enabled = true;
+                                checkBoxADSB.Checked = true;
+                                checkBoxMLAT.Checked = true;
+                                checkBoxSMR.Checked = true;
+                            }
+
+
                         }
-                        else if (filename.EndsWith("mlat.ast"))
-                        {
-                            checkBoxADSB.Enabled = false;
-                            checkBoxSMR.Enabled = false;
-                            checkBoxMLAT.Checked = true;
-                        }
-                        else if (filename.EndsWith("smr.ast"))
-                        {
-                            checkBoxMLAT.Enabled = false;
-                            checkBoxADSB.Enabled = false;
-                            checkBoxSMR.Checked = true;
-                        }
-                        else if (filename.EndsWith("smr_mlat_adsb.ast"))
-                        {
-                            checkBoxMLAT.Enabled = true;
-                            checkBoxADSB.Enabled = true;
-                            checkBoxSMR.Enabled = true;
-                            checkBoxADSB.Checked = true;
-                            checkBoxMLAT.Checked = true;
-                            checkBoxSMR.Checked = true;
-                        }
-
-
                     }
-                }
-                else if (dataLoaded == false)
-                {
-                    MessageBox.Show("Please wait until the current file has been completely loaded.", "File currently loading.");
+                    else if (dataLoaded == false)
+                    {
+                        MessageBox.Show("Please wait until the current file has been completely loaded.", "File currently loading.");
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("ERROR: The file has not been loaded successfully.");
+                    }
                 }
 
                 else
                 {
-                    MessageBox.Show("ERROR: The file has not been loaded successfully.");
+                    if (mapPaused == false)
+                    {
+                        MessageBox.Show("Please, first pause the simulation.");
+                    }
+                    else if (MessageBox.Show("Do you want to stop this running and start another one?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        calledFromLoad = true;
+                        CancelThread = true;
+                    }
                 }
             }
 
             else
             {
-                if (mapPaused == false)
-                {
-                    MessageBox.Show("Please, first pause the simulation.");
-                }
-                else if (MessageBox.Show("Do you want to stop this running and start another one?", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    calledFromLoad = true;
-                    CancelThread = true;
-                }
+                MessageBox.Show("Please wait until the current file has been completely loaded.", "File currently loading.");
+
             }
+
         }
         private void BtnLoadFile_Click(object sender, EventArgs e)
         {
@@ -250,6 +262,7 @@ namespace Interfaz
         {
             pictureBox3.Hide();
             iconPictureBox6.Show();
+            processGoing = false;
         }
         private void BtnDataView_Click(object sender, EventArgs e)
         {
@@ -293,7 +306,7 @@ namespace Interfaz
             }
             else if (loadMap && readGoing == false) //que nomes funcionin si el mapa esta loaded
             {
-                MessageBox.Show("This simulation could take a few minutes. Please wait until you are told thatit's over, or pause it and play it whenever you want . Thanks for waiting :)");
+                MessageBox.Show("This simulation could take a few minutes. Please wait until you are told that it's over, or pause it and play it whenever you want . Thanks for waiting :)");
                 BtnParar.Show();
                 BtnPlay.Hide();
                 Thread.Sleep(1000);
@@ -341,9 +354,10 @@ namespace Interfaz
         }
         private void reading()
         {
+            this.Invoke(showloadingmap);
             readGoing = true;
-            int testLen = 1000; //per que funcioni caldra que i < Data.TotalItems.Count
-            for (int i = 0; i < testLen; i++)
+            //int testLen = 1000;
+            for (int i = 0; i < Data.TotalItems.Count; i++)
             {
                 object[] item = Data.TotalItems[i];
                 string dataTime = item[Data.columns["Time of Day"]].ToString();
@@ -370,6 +384,7 @@ namespace Interfaz
             }
             Hora.Stop();
             readGoing = false;
+            Invoke(hideloadingmap);
 
             if (CancelThread == false)
             {
@@ -385,7 +400,6 @@ namespace Interfaz
                 {
                     this.Invoke(showdif);
                     loadMap = false;
-                    labelHora.Hide();
                     resetLoad();
                 }
 
@@ -420,7 +434,6 @@ namespace Interfaz
             {
                 z = Convert.ToDouble(item[Data.columns["Height"]]);
             }
-
 
             if (item[Data.columns["Ground Speed"]] != null)
             {
@@ -593,7 +606,7 @@ namespace Interfaz
             gMapControl1.MaxZoom = 23;
             gMapControl1.Zoom = 14;
             gMapControl1.AutoScroll = true;
-            gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
+
 
             loadMap = true;
 
@@ -765,24 +778,24 @@ namespace Interfaz
                 gMapControl1.MaxZoom = 22;
                 gMapControl1.Zoom = 14;
                 gMapControl1.AutoScroll = true;
-                gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             }
             else
             {
-                MessageBox.Show("First load the map --> on the MAP VIEW button");
+                if (sentInternally == false)
+                {
+                    MessageBox.Show("First load the map --> on the MAP VIEW button");
+                }
+                else
+                {
+                    sentInternally = false;
+                }
             }
         }
 
         private void gMapControl1_OnMarkerClick(GMapMarker item, MouseEventArgs e)
         {
-            bool Selected = true;
 
-            if (Selected)
-            {
-                MessageBox.Show("You have selected the " + item.Overlay.Id + " aircraft.");
-                Selected = false;
-            }
-
+            MessageBox.Show("You have selected the " + item.Overlay.Id + " aircraft.");
             loadAircraftInfoTable(item, e.X,e.Y);
 
         }
@@ -793,18 +806,19 @@ namespace Interfaz
             dtInf = new DataTable();
             dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Font = new Font(dataGridViewInfoAircraft.Font, FontStyle.Bold);
             dataGridViewInfoAircraft.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
+            dataGridViewInfoAircraft.RowHeadersVisible = false;
+            dataGridViewInfoAircraft.AllowUserToAddRows = false;
             dtInf.Columns.Add("Field");
             dtInf.Columns.Add("Value");
-
-
+            
             dtInf.Rows.Add("ICAO");
             dtInf.Rows.Add("Track Nº");
             dtInf.Rows.Add("SAC");
             dtInf.Rows.Add("SIC");
             dtInf.Rows.Add("FL");
-            dtInf.Rows.Add("Ground Speed");
+            dtInf.Rows.Add("Ground Speed [kt]");
             dataGridViewInfoAircraft.DataSource = dtInf;
+            dataGridViewInfoAircraft.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
 
             try
             {
@@ -824,16 +838,55 @@ namespace Interfaz
                 }
 
 
-                dataGridViewInfoAircraft.Rows[0].Cells[1].Value = IDSelected;  // ICAO
-                dataGridViewInfoAircraft.Rows[1].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
-                dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getSAC();  // SAC
-                dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getSIC();  // SIC
-                dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getFL();  // FL
-                dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
-                        
 
-                textBoxLATAircraft.Text = aircraftSelected.getLat().ToString();
-                textBoxLongAircraft.Text = aircraftSelected.getLong().ToString();
+                dataGridViewInfoAircraft.Rows[0].Cells[1].Value = IDSelected;  // ICAO
+                if (double.IsFinite(aircraftSelected.getTrackNumber()))
+                {
+                    dataGridViewInfoAircraft.Rows[1].Cells[1].Value = aircraftSelected.getTrackNumber();  // Track Nº
+                }
+                else
+                {
+                    dataGridViewInfoAircraft.Rows[1].Cells[1].Value = "";
+                }
+
+                if (double.IsFinite(aircraftSelected.getSAC()))
+                {
+                    dataGridViewInfoAircraft.Rows[2].Cells[1].Value = aircraftSelected.getSAC();  // SAC
+                }
+                else
+                {
+                    dataGridViewInfoAircraft.Rows[2].Cells[1].Value = "";
+                }
+
+                if (double.IsFinite(aircraftSelected.getSIC()))
+                {
+                    dataGridViewInfoAircraft.Rows[3].Cells[1].Value = aircraftSelected.getSIC();  // SIC
+                }
+                else
+                {
+                    dataGridViewInfoAircraft.Rows[3].Cells[1].Value = "";
+                }
+
+                if (double.IsFinite(aircraftSelected.getFL()))
+                {
+                    dataGridViewInfoAircraft.Rows[4].Cells[1].Value = aircraftSelected.getFL();  // FL
+                }
+                else
+                {
+                    dataGridViewInfoAircraft.Rows[4].Cells[1].Value = "";
+                }
+
+                if (double.IsFinite(aircraftSelected.getGroundSpeed()))
+                {
+                    dataGridViewInfoAircraft.Rows[5].Cells[1].Value = aircraftSelected.getGroundSpeed();  // Ground Speed
+                }
+                else
+                {
+                    dataGridViewInfoAircraft.Rows[5].Cells[1].Value = "";
+                }
+
+                textBoxLATAircraft.Text = Math.Round(aircraftSelected.getLat(),5).ToString();
+                textBoxLongAircraft.Text = Math.Round(aircraftSelected.getLong(),5).ToString();
 
             }
             catch
@@ -854,7 +907,7 @@ namespace Interfaz
 
             if (timescale == "x1")
             {
-                this.Hora.Interval = 1250;
+                this.Hora.Interval = 2000;
                 labelTimeScale.Text = "x0.5";
             }
             else if (timescale == "x1.25")
@@ -864,8 +917,8 @@ namespace Interfaz
             }
             else if (timescale == "x1.5")
             {
-                this.Hora.Interval = 500;
-                labelTimeScale.Text = "x1";
+                this.Hora.Interval = 800;
+                labelTimeScale.Text = "x1.25";
             }
             else
             {
@@ -880,7 +933,7 @@ namespace Interfaz
 
             if (timescale == "x1")
             {
-                this.Hora.Interval = 500;
+                this.Hora.Interval = 800;
                 labelTimeScale.Text = "x1.25";
             }
             else if (timescale == "x0.5")
@@ -890,7 +943,7 @@ namespace Interfaz
             }
             else if (timescale == "x1.25")
             {
-                this.Hora.Interval = 250;
+                this.Hora.Interval = 667;
                 labelTimeScale.Text = "x1.5";
             }
             else
@@ -913,7 +966,7 @@ namespace Interfaz
                 {
                     for (int a = 0; a < markersList.Count; a++)
                     {
-                        if (markersList[a].Overlay.Id.Contains(IdAicraftSelected))
+                        if (markersList[a].Overlay.Id.Replace(" ", "").Equals(IdAicraftSelected))
                         {
                             markersList[a].IsVisible = true;
 
@@ -934,26 +987,37 @@ namespace Interfaz
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("There is no aircraft with this ID, please make sure it is correct");
+                    MessageBox.Show("There is no aircraft with this ID, please make sure it is correct. You can check in the list.");
                 }
 
             }
         }
 
+        bool sentInternally = false;
         private void textBoxAircraft_MouseClick(object sender, MouseEventArgs e)
         {
             textBoxAircraft.Text = "";
+            sentInternally = true;
             iconButton1_Click(sender, e);
-            if (this.loadMap)
+
+            if (dataRead == false)
+            {
+                MessageBox.Show("No file has been imported yet.", "Please open a file.");
+            }
+            else if (loadMap == false)
+            {
+                MessageBox.Show("First load the map --> on the MAP VIEW button");
+            }
+            else if (loadMap && readGoing == false)
+            {
+                MessageBox.Show("Please, first start the map with the PLAY button.");
+            }
+            else if (loadMap && readGoing) //que nomes funcionin si el mapa esta loaded i running
             {
                 for (int i = 0; i < markersList.Count; i++)
                 {
                     markersList[i].IsVisible = true;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Please load the map first");
             }
         }
 
@@ -1101,11 +1165,15 @@ namespace Interfaz
         {
             try
             {
-                System.Diagnostics.Process.Start("https://github.com/anna22itu/PGTA1Asterix.git");
+                if(MessageBox.Show("Do you want to open an external link directed to our github page?", "Opening external link", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start("https://github.com/anna22itu/PGTA1Asterix.git");
+                }
+                
             }
             catch (Exception)
             {
-                MessageBox.Show("Now the information is not available, please reload the simulator and try again");
+                MessageBox.Show("Right now the information is not available, please reload the simulator and try again");
             }
         }
 
@@ -1168,7 +1236,6 @@ namespace Interfaz
                 gMapControl1.MaxZoom = 22;
                 gMapControl1.Zoom = 13;
                 gMapControl1.AutoScroll = true;
-                gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             }
             else
             {
@@ -1196,7 +1263,6 @@ namespace Interfaz
                 gMapControl1.MaxZoom = 22;
                 gMapControl1.Zoom = 8.5;
                 gMapControl1.AutoScroll = true;
-                gMapControl1.OnMarkerClick += new MarkerClick(gMapControl1_OnMarkerClick);
             }
             else
             {
@@ -1204,46 +1270,73 @@ namespace Interfaz
             }
         }
 
-        public bool listShowed = false;
 
+        bool shown = false;
+        bool firstTime = true;
+        int lastAdded;
         private void iconBtnShowList_Click(object sender, EventArgs e)
         {
-            try
+            if (shown == false)
             {
-                if (this.mapViewClicked == false || this.loadMap == false || this.mapPaused == false)
+                try
                 {
-                    MessageBox.Show("Please make sure the map is loaded and paused.");
-
-                }
-                else if (listShowed == false && this.mapViewClicked && this.mapPaused)
-                {
-                    guna2PanelShowList.Visible = true;
-                    listBoxShowList.Items.Add("The aircraft loaded on the map are:");
-
-                    if (targetList.Count == 0)
+                    if (this.loadMap)
                     {
-                        MessageBox.Show("There are no aircrafts on the map, please wait for them to load and then click me again");
+
+                        if (firstTime)
+                        {
+                            string s = "Loaded aircrafts:";
+                            listBoxShowList.Items.Add(s);
+                            listBoxShowList.Width = 200;
+                            guna2PanelShowList.Width = listBoxShowList.Width;
+                            int i = 0;
+                            foreach (string target in targetNames)
+                            {
+                                listBoxShowList.Items.Add(target);
+                                lastAdded = i;
+                                i++;
+                            }
+                            listBoxShowList.Height = 50 * listBoxShowList.Items.Count;
+                            guna2PanelShowList.Height = listBoxShowList.Height;
+                            guna2PanelShowList.Visible = true;
+                            shown = true;
+                            firstTime = false;
+                        }
+                        else // We only add the remaining ones
+                        {
+                            for (int w = lastAdded + 1; w < targetNames.Count; w++)
+                            {
+                                listBoxShowList.Items.Add(targetNames[w]);
+                                lastAdded = w;
+                            }
+                            guna2PanelShowList.Visible = true;
+                            shown = true;
+
+                        }
+
                     }
                     else
                     {
-                        foreach (Aircraft aircraft in targetList)
-                        {
-                            listBoxShowList.Items.Add(aircraft.getID());
-                        }
-                        listShowed = true;
+                        MessageBox.Show("Please make sure the map is loaded.");
                     }
                 }
-                else if (listShowed && this.mapViewClicked && this.mapPaused)
+                catch (Exception)
                 {
-                    listBoxShowList.Items.Clear();
-                    guna2PanelShowList.Visible = false;
-                    listShowed = false;
+                    MessageBox.Show("");
                 }
             }
-            catch (Exception)
+
+            else
             {
-                MessageBox.Show("There has been an error, please reload the simulator and try again.");
+                guna2PanelShowList.Visible = false;
+                shown = false;
             }
+
+        }
+
+        private void textBoxAircraft_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
