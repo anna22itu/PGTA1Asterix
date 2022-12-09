@@ -43,7 +43,7 @@ namespace Library
             datait = new object[193];
         }
 
-        public static bool export(string path, IProgress<int> loadingStarted, IProgress<int> loadingEnded)
+        public static int export(string path, IProgress<int> loadingStarted, IProgress<int> loadingEnded)
         {
             loadingStarted.Report(1);
             //string path = Directory.GetParent(System.Reflection.Assembly.GetExecutingAssembly().Location).FullName; // return the application.exe current folder
@@ -55,20 +55,20 @@ namespace Library
             try
             {
                 string headers = "";
-                foreach (string item in dataitems)
+                for(int i=0; i<dataitems.Count; i++)
                 {
-                    headers = headers + item + ";";
+                    headers = headers + dataitems[i] + ";";
                 }
                 sw.WriteLine(headers);
 
-                foreach (object[] datablock in TotalItems)
+                for(int u=0; u < TotalItems.Count; u++)
                 {
                     string data = "";
-                    foreach (object item in datablock)
+                    for(int w=0; w < TotalItems[u].Count(); w++)
                     {
-                        if (item != null)
+                        if (TotalItems[u][w] != null)
                         {
-                            data = data + item.ToString() + ";";
+                            data = data + TotalItems[u][w].ToString() + ";";
                         }
                         else
                         {
@@ -77,13 +77,14 @@ namespace Library
                     }
                     sw.WriteLine(data);
                 }
+                
                 sw.Close();
                 loadingEnded.Report(1);
-                return true;
+                return 1;
             }
             catch
             {
-                return false;
+                return 0;
             }
 
             
